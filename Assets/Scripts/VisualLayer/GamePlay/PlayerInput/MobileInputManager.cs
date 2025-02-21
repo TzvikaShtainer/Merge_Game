@@ -13,7 +13,7 @@ namespace VisualLayer.GamePlay.PlayerInput
         #endregion
 
 
-        public float GetHorizontalInput => Input.mousePosition.y; //just for now
+        public float GetHorizontalInput => Input.mousePosition.x;
 
         public bool IsClickRequested => _joystick.IsPressed;
     }
