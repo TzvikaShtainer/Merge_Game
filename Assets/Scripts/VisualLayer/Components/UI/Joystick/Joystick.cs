@@ -15,7 +15,7 @@ namespace VisualLayer.Components.UI.Joystick
 
         public void OnDrag(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            return;
         }
         
         public void OnPointerUp(PointerEventData eventData)
