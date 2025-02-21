@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.PlayerLoop;
+﻿using UnityEngine;
 using VisualLayer.GamePlay.PlayerInput;
 using Zenject;
 
@@ -25,8 +23,14 @@ namespace VisualLayer.Components.UI
 
             if (_playerInput.IsClickRequested)
             {
-                Debug.Log("Click");
+                Fire();
             }
+        }
+
+        private void Fire()
+        {
+            //Debug.Log("Fire");
+            return;
         }
     }
 }

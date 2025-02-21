@@ -3,7 +3,7 @@ using VisualLayer.Components.UI.Joystick;
 
 namespace VisualLayer.GamePlay.PlayerInput
 {
-    public class MobileInputManager : IPlayerInput
+    public class MobileInputManager : MonoBehaviour, IPlayerInput
     {
         #region Editor
 
@@ -15,6 +15,6 @@ namespace VisualLayer.GamePlay.PlayerInput
 
         public float GetHorizontalInput => Input.mousePosition.y; //just for now
 
-        public bool IsClickRequested => Input.GetMouseButtonDown(0); //just for now
+        public bool IsClickRequested => _joystick.IsPressed;
     }
 }
