@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VisualLayer.Factories;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.MergeItems;
 using VisualLayer.MergeItems.SpawnLogic;
@@ -15,5 +16,9 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .To<DesktopInputManager>()
             .AsSingle()
             .IfNotBound();
+
+        Container
+            .BindFactory<int, Transform, Item, ItemFactory>()
+            .FromFactory<ItemFactoryImplementation>();
     }
 }

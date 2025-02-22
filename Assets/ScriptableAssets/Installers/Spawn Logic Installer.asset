@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7cb68a1f4e4a35a736c882ab8e6059, type: 3}
   m_Name: Spawn Logic Installer
   m_EditorClassIdentifier: 
+  _spawnItemsManager: {fileID: 7924802674404438879, guid: ded3bd64dd8721340905d29dbcda76eb, type: 3}
