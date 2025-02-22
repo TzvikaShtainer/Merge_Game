@@ -19,17 +19,18 @@ namespace VisualLayer.Factories
         [Inject]
         private DiContainer _container;
         
-        public Item Create(int param1)
+        public Item Create(int itemId)
         {
-            var itemPrefab = _dataLayer.Metadata.GetPrefabForItem(param1);
-            var itemInstance = _container.InstantiatePrefab(itemPrefab);
+            var itemPrefab = _dataLayer.Metadata.GetPrefabForItem(itemId);
+            Item instanceToReturn = _container.InstantiatePrefabForComponent<Item>(itemPrefab, new object[] { itemId });
             
-            if (!itemPrefab.GetComponent<Item>())
+            if (!instanceToReturn)
             {
-                throw new System.Exception($"Prefab for item {param1} does not have an Item component!");
+                throw new System.Exception($"Prefab for item {itemId} does not have an Item component!");
             }
             
-            return itemInstance.GetComponent<Item>();
+            
+            return instanceToReturn;
         }
     }
 }

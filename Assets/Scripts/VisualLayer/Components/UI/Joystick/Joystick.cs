@@ -9,7 +9,7 @@ namespace VisualLayer.Components.UI.Joystick
         public void OnPointerDown(PointerEventData eventData)
         {
             IsPressed = true;
-            Debug.Log("OnPointerDown");
+            //Debug.Log("OnPointerDown");
             OnDrag(eventData);
         }
 
@@ -21,7 +21,7 @@ namespace VisualLayer.Components.UI.Joystick
         public void OnPointerUp(PointerEventData eventData)
         {
             IsPressed = false;
-            Debug.Log("OnPointerUp");
+            //Debug.Log("OnPointerUp");
         }
 
         
