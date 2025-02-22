@@ -34,7 +34,7 @@ namespace VisualLayer.Components.UI
 
         private void Spawn()
         {
-            _spawn.Spawn();
+            _spawn.Spawn(new Vector2(_playerInput.GetHorizontalInput, 2));
         }
     }
 }

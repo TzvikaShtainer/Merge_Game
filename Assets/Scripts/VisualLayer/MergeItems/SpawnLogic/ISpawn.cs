@@ -1,7 +1,9 @@
-﻿namespace VisualLayer.MergeItems.SpawnLogic
+﻿using UnityEngine;
+
+namespace VisualLayer.MergeItems.SpawnLogic
 {
     public interface ISpawn
     {
-        void Spawn();
+        void Spawn(Vector2 posToSpawn);
     }
 }

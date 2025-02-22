@@ -7,13 +7,13 @@ namespace VisualLayer.MergeItems
     public class ItemInstaller : ScriptableObjectInstaller<ItemInstaller>
     {
         [SerializeField]
-        private GameObject itemPrefab;
+        private GameObject _itemPrefab;
         
         public override void InstallBindings()
         {
             Container
-                .BindFactory<Item, Item.Factory>()
-                .FromComponentInNewPrefab(itemPrefab)
+                .BindFactory<Vector3, Item, Item.Factory>()
+                .FromComponentInNewPrefab(_itemPrefab)
                 .AsSingle();
         }
     }
