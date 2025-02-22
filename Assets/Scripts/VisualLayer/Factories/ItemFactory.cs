@@ -6,12 +6,12 @@ using Zenject;
 
 namespace VisualLayer.Factories
 {
-    public class ItemFactory : PlaceholderFactory<int, Transform, Item>
+    public class ItemFactory : PlaceholderFactory<int, Item>
     {
         
     }
 
-    public class ItemFactoryImplementation : IFactory<int, Transform, Item>
+    public class ItemFactoryImplementation : IFactory<int, Item>
     {
         [Inject]
         private IDataLayer _dataLayer;
@@ -19,10 +19,10 @@ namespace VisualLayer.Factories
         [Inject]
         private DiContainer _container;
         
-        public Item Create(int param1, Transform param2)
+        public Item Create(int param1)
         {
             var itemPrefab = _dataLayer.Metadata.GetPrefabForItem(param1);
-            var itemInstance = _container.InstantiatePrefab(itemPrefab, param2);
+            var itemInstance = _container.InstantiatePrefab(itemPrefab);
             
             if (!itemPrefab.GetComponent<Item>())
             {

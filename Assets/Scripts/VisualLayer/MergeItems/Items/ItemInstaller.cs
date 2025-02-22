@@ -11,10 +11,10 @@ namespace VisualLayer.MergeItems
         
         public override void InstallBindings()
         {
-            Container
-                .BindFactory<Vector3, Item, Item.Factory>()
-                .FromComponentInNewPrefab(_itemPrefab)
-                .AsSingle();
+            // Container
+            //     .BindFactory<Vector2, Item, Item.Factory>()
+            //     .FromComponentInNewPrefab(_itemPrefab)
+            //     .AsSingle();
         }
     }
 }

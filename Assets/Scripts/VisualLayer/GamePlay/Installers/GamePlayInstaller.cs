@@ -18,7 +18,7 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .IfNotBound();
 
         Container
-            .BindFactory<int, Transform, Item, ItemFactory>()
+            .BindFactory<int, Item, ItemFactory>()
             .FromFactory<ItemFactoryImplementation>();
     }
 }
