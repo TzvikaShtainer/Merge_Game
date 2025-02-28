@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using VisualLayer.Factories;
+using VisualLayer.MergeItems.MergeSystem;
 using Zenject;
 
 namespace VisualLayer.MergeItems
@@ -9,6 +11,13 @@ namespace VisualLayer.MergeItems
         private int _itemId;
         
         private bool isMerging = false;
+        private static float mergeDelay = 0.1f;
+        
+        [Inject]
+        private ItemFactory _itemFactory;
+        
+        [Inject]
+        private IMergeHandler _mergeHandler;
 
 
         [Inject]
@@ -16,6 +25,8 @@ namespace VisualLayer.MergeItems
         {
             _itemId = itemId;
         }
+
+        public int GetItemId() => _itemId;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -25,17 +36,16 @@ namespace VisualLayer.MergeItems
 
             if (otherItem != null && _itemId == otherItem._itemId)
             {
-                Debug.Log("merge");
-                MergeItems(otherItem);
+                if (_mergeHandler.CanMerge(this, otherItem))
+                {
+                    isMerging = true;
+                    otherItem.isMerging = true;
+                    
+                    _mergeHandler.Merge(this, otherItem);
+                }
+                
+                //MergeItems(otherItem);
             }
-        }
-
-        private void MergeItems(Item otherItem)
-        {
-            isMerging = true;
-            otherItem.isMerging = true;
-            
-            
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.MergeItems;
+using VisualLayer.MergeItems.MergeSystem;
 using VisualLayer.MergeItems.SpawnLogic;
 using Zenject;
 
@@ -20,5 +21,10 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
         Container
             .BindFactory<int, Item, ItemFactory>()
             .FromFactory<ItemFactoryImplementation>();
+
+        Container
+            .Bind<IMergeHandler>()
+            .To<MergeHandler>()
+            .AsSingle();
     }
 }

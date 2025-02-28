@@ -29,6 +29,18 @@ namespace DataLayer.Metadata
 
             return map.ItemPrefabRef;
         }
+
+        public bool HasNextLevelItem(int nextItemId)
+        {
+            ItemsMetadata itemsMetadata = _itemsMetadata[nextItemId];
+
+            if (itemsMetadata != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
         
         #endregion
     }

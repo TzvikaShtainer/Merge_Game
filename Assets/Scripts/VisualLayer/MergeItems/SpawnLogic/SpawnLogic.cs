@@ -16,6 +16,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
         
         public void Spawn(Vector2 posToSpawn)
         {
+            //need to handle spawn on firs click
             
             var isInDelay = Time.time - _lastTimeFire < 0.5; //0.5 just for now
             if (isInDelay)
