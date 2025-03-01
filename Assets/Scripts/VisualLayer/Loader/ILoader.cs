@@ -11,6 +11,10 @@ namespace VisualLayer.Loader
         void ResetData();
         
         UniTask FadeIn();
+        
+        UniTask FadeOut();
+        
+        void SetProgress(float progress, string text);
 
         #endregion
     }
