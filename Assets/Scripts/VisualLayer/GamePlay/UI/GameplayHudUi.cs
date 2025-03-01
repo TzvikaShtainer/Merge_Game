@@ -2,6 +2,7 @@
 using DataLayer;
 using TMPro;
 using UnityEngine;
+using VisualLayer.GamePlay.Handlers;
 using Zenject;
 
 namespace VisualLayer.GamePlay.UI
@@ -19,6 +20,9 @@ namespace VisualLayer.GamePlay.UI
         
         [Inject]
         private IDataLayer _dataLayer;
+        
+        [Inject]
+        private IHudBackClickHandler _backClickHandler; 
 
         #endregion
 
@@ -49,6 +53,12 @@ namespace VisualLayer.GamePlay.UI
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
         }
 
+        
+        public async void OnBackButtonClick()
+        {
+            _backClickHandler.Execute();
+        }
+        
         #endregion
     }
 }

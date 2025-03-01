@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VisualLayer.Factories;
+using VisualLayer.GamePlay.Handlers;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.MergeItems;
 using VisualLayer.MergeItems.MergeSystem;
@@ -25,6 +26,11 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
         Container
             .Bind<IMergeHandler>()
             .To<MergeHandler>()
+            .AsSingle();
+        
+        Container
+            .Bind<IHudBackClickHandler>()
+            .To<HudBackClickHandler>()
             .AsSingle();
     }
 }
