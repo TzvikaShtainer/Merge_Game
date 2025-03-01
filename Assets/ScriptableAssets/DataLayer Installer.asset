@@ -33,3 +33,41 @@ MonoBehaviour:
     _itemId: 4
     _itemPrefabRef: {fileID: 2284559540579497787, guid: c888584aaa337994085bf15bb92fbd39, type: 3}
     _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 5
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 5d31ad7abae7bb542ae82db800058027, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 6
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 4d83e1be25b98e44bb1b92a18837390d, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 7
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 1ad569265044c4c4caaa74c26da5dbbf, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 8
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 97ead899074dc5341b7098f5e61c7a62, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 9
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: b22ee4ee739677e4296f8304a86214ec, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 10
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: a8b6f2787790b4247ae38c1535fc13e3, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 11
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 7fd2c4ba957cb824b8081cf017823bf3, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 12
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 7e7a1be51f5af884887776e479d2b5d9, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  - _itemName: 
+    _itemId: 13
+    _itemPrefabRef: {fileID: 2284559540579497787, guid: 98095eb8769b8bb409fa7b6cc1dae13b, type: 3}
+    _itemPreviewSprite: {fileID: 0}
+  _playerBalances:
+    _coins: 370
