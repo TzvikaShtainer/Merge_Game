@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbee067272f4d3987d87d1cdd853aa6, type: 3}
   m_Name: Item Installer
   m_EditorClassIdentifier: 
-  _itemPrefab: {fileID: 2284559540579497787, guid: 0462494de74998042bc063d34497ff9b, type: 3}
+  _itemPrefab: {fileID: 2284559540579497787, guid: e854c7bc27ee4eb4fa25de439a140e47, type: 3}

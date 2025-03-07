@@ -65,9 +65,5 @@ MonoBehaviour:
     _itemId: 12
     _itemPrefabRef: {fileID: 2284559540579497787, guid: 7e7a1be51f5af884887776e479d2b5d9, type: 3}
     _itemPreviewSprite: {fileID: 0}
-  - _itemName: 
-    _itemId: 13
-    _itemPrefabRef: {fileID: 2284559540579497787, guid: 98095eb8769b8bb409fa7b6cc1dae13b, type: 3}
-    _itemPreviewSprite: {fileID: 0}
   _playerBalances:
-    _coins: 370
+    _coins: 530
