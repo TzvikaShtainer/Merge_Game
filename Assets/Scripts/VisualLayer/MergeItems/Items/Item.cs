@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DataLayer;
+using DataLayer.DataTypes;
+using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.MergeItems.MergeSystem;
 using Zenject;
@@ -7,8 +9,8 @@ namespace VisualLayer.MergeItems
 {
     public class Item : MonoBehaviour
     {
-        [SerializeField]
-        private int _itemId;
+        [SerializeField] 
+        private ItemMetadata _itemMetadata;
         
         private bool isMerging = false;
         private static float mergeDelay = 0.1f;
@@ -18,15 +20,18 @@ namespace VisualLayer.MergeItems
         
         [Inject]
         private IMergeHandler _mergeHandler;
+        
+        [Inject]
+        private IDataLayer _dataLayer;
 
 
         [Inject]
         private void Construct(int itemId)
         {
-            _itemId = itemId;
+            _itemMetadata = _dataLayer.Metadata.GetItemMetadata(itemId);
         }
 
-        public int GetItemId() => _itemId;
+        public int GetItemId() => _itemMetadata.ItemId;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -34,7 +39,7 @@ namespace VisualLayer.MergeItems
             
             Item otherItem = other.gameObject.GetComponent<Item>();
 
-            if (otherItem != null && _itemId == otherItem._itemId)
+            if (otherItem != null && _itemMetadata.ItemId == otherItem._itemMetadata.ItemId)
             {
                 if (_mergeHandler.CanMerge(this, otherItem))
                 {

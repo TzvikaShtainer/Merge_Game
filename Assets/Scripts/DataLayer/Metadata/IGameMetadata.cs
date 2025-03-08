@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DataLayer.DataTypes;
+using UnityEngine;
 
 namespace DataLayer.Metadata
 {
@@ -6,5 +7,7 @@ namespace DataLayer.Metadata
     {
         Object GetPrefabForItem(int itemId);
         bool HasNextLevelItem(int itemId);
+
+        public ItemMetadata GetItemMetadata(int itemIdToFind);
     }
 }

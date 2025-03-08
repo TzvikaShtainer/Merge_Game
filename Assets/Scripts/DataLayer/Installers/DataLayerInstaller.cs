@@ -11,7 +11,7 @@ namespace DataLayer.Installers
     public class DataLayerInstaller : ScriptableObjectInstaller<DataLayerInstaller>
     {
         [SerializeField]
-        private ItemsMetadata[] _items;
+        private ItemMetadata[] _items;
         
         [SerializeField] 
         private PlayerBalances _playerBalances;
@@ -45,7 +45,7 @@ namespace DataLayer.Installers
                 .AsSingle();
 
             subContainer
-                .Bind<ItemsMetadata[]>()
+                .Bind<ItemMetadata[]>()
                 .FromInstance(_items)
                 .AsSingle();
         }

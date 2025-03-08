@@ -11,13 +11,13 @@ namespace DataLayer.Metadata
         #region Injects
         
         [Inject]
-        private ItemsMetadata[] _itemsMetadata;
+        private ItemMetadata[] _itemsMetadata;
         
         #endregion
         
         #region Methods
         
-        public ItemsMetadata[] GetItemsMetadata() => _itemsMetadata;
+        public ItemMetadata[] GetItemsMetadata() => _itemsMetadata;
         
         public Object GetPrefabForItem(int itemIdToFind)
         {
@@ -32,14 +32,25 @@ namespace DataLayer.Metadata
 
         public bool HasNextLevelItem(int nextItemId)
         {
-            ItemsMetadata itemsMetadata = _itemsMetadata[nextItemId];
+            ItemMetadata itemMetadata = _itemsMetadata[nextItemId];
 
-            if (itemsMetadata != null)
+            if (itemMetadata != null)
             {
                 return true;
             }
 
             return false;
+        }
+
+        public ItemMetadata GetItemMetadata(int itemIdToFind)
+        {
+            var map = _itemsMetadata.FirstOrDefault(c => c.ItemId == itemIdToFind);
+            if (map == null)
+            {
+                throw new InvalidDataException($"Item type {itemIdToFind} in not registered in metadata");
+            }
+
+            return map;
         }
         
         #endregion

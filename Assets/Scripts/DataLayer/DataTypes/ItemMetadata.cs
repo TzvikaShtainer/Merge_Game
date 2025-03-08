@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 namespace DataLayer.DataTypes
 {
     [Serializable]
-    public class ItemsMetadata
+    public class ItemMetadata
     {
         #region Fields
 
