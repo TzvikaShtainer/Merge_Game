@@ -43,7 +43,7 @@ namespace VisualLayer.GamePlay.UI
         private void OnDestroy()
         {
             _dataLayer.Balances.CoinsBalanceChanged -= SyncUiWithData;
-            //_gameLogicHandler.NextItemCreated -= SyncUiWithData;
+            _gameLogicHandler.NextItemCreated -= SyncUiWithData;
 
             SyncUiWithData();
         }
@@ -52,7 +52,7 @@ namespace VisualLayer.GamePlay.UI
         private void InitializeView()
         {
             _dataLayer.Balances.CoinsBalanceChanged += SyncUiWithData;
-            //_gameLogicHandler.NextItemCreated += SyncUiWithData;
+            _gameLogicHandler.NextItemCreated += SyncUiWithData;
             
             SyncUiWithData();
         }
@@ -60,7 +60,7 @@ namespace VisualLayer.GamePlay.UI
         private void SyncUiWithData()
         {
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
-           // _nextItemSprite.sprite = _gameLogicHandler.GeNextItem().GetItemMetadata().ItemPreviewSprite;
+            _nextItemSprite.sprite = _gameLogicHandler.GeNextItem().GetItemMetadata().ItemPreviewSprite;
         }
 
         

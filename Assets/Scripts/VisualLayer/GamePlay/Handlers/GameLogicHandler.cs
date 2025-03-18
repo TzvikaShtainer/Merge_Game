@@ -62,7 +62,7 @@ namespace VisualLayer.GamePlay.Handlers
             _nextItem.GetComponent<Rigidbody2D>().gravityScale = 0;
             _nextItem.transform.position = new Vector2(10, 10);
             //Debug.Log(_nextItem.name);
-            //NextItemCreated?.Invoke();
+            NextItemCreated?.Invoke();
         }
         
         public Item GeNextItem() => _nextItem;
