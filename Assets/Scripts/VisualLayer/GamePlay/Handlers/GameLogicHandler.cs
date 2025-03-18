@@ -22,6 +22,9 @@ namespace VisualLayer.GamePlay.Handlers
         [Inject]
         private ItemFactory _itemFactory;
 
+        public Item GetNextItem() => _nextItem;
+        
+
         public void Initialize()
         {
             CreateFirstItem();
@@ -42,7 +45,7 @@ namespace VisualLayer.GamePlay.Handlers
             return itemToSpawn;
         }
 
-        private static void SetPos(Item itemToSpawn)
+        private void SetPos(Item itemToSpawn)
         {
             itemToSpawn.GetComponent<Rigidbody2D>().gravityScale = 0;
             
@@ -65,6 +68,20 @@ namespace VisualLayer.GamePlay.Handlers
             NextItemCreated?.Invoke();
         }
         
-        public Item GeNextItem() => _nextItem;
+        public void DropCurrentItem()
+        {
+            _currentItem.GetComponent<Rigidbody2D>().gravityScale = 1;
+        }
+
+        public void MoveToNextItemLogic(Vector2 posOfClick)
+        {
+            _currentItem = _nextItem;
+
+            SetPos(_currentItem);
+            
+            _currentItem.transform.position = new Vector2(posOfClick.x, 2.5f);
+
+            CreateNextItem();
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace VisualLayer.GamePlay.UI
         private void SyncUiWithData()
         {
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
-            _nextItemSprite.sprite = _gameLogicHandler.GeNextItem().GetItemMetadata().ItemPreviewSprite;
+            _nextItemSprite.sprite = _gameLogicHandler.GetNextItem().GetItemMetadata().ItemPreviewSprite;
         }
 
         

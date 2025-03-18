@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using VisualLayer.MergeItems;
 
 namespace VisualLayer.GamePlay.Handlers
@@ -9,6 +10,10 @@ namespace VisualLayer.GamePlay.Handlers
         
         public void CreateNextItem();
 
-        public Item GeNextItem();
+        public Item GetNextItem();
+
+        public void DropCurrentItem();
+
+        public void MoveToNextItemLogic(Vector2 posOfClick);
     }
 }

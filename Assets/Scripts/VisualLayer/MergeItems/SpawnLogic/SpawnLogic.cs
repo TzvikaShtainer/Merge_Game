@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using VisualLayer.Factories;
+using VisualLayer.GamePlay.Handlers;
 using Zenject;
 
 namespace VisualLayer.MergeItems.SpawnLogic
@@ -9,6 +10,9 @@ namespace VisualLayer.MergeItems.SpawnLogic
         [Inject]
         private ItemFactory _itemFactory;
         
+        [Inject]
+        private IGameLogicHandler _gameLogicHandler;
+        
         private float _lastTimeFire;
         
         private int _min_lvl_spawn = 0;
@@ -17,6 +21,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
         public void Spawn(Vector2 posToSpawn)
         {
             //need to handle spawn on firs click
+            _gameLogicHandler.DropCurrentItem();
             
             var isInDelay = Time.time - _lastTimeFire < 0.5; //0.5 just for now
             if (isInDelay)
@@ -24,12 +29,18 @@ namespace VisualLayer.MergeItems.SpawnLogic
                 return;
             }
             
-            Debug.Log("click");
+           
+            
+            _gameLogicHandler.MoveToNextItemLogic(posToSpawn);
+            
+            _lastTimeFire = Time.time;
+            
+            
             //int randomLvlToSpawn = Random.Range(_min_lvl_spawn, _max_lvl_spawn);
             //var itemToSpawn = _itemFactory.Create(randomLvlToSpawn);
             //itemToSpawn.transform.position = posToSpawn;
             
-            _lastTimeFire = Time.time;
+            
         }
     }
 }
