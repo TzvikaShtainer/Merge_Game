@@ -24,6 +24,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
                 return;
             }
             
+            Debug.Log("click");
             //int randomLvlToSpawn = Random.Range(_min_lvl_spawn, _max_lvl_spawn);
             //var itemToSpawn = _itemFactory.Create(randomLvlToSpawn);
             //itemToSpawn.transform.position = posToSpawn;

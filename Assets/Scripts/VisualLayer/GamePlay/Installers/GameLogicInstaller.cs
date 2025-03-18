@@ -4,14 +4,19 @@ using Zenject;
 
 namespace VisualLayer.GamePlay.Installers
 {
-    public class GameLogicInstaller : MonoInstaller<GameLogicInstaller>
+    [CreateAssetMenu(menuName = "Merge/MergeItems/GameLogicInstaller")]
+    public class GameLogicInstaller : ScriptableObjectInstaller<GameLogicInstaller>
     {
         public override void InstallBindings()
         {
-            Container
-                .Bind<IInitializable>()
-                .To<GameLogicHandler>()
-                .AsSingle();
+            
+           // Container
+            //    .Bind<GameLogicHandler>()
+            //    .AsTransient();
+            
+            
+            
+            
         }
     }
 }

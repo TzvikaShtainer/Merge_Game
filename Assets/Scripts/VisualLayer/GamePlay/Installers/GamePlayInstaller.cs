@@ -4,6 +4,7 @@ using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.GamePlay.Handlers;
 using VisualLayer.GamePlay.PlayerInput;
+using VisualLayer.GamePlay.UI;
 using VisualLayer.MergeItems;
 using VisualLayer.MergeItems.MergeSystem;
 using VisualLayer.MergeItems.SpawnLogic;
@@ -32,5 +33,10 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .Bind<IHudBackClickHandler>()
             .To<HudBackClickHandler>()
             .AsSingle();
+        
+        Container
+            .BindInterfacesAndSelfTo<GameLogicHandler>()
+            .AsSingle();
+            
     }
 }

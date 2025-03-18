@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.MergeItems;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace VisualLayer.GamePlay.Handlers
 {
-    public class GameLogicHandler: IInitializable
-    {
-        
+    public class GameLogicHandler: IInitializable, IGameLogicHandler
+    { 
         private int _min_lvl_spawn = 0;
         private int _max_lvl_spawn = 3;
 
@@ -51,13 +52,19 @@ namespace VisualLayer.GamePlay.Handlers
 
             itemToSpawn.transform.position = new Vector2(worldPosition.x, 2.5f);
         }
-        
-        private void CreateNextItem()
+
+        public event Action NextItemCreated;
+
+        public void CreateNextItem()
         {
             _nextItem = CreateItem();
             
             _nextItem.GetComponent<Rigidbody2D>().gravityScale = 0;
             _nextItem.transform.position = new Vector2(10, 10);
+            //Debug.Log(_nextItem.name);
+            //NextItemCreated?.Invoke();
         }
+        
+        public Item GeNextItem() => _nextItem;
     }
 }

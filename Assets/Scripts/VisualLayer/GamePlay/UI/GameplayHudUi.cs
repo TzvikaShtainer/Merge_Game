@@ -2,6 +2,7 @@
 using DataLayer;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VisualLayer.GamePlay.Handlers;
 using Zenject;
 
@@ -13,6 +14,9 @@ namespace VisualLayer.GamePlay.UI
 
         [SerializeField] 
         private TextMeshProUGUI _coinsBalaceText;
+        
+        [SerializeField] 
+        private Image _nextItemSprite;
 
         #endregion
 
@@ -23,6 +27,9 @@ namespace VisualLayer.GamePlay.UI
         
         [Inject]
         private IHudBackClickHandler _backClickHandler; 
+        
+        [Inject]
+        private IGameLogicHandler _gameLogicHandler;
 
         #endregion
 
@@ -36,6 +43,7 @@ namespace VisualLayer.GamePlay.UI
         private void OnDestroy()
         {
             _dataLayer.Balances.CoinsBalanceChanged -= SyncUiWithData;
+            //_gameLogicHandler.NextItemCreated -= SyncUiWithData;
 
             SyncUiWithData();
         }
@@ -43,7 +51,8 @@ namespace VisualLayer.GamePlay.UI
         
         private void InitializeView()
         {
-            _dataLayer.Balances.CoinsBalanceChanged+= SyncUiWithData;
+            _dataLayer.Balances.CoinsBalanceChanged += SyncUiWithData;
+            //_gameLogicHandler.NextItemCreated += SyncUiWithData;
             
             SyncUiWithData();
         }
@@ -51,6 +60,7 @@ namespace VisualLayer.GamePlay.UI
         private void SyncUiWithData()
         {
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
+           // _nextItemSprite.sprite = _gameLogicHandler.GeNextItem().GetItemMetadata().ItemPreviewSprite;
         }
 
         

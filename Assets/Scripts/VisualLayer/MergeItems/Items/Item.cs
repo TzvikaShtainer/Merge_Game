@@ -32,6 +32,7 @@ namespace VisualLayer.MergeItems
         }
 
         public int GetItemId() => _itemMetadata.ItemId;
+        public ItemMetadata GetItemMetadata() => _itemMetadata;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
