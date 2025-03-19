@@ -17,19 +17,38 @@ namespace VisualLayer.MergeItems.SpawnLogic
         
         private int _min_lvl_spawn = 0;
         private int _max_lvl_spawn = 3;
+        private bool _firstClickCounter = true;
         
         public void Spawn(Vector2 posToSpawn)
         {
-            //need to handle spawn on firs click
-            _gameLogicHandler.DropCurrentItem();
-            
             var isInDelay = Time.time - _lastTimeFire < 0.5; //0.5 just for now
-            if (isInDelay)
+            
+            if (!_firstClickCounter)
             {
+                Debug.Log("_firstClickCounter");
+                _firstClickCounter = false;
+                _gameLogicHandler.SetCurrItemPosByLocation(posToSpawn);
+                _gameLogicHandler.DropCurrentItem();
                 return;
             }
             
-            _gameLogicHandler.MoveToNextItemLogic(posToSpawn);
+            if (isInDelay)
+            {
+                Debug.Log("delay");
+                return;
+            }
+            
+            Debug.Log("Set And Drop");
+            _gameLogicHandler.SetNextItem(posToSpawn);
+            
+            _gameLogicHandler.DropCurrentItem();
+            
+            
+            
+            
+            
+            
+            
             
             _lastTimeFire = Time.time;
         }

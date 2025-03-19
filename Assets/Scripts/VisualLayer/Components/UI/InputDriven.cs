@@ -19,16 +19,19 @@ namespace VisualLayer.Components.UI
         #endregion
         
 
-        private void Update()
+        private void Start()
         {
-            if (_playerInput == null)
+            if (_playerInput is MobileInputManager mobileInput)
             {
-                return;
+                mobileInput.OnRelease += Spawn;
             }
-
-            if (_playerInput.IsClickRequested)
+        }
+        
+        private void OnDestroy()
+        {
+            if (_playerInput is MobileInputManager mobileInput)
             {
-                Spawn();
+                mobileInput.OnRelease -= Spawn;
             }
         }
 

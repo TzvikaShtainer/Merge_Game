@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using VisualLayer.Components.UI.Joystick;
 
 namespace VisualLayer.GamePlay.PlayerInput
@@ -16,5 +17,11 @@ namespace VisualLayer.GamePlay.PlayerInput
         public float GetHorizontalInput => Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
 
         public bool IsClickRequested => _joystick.IsPressed;
+        
+        public event Action OnRelease
+        {
+            add { _joystick.OnReleased += value; }
+            remove { _joystick.OnReleased -= value; }
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace VisualLayer.GamePlay.Handlers
 {
     public class GameLogicHandler: IInitializable, IGameLogicHandler
     { 
+        public event Action NextItemCreated;
+        
         private int _min_lvl_spawn = 0;
         private int _max_lvl_spawn = 3;
 
@@ -27,15 +29,22 @@ namespace VisualLayer.GamePlay.Handlers
 
         public void Initialize()
         {
-            CreateFirstItem();
+            HandleFirstItemCreation();
+            
             CreateNextItem();
         }
 
-        private void CreateFirstItem()
+        private void HandleFirstItemCreation()
         {
             _currentItem = CreateItem();
             
-            SetPos(_currentItem);
+            
+            // Convert screen center to world position
+            Vector3 screenCenter = new Vector3(Screen.width / 2, 2.5f * Screen.height / Camera.main.orthographicSize, Camera.main.nearClipPlane);
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenCenter);
+
+
+            SetCurrItemPosByLocation(new Vector2(worldPosition.x, 2.5f));
         }
 
         private Item CreateItem()
@@ -44,19 +53,13 @@ namespace VisualLayer.GamePlay.Handlers
             var itemToSpawn = _itemFactory.Create(randomLvlToSpawn);
             return itemToSpawn;
         }
-
-        private void SetPos(Item itemToSpawn)
+        
+        public void SetCurrItemPosByLocation(Vector2 pos)
         {
-            itemToSpawn.GetComponent<Rigidbody2D>().gravityScale = 0;
+            _currentItem.GetComponent<Rigidbody2D>().gravityScale = 0;
             
-            // Convert screen center to world position
-            Vector3 screenCenter = new Vector3(Screen.width / 2, 2.5f * Screen.height / Camera.main.orthographicSize, Camera.main.nearClipPlane);
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenCenter);
-
-            itemToSpawn.transform.position = new Vector2(worldPosition.x, 2.5f);
+            _currentItem.transform.position = pos;
         }
-
-        public event Action NextItemCreated;
 
         public void CreateNextItem()
         {
@@ -73,15 +76,15 @@ namespace VisualLayer.GamePlay.Handlers
             _currentItem.GetComponent<Rigidbody2D>().gravityScale = 1;
         }
 
-        public void MoveToNextItemLogic(Vector2 posOfClick)
+        public void SetNextItem(Vector2 posOfClick)
         {
             _currentItem = _nextItem;
 
-            SetPos(_currentItem);
-            
-            _currentItem.transform.position = new Vector2(posOfClick.x, 2.5f);
+            SetCurrItemPosByLocation(new Vector2(posOfClick.x, 2.5f));
 
             CreateNextItem();
         }
+
+       
     }
 }

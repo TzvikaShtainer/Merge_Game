@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 namespace VisualLayer.Components.UI.Joystick
 {
     public class Joystick: MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
+        public event Action OnReleased;
         public bool IsPressed { get; private set; }
+        
         public void OnPointerDown(PointerEventData eventData)
         {
             IsPressed = true;
-            //Debug.Log("OnPointerDown");
             OnDrag(eventData);
         }
 
@@ -21,7 +23,7 @@ namespace VisualLayer.Components.UI.Joystick
         public void OnPointerUp(PointerEventData eventData)
         {
             IsPressed = false;
-            //Debug.Log("OnPointerUp");
+            OnReleased?.Invoke();
         }
 
         

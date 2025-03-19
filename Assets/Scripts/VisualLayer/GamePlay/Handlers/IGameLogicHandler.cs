@@ -14,6 +14,8 @@ namespace VisualLayer.GamePlay.Handlers
 
         public void DropCurrentItem();
 
-        public void MoveToNextItemLogic(Vector2 posOfClick);
+        public void SetNextItem(Vector2 posOfClick);
+
+        public void SetCurrItemPosByLocation(Vector2 pos);
     }
 }

@@ -4,5 +4,6 @@
     {
         float GetHorizontalInput{ get; }
         bool IsClickRequested { get; }
+        
     }
 }

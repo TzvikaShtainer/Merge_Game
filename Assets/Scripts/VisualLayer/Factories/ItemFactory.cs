@@ -19,6 +19,8 @@ namespace VisualLayer.Factories
         [Inject]
         private DiContainer _container;
         
+        private int _creationCounter = 0;
+        
         public Item Create(int itemId)
         {
             var itemPrefab = _dataLayer.Metadata.GetPrefabForItem(itemId);
@@ -29,6 +31,8 @@ namespace VisualLayer.Factories
                 throw new System.Exception($"Prefab for item {itemId} does not have an Item component!");
             }
             
+            _creationCounter++; 
+            instanceToReturn.name = $"Item_{_creationCounter}"; 
             
             return instanceToReturn;
         }
