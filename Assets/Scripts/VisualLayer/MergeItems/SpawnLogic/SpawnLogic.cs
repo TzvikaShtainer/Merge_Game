@@ -22,8 +22,9 @@ namespace VisualLayer.MergeItems.SpawnLogic
         public void Spawn(Vector2 posToSpawn)
         {
             var isInDelay = Time.time - _lastTimeFire < 0.5; //0.5 just for now
+            //Debug.Log(_firstClickCounter);
             
-            if (!_firstClickCounter)
+            if (_firstClickCounter)
             {
                 Debug.Log("_firstClickCounter");
                 _firstClickCounter = false;
