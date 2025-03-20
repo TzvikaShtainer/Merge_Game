@@ -45,6 +45,8 @@ namespace VisualLayer.MergeItems.MergeSystem
             Vector2 newPosition = (item1.transform.position + item2.transform.position) / 2;
             newItem.transform.position = newPosition;
             
+            newItem.gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+            
             Object.Destroy(item1.gameObject);
             Object.Destroy(item2.gameObject);
             

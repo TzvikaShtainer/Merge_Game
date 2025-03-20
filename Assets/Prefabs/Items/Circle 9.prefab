@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7385427592253772724}
   - component: {fileID: 8269736786510923545}
   - component: {fileID: 7507317039545244910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a923438b4b4e4c358f34e8ebb32216b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemId: 0
+  _itemMetadata:
+    _itemName: 
+    _itemId: 0
+    _itemPrefabRef: {fileID: 0}
+    _itemPreviewSprite: {fileID: 0}
 --- !u!212 &7507317039545244910
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -173,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2849261159907811062}
   - component: {fileID: 5865403880840795833}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpriteImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

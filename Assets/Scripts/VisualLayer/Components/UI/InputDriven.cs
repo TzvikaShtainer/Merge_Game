@@ -27,6 +27,14 @@ namespace VisualLayer.Components.UI
             }
         }
         
+        private void Update()
+        {
+            if (_playerInput.IsClickRequested)
+            {
+                
+            }
+        }
+        
         private void OnDestroy()
         {
             if (_playerInput is MobileInputManager mobileInput)

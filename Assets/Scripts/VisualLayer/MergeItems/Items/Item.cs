@@ -42,15 +42,27 @@ namespace VisualLayer.MergeItems
 
             if (otherItem != null && _itemMetadata.ItemId == otherItem._itemMetadata.ItemId)
             {
-                if (_mergeHandler.CanMerge(this, otherItem))
-                {
-                    isMerging = true;
-                    otherItem.isMerging = true;
+                HandleCollisionWithSameItem(otherItem);
+            }
+            else
+            {
+                HandleCollisionWithJar();
+            }
+        }
+
+        private void HandleCollisionWithJar()
+        {
+            gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+        }
+
+        private void HandleCollisionWithSameItem(Item otherItem)
+        {
+            if (_mergeHandler.CanMerge(this, otherItem))
+            {
+                isMerging = true;
+                otherItem.isMerging = true;
                     
-                    _mergeHandler.Merge(this, otherItem);
-                }
-                
-                //MergeItems(otherItem);
+                _mergeHandler.Merge(this, otherItem);
             }
         }
     }
