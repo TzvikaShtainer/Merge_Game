@@ -13,6 +13,12 @@ namespace DataLayer.Metadata
         [Inject]
         private ItemMetadata[] _itemsMetadata;
         
+        [Inject]
+        private GameLevelMetadata[] _levelsMetadata;
+
+        [Inject]
+        private InfraScreenMetadata[] _infraScreenMetadata;
+        
         #endregion
         
         #region Methods
@@ -51,6 +57,28 @@ namespace DataLayer.Metadata
             }
 
             return map;
+        }
+        
+        public GameLevelMetadata GetLevelMetadata(GameLevelType levelType)
+        {
+            var result = _levelsMetadata.FirstOrDefault(m => m.LevelType == levelType);
+            if (result == null)
+            {
+                throw new InvalidDataException($"{levelType} level isn't supported");
+            }
+
+            return result;
+        }
+
+        public InfraScreenMetadata GetInfraScreenMetadata(InfraScreenType screenType)
+        {
+            var result = _infraScreenMetadata.FirstOrDefault(m => m.Type == screenType);
+            if (result == null)
+            {
+                throw new InvalidDataException($"{screenType} infra screen isn't supported");
+            }
+
+            return result;
         }
         
         #endregion

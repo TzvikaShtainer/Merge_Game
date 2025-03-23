@@ -2,6 +2,7 @@
 {
     public enum GameLevelType
     {
+        StartScreen,
         GamePlay
     }
 }

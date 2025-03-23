@@ -16,6 +16,12 @@ namespace DataLayer.Installers
         [SerializeField] 
         private PlayerBalances _playerBalances;
         
+        [SerializeField]
+        private GameLevelMetadata[] _levelsMetadata;
+        
+        [SerializeField]
+        private InfraScreenMetadata[] _infraScreenMetadatas;
+        
         
         public override void InstallBindings()
         {
@@ -48,6 +54,16 @@ namespace DataLayer.Installers
                 .Bind<ItemMetadata[]>()
                 .FromInstance(_items)
                 .AsSingle();
+            
+            subContainer
+                .Bind<GameLevelMetadata[]>()
+                .FromInstance(_levelsMetadata)
+                .AsCached();
+            
+            subContainer
+                .Bind<InfraScreenMetadata[]>()
+                .FromInstance(_infraScreenMetadatas)
+                .AsCached();
         }
     }
 }

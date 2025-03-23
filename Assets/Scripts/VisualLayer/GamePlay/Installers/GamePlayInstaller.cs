@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DataLayer.DataTypes;
 using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.GamePlay.Handlers;
@@ -12,6 +13,10 @@ using Zenject;
 
 public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
 {
+    
+    [SerializeField] 
+    private GameLevelType _levelType;
+    
     public override void InstallBindings()
     {
         Container
@@ -36,6 +41,16 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
         
         Container
             .BindInterfacesAndSelfTo<GameLogicHandler>()
+            .AsSingle();
+        
+        Container
+            .Bind<GameLevelType>()
+            .FromInstance(_levelType)
+            .AsSingle();
+        
+        Container
+            .Bind<IStartGameClickHandler>()
+            .To<StartGameClickHandler>()
             .AsSingle();
             
     }

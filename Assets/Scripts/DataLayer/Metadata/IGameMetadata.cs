@@ -9,5 +9,10 @@ namespace DataLayer.Metadata
         bool HasNextLevelItem(int itemId);
 
         public ItemMetadata GetItemMetadata(int itemIdToFind);
+        
+        GameLevelMetadata GetLevelMetadata(GameLevelType levelType);
+		
+        InfraScreenMetadata GetInfraScreenMetadata(InfraScreenType screenType);
+        
     }
 }

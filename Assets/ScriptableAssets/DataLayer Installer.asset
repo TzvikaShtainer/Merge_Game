@@ -63,3 +63,13 @@ MonoBehaviour:
     _itemPreviewSprite: {fileID: 0}
   _playerBalances:
     _coins: 590
+  _levelsMetadata:
+  - _levelType: 0
+    _levelName: Start Screen
+    _levelSceneBuildIndex: 0
+  - _levelType: 1
+    _levelName: Game Play
+    _levelSceneBuildIndex: 2
+  _infraScreenMetadatas:
+  - _type: 0
+    _sceneBuildIndex: 1

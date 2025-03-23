@@ -2,7 +2,6 @@
 {
     public enum InfraScreenType
     {
-        StartScreen,
         Loader,
         GamePopups
     }
