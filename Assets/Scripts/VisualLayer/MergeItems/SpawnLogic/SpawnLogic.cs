@@ -26,7 +26,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
             
             if (_firstClickCounter)
             {
-                Debug.Log("_firstClickCounter");
+               // Debug.Log("_firstClickCounter");
                 _firstClickCounter = false;
                 _gameLogicHandler.SetCurrItemPosByLocation(posToSpawn);
                 _gameLogicHandler.DropCurrentItem();
@@ -35,11 +35,11 @@ namespace VisualLayer.MergeItems.SpawnLogic
             
             if (isInDelay)
             {
-                Debug.Log("delay");
+               // Debug.Log("delay");
                 return;
             }
             
-            Debug.Log("Set And Drop");
+           // Debug.Log("Set And Drop");
             _gameLogicHandler.SetNextItem(posToSpawn);
             
             _gameLogicHandler.DropCurrentItem();

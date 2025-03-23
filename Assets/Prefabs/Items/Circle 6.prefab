@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7385427592253772724}
   - component: {fileID: 8269736786510923545}
   - component: {fileID: 3679045085277842103}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Circle 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8270811027368554920}
   - component: {fileID: 6619356705871965360}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: SpriteImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

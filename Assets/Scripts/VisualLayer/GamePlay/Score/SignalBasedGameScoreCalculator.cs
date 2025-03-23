@@ -28,7 +28,7 @@ namespace VisualLayer.GamePlay.Score
 
         private void ItemMergedSignalHandler()
         {
-            Debug.Log("ItemMergedSignalHandler");
+            //Debug.Log("ItemMergedSignalHandler");
             _dataLayer.Balances.AddCoins(_params.ItemsMerged); //multi by lvl merge mybe?
         }
     }

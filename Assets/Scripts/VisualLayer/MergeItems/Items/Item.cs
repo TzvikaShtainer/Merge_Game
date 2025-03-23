@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using System;
+using DataLayer;
 using DataLayer.DataTypes;
 using UnityEngine;
 using VisualLayer.Factories;
@@ -14,6 +15,7 @@ namespace VisualLayer.MergeItems
         
         private bool isMerging = false;
         private static float mergeDelay = 0.1f;
+        private Rigidbody2D _rigidbody;
         
         [Inject]
         private ItemFactory _itemFactory;
@@ -23,12 +25,40 @@ namespace VisualLayer.MergeItems
         
         [Inject]
         private IDataLayer _dataLayer;
-
+      
 
         [Inject]
         private void Construct(int itemId)
         {
             _itemMetadata = _dataLayer.Metadata.GetItemMetadata(itemId);
+        }
+
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+        }
+        
+
+        private void Update()
+        {
+            if (IsStandingAfterFall())
+            {
+                //Debug.Log("Standing");
+                gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+            }
+        }
+
+        private bool IsStandingAfterFall()
+        {
+            if (_rigidbody.velocity.magnitude < 0.1f)
+            {
+                if (gameObject.layer == LayerMask.NameToLayer("FallingFruit"))
+                {
+                    //Debug.Log("IsStandingAfterFall true");
+                    return true;
+                }
+            }
+            return false;
         }
 
         public int GetItemId() => _itemMetadata.ItemId;
@@ -49,12 +79,7 @@ namespace VisualLayer.MergeItems
                 HandleCollisionWithJar();
             }
         }
-
-        private void HandleCollisionWithJar()
-        {
-            gameObject.layer = LayerMask.NameToLayer("StandingFruit");
-        }
-
+        
         private void HandleCollisionWithSameItem(Item otherItem)
         {
             if (_mergeHandler.CanMerge(this, otherItem))
@@ -64,6 +89,11 @@ namespace VisualLayer.MergeItems
                     
                 _mergeHandler.Merge(this, otherItem);
             }
+        }
+        
+        private void HandleCollisionWithJar()
+        {
+            gameObject.layer = LayerMask.NameToLayer("StandingFruit");
         }
     }
 }
