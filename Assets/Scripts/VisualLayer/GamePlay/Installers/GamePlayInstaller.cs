@@ -47,11 +47,6 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .Bind<GameLevelType>()
             .FromInstance(_levelType)
             .AsSingle();
-        
-        Container
-            .Bind<IStartGameClickHandler>()
-            .To<StartGameClickHandler>()
-            .AsSingle();
             
     }
 }

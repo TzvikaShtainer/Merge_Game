@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
   _monoInstallers:
   - {fileID: 2016730318}
   _installerPrefabs: []
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016730315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa5b8957deb8d554db5f9c210508dd37, type: 3}
+  m_Script: {fileID: 11500000, guid: 387ed23664d04e9fa857a2d8883e9afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _levelType: 0
