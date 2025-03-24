@@ -62,7 +62,7 @@ MonoBehaviour:
     _itemPrefabRef: {fileID: 2284559540579497787, guid: 7fd2c4ba957cb824b8081cf017823bf3, type: 3}
     _itemPreviewSprite: {fileID: 0}
   _playerBalances:
-    _coins: 590
+    _coins: 630
   _levelsMetadata:
   - _levelType: 0
     _levelName: Start Screen
@@ -73,3 +73,5 @@ MonoBehaviour:
   _infraScreenMetadatas:
   - _type: 0
     _sceneBuildIndex: 1
+  - _type: 1
+    _sceneBuildIndex: 3

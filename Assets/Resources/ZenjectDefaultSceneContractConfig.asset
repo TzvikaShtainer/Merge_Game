@@ -17,3 +17,5 @@ MonoBehaviour:
     Scene: {fileID: 102900000, guid: cf1590683129f1e4eafde84788f4521d, type: 3}
   - ContractName: StartScreen
     Scene: {fileID: 102900000, guid: 27e02daecc0e9e64e95fcb81885f56a0, type: 3}
+  - ContractName: Popups
+    Scene: {fileID: 102900000, guid: 9e52e526126281d419a98428c5066d3f, type: 3}
