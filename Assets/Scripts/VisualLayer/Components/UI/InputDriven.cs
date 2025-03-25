@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ServiceLayer.Signals.SignalsClasses;
+using UnityEngine;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.MergeItems.SpawnLogic;
 using Zenject;
@@ -15,9 +16,8 @@ namespace VisualLayer.Components.UI
         [Inject]
         private ISpawn _spawn;
         
-
-        #endregion
         
+        #endregion
 
         private void Start()
         {
@@ -47,5 +47,7 @@ namespace VisualLayer.Components.UI
         {
             _spawn.Spawn(new Vector2(_playerInput.GetHorizontalInput, 2));
         }
+
+        
     }
 }

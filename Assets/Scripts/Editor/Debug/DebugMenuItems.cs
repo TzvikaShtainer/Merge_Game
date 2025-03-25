@@ -22,7 +22,7 @@ namespace Editor.Debug
             }
 			
             var popupFactory = context.Container.Resolve<YesNoPopup.Factory>();
-            popupFactory.Create();
+            //popupFactory.Create();
         }
     }
 }

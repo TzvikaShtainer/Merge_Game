@@ -1,4 +1,5 @@
 ﻿using ServiceLayer.GameScenes;
+using ServiceLayer.TimeControl;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,13 @@ namespace ServiceLayer.Installers
                 .Bind<IGameScenesService>()
                 .To<GameScenesService>()
                 .AsSingle();
+            
+            Container
+                .Bind<ITimeController>()
+                .To<TimeController>()
+                .AsSingle();
+            
+            
         }
     }
 }

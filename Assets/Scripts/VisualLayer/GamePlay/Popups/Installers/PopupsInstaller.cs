@@ -10,12 +10,12 @@ namespace VisualLayer.GamePlay.Popups.Installers
         private RectTransform _parentPopupCanvasTransform;
         
         [SerializeField]
-        private YesNoPopup.YesNoPopup _yesNoPopup;
+        private YesNoPopup.YesNoPopup _yesNoPopupPrefabRef;
         public override void InstallBindings()
         {
             Container
-                .BindFactory<YesNoPopup.YesNoPopup, YesNoPopup.YesNoPopup.Factory>()
-                .FromComponentInNewPrefab(_yesNoPopup)
+                .BindFactory<YesNoPopupArgs ,YesNoPopup.YesNoPopup, YesNoPopup.YesNoPopup.Factory>()
+                .FromComponentInNewPrefab(_yesNoPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform)
                 .AsSingle();
         }

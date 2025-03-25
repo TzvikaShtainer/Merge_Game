@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DataLayer.DataTypes;
 using UnityEngine;
+using VisualLayer.Components.UI;
 using VisualLayer.Factories;
 using VisualLayer.GamePlay.Handlers;
 using VisualLayer.GamePlay.PlayerInput;

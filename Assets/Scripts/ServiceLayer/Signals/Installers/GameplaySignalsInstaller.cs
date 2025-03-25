@@ -12,6 +12,9 @@ namespace ServiceLayer.Signals.Installers
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignal<ItemMergedSignal>();
+            
+            Container.DeclareSignal<UnpauseInput>();
+            Container.DeclareSignal<PauseInput>();
         }
     }
 }

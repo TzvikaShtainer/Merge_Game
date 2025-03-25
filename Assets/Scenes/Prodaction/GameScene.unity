@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 548040922}
   - component: {fileID: 548040921}
   - component: {fileID: 548040926}
+  - component: {fileID: 548040927}
   m_Layer: 5
   m_Name: Gameplay UI Canvas
   m_TagString: Untagged
@@ -480,6 +481,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548040920}
   m_CullTransparentMesh: 1
+--- !u!114 &548040927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548040920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90b00bd647e4231819b7b3215139598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joystick: {fileID: 1897198432}
 --- !u!1 &577131098
 GameObject:
   m_ObjectHideFlags: 0
