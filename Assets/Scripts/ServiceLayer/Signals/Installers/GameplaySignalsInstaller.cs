@@ -15,6 +15,9 @@ namespace ServiceLayer.Signals.Installers
             
             Container.DeclareSignal<UnpauseInput>();
             Container.DeclareSignal<PauseInput>();
+
+            Container.DeclareSignal<ReachedColliderLose>();
+            Container.DeclareSignal<HandleItemsCollisionAfterLose>();
         }
     }
 }

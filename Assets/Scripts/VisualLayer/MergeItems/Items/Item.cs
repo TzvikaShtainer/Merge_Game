@@ -1,6 +1,7 @@
 ﻿using System;
 using DataLayer;
 using DataLayer.DataTypes;
+using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.MergeItems.MergeSystem;
@@ -16,6 +17,7 @@ namespace VisualLayer.MergeItems
         private bool isMerging = false;
         private static float mergeDelay = 0.1f;
         private Rigidbody2D _rigidbody;
+        private bool _isLosing = false;
         
         [Inject]
         private ItemFactory _itemFactory;
@@ -25,12 +27,22 @@ namespace VisualLayer.MergeItems
         
         [Inject]
         private IDataLayer _dataLayer;
+        
+        [Inject]
+        private SignalBus _signalBus;
       
 
         [Inject]
         private void Construct(int itemId)
         {
             _itemMetadata = _dataLayer.Metadata.GetItemMetadata(itemId);
+            _signalBus.Subscribe<HandleItemsCollisionAfterLose>(OnPlayerLose);
+        }
+
+        private void OnPlayerLose()
+        {
+            _isLosing = true;
+            gameObject.layer = LayerMask.NameToLayer("CreatedFruit");
         }
 
         private void Awake()
@@ -52,7 +64,7 @@ namespace VisualLayer.MergeItems
         {
             if (_rigidbody.velocity.magnitude < 0.1f)
             {
-                if (gameObject.layer == LayerMask.NameToLayer("FallingFruit"))
+                if (gameObject.layer == LayerMask.NameToLayer("FallingFruit") && _isLosing)
                 {
                     //Debug.Log("IsStandingAfterFall true");
                     return true;
