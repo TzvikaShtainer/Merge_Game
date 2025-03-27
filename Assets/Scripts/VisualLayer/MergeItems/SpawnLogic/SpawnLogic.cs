@@ -15,8 +15,6 @@ namespace VisualLayer.MergeItems.SpawnLogic
         
         private float _lastTimeFire;
         
-        private int _min_lvl_spawn = 0;
-        private int _max_lvl_spawn = 3;
         private bool _firstClickCounter = true;
         
         public void Spawn(Vector2 posToSpawn)
@@ -43,13 +41,6 @@ namespace VisualLayer.MergeItems.SpawnLogic
             _gameLogicHandler.SetNextItem(posToSpawn);
             
             _gameLogicHandler.DropCurrentItem();
-            
-            
-            
-            
-            
-            
-            
             
             _lastTimeFire = Time.time;
         }

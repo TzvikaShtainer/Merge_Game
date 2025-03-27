@@ -11,8 +11,8 @@ namespace VisualLayer.GamePlay.Handlers
     { 
         public event Action NextItemCreated;
         
-        private int _min_lvl_spawn = 0;
-        private int _max_lvl_spawn = 3;
+        private int _minLvlSpawn = 0;
+        private int _maxLvlSpawn = 3;
 
         [SerializeField]
         private Item _currentItem;
@@ -49,7 +49,7 @@ namespace VisualLayer.GamePlay.Handlers
 
         private Item CreateItem()
         {
-            int randomLvlToSpawn = Random.Range(_min_lvl_spawn, _max_lvl_spawn);
+            int randomLvlToSpawn = Random.Range(_minLvlSpawn, _maxLvlSpawn);
             var itemToSpawn = _itemFactory.Create(randomLvlToSpawn);
             return itemToSpawn;
         }
