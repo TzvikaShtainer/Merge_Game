@@ -11,8 +11,8 @@ namespace VisualLayer.GamePlay.Handlers
     { 
         public event Action NextItemCreated;
         
-        private int _minLvlSpawn = 11;
-        private int _maxLvlSpawn = 12;
+        private int _minLvlSpawn = 0;
+        private int _maxLvlSpawn = 3;
 
         [SerializeField]
         private Item _currentItem;
