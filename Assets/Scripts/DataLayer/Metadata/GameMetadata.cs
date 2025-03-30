@@ -38,14 +38,15 @@ namespace DataLayer.Metadata
 
         public bool HasNextLevelItem(int nextItemId)
         {
-            ItemMetadata itemMetadata = _itemsMetadata[nextItemId];
-
-            if (itemMetadata != null)
+            
+            if (nextItemId < 0 || nextItemId >= _itemsMetadata.Length)
             {
-                return true;
+                return false;
             }
-
-            return false;
+            
+            
+            ItemMetadata itemMetadata = _itemsMetadata[nextItemId];
+            return itemMetadata != null;
         }
 
         public ItemMetadata GetItemMetadata(int itemIdToFind)
