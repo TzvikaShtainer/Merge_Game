@@ -14,6 +14,9 @@ namespace VisualLayer.GamePlay.UI
 
         [SerializeField] 
         private TextMeshProUGUI _coinsBalaceText;
+
+        [SerializeField] 
+        private TextMeshProUGUI _higestScoreText;
         
         [SerializeField] 
         private Image _nextItemSprite;
@@ -59,6 +62,8 @@ namespace VisualLayer.GamePlay.UI
         
         private void SyncUiWithData()
         {
+            _higestScoreText.text = _dataLayer.Balances.Coins.ToString();
+            
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
             _nextItemSprite.sprite = _gameLogicHandler.GetNextItem().GetItemMetadata().ItemPreviewSprite;
         }
