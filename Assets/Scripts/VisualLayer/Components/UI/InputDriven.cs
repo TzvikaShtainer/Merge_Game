@@ -1,4 +1,5 @@
 ﻿using ServiceLayer.Signals.SignalsClasses;
+using ServiceLayer.Utilis;
 using UnityEngine;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.MergeItems.SpawnLogic;
@@ -16,37 +17,67 @@ namespace VisualLayer.Components.UI
         [Inject]
         private ISpawn _spawn;
         
+        private DelayTimer _delayTimer;
+        private bool _waitingForNextItem = false;
+        private Vector2 _lastClickedPos;
+        private readonly float _delayTime = 0.5f;
+        
         
         #endregion
 
         private void Start()
         {
+            _delayTimer = new DelayTimer(_delayTime);
+            
             if (_playerInput is MobileInputManager mobileInput)
             {
-                mobileInput.OnRelease += Spawn;
+                mobileInput.OnRelease += OnRelease;
             }
         }
         
         private void Update()
         {
+            if (_waitingForNextItem && _delayTimer.IsReady)
+            {
+                CompleteSpawn();
+            }
+
+            if (!_delayTimer.IsReady || _waitingForNextItem)
+                return;
+
             if (_playerInput.IsClickRequested)
             {
-                
+                Vector2 newPos = new Vector2(_playerInput.GetHorizontalInput, 2.5f);
+                _spawn.UpdateDraggingPosition(newPos);
             }
+        }
+        
+        private void CompleteSpawn()
+        {
+            _spawn.CompleteSpawn(_lastClickedPos); 
+            _waitingForNextItem = false;
+        }
+        
+        private void OnRelease()
+        {
+            if (!_delayTimer.IsReady)
+                return;
+
+            _lastClickedPos = new Vector2(_playerInput.GetHorizontalInput, 2.5f);
+            _spawn.Spawn(_lastClickedPos); // מפיל מיידי
+            _waitingForNextItem = true;
+            _delayTimer.Reset();
         }
         
         private void OnDestroy()
         {
             if (_playerInput is MobileInputManager mobileInput)
             {
-                mobileInput.OnRelease -= Spawn;
+                mobileInput.OnRelease -= OnRelease;
             }
         }
 
-        private void Spawn()
-        {
-            _spawn.Spawn(new Vector2(_playerInput.GetHorizontalInput, 2));
-        }
+        
 
         
     }

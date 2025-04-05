@@ -67,7 +67,7 @@ namespace VisualLayer.GamePlay.Handlers
             
             _nextItem.GetComponent<Rigidbody2D>().gravityScale = 0;
             _nextItem.transform.position = new Vector2(10, 10);
-            //Debug.Log(_nextItem.name);
+
             NextItemCreated?.Invoke();
         }
         
@@ -81,8 +81,6 @@ namespace VisualLayer.GamePlay.Handlers
             _currentItem = _nextItem;
 
             SetCurrItemPosByLocation(new Vector2(posOfClick.x, 2.5f));
-
-            CreateNextItem();
         }
 
        
