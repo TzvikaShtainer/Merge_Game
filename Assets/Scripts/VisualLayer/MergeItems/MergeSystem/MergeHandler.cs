@@ -1,4 +1,6 @@
 ﻿using DataLayer;
+using DataLayer.DataTypes;
+using ServiceLayer.EffectsService;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.Factories;
@@ -16,6 +18,9 @@ namespace VisualLayer.MergeItems.MergeSystem
         
         [Inject]
         private SignalBus _signalBus;
+        
+        [Inject]
+        private IEffectsManager _effectsManager;
         
         public bool CanMerge(Item item1, Item item2)
         {
@@ -50,6 +55,8 @@ namespace VisualLayer.MergeItems.MergeSystem
             
             Object.Destroy(item1.gameObject);
             Object.Destroy(item2.gameObject);
+            
+            _effectsManager.PlayEffect(EffectType.Merge, newPosition);
             
             _signalBus.Fire<ItemMergedSignal>();
         }

@@ -75,3 +75,4 @@ MonoBehaviour:
     _sceneBuildIndex: 1
   - _type: 1
     _sceneBuildIndex: 3
+  _effectsDatabase: {fileID: 11400000, guid: e30962ae2582810408654981aaa7553b, type: 2}

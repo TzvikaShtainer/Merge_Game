@@ -1,6 +1,7 @@
 ﻿using DataLayer.Balances;
 using DataLayer.DataTypes;
 using DataLayer.Metadata;
+using ServiceLayer.EffectsService;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -21,10 +22,18 @@ namespace DataLayer.Installers
         
         [SerializeField]
         private InfraScreenMetadata[] _infraScreenMetadatas;
+
+        [SerializeField] 
+        private EffectsDatabase _effectsDatabase;
         
         
         public override void InstallBindings()
         {
+            Container
+                .Bind<EffectsDatabase>()
+                .FromInstance(_effectsDatabase)
+                .AsSingle();
+            
             Container
                 .Bind<IDataLayer>()
                 .FromSubContainerResolve()

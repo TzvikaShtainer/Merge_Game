@@ -17,7 +17,8 @@ namespace VisualLayer.GamePlay.PlayerInput
         public float GetHorizontalInput => Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
 
         public bool IsClickRequested => _joystick.IsPressed;
-        
+        public Vector2 GetClickPosition  => Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         public event Action OnRelease
         {
             add { _joystick.OnReleased += value; }

@@ -1,4 +1,5 @@
-﻿using ServiceLayer.GameScenes;
+﻿using ServiceLayer.EffectsService;
+using ServiceLayer.GameScenes;
 using ServiceLayer.TimeControl;
 using UnityEngine;
 using Zenject;
@@ -20,7 +21,10 @@ namespace ServiceLayer.Installers
                 .To<TimeController>()
                 .AsSingle();
             
-            
+            Container
+                .Bind<IEffectsManager>()
+                .To<EffectsManager>()
+                .AsSingle();
         }
     }
 }

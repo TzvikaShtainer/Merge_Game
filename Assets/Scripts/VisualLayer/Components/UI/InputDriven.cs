@@ -1,4 +1,6 @@
-﻿using ServiceLayer.Signals.SignalsClasses;
+﻿using DataLayer.DataTypes;
+using ServiceLayer.EffectsService;
+using ServiceLayer.Signals.SignalsClasses;
 using ServiceLayer.Utilis;
 using UnityEngine;
 using VisualLayer.GamePlay.PlayerInput;
@@ -16,6 +18,9 @@ namespace VisualLayer.Components.UI
         
         [Inject]
         private ISpawn _spawn;
+        
+        [Inject] 
+        private IEffectsManager _effectsManager;
         
         private DelayTimer _delayTimer;
         private bool _waitingForNextItem = false;
@@ -64,7 +69,10 @@ namespace VisualLayer.Components.UI
                 return;
 
             _lastClickedPos = new Vector2(_playerInput.GetHorizontalInput, 2.5f);
-            _spawn.Spawn(_lastClickedPos); // מפיל מיידי
+            _spawn.Spawn(_lastClickedPos); 
+            
+            _effectsManager.PlayEffect(EffectType.Release, _playerInput.GetClickPosition); //_lastClickedPos just for now, need to change
+            
             _waitingForNextItem = true;
             _delayTimer.Reset();
         }

@@ -7,7 +7,8 @@ namespace VisualLayer.GamePlay.PlayerInput
         public float GetHorizontalInput => Input.mousePosition.y;
 
         public bool IsClickRequested => Input.GetMouseButtonDown(0);
-        
+        public Vector2 GetClickPosition { get; }
+
         public bool IsTouchReleased //just copy for now
         {
             get 
