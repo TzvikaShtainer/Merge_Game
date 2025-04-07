@@ -16,15 +16,15 @@ MonoBehaviour:
   - _itemName: 
     _itemId: 0
     _itemPrefabRef: {fileID: 2284559540579497787, guid: 0462494de74998042bc063d34497ff9b, type: 3}
-    _itemPreviewSprite: {fileID: 21300000, guid: e689e00c26c973945813c4497d425cb8, type: 3}
+    _itemPreviewSprite: {fileID: 21300000, guid: a21f5459cd32b1b438a771a0862b74ff, type: 3}
   - _itemName: 
     _itemId: 1
     _itemPrefabRef: {fileID: 2284559540579497787, guid: e854c7bc27ee4eb4fa25de439a140e47, type: 3}
-    _itemPreviewSprite: {fileID: 21300000, guid: 62ecb02cc2fe8e84e9bd30b682bc950f, type: 3}
+    _itemPreviewSprite: {fileID: 21300000, guid: 9800152a31bd19041a2b598f44222306, type: 3}
   - _itemName: 
     _itemId: 2
     _itemPrefabRef: {fileID: 2284559540579497787, guid: d06ef0156432c2a458fbf4bccc8f6a53, type: 3}
-    _itemPreviewSprite: {fileID: 21300000, guid: 89e738b197fdb1541b4c22702f84194f, type: 3}
+    _itemPreviewSprite: {fileID: 21300000, guid: a200fe71f218f6946883422cc5d4a4a9, type: 3}
   - _itemName: 
     _itemId: 3
     _itemPrefabRef: {fileID: 2284559540579497787, guid: 66a169ab09b8e444cb3d1d76a1492665, type: 3}
@@ -57,12 +57,8 @@ MonoBehaviour:
     _itemId: 10
     _itemPrefabRef: {fileID: 2284559540579497787, guid: a8b6f2787790b4247ae38c1535fc13e3, type: 3}
     _itemPreviewSprite: {fileID: 0}
-  - _itemName: 
-    _itemId: 11
-    _itemPrefabRef: {fileID: 2284559540579497787, guid: 7fd2c4ba957cb824b8081cf017823bf3, type: 3}
-    _itemPreviewSprite: {fileID: 0}
   _playerBalances:
-    _coins: 630
+    _coins: 4310
   _levelsMetadata:
   - _levelType: 0
     _levelName: Start Screen
