@@ -8,15 +8,16 @@ public class FontReplacer : MonoBehaviour
     [MenuItem("Tools/Replace Fonts In Scene")]
     private static void ReplaceFonts()
     {
-        TMP_FontAsset newFont = Resources.Load<TMP_FontAsset>("Fonts/ChalkboardSE-Regular"); // תשנה לנתיב הפונט החדש שלך
+        TMP_FontAsset newFont = Resources.Load<TMP_FontAsset>("Fonts/ChalkboardSE-Regular"); 
         if (newFont == null)
         {
             Debug.LogError("Couldn't find the font! Make sure it's in Resources/Fonts/MyNewFont");
             return;
         }
 
-        TMP_Text[] allTexts = FindObjectsOfType<TMP_Text>(true); // כולל אובייקטים לא פעילים
+        TMP_Text[] allTexts = FindObjectsOfType<TMP_Text>(true); 
 
+        
         foreach (var text in allTexts)
         {
             text.font = newFont;
