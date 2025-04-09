@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 459431039}
   - component: {fileID: 459431040}
   m_Layer: 5
-  m_Name: Skills_Bottuns_Right
+  m_Name: abilities_Bottuns_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1230,7 +1230,7 @@ GameObject:
   - component: {fileID: 1051666920}
   - component: {fileID: 1051666921}
   m_Layer: 5
-  m_Name: Skills_Bottuns_Left
+  m_Name: abilities_Bottuns_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1564,6 +1564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelType: 0
+  destroyLowestAbilityData: {fileID: 0}
+  ability2: {fileID: 0}
+  ability3: {fileID: 0}
+  ability4: {fileID: 0}
 --- !u!114 &1165787261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1968,7 +1972,7 @@ GameObject:
   - component: {fileID: 1317587909}
   - component: {fileID: 1317587908}
   m_Layer: 5
-  m_Name: Button
+  m_Name: DestroyAllLowestLevelFruitsAbilityButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2036,7 +2040,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1317587909}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165787259}
+        m_TargetAssemblyTypeName: VisualLayer.GamePlay.UI.GameplayHudUi, Assembly-CSharp
+        m_MethodName: OnAbilityButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DestroyAllLowestLevelFruitsAbility
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1317587909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2216,6 +2232,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelType: 1
+  destroyLowestAbilityData: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
+  ability2: {fileID: 0}
+  ability3: {fileID: 0}
+  ability4: {fileID: 0}
 --- !u!114 &1510487345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2279,7 +2299,7 @@ GameObject:
   - component: {fileID: 1556459237}
   - component: {fileID: 1556459238}
   m_Layer: 5
-  m_Name: Skills_Buttons
+  m_Name: abilities_Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

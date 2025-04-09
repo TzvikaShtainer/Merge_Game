@@ -3,6 +3,7 @@ using DataLayer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.Handlers;
 using Zenject;
 
@@ -33,6 +34,9 @@ namespace VisualLayer.GamePlay.UI
         
         [Inject]
         private IGameLogicHandler _gameLogicHandler;
+        
+        [Inject]
+        private AbilityManager _abilityManager;
 
         #endregion
 
@@ -72,6 +76,12 @@ namespace VisualLayer.GamePlay.UI
         public async void OnBackButtonClick()
         {
             _backClickHandler.Execute();
+        }
+
+        public void OnAbilityButtonClick(string abilityId)
+        {
+            Debug.Log("OnAbilityButtonClick");
+            _abilityManager.UseAbility(abilityId);
         }
         
         #endregion
