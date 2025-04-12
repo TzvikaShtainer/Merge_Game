@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 459431039}
   - component: {fileID: 459431040}
   m_Layer: 5
-  m_Name: abilities_Bottuns_Right
+  m_Name: abilities_Buttons_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,7 +399,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -425,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -8.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1230,7 +1230,7 @@ GameObject:
   - component: {fileID: 1051666920}
   - component: {fileID: 1051666921}
   m_Layer: 5
-  m_Name: abilities_Bottuns_Left
+  m_Name: abilities_Buttons_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 1086797060}
   - component: {fileID: 1086797059}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: ShakeBoxButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1364,7 +1364,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1086797060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165787259}
+        m_TargetAssemblyTypeName: VisualLayer.GamePlay.UI.GameplayHudUi, Assembly-CSharp
+        m_MethodName: OnAbilityButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ShakeBoxAbility
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1086797060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1577,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelType: 0
   destroyLowestAbilityData: {fileID: 0}
-  ability2: {fileID: 0}
+  shakeBoxAbilityData: {fileID: 0}
+  shakeBoxAbilityJarPrefab: {fileID: 0}
+  mainGameplayCamera: {fileID: 0}
   ability3: {fileID: 0}
   ability4: {fileID: 0}
 --- !u!114 &1165787261
@@ -2120,6 +2134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1579089768}
   - {fileID: 1167958888}
   - {fileID: 1281261126}
   - {fileID: 577131099}
@@ -2233,7 +2248,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelType: 1
   destroyLowestAbilityData: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
-  ability2: {fileID: 0}
+  shakeBoxAbilityData: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
+  shakeBoxAbilityJarPrefab: {fileID: 1425782311}
+  mainGameplayCamera: {fileID: 519420031}
   ability3: {fileID: 0}
   ability4: {fileID: 0}
 --- !u!114 &1510487345
@@ -2429,12 +2446,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579089766}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: -0.26, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.09, y: -0.93, z: 1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1425782312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1605456348
 GameObject:
@@ -3338,7 +3355,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1425782312}
   - {fileID: 1847849362}
-  - {fileID: 1579089768}
   - {fileID: 548040924}
   - {fileID: 3865281889602747439}
   - {fileID: 834550116}

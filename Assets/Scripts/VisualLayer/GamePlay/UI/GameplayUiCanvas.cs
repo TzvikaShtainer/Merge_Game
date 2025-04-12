@@ -9,6 +9,9 @@ namespace VisualLayer.GamePlay.UI
         [SerializeField] 
         private GameObject _joystick;
         
+        [SerializeField]
+        private GameObject _gameplayCanvas;
+        
         [Inject]
         private SignalBus _signalBus;
         
@@ -16,6 +19,9 @@ namespace VisualLayer.GamePlay.UI
         {
             _signalBus.Subscribe<PauseInput>(PauseInputDriven);
             _signalBus.Subscribe<UnpauseInput>(UnpauseInputDriven);
+            
+            _signalBus.Subscribe<EnableUI>(EnableUICanvas);
+            _signalBus.Subscribe<DisableUI>(DisableUICanvas);
         }
 
         private void UnpauseInputDriven()
@@ -26,6 +32,16 @@ namespace VisualLayer.GamePlay.UI
         private void PauseInputDriven()
         {
             _joystick.SetActive(false);
+        }
+
+        private void EnableUICanvas()
+        {
+            _gameplayCanvas.SetActive(true);
+        }
+        
+        private void DisableUICanvas()
+        {
+            _gameplayCanvas.SetActive(false);
         }
     }
 }

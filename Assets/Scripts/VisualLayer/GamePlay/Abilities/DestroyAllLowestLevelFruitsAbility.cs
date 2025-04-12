@@ -49,11 +49,13 @@ namespace VisualLayer.GamePlay.Abilities
             
             Count--;
             _signalBus.Fire<PauseInput>();
+            _signalBus.Fire<DisableUI>();
 
             FindAndDestroyLowestItems();    
             
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5));
             _signalBus.Fire<UnpauseInput>();
+            _signalBus.Fire<EnableUI>();
         }
 
         private void FindAndDestroyLowestItems()

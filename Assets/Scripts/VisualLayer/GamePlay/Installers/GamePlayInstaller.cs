@@ -20,17 +20,30 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
     [SerializeField] 
     private GameLevelType _levelType;
     
+    [Header("Abilities Settings")]
+    [Header("Destroy Lowest Ability")]
     [SerializeField]
     private AbilityDataSO destroyLowestAbilityData;
     
+    [Header("Shake Box Ability")]
     [SerializeField]
-    private AbilityDataSO ability2;
+    private AbilityDataSO shakeBoxAbilityData;
     
+    [SerializeField]
+    private GameObject shakeBoxAbilityJarPrefab;
+
+    [SerializeField] 
+    private Camera mainGameplayCamera;
+    
+    [Header("ability3")]
     [SerializeField]
     private AbilityDataSO ability3;
     
+    [Header("ability4")]
     [SerializeField]
     private AbilityDataSO ability4;
+    
+    
     
     
     public override void InstallBindings()
@@ -82,6 +95,27 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .WhenInjectedInto<DestroyAllLowestLevelFruitsAbility>();
         
         //ShakeBoxAbility ability bind:
+        Container
+            .Bind<IAbility>()
+            .To<ShakeBoxAbility>()
+            .AsSingle();
+        
+        Container
+            .Bind<AbilityDataSO>()
+            .FromInstance(shakeBoxAbilityData)
+            .WhenInjectedInto<ShakeBoxAbility>();
+        
+        Container
+            .Bind<Transform>()
+            .WithId("ShakeBoxJar")
+            .FromInstance(shakeBoxAbilityJarPrefab.transform)
+            .AsCached();
+        
+        Container
+            .Bind<Camera>()
+            .WithId("MainGameplayCamera")
+            .FromInstance(mainGameplayCamera)
+            .AsSingle();
         
 
     }

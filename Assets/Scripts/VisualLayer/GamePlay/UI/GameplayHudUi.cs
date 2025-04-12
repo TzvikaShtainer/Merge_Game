@@ -80,7 +80,6 @@ namespace VisualLayer.GamePlay.UI
 
         public void OnAbilityButtonClick(string abilityId)
         {
-            Debug.Log("OnAbilityButtonClick");
             _abilityManager.UseAbility(abilityId);
         }
         
