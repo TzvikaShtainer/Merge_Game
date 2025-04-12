@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 933138192}
   - component: {fileID: 933138191}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: DestroySpecificFruitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1181,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 933138192}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165787259}
+        m_TargetAssemblyTypeName: VisualLayer.GamePlay.UI.GameplayHudUi, Assembly-CSharp
+        m_MethodName: OnAbilityButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DestroySpecificFruitAbility
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &933138192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,7 +1594,7 @@ MonoBehaviour:
   shakeBoxAbilityJarPrefab: {fileID: 0}
   mainGameplayCamera: {fileID: 0}
   upgradeSpecificFruitAbilityData: {fileID: 0}
-  ability4: {fileID: 0}
+  destroySpecificFruitAbilityData: {fileID: 0}
 --- !u!114 &1165787261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,7 +1999,7 @@ GameObject:
   - component: {fileID: 1317587909}
   - component: {fileID: 1317587908}
   m_Layer: 5
-  m_Name: DestroyAllLowestLevelFruitsAbilityButton
+  m_Name: DestroyAllLowestLevelFruitsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2253,7 +2265,7 @@ MonoBehaviour:
   shakeBoxAbilityJarPrefab: {fileID: 1425782311}
   mainGameplayCamera: {fileID: 519420031}
   upgradeSpecificFruitAbilityData: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
-  ability4: {fileID: 0}
+  destroySpecificFruitAbilityData: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
 --- !u!114 &1510487345
 MonoBehaviour:
   m_ObjectHideFlags: 0

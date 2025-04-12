@@ -39,9 +39,9 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
     [SerializeField]
     private AbilityDataSO upgradeSpecificFruitAbilityData ;
     
-    [Header("ability4")]
+    [Header("Destroy Specific Fruit Ability")]
     [SerializeField]
-    private AbilityDataSO ability4;
+    private AbilityDataSO destroySpecificFruitAbilityData;
     
     
     
@@ -132,5 +132,16 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .Bind<AbilityDataSO>()
             .FromInstance(upgradeSpecificFruitAbilityData)
             .WhenInjectedInto<UpgradeSpecificFruitAbility>();
+        
+        //DestroySpecificFruitAbility ability bind:
+        Container
+            .Bind<IAbility>()
+            .To<DestroySpecificFruitAbility>()
+            .AsSingle();
+        
+        Container
+            .Bind<AbilityDataSO>()
+            .FromInstance(destroySpecificFruitAbilityData)
+            .WhenInjectedInto<DestroySpecificFruitAbility>();
     }
 }
