@@ -5,7 +5,7 @@
         string Id { get; }
         int Count{ get; set; }
         
-        public void Use();
+        public void UseAbility();
         public void Buy();
     }
 }

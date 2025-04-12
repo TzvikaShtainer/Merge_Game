@@ -20,7 +20,7 @@ namespace VisualLayer.GamePlay.Abilities
         {
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
-                ability.Use();
+                ability.UseAbility();
             }
             else
             {

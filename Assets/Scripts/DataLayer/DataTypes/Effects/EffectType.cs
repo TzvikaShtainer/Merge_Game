@@ -3,6 +3,7 @@
     public enum EffectType
     {
         Release,
-        Merge
+        Merge,
+        Destroy
     }
 }

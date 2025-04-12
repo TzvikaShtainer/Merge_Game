@@ -1,11 +1,27 @@
-﻿using DataLayer.DataTypes.abilities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
+using DataLayer.DataTypes;
+using DataLayer.DataTypes.abilities;
+using ServiceLayer.EffectsService;
+using ServiceLayer.Signals.SignalsClasses;
+using ServiceLayer.TimeControl;
 using UnityEngine;
+using VisualLayer.MergeItems;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace VisualLayer.GamePlay.Abilities
 {
     public class DestroyAllLowestLevelFruitsAbility : IAbility
     {
+        [Inject]
+        private SignalBus _signalBus;
+        
+        [Inject] 
+        private IEffectsManager _effectsManager;
+        
         public string Id => _abilityDataSo.Id;
         public int Count
         {
@@ -20,18 +36,56 @@ namespace VisualLayer.GamePlay.Abilities
         {
             _abilityDataSo = abilityDataSo;
         }
-        public void Use()
-        {
-            if (Count > 0)
-            {
-                Count--;
-               Debug.Log("DestroyAllLowestLevelFruitsAbility has been called.");
-            }
-        }
-
+        
         public void Buy()
         {
             throw new System.NotImplementedException();
+        }
+        
+        public async void UseAbility()
+        {
+            if (Count <= 0)
+                return;
+            
+            Count--;
+            _signalBus.Fire<PauseInput>();
+
+            FindAndDestroyLowestItems();    
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            _signalBus.Fire<UnpauseInput>();
+        }
+
+        private void FindAndDestroyLowestItems()
+        {
+            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
+
+            //remove items that not inside the jar
+            allItems = allItems
+                .Where(item => !IsOutsideTheJar(item))
+                .ToList();
+
+            if (allItems.Count == 0)
+            {
+                Debug.Log("No items found");
+                return;
+            }
+
+            int lowestItemIndex = allItems.Min(item => item.GetItemId());
+
+            foreach (Item currItem in allItems)
+            {
+                if (currItem.GetItemId() == lowestItemIndex && !IsOutsideTheJar(currItem))
+                {
+                    Object.Destroy(currItem.gameObject);
+                    _effectsManager.PlayEffect(EffectType.Destroy, currItem.gameObject.transform.position);
+                }
+            }
+        }
+
+        private bool IsOutsideTheJar(Item currItem)
+        {
+            return currItem.gameObject.transform.position.y >= 2.5;
         }
     }
 }

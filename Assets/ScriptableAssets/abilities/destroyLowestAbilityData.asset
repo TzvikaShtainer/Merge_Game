@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: destroyLowestAbilityData
   m_EditorClassIdentifier: 
   _id: DestroyAllLowestLevelFruitsAbility
-  _count: 5
+  _count: 100

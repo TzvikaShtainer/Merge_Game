@@ -65,11 +65,12 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .AsSingle();
         
         
-        //Abilities Binds:
+        //-----------------Abilities Binds:-------------
         Container
             .Bind<AbilityManager>()
             .AsSingle();
         
+        //DestroyAllLowestLevelFruitsAbility ability bind:
         Container
             .Bind<IAbility>()
             .To<DestroyAllLowestLevelFruitsAbility>()
@@ -79,6 +80,9 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .Bind<AbilityDataSO>()
             .FromInstance(destroyLowestAbilityData)
             .WhenInjectedInto<DestroyAllLowestLevelFruitsAbility>();
+        
+        //ShakeBoxAbility ability bind:
+        
 
     }
 }
