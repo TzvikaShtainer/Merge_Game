@@ -399,7 +399,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -558,6 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 1897198432}
+  _gameplayCanvas: {fileID: 1165787257}
 --- !u!1 &577131098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1581,7 @@ MonoBehaviour:
   shakeBoxAbilityData: {fileID: 0}
   shakeBoxAbilityJarPrefab: {fileID: 0}
   mainGameplayCamera: {fileID: 0}
-  ability3: {fileID: 0}
+  upgradeSpecificFruitAbilityData: {fileID: 0}
   ability4: {fileID: 0}
 --- !u!114 &1165787261
 MonoBehaviour:
@@ -2251,7 +2252,7 @@ MonoBehaviour:
   shakeBoxAbilityData: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
   shakeBoxAbilityJarPrefab: {fileID: 1425782311}
   mainGameplayCamera: {fileID: 519420031}
-  ability3: {fileID: 0}
+  upgradeSpecificFruitAbilityData: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
   ability4: {fileID: 0}
 --- !u!114 &1510487345
 MonoBehaviour:
@@ -2466,7 +2467,7 @@ GameObject:
   - component: {fileID: 1605456351}
   - component: {fileID: 1605456350}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: UpgradeSpecificFruitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2534,7 +2535,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1605456351}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165787259}
+        m_TargetAssemblyTypeName: VisualLayer.GamePlay.UI.GameplayHudUi, Assembly-CSharp
+        m_MethodName: OnAbilityButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UpgradeSpecificFruitAbility
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1605456351
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ namespace VisualLayer.GamePlay.Abilities
 {
     public class ShakeBoxAbility : IAbility
     {
-        //Multi Clicks
         [Inject]
         private SignalBus _signalBus;
         

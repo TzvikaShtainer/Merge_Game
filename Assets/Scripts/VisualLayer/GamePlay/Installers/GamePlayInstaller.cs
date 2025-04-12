@@ -35,9 +35,9 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
     [SerializeField] 
     private Camera mainGameplayCamera;
     
-    [Header("ability3")]
+    [Header("Upgrade Specific FruitAbility")]
     [SerializeField]
-    private AbilityDataSO ability3;
+    private AbilityDataSO upgradeSpecificFruitAbilityData ;
     
     [Header("ability4")]
     [SerializeField]
@@ -53,6 +53,11 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .To<DesktopInputManager>()
             .AsSingle()
             .IfNotBound();
+        
+        Container
+            .Bind<InputDriven>()
+            .FromComponentInHierarchy()
+            .AsSingle();
 
         Container
             .BindFactory<int, Item, ItemFactory>()
@@ -117,6 +122,15 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .FromInstance(mainGameplayCamera)
             .AsSingle();
         
-
+        //UpgradeSpecificFruitAbility ability bind:
+        Container
+            .Bind<IAbility>()
+            .To<UpgradeSpecificFruitAbility>()
+            .AsSingle();
+        
+        Container
+            .Bind<AbilityDataSO>()
+            .FromInstance(upgradeSpecificFruitAbilityData)
+            .WhenInjectedInto<UpgradeSpecificFruitAbility>();
     }
 }

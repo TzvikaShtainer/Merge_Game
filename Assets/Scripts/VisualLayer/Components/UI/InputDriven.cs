@@ -26,7 +26,7 @@ namespace VisualLayer.Components.UI
         private bool _waitingForNextItem = false;
         private Vector2 _lastClickedPos;
         private readonly float _delayTime = 0.5f;
-        
+        private bool _isInputBlocked = false;
         
         #endregion
 
@@ -42,6 +42,9 @@ namespace VisualLayer.Components.UI
         
         private void Update()
         {
+            if (_isInputBlocked) 
+                return;
+            
             if (_waitingForNextItem && _delayTimer.IsReady)
             {
                 CompleteSpawn();
@@ -65,6 +68,9 @@ namespace VisualLayer.Components.UI
         
         private void OnRelease()
         {
+            if (_isInputBlocked)
+                return;
+            
             if (!_delayTimer.IsReady)
                 return;
 
@@ -85,8 +91,15 @@ namespace VisualLayer.Components.UI
             }
         }
 
-        
+        public void BlockInput()
+        {
+            _isInputBlocked = true;
+        }
 
+        public void UnblockInput()
+        {
+            _isInputBlocked = false;
+        }
         
     }
 }

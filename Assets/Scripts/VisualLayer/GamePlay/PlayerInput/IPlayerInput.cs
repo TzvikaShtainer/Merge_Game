@@ -8,6 +8,6 @@ namespace VisualLayer.GamePlay.PlayerInput
         bool IsClickRequested { get; }
         
         Vector2 GetClickPosition { get; }
-        
+
     }
 }
