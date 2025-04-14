@@ -65,21 +65,66 @@ namespace VisualLayer.GamePlay.Abilities
             
             Count--;
             
-            _signalBus.Fire<DisableUI>();
+            List<Item> itemsToToggle = new List<Item>();
             
-            _inputDriven.BlockInput();
-
+            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
+            
+            DisableEnvironment(itemsToToggle, allItems);
+            
             _isWaitingForClick = true;
             await WaitForUserClick();
             
             await UniTask.Delay(TimeSpan.FromSeconds(0.5));
-            _inputDriven.UnblockInput();
             
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5));
-            _signalBus.Fire<EnableUI>();
+            EnableEnvironment(itemsToToggle);
             
         }
 
+        private void DisableEnvironment(List<Item> itemsToToggle, List<Item> allItems)
+        {
+            _signalBus.Fire<DisableUI>();
+            
+            _inputDriven.BlockInput();
+            
+            SortItems(itemsToToggle, allItems);
+            
+            DisableItemsOutsideTheJar(itemsToToggle);
+        }
+
+        private void SortItems(List<Item> itemsToToggle, List<Item> allItems)
+        {
+            foreach (Item currItem in allItems)
+            {
+                if (IsOutsideTheJar(currItem))
+                {
+                    itemsToToggle.Add(currItem);
+                }
+            }
+        }
+        
+        private void DisableItemsOutsideTheJar(List<Item> itemsToToggle)
+        {
+            ToggleItems(itemsToToggle, false);
+        }
+        
+        private void EnableItemsOutsideTheJar(List<Item> itemsToToggle)
+        {
+            ToggleItems(itemsToToggle, true);
+        }
+
+        private void ToggleItems(List<Item> itemsToToggle, bool isEnabled)
+        {
+            foreach (Item currItem in itemsToToggle)
+            {
+                currItem.gameObject.SetActive(isEnabled);
+            }
+        }
+
+        private bool IsOutsideTheJar(Item currItem)
+        {
+            return currItem.transform.position.y >= 2.5f;
+        }
+        
         private bool IsJarEmpty()
         {
             List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
@@ -96,11 +141,6 @@ namespace VisualLayer.GamePlay.Abilities
             }
 
             return false;
-        }
-
-        private bool IsOutsideTheJar(Item item)
-        {
-            return item.gameObject.transform.position.y >= 2.5;
         }
 
         private async UniTask  WaitForUserClick()
@@ -133,6 +173,14 @@ namespace VisualLayer.GamePlay.Abilities
         {
             _effectsManager.PlayEffect(EffectType.Destroy, clickedItem.transform.position);
             Object.Destroy(clickedItem.gameObject);
+        }
+        
+        private void EnableEnvironment(List<Item> itemsToToggle)
+        {
+            _signalBus.Fire<EnableUI>();
+            _inputDriven.UnblockInput();
+            
+            EnableItemsOutsideTheJar(itemsToToggle);
         }
     }
 }
