@@ -119,9 +119,7 @@ namespace VisualLayer.GamePlay.Abilities
 
                         if (clickedItem != null)
                         {
-                            _effectsManager.PlayEffect(EffectType.Destroy, clickedItem.transform.position);
-                            Object.Destroy(clickedItem.gameObject);
-                            
+                            DestroySpecificFruit(clickedItem);
                             _isWaitingForClick = false;
                         }
                     }
@@ -131,33 +129,10 @@ namespace VisualLayer.GamePlay.Abilities
             }
         }
 
-        private void HandleUpgrade(Item clickedItem)
+        private void DestroySpecificFruit(Item clickedItem)
         {
-            int currentLevel = clickedItem.GetItemId();
-            Vector2 currItemPos = clickedItem.transform.position;
-            
+            _effectsManager.PlayEffect(EffectType.Destroy, clickedItem.transform.position);
             Object.Destroy(clickedItem.gameObject);
-            
-            int upgradedLevel = currentLevel + 1;
-
-            if (upgradedLevel >= 11)
-            {
-                _effectsManager.PlayEffect(EffectType.Destroy, currItemPos);
-                return;
-            }
-            
-            var newItem = _itemFactory.Create(upgradedLevel);
-            _effectsManager.PlayEffect(EffectType.Destroy, currItemPos);
-            
-            if (newItem != null)
-            {
-                newItem.GetComponent<Rigidbody2D>().gravityScale = 0;
-                newItem.transform.position = currItemPos;
-            }
-            else
-            {
-                Debug.LogError("Failed to create upgraded item!");
-            }
         }
     }
 }
