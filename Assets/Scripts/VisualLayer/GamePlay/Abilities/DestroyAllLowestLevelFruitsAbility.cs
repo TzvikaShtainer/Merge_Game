@@ -61,11 +61,8 @@ namespace VisualLayer.GamePlay.Abilities
         private void FindAndDestroyLowestItems()
         {
             List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-
-            //remove items that not inside the jar
-            allItems = allItems
-                .Where(item => !IsOutsideTheJar(item))
-                .ToList();
+            
+            allItems = RemoveItemsThatNotInTheJar(allItems);
 
             if (allItems.Count == 0)
             {
@@ -75,14 +72,28 @@ namespace VisualLayer.GamePlay.Abilities
 
             int lowestItemIndex = allItems.Min(item => item.GetItemId());
 
-            foreach (Item currItem in allItems)
+            DestroyLowestItems(allItems, lowestItemIndex);
+        }
+
+        private void DestroyLowestItems(List<Item> allItems, int lowestItemIndex)
+        {
+            for (var index = 0; index < allItems.Count; index++)
             {
+                var currItem = allItems[index];
                 if (currItem.GetItemId() == lowestItemIndex && !IsOutsideTheJar(currItem))
                 {
                     Object.Destroy(currItem.gameObject);
                     _effectsManager.PlayEffect(EffectType.Destroy, currItem.gameObject.transform.position);
                 }
             }
+        }
+
+        private List<Item> RemoveItemsThatNotInTheJar(List<Item> allItems)
+        {
+            allItems = allItems
+                .Where(item => !IsOutsideTheJar(item))
+                .ToList();
+            return allItems;
         }
 
         private bool IsOutsideTheJar(Item currItem)

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DataLayer.DataTypes.abilities;
 using DG.Tweening;
 using ServiceLayer.EffectsService;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
+using VisualLayer.MergeItems;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace VisualLayer.GamePlay.Abilities
 {
@@ -52,10 +56,13 @@ namespace VisualLayer.GamePlay.Abilities
             
             Count--;
             
-            _signalBus.Fire<PauseInput>();
-            _signalBus.Fire<DisableUI>();
+            List<Item> itemsToToggle = new List<Item>();
+            
+            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
+            
+            DisableEnvironment(itemsToToggle, allItems);
 
-             ZoomOutFOV();
+            ZoomOutFOV();
              await UniTask.Delay(TimeSpan.FromSeconds(0.5));
             
              ShakeBox();
@@ -63,10 +70,55 @@ namespace VisualLayer.GamePlay.Abilities
             
             ZoomInFOV();
             await UniTask.Delay(TimeSpan.FromSeconds(0.5));
+
             
             await UniTask.Delay(TimeSpan.FromSeconds(0.5));
-            _signalBus.Fire<UnpauseInput>();
-            _signalBus.Fire<EnableUI>();
+            
+            EnableEnvironment(itemsToToggle);
+        }
+
+        private void DisableEnvironment(List<Item> itemsToToggle, List<Item> allItems)
+        {
+            _signalBus.Fire<PauseInput>();
+            _signalBus.Fire<DisableUI>();
+            
+            SortItems(itemsToToggle, allItems);
+            
+            DisableItemsOutsideTheJar(itemsToToggle);
+        }
+
+        private void SortItems(List<Item> itemsToToggle,  List<Item> allItems)
+        {
+            foreach (Item currItem in allItems)
+            {
+                if (IsOutsideTheJar(currItem))
+                {
+                    itemsToToggle.Add(currItem);
+                }
+            }
+        }
+        
+        private void DisableItemsOutsideTheJar(List<Item> itemsToToggle)
+        {
+            ToggleItems(itemsToToggle, false);
+        }
+        
+        private void EnableItemsOutsideTheJar(List<Item> itemsToToggle)
+        {
+            ToggleItems(itemsToToggle, true);
+        }
+
+        private void ToggleItems(List<Item> itemsToToggle, bool isEnabled)
+        {
+            foreach (Item currItem in itemsToToggle)
+            {
+                currItem.gameObject.SetActive(isEnabled);
+            }
+        }
+
+        private bool IsOutsideTheJar(Item currItem)
+        {
+            return currItem.transform.position.y >= 2.5f;
         }
 
         private void ShakeBox()
@@ -179,6 +231,14 @@ namespace VisualLayer.GamePlay.Abilities
             {
                 Debug.LogWarning("Camera is not orthographic, expected orthographic mode.");
             }
+        }
+        
+        private void EnableEnvironment(List<Item> itemsToToggle)
+        {
+            _signalBus.Fire<UnpauseInput>();
+            _signalBus.Fire<EnableUI>();
+            
+            EnableItemsOutsideTheJar(itemsToToggle);
         }
     }
 }
