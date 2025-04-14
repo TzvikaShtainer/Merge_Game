@@ -87,7 +87,7 @@ namespace VisualLayer.GamePlay.Abilities
             DisableItemsOutsideTheJar(itemsToToggle);
         }
 
-        private void SortItems(List<Item> itemsToToggle,  List<Item> allItems)
+        private void SortItems(List<Item> itemsToToggle, List<Item> allItems)
         {
             foreach (Item currItem in allItems)
             {
