@@ -28,8 +28,12 @@ namespace VisualLayer.GamePlay.Score
 
         private void ItemMergedSignalHandler()
         {
-            //Debug.Log("ItemMergedSignalHandler");
-            _dataLayer.Balances.AddCoins(_params.ItemsMerged); //multi by lvl merge mybe?
+            _dataLayer.Balances.AddCurrentScore(_params.ItemsMerged); //multi by lvl merge mybe?
+
+            if ( _dataLayer.Balances.CurrentScore > _dataLayer.Balances.HighScore)
+            {
+                _dataLayer.Balances.SetHighScore(_dataLayer.Balances.CurrentScore); 
+            }
         }
     }
 }

@@ -20,6 +20,9 @@ namespace VisualLayer.GamePlay.UI
         private TextMeshProUGUI _higestScoreText;
         
         [SerializeField] 
+        private TextMeshProUGUI _currentScoreText;
+        
+        [SerializeField] 
         private Image _nextItemSprite;
 
         #endregion
@@ -50,6 +53,8 @@ namespace VisualLayer.GamePlay.UI
         private void OnDestroy()
         {
             _dataLayer.Balances.CoinsBalanceChanged -= SyncUiWithData;
+            _dataLayer.Balances.HighScoreChanged -= SyncUiWithData;
+            _dataLayer.Balances.ScoreChanged -= SyncUiWithData;
             _gameLogicHandler.NextItemCreated -= SyncUiWithData;
 
             SyncUiWithData();
@@ -59,16 +64,25 @@ namespace VisualLayer.GamePlay.UI
         private void InitializeView()
         {
             _dataLayer.Balances.CoinsBalanceChanged += SyncUiWithData;
+            _dataLayer.Balances.HighScoreChanged += SyncUiWithData;
+            _dataLayer.Balances.ScoreChanged += SyncUiWithData;
             _gameLogicHandler.NextItemCreated += SyncUiWithData;
+            
+            _currentScoreText.text = "0";
+            
+            _dataLayer.Balances.SetCurrentScore(0);
             
             SyncUiWithData();
         }
         
         private void SyncUiWithData()
         {
-            _higestScoreText.text = _dataLayer.Balances.Coins.ToString();
-            
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
+            
+            _higestScoreText.text = _dataLayer.Balances.HighScore.ToString();
+            
+            _currentScoreText.text = _dataLayer.Balances.CurrentScore.ToString();
+            
             _nextItemSprite.sprite = _gameLogicHandler.GetNextItem().GetItemMetadata().ItemPreviewSprite;
         }
 

@@ -31,9 +31,9 @@ namespace VisualLayer.MergeItems.MergeSystem
         {
             int newLevel = item1.GetItemId() + 1;
             
-            if (!_dataLayer.Metadata.HasNextLevelItem(newLevel)) //not working for now need to check
+            if (!_dataLayer.Metadata.HasNextLevelItem(newLevel)) 
             {
-                Debug.Log("dont have next");
+                //Debug.Log("dont have next");
                 _signalBus.Fire<ItemMergedSignal>();
                 
                 Object.Destroy(item1.gameObject);

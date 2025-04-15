@@ -58,7 +58,8 @@ MonoBehaviour:
     _itemPrefabRef: {fileID: 2284559540579497787, guid: a8b6f2787790b4247ae38c1535fc13e3, type: 3}
     _itemPreviewSprite: {fileID: 0}
   _playerBalances:
-    _coins: 4310
+    _coins: 300
+    _highScore: 0
   _levelsMetadata:
   - _levelType: 0
     _levelName: Start Screen

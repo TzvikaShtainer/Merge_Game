@@ -7,12 +7,19 @@ namespace DataLayer.Balances
         #region Events
 
         event Action CoinsBalanceChanged;
+        
+        event Action HighScoreChanged;
+        event Action ScoreChanged;
 
         #endregion
 
         #region Properties
 
         int Coins{get;}
+        
+        int HighScore{get;}
+        
+        int CurrentScore{get;}
         
 
         #endregion
@@ -22,6 +29,12 @@ namespace DataLayer.Balances
         void AddCoins(int coinsToAdd);
         
         bool RemoveCoins(int coinsToRemove);
+        
+        void SetHighScore(int newHighScore);
+        
+        void AddCurrentScore(int newCurrentScore);
+        
+        void SetCurrentScore(int newCurrentScore);
 
         #endregion
     }

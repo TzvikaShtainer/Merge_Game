@@ -9,6 +9,9 @@ namespace DataLayer.Balances
         #region Events
 
         public event Action CoinsBalanceChanged;
+        public event Action HighScoreChanged;
+        
+        public event Action ScoreChanged;
 
         #endregion
         
@@ -17,12 +20,20 @@ namespace DataLayer.Balances
         [SerializeField]
         private int _coins;
         
+        [SerializeField]
+        private int _highScore;
+        
+        [SerializeField]
+        private int _currentScore;
 
         #endregion
 
         #region Properties
 
         public int Coins => _coins;
+        
+        public int HighScore => _highScore;
+        public int CurrentScore => _currentScore;
 
         #endregion
 
@@ -49,6 +60,24 @@ namespace DataLayer.Balances
             _coins -= coinsToRemove;
             CoinsBalanceChanged?.Invoke();
             return true;
+        }
+
+        public void SetHighScore(int newHighScore)
+        {
+            _highScore = newHighScore;
+            HighScoreChanged?.Invoke();
+        }
+
+        public void AddCurrentScore(int newCurrentScore)
+        {
+            _currentScore += newCurrentScore;
+            ScoreChanged?.Invoke();
+        }
+
+        public void SetCurrentScore(int newCurrentScore)
+        {
+            _currentScore = newCurrentScore;
+            ScoreChanged?.Invoke();
         }
 
         #endregion
