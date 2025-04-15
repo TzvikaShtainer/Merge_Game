@@ -24,8 +24,9 @@ namespace VisualLayer.GamePlay.Score
         public void Initialize()
         {
             _signalBus.Subscribe<ItemMergedSignal>(ItemMergedSignalHandler);
+            _signalBus.Subscribe<AddCoinsSignal>(AddCoinsSignalHandler);
         }
-
+        
         private void ItemMergedSignalHandler()
         {
             _dataLayer.Balances.AddCurrentScore(_params.ItemsMerged); //multi by lvl merge mybe?
@@ -34,6 +35,11 @@ namespace VisualLayer.GamePlay.Score
             {
                 _dataLayer.Balances.SetHighScore(_dataLayer.Balances.CurrentScore); 
             }
+        }
+        
+        private void AddCoinsSignalHandler()
+        {
+            _dataLayer.Balances.AddCoins(10);
         }
     }
 }

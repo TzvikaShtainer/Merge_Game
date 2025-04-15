@@ -29,19 +29,31 @@ namespace VisualLayer.MergeItems.MergeSystem
 
         public void Merge(Item item1, Item item2)
         {
-            int newLevel = item1.GetItemId() + 1;
+            int fruitNextLevel = item1.GetItemId() + 1;
             
-            if (!_dataLayer.Metadata.HasNextLevelItem(newLevel)) 
+            
+            if (HasNextLevel(fruitNextLevel)) 
             {
-                //Debug.Log("dont have next");
                 _signalBus.Fire<ItemMergedSignal>();
                 
                 Object.Destroy(item1.gameObject);
                 Object.Destroy(item2.gameObject);
             }
-            
-            //merge items & destroy Old Items
-            MergeItems(item1, item2, newLevel);
+            else
+            {
+                //merge items & destroy Old Items
+                MergeItems(item1, item2, fruitNextLevel);
+            }
+           
+            if (fruitNextLevel >= 8)
+            {
+                _signalBus.Fire<AddCoinsSignal>();
+            }
+        }
+
+        private bool HasNextLevel(int newLevel)
+        {
+            return !_dataLayer.Metadata.HasNextLevelItem(newLevel);
         }
 
         private void MergeItems(Item item1, Item item2, int newLevel)
