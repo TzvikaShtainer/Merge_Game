@@ -109,11 +109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a923438b4b4e4c358f34e8ebb32216b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemMetadata:
+  itemMetadata:
     _itemName: 
     _itemId: 0
     _itemPrefabRef: {fileID: 0}
     _itemPreviewSprite: {fileID: 0}
+    _itemSadSprite: {fileID: 0}
+  itemSprite: {fileID: 6930976505014131340}
 --- !u!1 &2730706366928038611
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 namespace DataLayer.DataTypes
@@ -20,6 +21,9 @@ namespace DataLayer.DataTypes
 
         [SerializeField]
         private Sprite _itemPreviewSprite;
+        
+        [SerializeField]
+        private Sprite _itemSadSprite;
 
         #endregion
 
@@ -33,6 +37,8 @@ namespace DataLayer.DataTypes
         public Object ItemPrefabRef => _itemPrefabRef;
         
         public Sprite ItemPreviewSprite => _itemPreviewSprite;
+        
+        public Sprite ItemSadSprite => _itemSadSprite;
 
         #endregion
     }
