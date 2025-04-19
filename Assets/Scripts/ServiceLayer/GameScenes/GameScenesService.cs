@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using DataLayer;
 using DataLayer.DataTypes;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -50,6 +51,12 @@ namespace ServiceLayer.GameScenes
 
         public async UniTask UnloadLevelScene(GameLevelType levelType)
         {
+            if (!IsLevelSceneLoaded(levelType))
+            {
+                Debug.LogWarning($"Scene for level '{levelType}' is not loaded, skipping unload.");
+                return;
+            }
+            
             var metadata = _dataLayer.Metadata.GetLevelMetadata(levelType);
             await SceneManager.UnloadSceneAsync(metadata.LevelSceneBuildIndex);
         }

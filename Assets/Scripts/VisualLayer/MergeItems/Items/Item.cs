@@ -41,6 +41,8 @@ namespace VisualLayer.MergeItems
 
         private void OnPlayerLose()
         {
+            if (this == null) return;
+            
             _isLosing = true;
             gameObject.layer = LayerMask.NameToLayer("CreatedFruit");
             
