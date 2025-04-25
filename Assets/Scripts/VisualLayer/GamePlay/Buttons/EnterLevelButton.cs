@@ -6,14 +6,13 @@ namespace VisualLayer.GamePlay.Buttons
 {
     public class EnterLevelButton : MonoBehaviour
     {
-        private IStartGameClickHandler _enterLevelHandler;
-
-        
         [Inject]
-        public void Construct(IStartGameClickHandler enterLevelHandler)
+        private IStartGameClickHandler _enterLevelHandler;
+        
+        private void Awake()
         {
-            _enterLevelHandler = enterLevelHandler;
-         }
+            Debug.Log("Start Btn Awake. Handler is " + (_enterLevelHandler != null));
+        }
         
         public void OnClick()
         {
