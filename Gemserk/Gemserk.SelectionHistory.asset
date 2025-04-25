@@ -15,18 +15,10 @@ MonoBehaviour:
   selectionHistory:
     historySize: 200
     _history:
-    - reference: {fileID: 0}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 11500000, guid: 9f780b21ac9283943a3867416d1e5776, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1425782311-0
     - reference: {fileID: 0}
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
@@ -44,10 +36,14 @@ MonoBehaviour:
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1510487343-0
     - reference: {fileID: 0}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
+      sceneName: GameScene
+      scenePath: Assets/Scenes/Prodaction/GameScene.unity
+      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-548040920-0
     - reference: {fileID: 0}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
+      sceneName: GameScene
+      scenePath: Assets/Scenes/Prodaction/GameScene.unity
+      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1425782311-0
+    - reference: {fileID: 0}
+      sceneName: GameScene
+      scenePath: Assets/Scenes/Prodaction/GameScene.unity
+      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1579089766-0

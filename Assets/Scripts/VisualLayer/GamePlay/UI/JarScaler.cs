@@ -3,13 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class JarScaler : MonoBehaviour
 {
     [SerializeField]
     private float scaleFactor = 0.95f;
-    private void Start()
+    private void OnEnable()
     {
         FitToScreen();
+    }
+    
+    private void Update()
+    {
+        if (!Application.isPlaying)
+        {
+            FitToScreen();
+        }
     }
     private void FitToScreen()
     {
