@@ -74,6 +74,11 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .AsSingle();
         
         Container
+            .Bind<IHudPlusCurrencyClickHandler>()
+            .To<HudPlusCurrencyButtonClickHandler>()
+            .AsSingle();
+        
+        Container
             .BindInterfacesAndSelfTo<GameLogicHandler>()
             .AsSingle();
         

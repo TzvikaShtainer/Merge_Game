@@ -36,6 +36,9 @@ namespace VisualLayer.GamePlay.UI
         private IHudBackClickHandler _backClickHandler; 
         
         [Inject]
+        private IHudPlusCurrencyClickHandler _plusCurrencyClickHandler; 
+        
+        [Inject]
         private IGameLogicHandler _gameLogicHandler;
         
         [Inject]
@@ -95,6 +98,11 @@ namespace VisualLayer.GamePlay.UI
         public void OnAbilityButtonClick(string abilityId)
         {
             _abilityManager.UseAbility(abilityId);
+        }
+
+        public void OnPlusButtonClick()
+        {
+            _plusCurrencyClickHandler.Execute();
         }
         
         #endregion
