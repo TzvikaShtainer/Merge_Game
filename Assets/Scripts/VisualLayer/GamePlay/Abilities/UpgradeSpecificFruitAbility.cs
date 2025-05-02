@@ -196,7 +196,7 @@ namespace VisualLayer.GamePlay.Abilities
             
             if (newItem != null)
             {
-                newItem.GetComponent<Rigidbody2D>().gravityScale = 0;
+                //newItem.GetComponent<Rigidbody2D>().gravityScale = 0;
                 newItem.transform.position = currItemPos;
             }
             else
