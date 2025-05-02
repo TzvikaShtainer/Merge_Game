@@ -61,7 +61,7 @@ namespace VisualLayer.GamePlay.Popups.YesNoPopup
             Close();
         }
         
-        public void OnCancelClick()
+        public void OnNoClick()
         {
             
             var result = new YesNoPopupResult { IsYes = false };

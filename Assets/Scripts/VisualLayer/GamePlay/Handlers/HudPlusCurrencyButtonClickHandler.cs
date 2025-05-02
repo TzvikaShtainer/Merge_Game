@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ServiceLayer.Signals.SignalsClasses;
+using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.Popups.AddSkillsPopup;
 using Zenject;
@@ -13,9 +14,27 @@ namespace VisualLayer.GamePlay.Handlers
         [Inject] 
         private AbilityManager _abilityManager;
         
-        public void Execute(string abilityId)
+        [Inject]
+        private SignalBus _signalBus;
+        
+        public async void Execute(string abilityId)
         {
+            _signalBus.Fire<PauseInput>();
+            
             var popup = _addSkillsPopupFactory.Create(_abilityManager.GetAbilitySO(abilityId));
+
+            var popupInteractionResult = await popup.WaitForResult();
+
+            
+            if (popupInteractionResult.IsCanceled)
+            {
+                _signalBus.Fire<UnpauseInput>();
+                return;
+            }
+            
+            _abilityManager.BuyAbility(abilityId);
+            
+            _signalBus.Fire<UnpauseInput>();
         }
     }
 }

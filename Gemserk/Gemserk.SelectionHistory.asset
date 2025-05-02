@@ -55,15 +55,7 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 7235986652403890901, guid: 56aba42a0c2fa8743b9566fba9b9ec0b, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 102900000, guid: 652a531a0cdeb6d42900f68ce0d50b47, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 7235986652403890901, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
@@ -90,7 +82,27 @@ MonoBehaviour:
     - reference: {fileID: 0}
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
+      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1317587906-0
+    - reference: {fileID: 0}
+      sceneName: GameScene
+      scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1418270801-0
+    - reference: {fileID: 7235986652403890901, guid: 56aba42a0c2fa8743b9566fba9b9ec0b, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 7235986652403890901, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: a97378dd8452d98439a5725306030765, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: d07e17bb71759a543a66cadf5410b384, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
     - reference: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
       sceneName: 
       scenePath: 
@@ -107,11 +119,7 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1317587906-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1418270801-0
+    - reference: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 

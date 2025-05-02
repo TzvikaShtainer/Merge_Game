@@ -69,7 +69,7 @@ MonoBehaviour:
     _itemPreviewSprite: {fileID: 21300000, guid: e689e00c26c973945813c4497d425cb8, type: 3}
     _itemSadSprite: {fileID: 21300000, guid: 56c1ba7c440f20d4eaf99d77a10ae29e, type: 3}
   _playerBalances:
-    _coins: 30
+    _coins: 500
     _highScore: 180
     _currentScore: 0
   _levelsMetadata:

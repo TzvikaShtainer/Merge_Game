@@ -771,18 +771,18 @@ PrefabInstance:
     - target: {fileID: 4641298007127220813, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7235986652403890901}
+      objectReference: {fileID: 6701155958128324559}
     - target: {fileID: 4641298007127220813, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220813, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: OnNoButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220813, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: VisualLayer.GamePlay.Popups.YesNoPopup.YesNoPopup, Assembly-CSharp
+      value: VisualLayer.GamePlay.Popups.AddSkillsPopup.AddSkillsPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220813, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -913,18 +913,18 @@ PrefabInstance:
     - target: {fileID: 4641298007127220813, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7235986652403890901}
+      objectReference: {fileID: 6701155958128324559}
     - target: {fileID: 4641298007127220813, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220813, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: OnYesButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220813, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: VisualLayer.GamePlay.Popups.YesNoPopup.YesNoPopup, Assembly-CSharp
+      value: VisualLayer.GamePlay.Popups.AddSkillsPopup.AddSkillsPopup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220813, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
