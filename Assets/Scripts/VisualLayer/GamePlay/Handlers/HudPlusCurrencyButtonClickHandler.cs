@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
+using VisualLayer.GamePlay.Abilities;
+using VisualLayer.GamePlay.Popups.AddSkillsPopup;
+using Zenject;
 
 namespace VisualLayer.GamePlay.Handlers
 {
     public class HudPlusCurrencyButtonClickHandler : IHudPlusCurrencyClickHandler
     {
-        public void Execute()
+        [Inject]
+        AddSkillsPopup.Factory _addSkillsPopupFactory;
+        
+        [Inject] 
+        private AbilityManager _abilityManager;
+        
+        public void Execute(string abilityId)
         {
-            Debug.Log("HudPlusCurrencyButtonClickHandler");
+            var popup = _addSkillsPopupFactory.Create(_abilityManager.GetAbilitySO(abilityId));
         }
     }
 }

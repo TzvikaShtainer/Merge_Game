@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentPopupCanvasTransform: {fileID: 757602815}
   _yesNoPopupPrefabRef: {fileID: 3066193168179115435, guid: 56aba42a0c2fa8743b9566fba9b9ec0b, type: 3}
+  _addSkillPopupPrefabRef: {fileID: 6701155958128324559, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
 --- !u!1 &1964565182
 GameObject:
   m_ObjectHideFlags: 0

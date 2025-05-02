@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataLayer.DataTypes.abilities;
 using UnityEngine;
 using Zenject;
 
@@ -39,6 +40,13 @@ namespace VisualLayer.GamePlay.Abilities
         public int GetAbilityCount(string abilityId)
         {
             return _abilitiesDict.TryGetValue(abilityId, out var ability) ? ability.Count : 0;
+        }
+
+        public AbilityDataSO GetAbilitySO(string abilityId)
+        {
+            return _abilitiesDict.TryGetValue(abilityId, out var ability) 
+                ? ability.Data 
+                : null;
         }
     }
 }

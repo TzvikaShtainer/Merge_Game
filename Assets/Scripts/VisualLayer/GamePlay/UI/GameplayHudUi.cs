@@ -100,9 +100,10 @@ namespace VisualLayer.GamePlay.UI
             _abilityManager.UseAbility(abilityId);
         }
 
-        public void OnPlusButtonClick()
+        public void OnPlusButtonClick(string abilityId)
         {
-            _plusCurrencyClickHandler.Execute();
+            
+            _plusCurrencyClickHandler.Execute(abilityId);
         }
         
         #endregion

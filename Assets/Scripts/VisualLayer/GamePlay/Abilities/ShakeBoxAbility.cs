@@ -37,6 +37,8 @@ namespace VisualLayer.GamePlay.Abilities
         }
         
         private AbilityDataSO _abilityDataSo;
+        
+        public AbilityDataSO Data => _abilityDataSo;
 
         [Inject]
         public void Construct(AbilityDataSO abilityDataSo)

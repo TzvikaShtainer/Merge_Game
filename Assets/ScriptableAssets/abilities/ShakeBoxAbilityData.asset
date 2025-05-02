@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e6791cec34803a154a085f4bf2495, type: 3}
   m_Name: ShakeBoxAbilityData
   m_EditorClassIdentifier: 
+  _name: ShakeBoxAbility
   _id: ShakeBoxAbility
   _count: 294
+  _description: ShakeBoxAbility des
+  _cost: 30

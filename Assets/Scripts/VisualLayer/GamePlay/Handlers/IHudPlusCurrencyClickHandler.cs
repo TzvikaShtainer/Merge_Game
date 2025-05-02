@@ -2,6 +2,6 @@
 {
     public interface IHudPlusCurrencyClickHandler
     {
-        void Execute();
+        void Execute(string abilityId);
     }
 }

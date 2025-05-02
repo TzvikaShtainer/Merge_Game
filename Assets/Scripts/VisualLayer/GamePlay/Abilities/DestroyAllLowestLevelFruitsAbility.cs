@@ -41,7 +41,9 @@ namespace VisualLayer.GamePlay.Abilities
         {
             throw new System.NotImplementedException();
         }
-        
+
+        public AbilityDataSO Data => _abilityDataSo;
+
         public async void UseAbility()
         {
             if (Count <= 0)

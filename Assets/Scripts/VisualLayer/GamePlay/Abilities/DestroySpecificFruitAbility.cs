@@ -42,6 +42,8 @@ namespace VisualLayer.GamePlay.Abilities
             set => _abilityDataSo.Count = value;
         }
         
+        public AbilityDataSO Data => _abilityDataSo;
+        
         private AbilityDataSO _abilityDataSo;
         private bool _isWaitingForClick = false;
 

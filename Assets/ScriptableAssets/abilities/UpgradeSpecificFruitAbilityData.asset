@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e6791cec34803a154a085f4bf2495, type: 3}
   m_Name: UpgradeSpecificFruitAbilityData
   m_EditorClassIdentifier: 
+  _name: UpgradeSpecificFruitAbility
   _id: UpgradeSpecificFruitAbility
   _count: 100
+  _description: UpgradeSpecificFruitAbility des
+  _cost: 40
