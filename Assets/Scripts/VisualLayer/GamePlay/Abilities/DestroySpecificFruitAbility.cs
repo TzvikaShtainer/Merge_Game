@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using DataLayer;
 using DataLayer.DataTypes;
 using DataLayer.DataTypes.abilities;
 using ServiceLayer.EffectsService;
@@ -35,6 +36,9 @@ namespace VisualLayer.GamePlay.Abilities
         [Inject]
         private ItemFactory _itemFactory;
         
+        [Inject]
+        private IDataLayer _dataLayer;
+        
         public string Id => _abilityDataSo.Id;
         public int Count
         {
@@ -54,7 +58,9 @@ namespace VisualLayer.GamePlay.Abilities
         }
         public void Buy()
         {
-            throw new System.NotImplementedException();
+            Count++;
+            
+            _dataLayer.Balances.RemoveCoins(_abilityDataSo.Cost);
         }
         
         public async void UseAbility()

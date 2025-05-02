@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using DataLayer;
 using DataLayer.DataTypes.abilities;
 using DG.Tweening;
 using ServiceLayer.EffectsService;
@@ -17,6 +18,9 @@ namespace VisualLayer.GamePlay.Abilities
     {
         [Inject]
         private SignalBus _signalBus;
+        
+        [Inject]
+        private IDataLayer _dataLayer;
         
         [Inject] 
         private IEffectsManager _effectsManager;
@@ -48,7 +52,9 @@ namespace VisualLayer.GamePlay.Abilities
         
         public void Buy()
         {
-            throw new System.NotImplementedException();
+            Count++;
+            
+            _dataLayer.Balances.RemoveCoins(_abilityDataSo.Cost);
         }
         
         public async void UseAbility()
