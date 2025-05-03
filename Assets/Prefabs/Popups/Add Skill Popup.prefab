@@ -668,6 +668,7 @@ MonoBehaviour:
   _popupSkillName: {fileID: 2276915563841134313}
   _popupSkillDescription: {fileID: 4229991291329714070}
   _popupSkillCost: {fileID: 2229872681254930347}
+  _yesButtonGameObject: {fileID: 9119702085499212302}
 --- !u!1001 &3606105409941456396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -947,6 +948,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
+--- !u!114 &9119702085499212302 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4641298007127220813, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
+  m_PrefabInstance: {fileID: 4532454420727345219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9119702085499212303 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4641298007127220812, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}

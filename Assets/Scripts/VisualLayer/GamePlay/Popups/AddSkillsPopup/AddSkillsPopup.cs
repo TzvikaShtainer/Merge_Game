@@ -1,8 +1,10 @@
 ﻿using Cysharp.Threading.Tasks;
+using DataLayer;
 using DataLayer.DataTypes.abilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
 using Zenject;
 
@@ -26,6 +28,9 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
         
         [SerializeField]
         private TextMeshProUGUI _popupSkillCost;
+
+        [SerializeField]
+        private Button _yesButtonGameObject;
         
         private AbilityDataSO _abilityData;
         
@@ -40,6 +45,9 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
         #region Injects
         
         [Inject]
+        private IDataLayer _dataLayer;
+        
+        [Inject]
         public void Construct(AbilityDataSO abilityDataSo)
         {
             _abilityData = abilityDataSo;
@@ -47,8 +55,13 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
             _popupSkillName.text = abilityDataSo.Name;
             _popupSkillDescription.text = abilityDataSo.Description;
             _popupSkillCost.text = abilityDataSo.Cost.ToString();
+            _yesButtonGameObject.interactable = IsHaveMoney(abilityDataSo);
         }
-        
+
+        private bool IsHaveMoney(AbilityDataSO abilityDataSo)
+        {
+            return abilityDataSo.Cost < _dataLayer.Balances.Coins;
+        }
 
         #endregion
         

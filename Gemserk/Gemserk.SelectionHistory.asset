@@ -55,10 +55,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 102900000, guid: 652a531a0cdeb6d42900f68ce0d50b47, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 0}
       sceneName: GamePopups
       scenePath: Assets/Scenes/Prodaction/GamePopups.unity
@@ -72,10 +68,6 @@ MonoBehaviour:
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1165787257-0
     - reference: {fileID: 7235986652403890901, guid: 56aba42a0c2fa8743b9566fba9b9ec0b, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 7235986652403890901, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
@@ -118,10 +110,6 @@ MonoBehaviour:
     - reference: {fileID: 0}
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1317587906-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-933138189-0
     - reference: {fileID: 0}
       sceneName: GameScene
@@ -135,22 +123,6 @@ MonoBehaviour:
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-987754859-0
-    - reference: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 0}
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
@@ -171,3 +143,31 @@ MonoBehaviour:
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1317587906-0
+    - reference: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: 652a531a0cdeb6d42900f68ce0d50b47, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 7235986652403890901, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 0}
+      sceneName: Add Skill Popup
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-7235986652403890901-0
