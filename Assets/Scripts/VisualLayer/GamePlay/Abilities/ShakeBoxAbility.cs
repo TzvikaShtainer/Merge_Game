@@ -14,14 +14,8 @@ using Object = UnityEngine.Object;
 
 namespace VisualLayer.GamePlay.Abilities
 {
-    public class ShakeBoxAbility : IAbility
+    public class ShakeBoxAbility : BaseAbility
     {
-        [Inject]
-        private SignalBus _signalBus;
-        
-        [Inject]
-        private IDataLayer _dataLayer;
-        
         [Inject] 
         private IEffectsManager _effectsManager;
         
@@ -33,42 +27,15 @@ namespace VisualLayer.GamePlay.Abilities
         
         private float _originalOrthoSize;
         
-        public string Id => _abilityDataSo.Id;
-        public int Count
-        {
-            get => _abilityDataSo.Count;
-            set => _abilityDataSo.Count = value;
-        }
         
-        private AbilityDataSO _abilityDataSo;
-        
-        public AbilityDataSO Data => _abilityDataSo;
-
-        [Inject]
-        public void Construct(AbilityDataSO abilityDataSo)
-        {
-            _abilityDataSo = abilityDataSo;
-        }
-        
-        public void Buy()
-        {
-            Count++;
-            
-            _dataLayer.Balances.RemoveCoins(_abilityDataSo.Cost);
-        }
-        
-        public async void UseAbility()
+        public override async void UseAbility()
         {
             if (Count <= 0)
                 return;
             
             Count--;
             
-            List<Item> itemsToToggle = new List<Item>();
-            
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-            
-            DisableEnvironment(itemsToToggle, allItems);
+            DisableEnvironment();
 
             ZoomOutFOV();
              await UniTask.Delay(TimeSpan.FromSeconds(0.5));
@@ -82,52 +49,16 @@ namespace VisualLayer.GamePlay.Abilities
             
             await UniTask.Delay(TimeSpan.FromSeconds(0.5));
             
-            EnableEnvironment(itemsToToggle);
-        }
-
-        private void DisableEnvironment(List<Item> itemsToToggle, List<Item> allItems)
-        {
-            _signalBus.Fire<PauseInput>();
-            _signalBus.Fire<DisableUI>();
-            
-            SortItems(itemsToToggle, allItems);
-            
-            DisableItemsOutsideTheJar(itemsToToggle);
-        }
-
-        private void SortItems(List<Item> itemsToToggle, List<Item> allItems)
-        {
-            foreach (Item currItem in allItems)
-            {
-                if (IsOutsideTheJar(currItem))
-                {
-                    itemsToToggle.Add(currItem);
-                }
-            }
+            EnableEnvironment();
         }
         
-        private void DisableItemsOutsideTheJar(List<Item> itemsToToggle)
+        protected override void DisableEnvironment()
         {
-            ToggleItems(itemsToToggle, false);
-        }
-        
-        private void EnableItemsOutsideTheJar(List<Item> itemsToToggle)
-        {
-            ToggleItems(itemsToToggle, true);
+            base.DisableEnvironment();
+            
+            SignalBus.Fire<PauseInput>();
         }
 
-        private void ToggleItems(List<Item> itemsToToggle, bool isEnabled)
-        {
-            foreach (Item currItem in itemsToToggle)
-            {
-                currItem.gameObject.SetActive(isEnabled);
-            }
-        }
-
-        private bool IsOutsideTheJar(Item currItem)
-        {
-            return currItem.transform.position.y >= 2.5f;
-        }
 
         private void ShakeBox()
         {
@@ -241,12 +172,12 @@ namespace VisualLayer.GamePlay.Abilities
             }
         }
         
-        private void EnableEnvironment(List<Item> itemsToToggle)
+        public override void EnableEnvironment()
         {
-            _signalBus.Fire<UnpauseInput>();
-            _signalBus.Fire<EnableUI>();
+            SignalBus.Fire<UnpauseInput>();
+            SignalBus.Fire<EnableUI>();
             
-            EnableItemsOutsideTheJar(itemsToToggle);
+            EnableItemsOutsideTheJar();
         }
     }
 }

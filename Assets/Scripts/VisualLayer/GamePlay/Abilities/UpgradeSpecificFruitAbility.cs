@@ -18,14 +18,8 @@ using Object = UnityEngine.Object;
 
 namespace VisualLayer.GamePlay.Abilities
 {
-    public class UpgradeSpecificFruitAbility : IAbility
+    public class UpgradeSpecificFruitAbility : BaseAbility
     {
-        [Inject]
-        private SignalBus _signalBus;
-        
-        [Inject]
-        private IDataLayer _dataLayer;
-        
         [Inject] 
         private IEffectsManager _effectsManager;
         
@@ -38,31 +32,9 @@ namespace VisualLayer.GamePlay.Abilities
         [Inject]
         private ItemFactory _itemFactory;
         
-        public string Id => _abilityDataSo.Id;
-        public int Count
-        {
-            get => _abilityDataSo.Count;
-            set => _abilityDataSo.Count = value;
-        }
-        
-        public AbilityDataSO Data => _abilityDataSo;
-        
-        private AbilityDataSO _abilityDataSo;
         private bool _isWaitingForClick = false;
-
-        [Inject]
-        public void Construct(AbilityDataSO abilityDataSo)
-        {
-            _abilityDataSo = abilityDataSo;
-        }
-        public void Buy()
-        {
-            Count++;
-            
-            _dataLayer.Balances.RemoveCoins(_abilityDataSo.Cost);
-        }
         
-        public async void UseAbility()
+        public override  async void UseAbility()
         {
             if (Count <= 0)
                 return;
@@ -72,82 +44,23 @@ namespace VisualLayer.GamePlay.Abilities
             
             Count--;
             
-            List<Item> itemsToToggle = new List<Item>();
             
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-            
-            DisableEnvironment(itemsToToggle, allItems);
+            DisableEnvironment(); 
 
             _isWaitingForClick = true;
             await WaitForUserClick();
             
             await UniTask.Delay(TimeSpan.FromSeconds(0.5));
             
-            EnableEnvironment(itemsToToggle);
+            EnableEnvironment();
             
         }
-
-        private void DisableEnvironment(List<Item> itemsToToggle, List<Item> allItems)
+        
+        protected override void DisableEnvironment()
         {
-            _signalBus.Fire<DisableUI>();
+            base.DisableEnvironment();
             
             _inputDriven.BlockInput();
-            
-            SortItems(itemsToToggle, allItems);
-            
-            DisableItemsOutsideTheJar(itemsToToggle);
-        }
-
-        private void SortItems(List<Item> itemsToToggle, List<Item> allItems)
-        {
-            foreach (Item currItem in allItems)
-            {
-                if (IsOutsideTheJar(currItem))
-                {
-                    itemsToToggle.Add(currItem);
-                }
-            }
-        }
-        
-        private void DisableItemsOutsideTheJar(List<Item> itemsToToggle)
-        {
-            ToggleItems(itemsToToggle, false);
-        }
-        
-        private void EnableItemsOutsideTheJar(List<Item> itemsToToggle)
-        {
-            ToggleItems(itemsToToggle, true);
-        }
-
-        private void ToggleItems(List<Item> itemsToToggle, bool isEnabled)
-        {
-            foreach (Item currItem in itemsToToggle)
-            {
-                currItem.gameObject.SetActive(isEnabled);
-            }
-        }
-
-        private bool IsOutsideTheJar(Item currItem)
-        {
-            return currItem.transform.position.y >= 2.5f;
-        }
-        
-        private bool IsJarEmpty()
-        {
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-
-            //remove items that not inside the jar
-            allItems = allItems
-                .Where(item => !IsOutsideTheJar(item))
-                .ToList();
-
-            if (allItems.Count == 0)
-            {
-                Debug.Log("No items found");
-                return true;
-            }
-
-            return false;
         }
 
         private async UniTask  WaitForUserClick()
@@ -205,12 +118,12 @@ namespace VisualLayer.GamePlay.Abilities
             }
         }
         
-        private void EnableEnvironment(List<Item> itemsToToggle)
+        public override void EnableEnvironment()
         {
-            _signalBus.Fire<EnableUI>();
+            SignalBus.Fire<EnableUI>();
             _inputDriven.UnblockInput();
             
-            EnableItemsOutsideTheJar(itemsToToggle);
+            EnableItemsOutsideTheJar();
         }
     }
 }

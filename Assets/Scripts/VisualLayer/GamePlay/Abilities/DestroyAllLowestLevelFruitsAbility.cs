@@ -15,104 +15,34 @@ using Object = UnityEngine.Object;
 
 namespace VisualLayer.GamePlay.Abilities
 {
-    public class DestroyAllLowestLevelFruitsAbility : IAbility
+    public class DestroyAllLowestLevelFruitsAbility : BaseAbility
     {
-        [Inject]
-        private SignalBus _signalBus;
-        
         [Inject] 
         private IEffectsManager _effectsManager;
-        
-        [Inject]
-        private IDataLayer _dataLayer;
-        
-        public string Id => _abilityDataSo.Id;
-        public int Count
-        {
-            get => _abilityDataSo.Count;
-            set => _abilityDataSo.Count = value;
-        }
-        
-        private AbilityDataSO _abilityDataSo;
 
-        [Inject]
-        public void Construct(AbilityDataSO abilityDataSo)
-        {
-            _abilityDataSo = abilityDataSo;
-        }
-        
-        public void Buy()
-        {
-            Count++;
-            
-            _dataLayer.Balances.RemoveCoins(_abilityDataSo.Cost);
-        }
-
-        public AbilityDataSO Data => _abilityDataSo;
-
-        public async void UseAbility()
+        public override async void UseAbility()
         {
             if (Count <= 0)
                 return;
             
             Count--;
             
-            List<Item> itemsToToggle = new List<Item>();
-            
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-            
-            DisableEnvironment(itemsToToggle, allItems);
+            DisableEnvironment();
 
             FindAndDestroyLowestItems();    
             
             await UniTask.Delay(TimeSpan.FromSeconds(0.5));
             
-            EnableEnvironment(itemsToToggle);
+            EnableEnvironment();
         }
-
-        private void DisableEnvironment(List<Item> itemsToToggle, List<Item> allItems)
+        
+        protected override void DisableEnvironment()
         {
-            _signalBus.Fire<PauseInput>();
-            _signalBus.Fire<DisableUI>();
+            base.DisableEnvironment();
             
-            SortItems(itemsToToggle, allItems);
-            
-            DisableItemsOutsideTheJar(itemsToToggle);
-        }
-        
-        private void SortItems(List<Item> itemsToToggle, List<Item> allItems)
-        {
-            foreach (Item currItem in allItems)
-            {
-                if (IsOutsideTheJar(currItem))
-                {
-                    itemsToToggle.Add(currItem);
-                }
-            }
-        }
-        
-        private void DisableItemsOutsideTheJar(List<Item> itemsToToggle)
-        {
-            ToggleItems(itemsToToggle, false);
-        }
-        
-        private void EnableItemsOutsideTheJar(List<Item> itemsToToggle)
-        {
-            ToggleItems(itemsToToggle, true);
+            SignalBus.Fire<PauseInput>();
         }
 
-        private void ToggleItems(List<Item> itemsToToggle, bool isEnabled)
-        {
-            foreach (Item currItem in itemsToToggle)
-            {
-                currItem.gameObject.SetActive(isEnabled);
-            }
-        }
-
-        private bool IsOutsideTheJar(Item currItem)
-        {
-            return currItem.transform.position.y >= 2.5f;
-        }
         
         private void FindAndDestroyLowestItems()
         {
@@ -152,12 +82,12 @@ namespace VisualLayer.GamePlay.Abilities
             return allItems;
         }
         
-        private void EnableEnvironment(List<Item> itemsToToggle)
+        public override void EnableEnvironment()
         {
-            _signalBus.Fire<UnpauseInput>();
-            _signalBus.Fire<EnableUI>();
+            SignalBus.Fire<UnpauseInput>();
+            SignalBus.Fire<EnableUI>();
             
-            EnableItemsOutsideTheJar(itemsToToggle);
+            EnableItemsOutsideTheJar();
         }
     }
 }
