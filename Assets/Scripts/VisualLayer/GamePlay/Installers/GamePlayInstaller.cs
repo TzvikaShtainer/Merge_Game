@@ -19,33 +19,7 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
     
     [SerializeField] 
     private GameLevelType _levelType;
-    
-    [Header("Abilities Settings")]
-    [Header("Destroy Lowest Ability")]
-    [SerializeField]
-    private AbilityDataSO destroyLowestAbilityData;
-    
-    [Header("Shake Box Ability")]
-    [SerializeField]
-    private AbilityDataSO shakeBoxAbilityData;
-    
-    [SerializeField]
-    private GameObject shakeBoxAbilityJarPrefab;
 
-    [SerializeField] 
-    private Camera mainGameplayCamera;
-    
-    [Header("Upgrade Specific FruitAbility")]
-    [SerializeField]
-    private AbilityDataSO upgradeSpecificFruitAbilityData ;
-    
-    [Header("Destroy Specific Fruit Ability")]
-    [SerializeField]
-    private AbilityDataSO destroySpecificFruitAbilityData;
-    
-    
-    
-    
     public override void InstallBindings()
     {
         Container
@@ -86,67 +60,5 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .Bind<GameLevelType>()
             .FromInstance(_levelType)
             .AsSingle();
-        
-        
-        //-----------------Abilities Binds:-------------
-        Container
-            .Bind<AbilityManager>()
-            .AsSingle();
-        
-        //DestroyAllLowestLevelFruitsAbility ability bind:
-        Container
-            .Bind<IAbility>()
-            .To<DestroyAllLowestLevelFruitsAbility>()
-            .AsSingle();
-        
-        Container
-            .Bind<AbilityDataSO>()
-            .FromInstance(destroyLowestAbilityData)
-            .WhenInjectedInto<DestroyAllLowestLevelFruitsAbility>();
-        
-        //ShakeBoxAbility ability bind:
-        Container
-            .Bind<IAbility>()
-            .To<ShakeBoxAbility>()
-            .AsSingle();
-        
-        Container
-            .Bind<AbilityDataSO>()
-            .FromInstance(shakeBoxAbilityData)
-            .WhenInjectedInto<ShakeBoxAbility>();
-        
-        Container
-            .Bind<Transform>()
-            .WithId("ShakeBoxJar")
-            .FromInstance(shakeBoxAbilityJarPrefab.transform)
-            .AsCached();
-        
-        Container
-            .Bind<Camera>()
-            .WithId("MainGameplayCamera")
-            .FromInstance(mainGameplayCamera)
-            .AsSingle();
-        
-        //UpgradeSpecificFruitAbility ability bind:
-        Container
-            .Bind<IAbility>()
-            .To<UpgradeSpecificFruitAbility>()
-            .AsSingle();
-        
-        Container
-            .Bind<AbilityDataSO>()
-            .FromInstance(upgradeSpecificFruitAbilityData)
-            .WhenInjectedInto<UpgradeSpecificFruitAbility>();
-        
-        //DestroySpecificFruitAbility ability bind:
-        Container
-            .Bind<IAbility>()
-            .To<DestroySpecificFruitAbility>()
-            .AsSingle();
-        
-        Container
-            .Bind<AbilityDataSO>()
-            .FromInstance(destroySpecificFruitAbilityData)
-            .WhenInjectedInto<DestroySpecificFruitAbility>();
     }
 }

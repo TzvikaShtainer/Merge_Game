@@ -3052,6 +3052,7 @@ GameObject:
   - component: {fileID: 1510487346}
   - component: {fileID: 1510487345}
   - component: {fileID: 1510487344}
+  - component: {fileID: 1510487347}
   m_Layer: 0
   m_Name: '[-- SceneContext --]'
   m_TagString: Untagged
@@ -3096,6 +3097,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fb2253bfa98c5247a1c6524b5d6bb88, type: 2}
   _monoInstallers:
   - {fileID: 1510487344}
+  - {fileID: 1510487347}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3130,6 +3132,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510487347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510487343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1755562e8e8d47b89e4796b092804d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyLowestAbilityData: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
+  shakeBoxAbilityData: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
+  shakeBoxAbilityJarPrefab: {fileID: 1425782311}
+  mainGameplayCamera: {fileID: 519420031}
+  upgradeSpecificFruitAbilityData: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
+  destroySpecificFruitAbilityData: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
 --- !u!1 &1533582983
 GameObject:
   m_ObjectHideFlags: 0
