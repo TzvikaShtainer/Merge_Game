@@ -80,6 +80,8 @@ namespace VisualLayer.GamePlay.Handlers
         {
             _currentItem = _nextItem;
 
+            posOfClick.x = Mathf.Clamp(posOfClick.x, -1.4f, 1.4f);
+            
             SetCurrItemPosByLocation(new Vector2(posOfClick.x, 2.5f));
         }
 

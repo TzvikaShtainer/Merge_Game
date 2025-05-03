@@ -3073,12 +3073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelType: 1
-  destroyLowestAbilityData: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
-  shakeBoxAbilityData: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
-  shakeBoxAbilityJarPrefab: {fileID: 1425782311}
-  mainGameplayCamera: {fileID: 519420031}
-  upgradeSpecificFruitAbilityData: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
-  destroySpecificFruitAbilityData: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
 --- !u!114 &1510487345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4076,7 +4070,7 @@ RectTransform:
   m_GameObject: {fileID: 1897198432}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.91250014, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.91250014, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 548040924}

@@ -23,6 +23,8 @@ namespace VisualLayer.MergeItems.SpawnLogic
 
         public void UpdateDraggingPosition(Vector2 pos)
         {
+            pos.x = Mathf.Clamp(pos.x, -1.4f, 1.4f);
+            
             _gameLogicHandler.SetCurrItemPosByLocation(pos);
         }
     }
