@@ -33,6 +33,9 @@ namespace VisualLayer.GamePlay.Abilities
             if (Count <= 0)
                 return;
             
+            if (IsJarEmpty())
+                return;
+            
             Count--;
             
             DisableEnvironment();
