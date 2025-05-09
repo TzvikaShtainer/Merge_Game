@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Bye Bye Little Ones
   _id: DestroyAllLowestLevelFruitsAbility
-  _count: 16
-  _description: Remove The Smallest Fruits
+  _count: 15
+  _description: Remove The Smallest Desserts
   _cost: 10
   _skillSprite: {fileID: 21300000, guid: b2ec5df63bd0c3b488160e0c3c628565, type: 3}
