@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e6791cec34803a154a085f4bf2495, type: 3}
   m_Name: UpgradeSpecificFruitAbilityData
   m_EditorClassIdentifier: 
-  _name: UpgradeSpecificFruitAbility
+  _name: Make Me Bigger
   _id: UpgradeSpecificFruitAbility
   _count: 100
-  _description: UpgradeSpecificFruitAbility des
+  _description: Tap To Updrade A Specific Dessert
   _cost: 40
+  _skillSprite: {fileID: 21300000, guid: 36901887b5c311b4482a0ea8e9113722, type: 3}

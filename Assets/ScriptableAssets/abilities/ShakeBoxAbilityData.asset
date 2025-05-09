@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e6791cec34803a154a085f4bf2495, type: 3}
   m_Name: ShakeBoxAbilityData
   m_EditorClassIdentifier: 
-  _name: ShakeBoxAbility
+  _name: Shake It UP
   _id: ShakeBoxAbility
   _count: 100
-  _description: ShakeBoxAbility des
+  _description: Shake The Jar To Mix Them Up
   _cost: 30
+  _skillSprite: {fileID: 21300000, guid: e650d39f69bf98f4e9b3b6ac45d6bbcb, type: 3}

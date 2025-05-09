@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e6791cec34803a154a085f4bf2495, type: 3}
   m_Name: DestroySpecificFruitAbilityData
   m_EditorClassIdentifier: 
-  _name: DestroySpecificFruitAbility
+  _name: Bomb It Up
   _id: DestroySpecificFruitAbility
   _count: 100
-  _description: DestroySpecificFruitAbility des
+  _description: Tap To Destroy A Specific Fruit
   _cost: 20
+  _skillSprite: {fileID: 21300000, guid: 83385c21967edf7418259657295bb815, type: 3}

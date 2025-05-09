@@ -31,6 +31,9 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
 
         [SerializeField]
         private Button _yesButtonGameObject;
+
+        [SerializeField] 
+        private Transform _popupSkillSpriteTransform;
         
         private AbilityDataSO _abilityData;
         
@@ -54,8 +57,9 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
             
             _popupSkillName.text = abilityDataSo.Name;
             _popupSkillDescription.text = abilityDataSo.Description;
-            _popupSkillCost.text = abilityDataSo.Cost.ToString();
+            _popupSkillCost.text = "Cost:\n" + abilityDataSo.Cost + " Coins";
             _yesButtonGameObject.interactable = IsHaveMoney(abilityDataSo);
+            _popupSkillSpriteTransform.gameObject.GetComponent<Image>().sprite = abilityDataSo.SkillSprite;
         }
 
         private bool IsHaveMoney(AbilityDataSO abilityDataSo)

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e6791cec34803a154a085f4bf2495, type: 3}
   m_Name: destroyLowestAbilityData
   m_EditorClassIdentifier: 
-  _name: DestroyAllLowestLevelFruitsAbility
+  _name: Bye Bye Little Ones
   _id: DestroyAllLowestLevelFruitsAbility
-  _count: 17
-  _description: DestroyAllLowestLevelFruitsAbility DEscription
+  _count: 16
+  _description: Remove The Smallest Fruits
   _cost: 10
+  _skillSprite: {fileID: 21300000, guid: b2ec5df63bd0c3b488160e0c3c628565, type: 3}

@@ -11,12 +11,13 @@ namespace DataLayer.DataTypes.abilities
         [SerializeField] private int _count;
         [SerializeField] private string _description;
         [SerializeField] private int _cost;
+        [SerializeField] private Sprite _skillSprite;
         
         public string Name => _name;
         public string Id => _id;
         public string Description => _description;
-        
         public int Cost => _cost;
+        public Sprite SkillSprite => _skillSprite;
         
         
     
