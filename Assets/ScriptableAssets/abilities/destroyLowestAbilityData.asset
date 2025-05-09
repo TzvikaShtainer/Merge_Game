@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: DestroyAllLowestLevelFruitsAbility
   _id: DestroyAllLowestLevelFruitsAbility
-  _count: 100
+  _count: 17
   _description: DestroyAllLowestLevelFruitsAbility DEscription
   _cost: 10
