@@ -1,5 +1,7 @@
 ﻿using DataLayer.DataTypes.abilities;
 using UnityEngine;
+using UnityEngine.Serialization;
+using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
 using Zenject;
 
@@ -15,6 +17,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
         
         [SerializeField]
         private AddSkillsPopup.AddSkillsPopup _addSkillPopupPrefabRef;
+        
+        [SerializeField]
+        private SettingsMenuPopup settingsMenuPopupPrefabRef;
         public override void InstallBindings()
         {
             Container
@@ -28,6 +33,11 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .FromComponentInNewPrefab(_addSkillPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform)
                 .AsSingle();
+
+            Container
+                .BindFactory<MusicMenuPopup.SettingsMenuPopup, MusicMenuPopup.SettingsMenuPopup.Factory>()
+                .FromComponentInNewPrefab(settingsMenuPopupPrefabRef)
+                .UnderTransform(_parentPopupCanvasTransform);
         }
         
         

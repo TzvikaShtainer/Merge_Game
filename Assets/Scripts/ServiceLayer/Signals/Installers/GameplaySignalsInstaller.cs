@@ -11,17 +11,25 @@ namespace ServiceLayer.Signals.Installers
         {
             SignalBusInstaller.Install(Container);
 
+            //Items Signals
             Container.DeclareSignal<ItemMergedSignal>();
             Container.DeclareSignal<AddCoinsSignal>();
             
+            
+            //Input Signals
             Container.DeclareSignal<UnpauseInput>();
             Container.DeclareSignal<PauseInput>();
             
+            
+            //UI Signals
             Container.DeclareSignal<EnableUI>();
             Container.DeclareSignal<DisableUI>();
 
+            
+            //Psychics Signals
             Container.DeclareSignal<ReachedColliderLose>();
             Container.DeclareSignal<HandleItemsCollisionAfterLose>();
+            
         }
     }
 }

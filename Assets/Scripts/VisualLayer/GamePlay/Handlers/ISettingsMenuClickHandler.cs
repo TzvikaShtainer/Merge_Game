@@ -2,7 +2,7 @@
 
 namespace VisualLayer.GamePlay.Handlers
 {
-    public interface IHudBackClickHandler
+    public interface ISettingsMenuClickHandler
     {
         UniTask Execute(); 
     }

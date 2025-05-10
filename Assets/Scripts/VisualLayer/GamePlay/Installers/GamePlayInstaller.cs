@@ -8,6 +8,7 @@ using VisualLayer.Factories;
 using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.Handlers;
 using VisualLayer.GamePlay.PlayerInput;
+using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.GamePlay.UI;
 using VisualLayer.MergeItems;
 using VisualLayer.MergeItems.MergeSystem;
@@ -43,9 +44,13 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .AsSingle();
         
         Container
-            .Bind<IHudBackClickHandler>()
-            .To<HudBackClickHandler>()
+            .Bind<ISettingsMenuClickHandler>()
+            .To<SettingsMenuClickHandler>()
             .AsSingle();
+        
+        Container.Bind<ISettingsMenuActions>()
+            .To<SettingsMenuHandler>()
+            .AsTransient();
         
         Container
             .Bind<IHudPlusCurrencyClickHandler>()

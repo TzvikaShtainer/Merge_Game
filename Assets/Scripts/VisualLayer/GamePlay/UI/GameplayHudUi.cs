@@ -33,7 +33,7 @@ namespace VisualLayer.GamePlay.UI
         private IDataLayer _dataLayer;
         
         [Inject]
-        private IHudBackClickHandler _backClickHandler; 
+        private ISettingsMenuClickHandler _backClickHandler; 
         
         [Inject]
         private IHudPlusCurrencyClickHandler _plusCurrencyClickHandler; 
