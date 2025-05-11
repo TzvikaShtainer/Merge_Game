@@ -1,26 +1,27 @@
 ﻿using Cysharp.Threading.Tasks;
 using DataLayer;
 using DataLayer.DataTypes;
+using ServiceLayer.GameScenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace ServiceLayer.GameScenes
+namespace Blast.ServiceLayer.GameScenes
 {
     public class GameScenesService : IGameScenesService
     {
-
         #region Injects
-
+        
         [Inject]
         private IDataLayer _dataLayer;
         
         [Inject]
         private ZenjectSceneLoader _zenjectSceneLoader;
-
+        
         #endregion
         
         #region Methods
+
         public async UniTask LoadInfraSceneIfNotLoaded(InfraScreenType sceneType)
         {
             if (IsInfraSceneLoaded(sceneType))
@@ -41,8 +42,8 @@ namespace ServiceLayer.GameScenes
             
             var metadata = _dataLayer.Metadata.GetLevelMetadata(levelType);
             await _zenjectSceneLoader.LoadSceneAsync(metadata.LevelSceneBuildIndex, LoadSceneMode.Additive);
-        }
-
+        } 
+        
         public async UniTask UnloadInfraScreen(InfraScreenType sceneType)
         {
             var metadata = _dataLayer.Metadata.GetInfraScreenMetadata(sceneType);
@@ -51,16 +52,10 @@ namespace ServiceLayer.GameScenes
 
         public async UniTask UnloadLevelScene(GameLevelType levelType)
         {
-            if (!IsLevelSceneLoaded(levelType))
-            {
-                Debug.LogWarning($"Scene for level '{levelType}' is not loaded, skipping unload.");
-                return;
-            }
-            
             var metadata = _dataLayer.Metadata.GetLevelMetadata(levelType);
             await SceneManager.UnloadSceneAsync(metadata.LevelSceneBuildIndex);
         }
-        
+
         private bool IsLevelSceneLoaded(GameLevelType levelType)
         {
             try
@@ -76,7 +71,7 @@ namespace ServiceLayer.GameScenes
 
             return false;
         }
-        
+
         private bool IsInfraSceneLoaded(InfraScreenType sceneType)
         {
             try
@@ -92,7 +87,7 @@ namespace ServiceLayer.GameScenes
 
             return false;
         }
-        
+
         #endregion
     }
 }

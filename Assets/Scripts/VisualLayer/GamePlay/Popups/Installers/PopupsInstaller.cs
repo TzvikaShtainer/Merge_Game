@@ -35,7 +35,7 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .AsSingle();
 
             Container
-                .BindFactory<MusicMenuPopup.SettingsMenuPopup, MusicMenuPopup.SettingsMenuPopup.Factory>()
+                .BindFactory<SettingsMenuPopup, SettingsMenuPopup.Factory>()
                 .FromComponentInNewPrefab(settingsMenuPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
         }

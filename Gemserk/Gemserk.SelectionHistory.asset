@@ -19,10 +19,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 102900000, guid: 27e02daecc0e9e64e95fcb81885f56a0, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 102900000, guid: a2955a417e9bbfd44a5f45a698ba1b6d, type: 3}
       sceneName: 
       scenePath: 
@@ -135,14 +131,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 102900000, guid: 9e52e526126281d419a98428c5066d3f, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
       sceneName: 
       scenePath: 
@@ -159,34 +147,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-18486298-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-459431038-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1051666919-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1556459236-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-577131098-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1281261125-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1167958887-0
     - reference: {fileID: 102900000, guid: d07e17bb71759a543a66cadf5410b384, type: 3}
       sceneName: 
       scenePath: 
@@ -235,11 +195,43 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 102900000, guid: 652a531a0cdeb6d42900f68ce0d50b47, type: 3}
+    - reference: {fileID: 7235986652403890901, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 7235986652403890901, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
+    - reference: {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 7235986652403890901, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: 27e02daecc0e9e64e95fcb81885f56a0, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 4504745138737944102, guid: 8c24ddf26fb1f7a438df131aae4d13d9, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: cf1590683129f1e4eafde84788f4521d, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: 9e52e526126281d419a98428c5066d3f, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 0}
+      sceneName: GameScene
+      scenePath: Assets/Scenes/Prodaction/GameScene.unity
+      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1510487343-0
+    - reference: {fileID: 102900000, guid: 652a531a0cdeb6d42900f68ce0d50b47, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
@@ -250,36 +242,8 @@ MonoBehaviour:
     - reference: {fileID: 0}
       sceneName: GamePopups
       scenePath: Assets/Scenes/Prodaction/GamePopups.unity
-      globalObjectId: GlobalObjectId_V1-2-9e52e526126281d419a98428c5066d3f-757602811-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1165787257-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-548040920-0
-    - reference: {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1510487343-0
-    - reference: {fileID: 0}
-      sceneName: GamePopups
-      scenePath: Assets/Scenes/Prodaction/GamePopups.unity
       globalObjectId: GlobalObjectId_V1-2-9e52e526126281d419a98428c5066d3f-1239954545-0
-    - reference: {fileID: 7235986652403890901, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
+    - reference: {fileID: 11400000, guid: 0cef38133c4c3a04aa67ddec66504f26, type: 2}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: Settings Menu Popup
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-7235986652403890901-0
-    - reference: {fileID: 0}
-      sceneName: Settings Menu Popup
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-4641298007127220811-2424733998141565464

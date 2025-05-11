@@ -28,13 +28,13 @@ namespace VisualLayer.GamePlay.Handlers
         
         public async UniTask Execute()
         {
-            _timeController.PauseGameplay();
-            _signalBus.Fire<PauseInput>();
+            //_timeController.PauseGameplay();
+            //_signalBus.Fire<PauseInput>();
             
             var popup = _musicMenuPopupFactory.Create();
             popup.Initialize(_actions);
             
-            _timeController.UnpauseGameplay();
+            //_timeController.UnpauseGameplay();
             
         }
     }

@@ -42,11 +42,22 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             _settingsMenuActions = settingsMenuActions;
         }
         
-        public void OnContinueBtnClick() => _settingsMenuActions.OnCloseMenu();
+        public void OnContinueBtnClick()
+        {
+            Close();
+        }
+
         public void OnBgMusicBtnClick() => _settingsMenuActions.OnToggleMusic();
         public void OnSoundBtnClick() => _settingsMenuActions.OnToggleSfx();
         public void OnVibrationBtnClick() => _settingsMenuActions.OnToggleVibration();
-        public void OnRestartBtnClick() => _settingsMenuActions.OnRestartGame();
+
+        public async void OnRestartBtnClick()
+        {
+            _settingsMenuActions.OnRestartGame();
+            
+            Close();
+        }
+        //=> _settingsMenuActions.OnRestartGame();
         
 
         #endregion
