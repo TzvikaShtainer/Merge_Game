@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DataLayer;
 using DataLayer.DataTypes;
+using DG.Tweening;
 using ServiceLayer.GameScenes;
 using ServiceLayer.Signals.SignalsClasses;
 using TMPro;
@@ -40,7 +41,7 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         #endregion
 
         #region Methods
-
+        
         public void Initialize(ISettingsMenuActions settingsMenuActions)
         {
             _settingsMenuActions = settingsMenuActions;

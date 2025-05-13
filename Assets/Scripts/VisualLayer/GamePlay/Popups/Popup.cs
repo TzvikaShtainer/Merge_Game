@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace VisualLayer.GamePlay.Popups
 {
@@ -6,7 +7,19 @@ namespace VisualLayer.GamePlay.Popups
     {
         protected virtual void Close()
         {
-            Destroy(gameObject);
+            transform.DOScale(Vector3.zero, 0.25f)
+                .SetEase(Ease.InBack)
+                .OnComplete(() => Destroy(gameObject));
+        }
+        
+        private void Awake()
+        {
+            transform.localScale = Vector3.zero;
+        }
+        
+        private void OnEnable()
+        {
+            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
         }
     }
 }
