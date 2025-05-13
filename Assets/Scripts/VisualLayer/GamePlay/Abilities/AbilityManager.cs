@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataLayer.DataTypes.abilities;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace VisualLayer.GamePlay.Abilities
 {
     public class AbilityManager
     {
+        public event Action<string, int> OnAbilityChanged;
+        
         private Dictionary<string, IAbility> _abilitiesDict = new();
 
         
@@ -22,6 +25,8 @@ namespace VisualLayer.GamePlay.Abilities
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
                 ability.UseAbility();
+                
+                OnAbilityChanged?.Invoke(abilityId, ability.Count);
             }
             else
             {
@@ -34,6 +39,8 @@ namespace VisualLayer.GamePlay.Abilities
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
                 ability.Buy();
+                
+                OnAbilityChanged?.Invoke(abilityId, ability.Count);
             }
         }
 

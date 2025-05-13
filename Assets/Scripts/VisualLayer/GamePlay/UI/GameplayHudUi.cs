@@ -24,6 +24,18 @@ namespace VisualLayer.GamePlay.UI
         
         [SerializeField] 
         private Image _nextItemSprite;
+        
+        [SerializeField] 
+        private TextMeshProUGUI _destroyAllLowestLevelFruitsAbilityText;
+        
+        [SerializeField] 
+        private TextMeshProUGUI _destroySpecificFruitAbilityText;
+        
+        [SerializeField] 
+        private TextMeshProUGUI _shakeBoxAbilityText;
+        
+        [SerializeField] 
+        private TextMeshProUGUI _upgradeSpecificFruitAbilityText;
 
         #endregion
 
@@ -58,7 +70,10 @@ namespace VisualLayer.GamePlay.UI
             _dataLayer.Balances.CoinsBalanceChanged -= SyncUiWithData;
             _dataLayer.Balances.HighScoreChanged -= SyncUiWithData;
             _dataLayer.Balances.ScoreChanged -= SyncUiWithData;
+            
             _gameLogicHandler.NextItemCreated -= SyncUiWithData;
+            
+            _abilityManager.OnAbilityChanged -= SyncAbilityCountData;
 
             SyncUiWithData();
         }
@@ -69,15 +84,23 @@ namespace VisualLayer.GamePlay.UI
             _dataLayer.Balances.CoinsBalanceChanged += SyncUiWithData;
             _dataLayer.Balances.HighScoreChanged += SyncUiWithData;
             _dataLayer.Balances.ScoreChanged += SyncUiWithData;
+            
             _gameLogicHandler.NextItemCreated += SyncUiWithData;
+
+            _abilityManager.OnAbilityChanged += SyncAbilityCountData;
             
             _currentScoreText.text = "0";
             
             _dataLayer.Balances.SetCurrentScore(0);
             
             SyncUiWithData();
+
+            SyncAbilityCountData("DestroyAllLowestLevelFruitsAbility", _abilityManager.GetAbilityCount("DestroyAllLowestLevelFruitsAbility"));
+            SyncAbilityCountData("DestroySpecificFruitAbility", _abilityManager.GetAbilityCount("DestroySpecificFruitAbility"));
+            SyncAbilityCountData("ShakeBoxAbility", _abilityManager.GetAbilityCount("ShakeBoxAbility"));
+            SyncAbilityCountData("UpgradeSpecificFruitAbility", _abilityManager.GetAbilityCount("UpgradeSpecificFruitAbility"));
         }
-        
+
         private void SyncUiWithData()
         {
             _coinsBalaceText.text = _dataLayer.Balances.Coins.ToString();
@@ -89,6 +112,13 @@ namespace VisualLayer.GamePlay.UI
             _nextItemSprite.sprite = _gameLogicHandler.GetNextItem().GetItemMetadata().ItemPreviewSprite;
         }
 
+        private void SyncAbilityCountData(string abilityId, int newCount)
+        {
+            if (abilityId == "DestroyAllLowestLevelFruitsAbility") _destroyAllLowestLevelFruitsAbilityText.text = newCount.ToString();
+            if (abilityId == "DestroySpecificFruitAbility") _destroySpecificFruitAbilityText.text = newCount.ToString();
+            if (abilityId == "ShakeBoxAbility") _shakeBoxAbilityText.text = newCount.ToString();
+            if (abilityId == "UpgradeSpecificFruitAbility") _upgradeSpecificFruitAbilityText.text = newCount.ToString();
+        }
         
         public async void OnBackButtonClick()
         {

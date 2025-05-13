@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Shake It UP
   _id: ShakeBoxAbility
-  _count: 100
+  _count: 50
   _description: Shake The Jar To Mix Them Up
   _cost: 30
   _skillSprite: {fileID: 21300000, guid: e650d39f69bf98f4e9b3b6ac45d6bbcb, type: 3}

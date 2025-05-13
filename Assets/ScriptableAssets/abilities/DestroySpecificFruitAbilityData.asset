@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Bomb It Up
   _id: DestroySpecificFruitAbility
-  _count: 99
+  _count: 10
   _description: Tap To Destroy A Specific Dessert
   _cost: 20
   _skillSprite: {fileID: 21300000, guid: 83385c21967edf7418259657295bb815, type: 3}

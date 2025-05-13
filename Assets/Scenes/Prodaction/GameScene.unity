@@ -2050,6 +2050,10 @@ MonoBehaviour:
   _higestScoreText: {fileID: 827782760}
   _currentScoreText: {fileID: 792071999}
   _nextItemSprite: {fileID: 1480336552}
+  _destroyAllLowestLevelFruitsAbilityText: {fileID: 1536532197}
+  _destroySpecificFruitAbilityText: {fileID: 269516685}
+  _shakeBoxAbilityText: {fileID: 1368814908}
+  _upgradeSpecificFruitAbilityText: {fileID: 1719701523}
 --- !u!114 &1165787261
 MonoBehaviour:
   m_ObjectHideFlags: 0

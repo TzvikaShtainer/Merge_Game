@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Make Me Bigger
   _id: UpgradeSpecificFruitAbility
-  _count: 100
+  _count: 31
   _description: Tap To Updrade A Specific Dessert
   _cost: 40
   _skillSprite: {fileID: 21300000, guid: 36901887b5c311b4482a0ea8e9113722, type: 3}
