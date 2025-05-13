@@ -187,10 +187,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 7235986652403890901, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 102900000, guid: 27e02daecc0e9e64e95fcb81885f56a0, type: 3}
       sceneName: 
       scenePath: 
@@ -223,10 +219,6 @@ MonoBehaviour:
       sceneName: Loader
       scenePath: Assets/Scenes/Prodaction/Loader.unity
       globalObjectId: GlobalObjectId_V1-2-cf1590683129f1e4eafde84788f4521d-1452349657-0
-    - reference: {fileID: 0}
-      sceneName: GamePopups
-      scenePath: Assets/Scenes/Prodaction/GamePopups.unity
-      globalObjectId: GlobalObjectId_V1-2-9e52e526126281d419a98428c5066d3f-1239954545-0
     - reference: {fileID: 11400000, guid: 0cef38133c4c3a04aa67ddec66504f26, type: 2}
       sceneName: 
       scenePath: 
@@ -314,10 +306,6 @@ MonoBehaviour:
     - reference: {fileID: 0}
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-827782758-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-2116670167-0
     - reference: {fileID: 0}
       sceneName: GameScene
@@ -331,3 +319,19 @@ MonoBehaviour:
       sceneName: GameScene
       scenePath: Assets/Scenes/Prodaction/GameScene.unity
       globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-827782758-0
+    - reference: {fileID: 0}
+      sceneName: GamePopups
+      scenePath: Assets/Scenes/Prodaction/GamePopups.unity
+      globalObjectId: GlobalObjectId_V1-2-9e52e526126281d419a98428c5066d3f-1239954545-0
+    - reference: {fileID: 7235986652403890901, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 0}
+      sceneName: Settings Menu Popup
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-4641298007127220811-2424733998141565464
+    - reference: {fileID: 0}
+      sceneName: Settings Menu Popup
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-7235986652403890901-0

@@ -8,6 +8,5 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         void OnToggleSfx();
         void OnToggleVibration();
         UniTask OnRestartGame();
-        void OnCloseMenu();
     }
 }

@@ -23,6 +23,10 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 
         #region Editor
 
+        [SerializeField] private ToggleButton _musicToggle;
+        [SerializeField] private ToggleButton _sfxToggle;
+        [SerializeField] private ToggleButton _vibrationToggle;
+        
         #endregion
         
         #region Fields
@@ -42,14 +46,26 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             _settingsMenuActions = settingsMenuActions;
         }
         
-        public void OnContinueBtnClick()
+        public void OnContinueBtnClick() => Close();
+        
+
+        public void OnBgMusicBtnClick()
         {
-            Close();
+            _musicToggle.Toggle();
+            _settingsMenuActions.OnToggleMusic();
         }
 
-        public void OnBgMusicBtnClick() => _settingsMenuActions.OnToggleMusic();
-        public void OnSoundBtnClick() => _settingsMenuActions.OnToggleSfx();
-        public void OnVibrationBtnClick() => _settingsMenuActions.OnToggleVibration();
+        public void OnSoundBtnClick()
+        {
+            _sfxToggle.Toggle();
+            _settingsMenuActions.OnToggleSfx();
+        }
+
+        public void OnVibrationBtnClick()
+        {
+            _vibrationToggle.Toggle();
+            _settingsMenuActions.OnToggleVibration();
+        }
 
         public async void OnRestartBtnClick()
         {
@@ -57,8 +73,6 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             
             Close();
         }
-        //=> _settingsMenuActions.OnRestartGame();
-        
 
         #endregion
     }

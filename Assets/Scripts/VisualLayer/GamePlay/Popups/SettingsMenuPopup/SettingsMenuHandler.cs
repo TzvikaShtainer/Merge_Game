@@ -21,17 +21,17 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         
         public void OnToggleMusic()
         {
-           Debug.Log("OnToggleMusic");
+           
         }
 
         public void OnToggleSfx()
         {
-            Debug.Log("OnToggleSfx");
+            
         }
 
         public void OnToggleVibration()
         {
-            Debug.Log("OnToggleVibration");
+            
         }
 
         public async UniTask OnRestartGame()
@@ -58,11 +58,6 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             _loader.SetProgress(0.9f, "Completing");
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             await _loader.FadeOut();
-        }
-
-        public void OnCloseMenu()
-        {
-            Debug.Log("OnCloseMenu");
         }
     }
 }
