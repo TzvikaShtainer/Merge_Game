@@ -19,10 +19,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 102900000, guid: a2955a417e9bbfd44a5f45a698ba1b6d, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 102900000, guid: 707b2302942a5374faaad50d80dff4ad, type: 3}
       sceneName: 
       scenePath: 
@@ -167,18 +163,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 102900000, guid: 27e02daecc0e9e64e95fcb81885f56a0, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 4504745138737944102, guid: 8c24ddf26fb1f7a438df131aae4d13d9, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 102900000, guid: cf1590683129f1e4eafde84788f4521d, type: 3}
       sceneName: 
       scenePath: 
@@ -191,18 +175,10 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1510487343-0
     - reference: {fileID: 102900000, guid: 652a531a0cdeb6d42900f68ce0d50b47, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/Scenes/Prodaction/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-cf1590683129f1e4eafde84788f4521d-1452349657-0
     - reference: {fileID: 11400000, guid: 0cef38133c4c3a04aa67ddec66504f26, type: 2}
       sceneName: 
       scenePath: 
@@ -215,18 +191,6 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-319910228-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1192026215-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1200130751-0
     - reference: {fileID: 102900000, guid: 164580e9dde7c0544b4ea4b6b0ee82fa, type: 3}
       sceneName: 
       scenePath: 
@@ -243,86 +207,14 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1533582983-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1900436153-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1799233816-0
     - reference: {fileID: 102900000, guid: 5c05e6b1cbd166b46b2ef8e817f6b7a3, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-2116670167-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1741964320-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-888411801-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-827782758-0
-    - reference: {fileID: 0}
-      sceneName: GamePopups
-      scenePath: Assets/Scenes/Prodaction/GamePopups.unity
-      globalObjectId: GlobalObjectId_V1-2-9e52e526126281d419a98428c5066d3f-1239954545-0
     - reference: {fileID: 7235986652403890901, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-548040920-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-459431038-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-2031051775-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1317587906-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1418270801-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-933138189-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1086797057-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-987754859-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1605456348-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-2095470622-0
     - reference: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
       sceneName: 
       scenePath: 
@@ -359,39 +251,35 @@ MonoBehaviour:
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1165787257-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1304873312-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1556459236-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1596819108-0
-    - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1694728034-0
-    - reference: {fileID: 0}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 11500000, guid: 3ee2b88343f20774a8dd8cc3acc3810d, type: 3}
-      sceneName: 
-      scenePath: 
-      globalObjectId: 
     - reference: {fileID: 11400000, guid: 698b2db098268c640929a7b8090a31eb, type: 2}
       sceneName: 
       scenePath: 
       globalObjectId: 
+    - reference: {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 11400000, guid: 6f4a282a84a40814ea8ccf7efbaf932f, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 11400000, guid: e9227ed5a30733142ba3bb92406ada8e, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 4504745138737944102, guid: 8c24ddf26fb1f7a438df131aae4d13d9, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: a2955a417e9bbfd44a5f45a698ba1b6d, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: 27e02daecc0e9e64e95fcb81885f56a0, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
     - reference: {fileID: 0}
-      sceneName: GameScene
-      scenePath: Assets/Scenes/Prodaction/GameScene.unity
-      globalObjectId: GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-464968582-0
+      sceneName: StartScreen
+      scenePath: Assets/Scenes/Prodaction/StartScreen.unity
+      globalObjectId: GlobalObjectId_V1-2-27e02daecc0e9e64e95fcb81885f56a0-2016730315-0

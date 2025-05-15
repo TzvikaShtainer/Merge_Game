@@ -1,6 +1,7 @@
 ﻿using Blast.ServiceLayer.GameScenes;
 using ServiceLayer.EffectsService;
 using ServiceLayer.GameScenes;
+using ServiceLayer.PlayFabService;
 using ServiceLayer.TimeControl;
 using UnityEngine;
 using Zenject;
@@ -25,6 +26,11 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<IEffectsManager>()
                 .To<EffectsManager>()
+                .AsSingle();
+
+            Container
+                .Bind<IServerService>()
+                .To<PlayFabService.PlayFabService>()
                 .AsSingle();
         }
     }

@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using ServiceLayer.PlayFabService;
 using UnityEngine;
+using Zenject;
 
 namespace DataLayer.Balances
 {
@@ -37,6 +41,18 @@ namespace DataLayer.Balances
 
         #endregion
 
+        #region Injects
+        
+        private IServerService _serverService;
+        
+        public void Initialize(IServerService serverService)
+        {
+            _serverService = serverService;
+        }
+
+        #endregion
+        
+
         #region Methods
 
         public void AddCoins(int coinsToAdd)
@@ -48,6 +64,11 @@ namespace DataLayer.Balances
             
             _coins += coinsToAdd;
             CoinsBalanceChanged?.Invoke();
+            
+            _serverService.SetUserData(new Dictionary<string, string>
+            {
+                { "Coins", _coins.ToString() }
+            }).Forget();
         }
 
         public bool RemoveCoins(int coinsToRemove)
@@ -59,6 +80,12 @@ namespace DataLayer.Balances
             
             _coins -= coinsToRemove;
             CoinsBalanceChanged?.Invoke();
+            
+            _serverService.SetUserData(new Dictionary<string, string>
+            {
+                { "Coins", _coins.ToString() }
+            }).Forget();
+            
             return true;
         }
 
@@ -66,6 +93,11 @@ namespace DataLayer.Balances
         {
             _highScore = newHighScore;
             HighScoreChanged?.Invoke();
+            
+            _serverService.SetUserData(new Dictionary<string, string>
+            {
+                { "HighScore", _highScore.ToString() }
+            }).Forget();
         }
 
         public void AddCurrentScore(int newCurrentScore)
@@ -79,7 +111,19 @@ namespace DataLayer.Balances
             _currentScore = newCurrentScore;
             ScoreChanged?.Invoke();
         }
+        
+        public async UniTask LoadFromServer()
+        {
+            var data = await _serverService.GetUserData("Coins", "HighScore");
 
+            if (data.TryGetValue("Coins", out var coinsStr) && int.TryParse(coinsStr, out var coins))
+                _coins = coins;
+
+            if (data.TryGetValue("HighScore", out var highStr) && int.TryParse(highStr, out var highScore))
+                _highScore = highScore;
+        }
+        
+        
         #endregion
         
     }

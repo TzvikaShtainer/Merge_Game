@@ -2,6 +2,7 @@
 using DataLayer.DataTypes;
 using DataLayer.Metadata;
 using ServiceLayer.EffectsService;
+using ServiceLayer.PlayFabService;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -47,6 +48,10 @@ namespace DataLayer.Installers
                 .Bind<IDataLayer>()
                 .To<DataLayer>()
                 .AsSingle();
+            
+            var serverService = Container.Resolve<IServerService>();
+
+            _playerBalances.Initialize(serverService);
             
             subContainer
                 .Bind<IPlayerBalances>()

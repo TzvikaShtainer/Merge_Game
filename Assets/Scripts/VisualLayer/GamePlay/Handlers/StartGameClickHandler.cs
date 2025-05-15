@@ -2,6 +2,7 @@
 using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
+using ServiceLayer.PlayFabService;
 using VisualLayer.Loader;
 using Zenject;
 
@@ -17,6 +18,11 @@ namespace VisualLayer.GamePlay.Handlers
 
         [Inject] 
         private IDataLayer _dataLayer;
+        
+        [Inject]
+        private IServerService _serverService;
+        
+        
         public async void Execute()
         {
             _loader.ResetData();
@@ -24,6 +30,11 @@ namespace VisualLayer.GamePlay.Handlers
             await UniTask.Delay(500);
             _loader.SetProgress(0.2f, "Loading Level 20%");
 
+            await _serverService.Login();
+            await _dataLayer.Balances.LoadFromServer();
+            
+            await UniTask.Delay(1000);
+            
             await scenesService.UnloadLevelScene(GameLevelType.StartScreen);
                 
             await UniTask.Delay(1000);

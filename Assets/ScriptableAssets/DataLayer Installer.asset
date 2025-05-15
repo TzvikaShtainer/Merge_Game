@@ -71,7 +71,7 @@ MonoBehaviour:
   _playerBalances:
     _coins: 15
     _highScore: 180
-    _currentScore: 40
+    _currentScore: 0
   _levelsMetadata:
   - _levelType: 0
     _levelName: Start Screen

@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 
 namespace DataLayer.Balances
 {
@@ -35,6 +36,8 @@ namespace DataLayer.Balances
         void AddCurrentScore(int newCurrentScore);
         
         void SetCurrentScore(int newCurrentScore);
+
+        public UniTask LoadFromServer();
 
         #endregion
     }
