@@ -5,16 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Prodaction/StartScreen.unity
-    guid: 27e02daecc0e9e64e95fcb81885f56a0
+  - enabled: 0
+    path: Assets/Scenes/Prodaction/TestScene.unity
+    guid: cdef7ba64ca758f4b9306532c9cf9128
   - enabled: 1
     path: Assets/Scenes/Prodaction/Loader.unity
     guid: cf1590683129f1e4eafde84788f4521d
   - enabled: 1
     path: Assets/Scenes/Prodaction/GamePopups.unity
     guid: 9e52e526126281d419a98428c5066d3f
+  - enabled: 0
+    path: Assets/Scenes/Prodaction/StartScreen.unity
+    guid: 27e02daecc0e9e64e95fcb81885f56a0
   - enabled: 1
     path: Assets/Scenes/Prodaction/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

@@ -1,4 +1,5 @@
-﻿using DataLayer.DataTypes;
+﻿using System;
+using DataLayer.DataTypes;
 using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.GamePlay.Handlers;
@@ -16,11 +17,13 @@ namespace VisualLayer.GamePlay.Installers
     
         public override void InstallBindings()
         {
-            Container
-                .Bind<IPlayerInput>()
-                .To<DesktopInputManager>()
-                .AsSingle()
-                .IfNotBound();
+            Debug.Log("InstallBindings Started");
+            
+            // Container
+            //     .Bind<IPlayerInput>()
+            //     .To<DesktopInputManager>()
+            //     .AsSingle()
+            //     .IfNotBound();
         
             Container
                 .Bind<GameLevelType>()
@@ -32,6 +35,13 @@ namespace VisualLayer.GamePlay.Installers
                 .To<StartGameClickHandler>()
                 .AsSingle();
             
+            Debug.Log("InstallBindings Ended");
+        }
+
+        private void Awake()
+        {
+            Debug.Log("StartScreenInstaller Awake");
+            //InstallBindings();
         }
     }
 }

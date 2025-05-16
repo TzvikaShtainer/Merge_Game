@@ -66,7 +66,7 @@ namespace VisualLayer.MergeItems
 
         private bool IsStandingAfterFall()
         {
-            if (_rigidbody.velocity.magnitude < 0.1f)
+            if (_rigidbody.linearVelocity.magnitude < 0.1f)
             {
                 if (gameObject.layer == LayerMask.NameToLayer("FallingFruit") && _isLosing)
                 {
