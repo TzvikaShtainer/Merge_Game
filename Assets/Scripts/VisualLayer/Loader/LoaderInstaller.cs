@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
@@ -15,6 +16,11 @@ namespace VisualLayer.Loader
         [Inject]
         private IGameScenesService _scenesService;
         
+        [Inject]
+        private IServerService _serverService;
+        
+        [Inject] 
+        private IDataLayer _dataLayer;
         
         #region Loader
 
@@ -43,14 +49,17 @@ namespace VisualLayer.Loader
             await UniTask.Delay(500);
             _loader.SetProgress(0.2f, "Loading Level 20%");
             
+            await _serverService.Login();
+            await _dataLayer.Balances.LoadFromServer();
             
             await UniTask.Delay(1000);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
             
-            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
-                
+            
             await UniTask.Delay(1000);
             _loader.SetProgress(0.5f, "Loading Level 50%");
+            
+            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
             await UniTask.Delay(500);
             _loader.SetProgress(1f, "Loading Level 100%");

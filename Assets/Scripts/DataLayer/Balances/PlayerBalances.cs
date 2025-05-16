@@ -114,6 +114,7 @@ namespace DataLayer.Balances
         
         public async UniTask LoadFromServer()
         {
+            Debug.Log("Loading player balances");
             var data = await _serverService.GetUserData("Coins", "HighScore");
 
             if (data.TryGetValue("Coins", out var coinsStr) && int.TryParse(coinsStr, out var coins))
@@ -121,6 +122,8 @@ namespace DataLayer.Balances
 
             if (data.TryGetValue("HighScore", out var highStr) && int.TryParse(highStr, out var highScore))
                 _highScore = highScore;
+            
+            Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore);
         }
         
         
