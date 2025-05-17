@@ -35,7 +35,7 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .AsSingle();
 
         Container
-            .BindFactory<int, Item, ItemFactory>()
+            .BindFactory<int, Vector2, Item, ItemFactory>()
             .FromFactory<ItemFactoryImplementation>();
 
         Container

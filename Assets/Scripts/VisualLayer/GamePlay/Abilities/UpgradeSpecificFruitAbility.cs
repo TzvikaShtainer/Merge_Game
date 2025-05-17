@@ -104,18 +104,18 @@ namespace VisualLayer.GamePlay.Abilities
                 return;
             }
             
-            var newItem = _itemFactory.Create(upgradedLevel);
+            var newItem = _itemFactory.Create(upgradedLevel,currItemPos);
             _effectsManager.PlayEffect(EffectType.Destroy, currItemPos);
             
-            if (newItem != null)
-            {
-                //newItem.GetComponent<Rigidbody2D>().gravityScale = 0;
-                newItem.transform.position = currItemPos;
-            }
-            else
-            {
-                Debug.LogError("Failed to create upgraded item!");
-            }
+            // if (newItem != null)
+            // {
+            //     //newItem.GetComponent<Rigidbody2D>().gravityScale = 0;
+            //     //newItem.transform.position = currItemPos;
+            // }
+            // else
+            // {
+            //     Debug.LogError("Failed to create upgraded item!");
+            // }
         }
         
         public override void EnableEnvironment()

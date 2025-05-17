@@ -58,10 +58,11 @@ namespace VisualLayer.MergeItems.MergeSystem
 
         private void MergeItems(Item item1, Item item2, int newLevel)
         {
-            Item newItem = _itemFactory.Create(newLevel);
+            //Item newItem = _itemFactory.Create(newLevel,);
             
             Vector2 newPosition = (item1.transform.position + item2.transform.position) / 2;
-            newItem.transform.position = newPosition;
+            Item newItem = _itemFactory.Create(newLevel, newPosition);
+           // newItem.transform.position = newPosition;
             
             newItem.gameObject.layer = LayerMask.NameToLayer("StandingFruit");
             

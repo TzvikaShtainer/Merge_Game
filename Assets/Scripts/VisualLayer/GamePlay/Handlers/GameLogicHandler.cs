@@ -11,8 +11,8 @@ namespace VisualLayer.GamePlay.Handlers
     { 
         public event Action NextItemCreated;
         
-        private int _minLvlSpawn = 6;
-        private int _maxLvlSpawn = 6;
+        private int _minLvlSpawn = 0;
+        private int _maxLvlSpawn = 3;
 
         [SerializeField]
         private Item _currentItem;
@@ -36,21 +36,22 @@ namespace VisualLayer.GamePlay.Handlers
 
         private void HandleFirstItemCreation()
         {
-            _currentItem = CreateItem();
+            //_currentItem = CreateItem();
             
             
             // Convert screen center to world position
             Vector3 screenCenter = new Vector3(Screen.width / 2, 2.5f * Screen.height / Camera.main.orthographicSize, Camera.main.nearClipPlane);
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenCenter);
 
-
+            _currentItem = CreateItem(new Vector2(worldPosition.x, 2.5f));
+            
             SetCurrItemPosByLocation(new Vector2(worldPosition.x, 2.5f));
         }
 
-        private Item CreateItem()
+        private Item CreateItem(Vector2 pos)
         {
             int randomLvlToSpawn = Random.Range(_minLvlSpawn, _maxLvlSpawn);
-            var itemToSpawn = _itemFactory.Create(randomLvlToSpawn);
+            var itemToSpawn = _itemFactory.Create(randomLvlToSpawn, pos);
             return itemToSpawn;
         }
         
@@ -63,10 +64,10 @@ namespace VisualLayer.GamePlay.Handlers
 
         public void CreateNextItem()
         {
-            _nextItem = CreateItem();
+            _nextItem = CreateItem(new Vector2(10, 10));
             
             _nextItem.GetComponent<Rigidbody2D>().gravityScale = 0;
-            _nextItem.transform.position = new Vector2(10, 10);
+            //_nextItem.transform.position = new Vector2(10, 10);
 
             NextItemCreated?.Invoke();
         }

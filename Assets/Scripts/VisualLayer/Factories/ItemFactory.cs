@@ -6,12 +6,12 @@ using Zenject;
 
 namespace VisualLayer.Factories
 {
-    public class ItemFactory : PlaceholderFactory<int, Item>
+    public class ItemFactory : PlaceholderFactory<int, Vector2, Item>
     {
         
     }
 
-    public class ItemFactoryImplementation : IFactory<int, Item>
+    public class ItemFactoryImplementation : IFactory<int, Vector2, Item>
     {
         [Inject]
         private IDataLayer _dataLayer;
@@ -21,10 +21,18 @@ namespace VisualLayer.Factories
         
         private int _creationCounter = 0;
         
-        public Item Create(int itemId)
+        public Item Create(int itemId, Vector2 pos)
         {
             var itemPrefab = _dataLayer.Metadata.GetPrefabForItem(itemId);
-            Item instanceToReturn = _container.InstantiatePrefabForComponent<Item>(itemPrefab, new object[] { itemId });
+            
+            //Item instanceToReturn = _container.InstantiatePrefabForComponent<Item>(itemPrefab, new object[] { itemId });
+            Item instanceToReturn = _container.InstantiatePrefabForComponent<Item>(
+                itemPrefab,
+                pos,
+                Quaternion.identity, // בלי רוטציה
+                null, // אין הורה
+                new object[] { itemId }
+            );
             
             if (!instanceToReturn)
             {

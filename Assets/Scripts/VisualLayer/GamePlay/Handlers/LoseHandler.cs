@@ -27,6 +27,7 @@ namespace VisualLayer.GamePlay.Handlers
             Collider2D hit = Physics2D.OverlapBox(detectionZone.bounds.center, detectionZone.bounds.size, 0f, LayerMask.GetMask("StandingFruit"));
             if (hit)
             {
+                Debug.Log(hit.gameObject.name);
                 Debug.Log("here");
                 CustomTriggerBehavior(hit);
             }
