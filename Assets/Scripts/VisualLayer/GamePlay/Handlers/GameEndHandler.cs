@@ -1,104 +1,107 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using DataLayer.DataTypes;
-using ServiceLayer.GameScenes;
-using ServiceLayer.Signals.SignalsClasses;
-using ServiceLayer.TimeControl;
-using UnityEngine;
-using VisualLayer.GamePlay.Popups.YesNoPopup;
-using VisualLayer.Loader;
-using Zenject;
+﻿    using System;
+    using Cysharp.Threading.Tasks;
+    using DataLayer.DataTypes;
+    using ServiceLayer.GameScenes;
+    using ServiceLayer.Signals.SignalsClasses;
+    using ServiceLayer.TimeControl;
+    using UnityEngine;
+    using VisualLayer.GamePlay.Popups.YesNoPopup;
+    using VisualLayer.Loader;
+    using Zenject;
 
-namespace VisualLayer.GamePlay.Handlers
-{
-    public class GameEndHandler
+    namespace VisualLayer.GamePlay.Handlers
     {
-        [Inject]
-        private ILoader _loader;
-        
-        [Inject] 
-        private YesNoPopup.Factory _yesNoPopupFactory;
-        
-        [Inject]
-        private ITimeController _timeController;
-        
-        [Inject]
-        private IGameScenesService _scenesService;
-
-        [Inject]
-        private GameLevelType _currentLevelType;
-        
-        [Inject]
-        private SignalBus _signalBus;
-        
-        public async void Execute()
+        public class GameEndHandler
         {
-            _timeController.PauseGameplay();
+            [Inject]
+            private ILoader _loader;
             
-            _signalBus.Fire<PauseInput>();
+            [Inject] 
+            private YesNoPopup.Factory _yesNoPopupFactory;
+            
+            [Inject]
+            private ITimeController _timeController;
+            
+            [Inject]
+            private IGameScenesService _scenesService;
 
-            var popupArgs = new YesNoPopupArgs
+            [Inject]
+            private GameLevelType _currentLevelType;
+            
+            [Inject]
+            private SignalBus _signalBus;
+            
+            public async void Execute()
             {
-                Text = "You Lose!",
-                IsNoButtonVisible = true,
-                YesCaption = "Try Again?",
-                NoCaption = "Go Home",
-            };
-            
-            var popup = _yesNoPopupFactory.Create(popupArgs);
-            var result = await popup.WaitForResult();
-            
-            _timeController.UnpauseGameplay();
-            
-            if (result.IsNo)
-            {
-                _signalBus.Fire<UnpauseInput>();
+                _signalBus.Fire<PauseInput>();
+
+                var popupArgs = new YesNoPopupArgs
+                {
+                    Text = "You Lose!",
+                    IsNoButtonVisible = true,
+                    YesCaption = "Try Again?",
+                    NoCaption = "Go Home",
+                };
                 
-                _loader.ResetData();
-                await _loader.FadeIn();
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                _loader.SetProgress(0.2f, "20%");
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                _loader.SetProgress(0.5f, "50%");
-            
-                //unload gameplay lvl scene
-                await _scenesService.UnloadLevelScene(_currentLevelType);
-            
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                _loader.SetProgress(1f, "100%");
-            
-                //load Start Screen scene
-                await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
-            
-            
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                await _loader.FadeOut();
+                var popup = _yesNoPopupFactory.Create(popupArgs);
+                
+                await UniTask.Delay(System.TimeSpan.FromSeconds(0.2f));
+                
+                _timeController.PauseGameplay();
+                
+                var result = await popup.WaitForResult();
+                
+                _timeController.UnpauseGameplay();
+                
+                if (result.IsNo)
+                {
+                    _signalBus.Fire<UnpauseInput>();
+                    
+                    _loader.ResetData();
+                    await _loader.FadeIn();
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    _loader.SetProgress(0.2f, "20%");
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    _loader.SetProgress(0.5f, "50%");
+                
+                    //unload gameplay lvl scene
+                    await _scenesService.UnloadLevelScene(_currentLevelType);
+                
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    _loader.SetProgress(1f, "100%");
+                
+                    //load Start Screen scene
+                    await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
+                
+                
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    await _loader.FadeOut();
+                }
+                else
+                {
+                    _signalBus.Fire<UnpauseInput>();
+                
+                    _loader.ResetData();
+                    await _loader.FadeIn();
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    _loader.SetProgress(0.2f, "20%");
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    _loader.SetProgress(0.5f, "50%");
+                
+                    //unload gameplay lvl scene
+                    await _scenesService.UnloadLevelScene(_currentLevelType);
+                
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    _loader.SetProgress(1f, "100%");
+                
+                    //load Start Screen scene
+                    await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+                
+                
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                    await _loader.FadeOut();
+                }
+               
             }
-            else
-            {
-                _signalBus.Fire<UnpauseInput>();
-            
-                _loader.ResetData();
-                await _loader.FadeIn();
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                _loader.SetProgress(0.2f, "20%");
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                _loader.SetProgress(0.5f, "50%");
-            
-                //unload gameplay lvl scene
-                await _scenesService.UnloadLevelScene(_currentLevelType);
-            
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                _loader.SetProgress(1f, "100%");
-            
-                //load Start Screen scene
-                await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
-            
-            
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                await _loader.FadeOut();
-            }
-           
         }
     }
-}

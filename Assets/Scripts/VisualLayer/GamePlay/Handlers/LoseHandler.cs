@@ -12,10 +12,10 @@ namespace VisualLayer.GamePlay.Handlers
 
         public BoxCollider2D detectionZone;
 
-        private void Awake()
-        {
-            detectionZone = GetComponent<BoxCollider2D>();
-        }
+        // private void Awake()
+        // {
+        //     detectionZone = GetComponent<BoxCollider2D>();
+        // }
 
         private void FixedUpdate()
         {
@@ -27,6 +27,7 @@ namespace VisualLayer.GamePlay.Handlers
             Collider2D hit = Physics2D.OverlapBox(detectionZone.bounds.center, detectionZone.bounds.size, 0f, LayerMask.GetMask("StandingFruit"));
             if (hit)
             {
+                Debug.Log("here");
                 CustomTriggerBehavior(hit);
             }
         }
@@ -35,6 +36,7 @@ namespace VisualLayer.GamePlay.Handlers
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("StandingFruit"))
             {
+                Debug.Log("here2");
                 _signalBus.Fire<HandleItemsCollisionAfterLose>();
                 _signalBus.Fire<ReachedColliderLose>();
             }
