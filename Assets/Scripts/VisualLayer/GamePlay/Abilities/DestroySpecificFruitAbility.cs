@@ -95,7 +95,7 @@ namespace VisualLayer.GamePlay.Abilities
 
         private void DestroySpecificFruit(Item clickedItem)
         {
-            _effectsManager.PlayEffect(EffectType.Destroy, clickedItem.transform.position);
+            _effectsManager.PlayEffect(EffectType.DestroyAbility, clickedItem.transform.position);
             Object.Destroy(clickedItem.gameObject);
         }
         

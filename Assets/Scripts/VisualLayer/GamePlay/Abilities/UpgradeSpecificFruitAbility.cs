@@ -100,12 +100,12 @@ namespace VisualLayer.GamePlay.Abilities
 
             if (upgradedLevel >= 11)
             {
-                _effectsManager.PlayEffect(EffectType.Destroy, currItemPos);
+                _effectsManager.PlayEffect(EffectType.DestroyAbility, currItemPos);
                 return;
             }
             
             var newItem = _itemFactory.Create(upgradedLevel,currItemPos);
-            _effectsManager.PlayEffect(EffectType.Destroy, currItemPos);
+            _effectsManager.PlayEffect(EffectType.DestroyAbility, currItemPos);
             
             // if (newItem != null)
             // {
