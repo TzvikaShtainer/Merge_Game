@@ -34,6 +34,24 @@ namespace DataLayer.Installers
                 .Bind<EffectsDatabase>()
                 .FromInstance(_effectsDatabase)
                 .AsSingle();
+
+            foreach (var currEffect in _effectsDatabase.effects)
+            {
+                //Container.BindMemoryPool<EffectPoolItem, EffectPool>()
+                //    .WithId(currEffect.effectType)
+                //    .FromComponentInNewPrefab(currEffect.particleSystem.gameObject)
+                //    .UnderTransformGroup("EffectPool");
+                
+                Container
+                    .BindFactory<EffectPoolItem, EffectPoolItem.Factory>()
+                    .WithId(currEffect.effectType)
+                    .FromPoolableMemoryPool(
+                        poolInitializer => poolInitializer
+                            .WithInitialSize(1)
+                            .WithMaxSize(5)
+                            .FromComponentInNewPrefab(currEffect.particleSystem)
+                            .UnderTransformGroup("Effects Pool"));
+            }
             
             Container
                 .Bind<IDataLayer>()

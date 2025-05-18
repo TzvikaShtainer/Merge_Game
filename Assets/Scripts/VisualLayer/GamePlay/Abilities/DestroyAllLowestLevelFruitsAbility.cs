@@ -72,7 +72,7 @@ namespace VisualLayer.GamePlay.Abilities
                 if (currItem.GetItemId() == lowestItemIndex && !IsOutsideTheJar(currItem))
                 {
                     Object.Destroy(currItem.gameObject);
-                    _effectsManager.PlayEffect(EffectType.Destroy, currItem.gameObject.transform.position);
+                    _effectsManager.PlayEffect(EffectType.DestroyAbility, currItem.gameObject.transform.position);
                 }
             }
         }
