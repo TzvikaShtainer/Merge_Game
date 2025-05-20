@@ -85,6 +85,7 @@ namespace VisualLayer.GamePlay.Abilities
                         {
                             DestroySpecificFruit(clickedItem);
                             _isWaitingForClick = false;
+                            FMODUnity.RuntimeManager.PlayOneShot(FModEvents.Instance.RemovePowerup);
                         }
                     }
                 }
