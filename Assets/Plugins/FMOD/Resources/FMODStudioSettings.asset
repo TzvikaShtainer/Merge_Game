@@ -380,8 +380,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: pp/pp.fspro
-  sourceBankPath: pp/Build
+  sourceProjectPath: ../pp/pp.fspro
+  sourceBankPath: ../pp/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

@@ -65,6 +65,8 @@ namespace VisualLayer.MergeItems.MergeSystem
            // newItem.transform.position = newPosition;
             
             newItem.gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+
+            FMODUnity.RuntimeManager.PlayOneShot(FModEvents.Instance.Merge, newPosition);
             
             Object.Destroy(item1.gameObject);
             Object.Destroy(item2.gameObject);

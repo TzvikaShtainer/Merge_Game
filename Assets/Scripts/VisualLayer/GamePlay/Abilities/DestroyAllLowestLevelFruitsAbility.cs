@@ -71,6 +71,8 @@ namespace VisualLayer.GamePlay.Abilities
                 var currItem = allItems[index];
                 if (currItem.GetItemId() == lowestItemIndex && !IsOutsideTheJar(currItem))
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot(FModEvents.Instance.DestroyAllLowestLevelFruit, currItem.transform.position);
+
                     Object.Destroy(currItem.gameObject);
                     _effectsManager.PlayEffect(EffectType.DestroyAbility, currItem.gameObject.transform.position);
                 }

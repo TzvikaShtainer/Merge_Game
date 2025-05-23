@@ -1336,6 +1336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885433345}
   - component: {fileID: 1885433344}
+  - component: {fileID: 1885433346}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1369,41 +1370,48 @@ MonoBehaviour:
       Data3: -81529699
       Data4: -671388673
     Path: event:/SFX/Click
-  <Explode>k__BackingField:
+  <UpgradeSpecificFruit>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1897962895
+      Data2: 1255629183
+      Data3: 796208569
+      Data4: 1584477007
+    Path: event:/SFX/UpgradeSpecificFruit
   <Merge>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <Powerup1>k__BackingField:
+      Data1: -1482801989
+      Data2: 1188518002
+      Data3: -613523313
+      Data4: 2048741173
+    Path: event:/SFX/Merge
+  <DestroyAllLowestLevelFruit>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -2108267826
+      Data2: 1194014123
+      Data3: -1962721916
+      Data4: 701479770
+    Path: event:/DestroyAllLowestLevelFruit
   <RemovePowerup>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 268020467
+      Data2: 1265034562
+      Data3: 82003350
+      Data4: -722963020
+    Path: event:/SFX/RemoveSpecificFruit
   <StartGame>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1921114327
+      Data2: 1323345192
+      Data3: -643944319
+      Data4: 586321693
+    Path: event:/SFX/Start Game
+  <ShakeBox>k__BackingField:
+    Guid:
+      Data1: 302531652
+      Data2: 1152852857
+      Data3: -655107453
+      Data4: -1160941096
+    Path: event:/ShakeBox
 --- !u!4 &1885433345
 Transform:
   m_ObjectHideFlags: 0
@@ -1419,6 +1427,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1885433346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885433343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d78b5f80eaed6342953392b431b6dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

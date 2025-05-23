@@ -16,6 +16,10 @@ namespace VisualLayer.GamePlay.Buttons
         
         public void OnClick()
         {
+            FMODUnity.RuntimeManager.PlayOneShot(FModEvents.Instance.StartGame);
+
+
+
             _enterLevelHandler.Execute();
         }
     }

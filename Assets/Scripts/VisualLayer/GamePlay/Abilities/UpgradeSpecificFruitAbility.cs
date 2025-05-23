@@ -105,6 +105,7 @@ namespace VisualLayer.GamePlay.Abilities
             }
             
             var newItem = _itemFactory.Create(upgradedLevel,currItemPos);
+            FMODUnity.RuntimeManager.PlayOneShot(FModEvents.Instance.UpgradeSpecificFruit, currItemPos);
             _effectsManager.PlayEffect(EffectType.DestroyAbility, currItemPos);
             
             // if (newItem != null)

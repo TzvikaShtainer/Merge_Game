@@ -17,19 +17,23 @@ public class FModEvents : MonoBehaviour
     [field: SerializeField] public FMODUnity.EventReference Click { get; private set; }
 
     [field: Header("UpgradeSpecificFruit")]
-    [field: SerializeField] public FMODUnity.EventReference Explode { get; private set; }
+    [field: SerializeField] public FMODUnity.EventReference UpgradeSpecificFruit { get; private set; }
 
     [field: Header("Merge")]
     [field: SerializeField] public FMODUnity.EventReference Merge { get; private set; }
 
-    [field: Header("PowerUp1")]
-    [field: SerializeField] public FMODUnity.EventReference Powerup1 { get; private set; }
+    [field: Header("DestroyAllLowestLevelFruit")]
+    [field: SerializeField] public FMODUnity.EventReference DestroyAllLowestLevelFruit { get; private set; }
 
     [field: Header("RemoveSpecificFruit")]
     [field: SerializeField] public FMODUnity.EventReference RemovePowerup { get; private set; }
 
     [field: Header("Start Game")]
     [field: SerializeField] public FMODUnity.EventReference StartGame { get; private set; }
+
+    [field: Header("ShakeBox")]
+    [field: SerializeField] public FMODUnity.EventReference ShakeBox { get; private set; }
+
 
     private void Awake()
     {
