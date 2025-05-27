@@ -29,7 +29,11 @@ namespace VisualLayer.GamePlay.Installers
         [Header("Destroy Specific Fruit Ability")]
         [SerializeField]
         private AbilityDataSO destroySpecificFruitAbilityData;
-
+        
+        [Header("Destroy Items After Continue Ability")]
+        [SerializeField]
+        private AbilityDataSO destroyItemsAfterContinueAbilityData;
+        
         public override void InstallBindings()
         {
             Container
@@ -91,6 +95,18 @@ namespace VisualLayer.GamePlay.Installers
                 .Bind<AbilityDataSO>()
                 .FromInstance(destroySpecificFruitAbilityData)
                 .WhenInjectedInto<DestroySpecificFruitAbility>();
+            
+            
+            //DestroyItemsAfterContinue ability bind:
+            Container
+                .Bind<IAbility>()
+                .To<DestroyItemsAfterContinue>()
+                .AsSingle();
+                    
+            Container
+                .Bind<AbilityDataSO>()
+                .FromInstance(destroyItemsAfterContinueAbilityData)
+                .WhenInjectedInto<DestroyItemsAfterContinue>();
         }
     }
 }

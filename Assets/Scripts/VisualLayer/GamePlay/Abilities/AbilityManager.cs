@@ -47,7 +47,12 @@ namespace VisualLayer.GamePlay.Abilities
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
                 ability.UseAbility();
-                
+
+                if (ability.Id == "DestroyItemsAfterContinue")
+                {
+                    Debug.Log("DestroyItemsAfterContinue");
+                    return;
+                }
                 OnAbilityChanged?.Invoke(abilityId, ability.Count);
                 
                 _serverService.SetUserData(new Dictionary<string, string>

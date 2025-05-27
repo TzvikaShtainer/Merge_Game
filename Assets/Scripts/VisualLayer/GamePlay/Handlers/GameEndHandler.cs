@@ -5,6 +5,7 @@
     using ServiceLayer.Signals.SignalsClasses;
     using ServiceLayer.TimeControl;
     using UnityEngine;
+    using VisualLayer.GamePlay.Abilities;
     using VisualLayer.GamePlay.Popups.YesNoPopup;
     using VisualLayer.Loader;
     using Zenject;
@@ -31,6 +32,9 @@
             [Inject]
             private SignalBus _signalBus;
             
+            [Inject]
+            private AbilityManager _abilityManager;
+            
             public async void Execute()
             {
                 _signalBus.Fire<PauseInput>();
@@ -53,29 +57,13 @@
                 
                 _timeController.UnpauseGameplay();
                 
-                if (result.IsNo)
+                if (result.IsYes)
                 {
                     _signalBus.Fire<UnpauseInput>();
+                    _signalBus.Fire<OnContinueClicked>();
                     
-                    _loader.ResetData();
-                    await _loader.FadeIn();
-                    await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    _loader.SetProgress(0.2f, "20%");
-                    await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    _loader.SetProgress(0.5f, "50%");
-                
-                    //unload gameplay lvl scene
-                    await _scenesService.UnloadLevelScene(_currentLevelType);
-                
-                    await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    _loader.SetProgress(1f, "100%");
-                
-                    //load Start Screen scene
-                    await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
-                
-                
-                    await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    await _loader.FadeOut();
+                    _abilityManager.UseAbility("DestroyItemsAfterContinue");
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.5));
                 }
                 else
                 {

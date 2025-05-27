@@ -28,7 +28,7 @@ namespace VisualLayer.GamePlay.Handlers
             if (hit)
             {
                 Debug.Log(hit.gameObject.name);
-                Debug.Log("here");
+                //Debug.Log("here");
                 CustomTriggerBehavior(hit);
             }
         }
@@ -37,7 +37,7 @@ namespace VisualLayer.GamePlay.Handlers
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("StandingFruit"))
             {
-                Debug.Log("here2");
+                //Debug.Log("here2");
                 _signalBus.Fire<HandleItemsCollisionAfterLose>();
                 _signalBus.Fire<ReachedColliderLose>();
             }

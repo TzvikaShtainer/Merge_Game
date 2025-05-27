@@ -37,6 +37,7 @@ namespace VisualLayer.MergeItems
         {
             itemMetadata = _dataLayer.Metadata.GetItemMetadata(itemId);
             _signalBus.Subscribe<HandleItemsCollisionAfterLose>(OnPlayerLose);
+            _signalBus.Subscribe<OnContinueClicked>(OnPlayerContinueClicked);
         }
 
         private void OnPlayerLose()
@@ -47,6 +48,14 @@ namespace VisualLayer.MergeItems
             gameObject.layer = LayerMask.NameToLayer("CreatedFruit");
             
             itemSprite.sprite = itemMetadata.ItemSadSprite;
+        }
+
+        private void OnPlayerContinueClicked()
+        {
+            if (this == null) return;
+            
+            _isLosing = false;
+            itemSprite.sprite = itemMetadata.ItemPreviewSprite;
         }
 
         private void Awake()

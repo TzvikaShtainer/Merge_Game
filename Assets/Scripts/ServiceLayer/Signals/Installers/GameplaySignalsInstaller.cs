@@ -30,6 +30,8 @@ namespace ServiceLayer.Signals.Installers
             Container.DeclareSignal<ReachedColliderLose>();
             Container.DeclareSignal<HandleItemsCollisionAfterLose>();
             
+            Container.DeclareSignal<OnContinueClicked>();
+            
         }
     }
 }
