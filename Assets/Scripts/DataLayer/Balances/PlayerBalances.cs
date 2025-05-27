@@ -118,10 +118,17 @@ namespace DataLayer.Balances
             var data = await _serverService.GetUserData("Coins", "HighScore");
 
             if (data.TryGetValue("Coins", out var coinsStr) && int.TryParse(coinsStr, out var coins))
+            {
                 _coins = coins;
+                CoinsBalanceChanged?.Invoke();
+            }
+
 
             if (data.TryGetValue("HighScore", out var highStr) && int.TryParse(highStr, out var highScore))
+            {
                 _highScore = highScore;
+                HighScoreChanged?.Invoke();
+            }
             
             Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore);
         }

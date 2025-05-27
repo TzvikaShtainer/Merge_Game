@@ -7,6 +7,7 @@ using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
 using Unity.VisualScripting;
 using UnityEngine;
+using VisualLayer.GamePlay.Abilities;
 using Zenject;
 
 namespace VisualLayer.Loader
@@ -21,6 +22,9 @@ namespace VisualLayer.Loader
         
         [Inject] 
         private IDataLayer _dataLayer;
+        
+        [Inject]
+        private AbilityManager _abilityManager;
         
         #region Loader
 
@@ -51,6 +55,7 @@ namespace VisualLayer.Loader
             
             await _serverService.Login();
             await _dataLayer.Balances.LoadFromServer();
+            //await _abilityManager.LoadFromServer();
             
             await UniTask.Delay(1000);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);

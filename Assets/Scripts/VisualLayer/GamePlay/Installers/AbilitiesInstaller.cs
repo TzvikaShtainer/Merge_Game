@@ -32,7 +32,6 @@ namespace VisualLayer.GamePlay.Installers
 
         public override void InstallBindings()
         {
-           
             Container
                 .Bind<AbilityManager>()
                 .AsSingle();

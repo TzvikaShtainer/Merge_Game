@@ -5,6 +5,7 @@ using ServiceLayer.EffectsService;
 using ServiceLayer.PlayFabService;
 using Unity.VisualScripting;
 using UnityEngine;
+using VisualLayer.GamePlay.Abilities;
 using Zenject;
 
 namespace DataLayer.Installers
@@ -96,6 +97,10 @@ namespace DataLayer.Installers
                 .Bind<InfraScreenMetadata[]>()
                 .FromInstance(_infraScreenMetadatas)
                 .AsCached();
+            
+            Container
+                .Bind<AbilityManager>()
+                .AsSingle();
         }
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
     particleSystem: {fileID: 1511583363925180077, guid: 530eb04beb7b3b04885cf660ba66ef63, type: 3}
   - effectType: 1
     particleSystem: {fileID: 4250298743439401353, guid: 17180adfdc3bef245ba1ea14d02ec6d8, type: 3}
-  - effectType: 2
-    particleSystem: {fileID: 3784945155588612439, guid: 32f3177e16aa41a4ab1fff9ab021f60e, type: 3}
   - effectType: 3
+    particleSystem: {fileID: 3784945155588612439, guid: 32f3177e16aa41a4ab1fff9ab021f60e, type: 3}
+  - effectType: 2
     particleSystem: {fileID: 3740193805690738403, guid: 9e468e399138b4243a33616d8b121423, type: 3}
