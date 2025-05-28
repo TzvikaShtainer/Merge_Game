@@ -7,13 +7,60 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000013840E2F628 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001A2B19ADCF8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] PlaybackSystem::init                     : done
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] SystemI::createSound                     : filename = ../pp/Build/Desktop/Music.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000001A2A05AB068, queue head = 000001A2B27AF5B8, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001A2A05AB068
+[LOG] SystemI::createSoundInternal             :     Create name='../pp/Build/Desktop/Music.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1153792
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 1696
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001A2A05A6720
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 81230
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='2211', format=5, channels=2, frequency=48000, lengthbytes=1152896, lengthpcm=4665692, pcmblocksize=0, loopstart=0, loopend=4607998, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.764160.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001A2A05AB068
+[LOG] SoundI::release                          : 2211 (000001A2A05AB578)
+[LOG] SoundI::release                          :     2211 (000001A199D319B8)
+[LOG] SoundI::release                          :     2211 (000001A2A05AA9A8)
+[LOG] SoundI::release                          : 2211 (000001A2A05AB068)
+[LOG] SoundI::release                          :     2211 (000001A199D32038)
+[LOG] SoundI::release                          :     2211 (0000019F81B35578)
+[LOG] SoundI::release                          :  (000001A199D8E418)
+[LOG] SoundI::release                          :     ESM_GF_fx_gravel_one_shots_footstep_sneakers_walking_slowly_dry_crunchy_exterior_13 (000001A199D31E98)
+[LOG] SoundI::release                          :  (000001A19EEC1BA8)
+[LOG] SoundI::release                          :     ESM_MG3_fx_foley_slime_smash_squish_splat_07 (000001A1D50B6738)
+[LOG] SoundI::release                          :  (000001A19EEC01C8)
+[LOG] SoundI::release                          :     22222 (000001A1D50B56F8)
+[LOG] SoundI::release                          :  (000001A19EEC1198)
+[LOG] SoundI::release                          :     ESM_Arcade_Game_Jump_1_Classic_Retro_8_Bit_ (000001A1D50B5218)
+[LOG] SoundI::release                          :  (000001A199D8E6F8)
+[LOG] SoundI::release                          :     explode (000001A199D326B8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -21,3 +68,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
