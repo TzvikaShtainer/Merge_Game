@@ -31,6 +31,9 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
 
         [SerializeField]
         private Button _yesButtonGameObject;
+        
+        [SerializeField]
+        private Button _noButtonGameObject;
 
         [SerializeField] 
         private Transform _popupSkillSpriteTransform;
@@ -59,6 +62,7 @@ namespace VisualLayer.GamePlay.Popups.AddSkillsPopup
             _popupSkillDescription.text = abilityDataSo.Description;
             _popupSkillCost.text = "Cost:\n" + abilityDataSo.Cost + " Coins";
             _yesButtonGameObject.interactable = IsHaveMoney(abilityDataSo);
+            _noButtonGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 200); //הגדרה באדיטור לא עבדה לא יודע למה אז מגדיר ידנית
             _popupSkillSpriteTransform.gameObject.GetComponent<Image>().sprite = abilityDataSo.SkillSprite;
         }
 

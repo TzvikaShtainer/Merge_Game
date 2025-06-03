@@ -751,6 +751,7 @@ MonoBehaviour:
   _popupSkillDescription: {fileID: 4229991291329714070}
   _popupSkillCost: {fileID: 2229872681254930347}
   _yesButtonGameObject: {fileID: 9119702085499212302}
+  _noButtonGameObject: {fileID: 8242227447759053889}
   _popupSkillSpriteTransform: {fileID: 7929797228659017221}
 --- !u!1001 &3606105409941456396
 PrefabInstance:
@@ -790,11 +791,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 166
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_LocalPosition.x
@@ -875,7 +876,7 @@ PrefabInstance:
     - target: {fileID: 4641298007127220814, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 5863505280419309686, guid: bd15f21ff4387f74f95942e508187c8a, type: 3}
+      objectReference: {fileID: -7122821506108473756, guid: bfd7dd0c294ec9f4cae98b303270329c, type: 3}
     - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_text
       value: No
@@ -902,6 +903,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4641298007127220812, guid: fe54246863587b44cac17170a71eec77, type: 3}
   m_PrefabInstance: {fileID: 3606105409941456396}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8242227447759053889 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4641298007127220813, guid: fe54246863587b44cac17170a71eec77, type: 3}
+  m_PrefabInstance: {fileID: 3606105409941456396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4532454420727345219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -940,11 +952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 166
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1025,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 4641298007127220814, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 4900756977395780027, guid: ea9567ef30d21af42be7dc1df4678bfe, type: 3}
+      objectReference: {fileID: 3791937049071528822, guid: 86bfe44569ddb2745bd765784116b704, type: 3}
     - target: {fileID: 4641298007483600876, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_text
       value: Yes
