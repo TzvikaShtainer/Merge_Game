@@ -14,15 +14,14 @@ namespace VisualLayer.GamePlay.Abilities
         public event Action<string, int> OnAbilityChanged;
         
         private Dictionary<string, IAbility> _abilitiesDict = new();
-
         
         #region Injects
         
         [Inject]
         private IServerService _serverService;
         
-        [Inject]
-        public void Construct(List<IAbility> abilities)
+        
+        public void InitAbilities(List<IAbility> abilities)
         {
             //Debug.Log($"Constructing AbilityManager with {abilities?.Count ?? 0} abilities");
             if (abilities == null || abilities.Count == 0)
@@ -32,6 +31,9 @@ namespace VisualLayer.GamePlay.Abilities
             }
     
             _abilitiesDict = abilities.ToDictionary(a => a.Id, a => a);
+            
+            
+            
             //Debug.Log($"Created dictionary with {_abilitiesDict.Count} abilities");
             foreach (var ability in abilities)
             {
@@ -40,8 +42,8 @@ namespace VisualLayer.GamePlay.Abilities
 
         }
         
-        #endregion  
-
+        #endregion
+        
         public void UseAbility(string abilityId)
         {
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
@@ -50,7 +52,7 @@ namespace VisualLayer.GamePlay.Abilities
 
                 if (ability.Id == "DestroyItemsAfterContinue")
                 {
-                    Debug.Log("DestroyItemsAfterContinue");
+                    //Debug.Log("DestroyItemsAfterContinue");
                     return;
                 }
                 OnAbilityChanged?.Invoke(abilityId, ability.Count);
@@ -59,10 +61,6 @@ namespace VisualLayer.GamePlay.Abilities
                 {
                     { ability.Id, ability.Count.ToString() }
                 }).Forget();
-            }
-            else
-            {
-                //Debug.Log($"Ability: {abilityId} - doesn't exist");
             }
         }
         
@@ -100,16 +98,16 @@ namespace VisualLayer.GamePlay.Abilities
             var abilityKeys = _abilitiesDict.Keys.ToArray();
             var data = await _serverService.GetUserData(abilityKeys); 
             
-            Debug.Log("dict "+_abilitiesDict);
-            //אין אתחול
+            //Debug.Log($"Total keys: {_abilitiesDict.Keys.Count}");
+            
             foreach (var kvp in _abilitiesDict)
             {
-                Debug.Log("ssssssss.");
+                //Debug.Log($"Inside Dict: {kvp.Key}.");
                 var id = kvp.Key;
                 var ability = kvp.Value;
 
-                Debug.Log(id);
-                Debug.Log(ability);
+                //Debug.Log(id);
+                //Debug.Log(ability);
                 if (data.TryGetValue(id, out var countStr) && int.TryParse(countStr, out var count))
                 {
                     ability.Count = count;

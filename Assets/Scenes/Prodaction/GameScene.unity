@@ -3165,6 +3165,7 @@ MonoBehaviour:
   mainGameplayCamera: {fileID: 519420031}
   upgradeSpecificFruitAbilityData: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
   destroySpecificFruitAbilityData: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
+  destroyItemsAfterContinueAbilityData: {fileID: 11400000, guid: a92c839926ff574479db9fc9ef53a0cc, type: 2}
 --- !u!1 &1533582983
 GameObject:
   m_ObjectHideFlags: 0

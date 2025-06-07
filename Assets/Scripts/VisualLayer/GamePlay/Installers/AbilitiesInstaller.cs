@@ -1,4 +1,5 @@
-﻿using DataLayer.DataTypes.abilities;
+﻿using System.Collections.Generic;
+using DataLayer.DataTypes.abilities;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
 using Zenject;
@@ -34,17 +35,20 @@ namespace VisualLayer.GamePlay.Installers
         [SerializeField]
         private AbilityDataSO destroyItemsAfterContinueAbilityData;
         
+        [Inject] private AbilityManager _abilityManager;
+        [Inject] private List<IAbility> _allAbilities;
+        
         public override void InstallBindings()
         {
-            Container
-                .Bind<AbilityManager>()
-                .AsSingle();
+            // Container
+            //     .Bind<AbilityManager>()
+            //     .AsSingle();
                     
             //DestroyAllLowestLevelFruitsAbility ability bind:
             Container
                 .Bind<IAbility>()
                 .To<DestroyAllLowestLevelFruitsAbility>()
-                .AsSingle();
+                .AsCached();
                     
             Container
                 .Bind<AbilityDataSO>()
@@ -55,7 +59,7 @@ namespace VisualLayer.GamePlay.Installers
             Container
                 .Bind<IAbility>()
                 .To<ShakeBoxAbility>()
-                .AsSingle();
+                .AsCached();
                     
             Container
                 .Bind<AbilityDataSO>()
@@ -78,7 +82,7 @@ namespace VisualLayer.GamePlay.Installers
             Container
                 .Bind<IAbility>()
                 .To<UpgradeSpecificFruitAbility>()
-                .AsSingle();
+                .AsCached();
                     
             Container
                 .Bind<AbilityDataSO>()
@@ -89,7 +93,7 @@ namespace VisualLayer.GamePlay.Installers
             Container
                 .Bind<IAbility>()
                 .To<DestroySpecificFruitAbility>()
-                .AsSingle();
+                .AsCached();
                     
             Container
                 .Bind<AbilityDataSO>()
@@ -101,12 +105,20 @@ namespace VisualLayer.GamePlay.Installers
             Container
                 .Bind<IAbility>()
                 .To<DestroyItemsAfterContinue>()
-                .AsSingle();
+                .AsCached();
                     
             Container
                 .Bind<AbilityDataSO>()
                 .FromInstance(destroyItemsAfterContinueAbilityData)
                 .WhenInjectedInto<DestroyItemsAfterContinue>();
         }
+        
+        public override void Start()
+        {
+            var abilities = Container.ResolveAll<IAbility>();
+
+            _abilityManager.InitAbilities(abilities);
+        }
+        
     }
 }
