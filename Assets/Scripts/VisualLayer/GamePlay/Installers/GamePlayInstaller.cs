@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DataLayer.DataTypes;
 using DataLayer.DataTypes.abilities;
+using ServiceLayer.SaveSystem;
 using UnityEngine;
 using VisualLayer.Components.UI;
 using VisualLayer.Factories;
@@ -23,6 +24,7 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
 
     public override void InstallBindings()
     {
+        //Debug.Log("GamePlaySceneInstaller: Installing bindings...");
         Container
             .Bind<IPlayerInput>()
             .To<DesktopInputManager>()
@@ -33,10 +35,6 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .Bind<InputDriven>()
             .FromComponentInHierarchy()
             .AsSingle();
-
-        Container
-            .BindFactory<int, Vector2, Item, ItemFactory>()
-            .FromFactory<ItemFactoryImplementation>();
 
         Container
             .Bind<IMergeHandler>()
@@ -62,8 +60,15 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .AsSingle();
         
         Container
+            .BindFactory<int, Vector2, Item, ItemFactory>()
+            .FromFactory<ItemFactoryImplementation>();
+        
+        Container
             .Bind<GameLevelType>()
             .FromInstance(_levelType)
             .AsSingle();
+        
+        Container.BindInterfacesTo<GamePlayReadyNotifier>().AsSingle();
+        //Debug.Log("GamePlaySceneInstaller: FINISH");
     }
 }

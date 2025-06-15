@@ -1,4 +1,5 @@
 ﻿using System;
+using ServiceLayer.SaveSystem;
 using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.MergeItems;
@@ -53,6 +54,16 @@ namespace VisualLayer.GamePlay.Handlers
             int randomLvlToSpawn = Random.Range(_minLvlSpawn, _maxLvlSpawn);
             var itemToSpawn = _itemFactory.Create(randomLvlToSpawn, pos);
             return itemToSpawn;
+        }
+
+        public Item CreateItemFromSave(string typeId, SerializableTypes.SerializableVector2 pos)
+        {
+            Vector2 position2D = new(pos.x, pos.y);
+            int itemId = int.Parse(typeId);
+            
+            Item newItem = _itemFactory.Create(itemId, position2D);
+            
+            return newItem;
         }
         
         public void SetCurrItemPosByLocation(Vector2 pos)

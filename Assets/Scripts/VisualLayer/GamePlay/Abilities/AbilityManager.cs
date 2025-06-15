@@ -93,7 +93,7 @@ namespace VisualLayer.GamePlay.Abilities
         
         public async UniTask LoadFromServer()
         {
-            Debug.Log("Loading player abilities from server...");
+            //Debug.Log("Loading player abilities from server...");
 
             var abilityKeys = _abilitiesDict.Keys.ToArray();
             var data = await _serverService.GetUserData(abilityKeys); 
@@ -119,7 +119,7 @@ namespace VisualLayer.GamePlay.Abilities
                 }
             }
 
-            Debug.Log("✅ Finished loading abilities from server.");
+            //Debug.Log("✅ Finished loading abilities from server.");
         }
     }
 }

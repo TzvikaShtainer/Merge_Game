@@ -29,8 +29,8 @@ namespace VisualLayer.Factories
             Item instanceToReturn = _container.InstantiatePrefabForComponent<Item>(
                 itemPrefab,
                 pos,
-                Quaternion.identity, // בלי רוטציה
-                null, // אין הורה
+                Quaternion.identity,
+                null, 
                 new object[] { itemId }
             );
             

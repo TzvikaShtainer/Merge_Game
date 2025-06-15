@@ -9,6 +9,7 @@ namespace ServiceLayer.Signals.Installers
     {
         public override void InstallBindings()
         {
+            //Debug.Log("INSTALLING SIGNAL BUS FROM GAMEPLAYSIGNALSINSTALLER", this);
             SignalBusInstaller.Install(Container);
 
             //Items Signals
@@ -31,6 +32,9 @@ namespace ServiceLayer.Signals.Installers
             Container.DeclareSignal<HandleItemsCollisionAfterLose>();
             
             Container.DeclareSignal<OnContinueClicked>();
+            
+            Container.DeclareSignal<GamePlayReadySignal>();
+            //Debug.Log("FINISH SIGNAL BUS");
             
         }
     }

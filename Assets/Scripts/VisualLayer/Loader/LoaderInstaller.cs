@@ -5,6 +5,8 @@ using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
+using ServiceLayer.SaveSystem;
+using ServiceLayer.Signals.SignalsClasses;
 using Unity.VisualScripting;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
@@ -26,12 +28,20 @@ namespace VisualLayer.Loader
         [Inject]
         private AbilityManager _abilityManager;
         
+        [Inject]
+        private ISaveSystem _saveSystem;
+        
+        [Inject]
+        private SignalBus _signalBus;
+        
         #region Loader
 
         [SerializeField]
         private Loader _loader;
 
         #endregion
+        
+        private TaskCompletionSource<bool> _gamePlayReadyTcs = new();
         
         public override void InstallBindings()
         {
@@ -43,7 +53,18 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
+            _signalBus.Subscribe<GamePlayReadySignal>(OnGamePlayReady);
+            
             await LoadGameScene();
+            
+            Container.BindSignal<GamePlayReadySignal>()
+                .ToMethod<LoaderInstaller>(x => x.OnGamePlayReady)
+                .FromResolve();
+        }
+
+        private void OnGamePlayReady()
+        {
+            _gamePlayReadyTcs.TrySetResult(true);
         }
 
         private async Task LoadGameScene()
@@ -65,10 +86,18 @@ namespace VisualLayer.Loader
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
+            await UniTask.DelayFrame(100);
             
             await _abilityManager.LoadFromServer();
             
+            //Debug.Log("_gamePlayReadyTcs.Task");
+            //await _gamePlayReadyTcs.Task;
+            
             await UniTask.Delay(500);
+            
+            //Debug.Log("_saveSystem.Load()");
+            await _saveSystem.Load();
+            
             _loader.SetProgress(1f, "Loading Level 100%");
             
             _loader.FadeOut();
