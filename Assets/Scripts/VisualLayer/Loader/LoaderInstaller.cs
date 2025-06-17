@@ -41,8 +41,6 @@ namespace VisualLayer.Loader
 
         #endregion
         
-        private TaskCompletionSource<bool> _gamePlayReadyTcs = new();
-        
         public override void InstallBindings()
         {
             Container
@@ -53,18 +51,7 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
-            _signalBus.Subscribe<GamePlayReadySignal>(OnGamePlayReady);
-            
             await LoadGameScene();
-            
-            Container.BindSignal<GamePlayReadySignal>()
-                .ToMethod<LoaderInstaller>(x => x.OnGamePlayReady)
-                .FromResolve();
-        }
-
-        private void OnGamePlayReady()
-        {
-            _gamePlayReadyTcs.TrySetResult(true);
         }
 
         private async Task LoadGameScene()
@@ -87,15 +74,9 @@ namespace VisualLayer.Loader
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
             await UniTask.DelayFrame(100);
-            
             await _abilityManager.LoadFromServer();
             
-            //Debug.Log("_gamePlayReadyTcs.Task");
-            //await _gamePlayReadyTcs.Task;
-            
             await UniTask.Delay(500);
-            
-            //Debug.Log("_saveSystem.Load()");
             await _saveSystem.Load();
             
             _loader.SetProgress(1f, "Loading Level 100%");

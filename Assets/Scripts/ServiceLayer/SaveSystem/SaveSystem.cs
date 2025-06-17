@@ -11,9 +11,6 @@ namespace ServiceLayer.SaveSystem
 {
     public class SaveSystem : ISaveSystem
     {
-        //[Inject]
-        //private LazyInject<GameLogicHandler> _gameLogicHandler;
-        
         private GameLogicHandler _gameLogicHandler;
 
         public void Init(GameLogicHandler handler)
@@ -22,6 +19,7 @@ namespace ServiceLayer.SaveSystem
         }
         
         private string SavePath => Path.Combine(Application.persistentDataPath, "GameItemsLocation.json");
+        //C:/Users/tzvik/AppData/LocalLow/DreamzStudio/Merge Delicious
         public void Save()
         {
             var itemsToSave = GameObject.FindObjectsOfType<Item>()
@@ -49,7 +47,7 @@ namespace ServiceLayer.SaveSystem
 
             if (!File.Exists(SavePath))
             {
-                Debug.LogWarning("⚠️ Save file does not exist.");
+                Debug.LogWarning("Save file does not exist.");
                 return;
             }
 
@@ -57,7 +55,7 @@ namespace ServiceLayer.SaveSystem
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.LogWarning("⚠️ JSON content is empty or whitespace.");
+                Debug.LogWarning("JSON content is empty or whitespace.");
                 return;
             }
 
@@ -65,13 +63,13 @@ namespace ServiceLayer.SaveSystem
 
             if (saveData == null)
             {
-                Debug.LogWarning("⚠️ Parsed saveData is null.");
+                Debug.LogWarning("Parsed saveData is null.");
                 return;
             }
 
             if (saveData.Items == null || saveData.Items.Count == 0)
             {
-                Debug.LogWarning("⚠️ No items found in save data.");
+                Debug.LogWarning("No items found in save data.");
                 return;
             }
 
@@ -82,7 +80,7 @@ namespace ServiceLayer.SaveSystem
             {
                 if (itemData.position.y == 2.5f || itemData.position.y == 10f)
                 {
-                    //Debug.Log("⛔ Skipping item at position y=2.5 or y=10");
+                    //Debug.Log("Skipping item at position y=2.5 or y=10");
                     continue;
                 }
 
@@ -92,7 +90,7 @@ namespace ServiceLayer.SaveSystem
                 item.GetComponent<Rigidbody2D>().linearVelocity = itemData.velocity.ToVector2();
             }
 
-            //Debug.Log("✅ SaveSystem: Load FINISH");
+            //Debug.Log("SaveSystem: Load FINISH");
         }
     }
 }

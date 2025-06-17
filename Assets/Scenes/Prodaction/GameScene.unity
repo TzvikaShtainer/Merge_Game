@@ -3106,7 +3106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 0fb2253bfa98c5247a1c6524b5d6bb88, type: 2}
+  - {fileID: 11400000, guid: 6f4a282a84a40814ea8ccf7efbaf932f, type: 2}
   _monoInstallers:
   - {fileID: 1510487344}
   - {fileID: 1510487347}
@@ -3128,7 +3130,6 @@ MonoBehaviour:
   _contractNames: []
   _parentContractNames:
   - Popups
-  - Loader
 --- !u!4 &1510487346
 Transform:
   m_ObjectHideFlags: 0
