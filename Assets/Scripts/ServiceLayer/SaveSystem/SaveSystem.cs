@@ -4,8 +4,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VisualLayer.GamePlay.Handlers;
 using VisualLayer.MergeItems;
-using Zenject;
-using Progress = UnityEditor.Progress;
 
 namespace ServiceLayer.SaveSystem
 {

@@ -2,6 +2,7 @@
 using DataLayer;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
+using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
 
 namespace ServiceLayer.Utilis
@@ -24,9 +25,8 @@ namespace ServiceLayer.Utilis
 
         public async UniTask LoadAllDataFromServer()
         {
-            await _dataLayer.Balances.LoadFromServer();
+             await _dataLayer.Balances.LoadFromServer();
              await _abilityManager.LoadFromServer();
-                        
              await _gameSettingsService.LoadFromServer();
              await _saveSystem.Load();
         }

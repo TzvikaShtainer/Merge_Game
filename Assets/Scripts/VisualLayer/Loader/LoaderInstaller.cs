@@ -57,7 +57,7 @@ namespace VisualLayer.Loader
             
             await _serverService.Login();
 
-            await _gameStartupCoordinator.LoadAllDataFromServer();
+            
             
             await UniTask.Delay(1000);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
@@ -69,6 +69,8 @@ namespace VisualLayer.Loader
             
             await UniTask.DelayFrame(100);
             _loader.SetProgress(0.7f, "Loading Level 70%");
+            
+            await _gameStartupCoordinator.LoadAllDataFromServer();
             
             await UniTask.Delay(500);
             

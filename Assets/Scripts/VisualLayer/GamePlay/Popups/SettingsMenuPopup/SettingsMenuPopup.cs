@@ -12,14 +12,15 @@ using VisualLayer.GamePlay.Popups.YesNoPopup;
 using VisualLayer.Loader;
 using Zenject;
 using Button = UnityEngine.UIElements.Button;
-
 namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 {
     public class SettingsMenuPopup : Popup
     {
         #region Factories
 
-        public class Factory : PlaceholderFactory<SettingsMenuPopup> { }
+        public class Factory : PlaceholderFactory<SettingsMenuPopup>
+        {
+        }
 
         #endregion
 
@@ -28,24 +29,23 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         [SerializeField] private ToggleButton _musicToggle;
         [SerializeField] private ToggleButton _sfxToggle;
         [SerializeField] private ToggleButton _vibrationToggle;
-        
+
         #endregion
-        
+
         #region Fields
-        
+
         private ISettingsMenuActions _settingsMenuActions;
 
         #endregion
 
         #region Injects
 
-        [Inject]
-        private IGameSettingsService  _gameSettingsService;
-        
+        [Inject] private IGameSettingsService _gameSettingsService;
+
         #endregion
 
         #region Methods
-        
+
         public void Initialize(ISettingsMenuActions settingsMenuActions)
         {
             _settingsMenuActions = settingsMenuActions;
@@ -53,9 +53,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             _sfxToggle.SetState(_gameSettingsService.Settings.IsSoundEffectsOn);
             _vibrationToggle.SetState(_gameSettingsService.Settings.IsVibrationOn);
         }
-        
+
         public void OnContinueBtnClick() => Close();
-        
+
 
         public void OnBgMusicBtnClick()
         {
@@ -78,7 +78,7 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         public async void OnRestartBtnClick()
         {
             _settingsMenuActions.OnRestartGame();
-            
+
             Close();
         }
 
