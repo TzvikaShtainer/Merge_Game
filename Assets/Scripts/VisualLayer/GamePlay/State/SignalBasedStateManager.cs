@@ -19,7 +19,7 @@ namespace VisualLayer.GamePlay.State
         
         public void Initialize()
         {
-            _signalBus.Subscribe<ReachedColliderLose>(OnPlayerLose);
+            _signalBus.Subscribe<ReachedColliderLoseSignal>(OnPlayerLose);
         }
 
         private void OnPlayerLose()

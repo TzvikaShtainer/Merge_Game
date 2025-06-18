@@ -120,7 +120,7 @@ namespace VisualLayer.GamePlay.Abilities
         
         public override void EnableEnvironment()
         {
-            SignalBus.Fire<EnableUI>();
+            SignalBus.Fire<EnableUISignal>();
             _inputDriven.UnblockInput();
             
             EnableItemsOutsideTheJar();

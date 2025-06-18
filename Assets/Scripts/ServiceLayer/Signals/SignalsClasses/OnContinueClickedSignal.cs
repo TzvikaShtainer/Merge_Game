@@ -1,6 +1,6 @@
 ﻿namespace ServiceLayer.Signals.SignalsClasses
 {
-    public class UnpauseInput
+    public class OnContinueClickedSignal
     {
         
     }

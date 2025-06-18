@@ -36,8 +36,8 @@ namespace VisualLayer.MergeItems
         private void Construct(int itemId)
         {
             itemMetadata = _dataLayer.Metadata.GetItemMetadata(itemId);
-            _signalBus.Subscribe<HandleItemsCollisionAfterLose>(OnPlayerLose);
-            _signalBus.Subscribe<OnContinueClicked>(OnPlayerContinueClicked);
+            _signalBus.Subscribe<HandleItemsCollisionAfterLoseSignal>(OnPlayerLose);
+            _signalBus.Subscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
         }
 
         private void OnPlayerLose()

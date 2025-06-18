@@ -41,7 +41,7 @@
             
             public async void Execute()
             {
-                _signalBus.Fire<PauseInput>();
+                _signalBus.Fire<PauseInputSignal>();
 
                 var popupArgs = new YesNoPopupArgs
                 {
@@ -63,8 +63,8 @@
                 
                 if (result.IsYes)
                 {
-                    _signalBus.Fire<UnpauseInput>();
-                    _signalBus.Fire<OnContinueClicked>();
+                    _signalBus.Fire<UnpauseInputSignal>();
+                    _signalBus.Fire<OnContinueClickedSignal>();
                     
                     _abilityManager.UseAbility("DestroyItemsAfterContinue");
                     _dataLayer.Balances.RemoveCoins(20);
@@ -72,7 +72,7 @@
                 }
                 else
                 {
-                    _signalBus.Fire<UnpauseInput>();
+                    _signalBus.Fire<UnpauseInputSignal>();
                 
                     _loader.ResetData();
                     await _loader.FadeIn();

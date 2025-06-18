@@ -51,7 +51,7 @@ namespace VisualLayer.GamePlay.Abilities
             
             AllItems = Object.FindObjectsOfType<Item>().ToList();
             
-            SignalBus.Fire<DisableUI>();
+            SignalBus.Fire<DisableUISignal>();
             
             SortItems();
             

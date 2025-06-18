@@ -1,6 +1,6 @@
 ﻿namespace ServiceLayer.Signals.SignalsClasses
 {
-    public class HandleItemsCollisionAfterLose
+    public class PauseInputSignal
     {
         
     }

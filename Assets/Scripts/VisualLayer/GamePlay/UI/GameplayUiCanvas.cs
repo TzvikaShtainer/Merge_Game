@@ -17,11 +17,11 @@ namespace VisualLayer.GamePlay.UI
         
         public void Awake()
         {
-            _signalBus.Subscribe<PauseInput>(PauseInputDriven);
-            _signalBus.Subscribe<UnpauseInput>(UnpauseInputDriven);
+            _signalBus.Subscribe<PauseInputSignal>(PauseInputDriven);
+            _signalBus.Subscribe<UnpauseInputSignal>(UnpauseInputDriven);
             
-            _signalBus.Subscribe<EnableUI>(EnableUICanvas);
-            _signalBus.Subscribe<DisableUI>(DisableUICanvas);
+            _signalBus.Subscribe<EnableUISignal>(EnableUICanvas);
+            _signalBus.Subscribe<DisableUISignal>(DisableUICanvas);
         }
 
         private void UnpauseInputDriven()

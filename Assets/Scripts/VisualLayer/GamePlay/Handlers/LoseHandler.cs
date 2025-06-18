@@ -16,7 +16,7 @@ namespace VisualLayer.GamePlay.Handlers
 
         private void Awake()
         {
-            _signalBus.Subscribe<OnContinueClicked>(OnPlayerContinueClicked);
+            _signalBus.Subscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
         }
 
         private void OnPlayerContinueClicked()
@@ -43,9 +43,9 @@ namespace VisualLayer.GamePlay.Handlers
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("StandingFruit") && !_isTriggered)
             {
-                _signalBus.Fire<HandleItemsCollisionAfterLose>();
+                _signalBus.Fire<HandleItemsCollisionAfterLoseSignal>();
                 
-                _signalBus.Fire<ReachedColliderLose>();
+                _signalBus.Fire<ReachedColliderLoseSignal>();
 
                 _isTriggered = true;
             }

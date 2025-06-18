@@ -18,20 +18,20 @@ namespace ServiceLayer.Signals.Installers
             
             
             //Input Signals
-            Container.DeclareSignal<UnpauseInput>();
-            Container.DeclareSignal<PauseInput>();
+            Container.DeclareSignal<UnpauseInputSignal>();
+            Container.DeclareSignal<PauseInputSignal>();
             
             
             //UI Signals
-            Container.DeclareSignal<EnableUI>();
-            Container.DeclareSignal<DisableUI>();
+            Container.DeclareSignal<EnableUISignal>();
+            Container.DeclareSignal<DisableUISignal>();
 
             
             //Psychics Signals
-            Container.DeclareSignal<ReachedColliderLose>();
-            Container.DeclareSignal<HandleItemsCollisionAfterLose>();
+            Container.DeclareSignal<ReachedColliderLoseSignal>();
+            Container.DeclareSignal<HandleItemsCollisionAfterLoseSignal>();
             
-            Container.DeclareSignal<OnContinueClicked>();
+            Container.DeclareSignal<OnContinueClickedSignal>();
             
             Container.DeclareSignal<GamePlayReadySignal>();
             //Debug.Log("FINISH SIGNAL BUS");

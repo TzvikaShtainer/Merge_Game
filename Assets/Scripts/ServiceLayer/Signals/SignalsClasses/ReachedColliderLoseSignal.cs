@@ -1,6 +1,6 @@
 ﻿namespace ServiceLayer.Signals.SignalsClasses
 {
-    public class DisableUI
+    public class ReachedColliderLoseSignal
     {
         
     }

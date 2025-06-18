@@ -19,7 +19,7 @@ namespace VisualLayer.GamePlay.Handlers
         
         public async void Execute(string abilityId)
         {
-            _signalBus.Fire<PauseInput>();
+            _signalBus.Fire<PauseInputSignal>();
             
             var popup = _addSkillsPopupFactory.Create(_abilityManager.GetAbilitySO(abilityId));
 
@@ -28,13 +28,13 @@ namespace VisualLayer.GamePlay.Handlers
             
             if (popupInteractionResult.IsCanceled)
             {
-                _signalBus.Fire<UnpauseInput>();
+                _signalBus.Fire<UnpauseInputSignal>();
                 return;
             }
             
             _abilityManager.BuyAbility(abilityId);
             
-            _signalBus.Fire<UnpauseInput>();
+            _signalBus.Fire<UnpauseInputSignal>();
         }
     }
 }

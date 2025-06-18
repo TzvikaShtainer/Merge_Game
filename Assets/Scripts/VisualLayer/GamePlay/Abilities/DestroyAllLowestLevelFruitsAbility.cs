@@ -43,7 +43,7 @@ namespace VisualLayer.GamePlay.Abilities
         {
             base.DisableEnvironment();
             
-            SignalBus.Fire<PauseInput>();
+            SignalBus.Fire<PauseInputSignal>();
         }
 
         
@@ -87,8 +87,8 @@ namespace VisualLayer.GamePlay.Abilities
         
         public override void EnableEnvironment()
         {
-            SignalBus.Fire<UnpauseInput>();
-            SignalBus.Fire<EnableUI>();
+            SignalBus.Fire<UnpauseInputSignal>();
+            SignalBus.Fire<EnableUISignal>();
             
             EnableItemsOutsideTheJar();
         }
