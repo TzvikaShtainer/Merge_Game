@@ -6,6 +6,7 @@ using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
+using ServiceLayer.SettingsService;
 using ServiceLayer.Signals.SignalsClasses;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,6 +34,9 @@ namespace VisualLayer.Loader
         
         [Inject]
         private SignalBus _signalBus;
+        
+        [Inject]
+        private IGameSettingsService  _settingsService;
         
         #region Loader
 
@@ -78,6 +82,8 @@ namespace VisualLayer.Loader
             _loader.SetProgress(0.7f, "Loading Level 70%");
             
             await _abilityManager.LoadFromServer();
+            
+            await _settingsService.LoadFromServer();
             
             await UniTask.Delay(500);
             

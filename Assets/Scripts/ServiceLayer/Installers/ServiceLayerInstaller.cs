@@ -3,6 +3,7 @@ using ServiceLayer.EffectsService;
 using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
+using ServiceLayer.SettingsService;
 using ServiceLayer.TimeControl;
 using UnityEngine;
 using Zenject;
@@ -37,6 +38,11 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<ISaveSystem>()
                 .To<SaveSystem.SaveSystem>()
+                .AsSingle();
+            
+            Container
+                .Bind<IGameSettingsService>()
+                .To<GameSettingsService>()
                 .AsSingle();
         }
     }

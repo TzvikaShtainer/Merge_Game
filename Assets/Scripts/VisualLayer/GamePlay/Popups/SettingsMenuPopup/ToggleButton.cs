@@ -15,7 +15,16 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             isOn = !isOn;
             buttonImage.sprite = isOn ? spriteOn : spriteOff;
         }
-        
-        //-----TODO: Save States------
+
+        public void SetState(bool newValue)
+        {
+            isOn = newValue;
+            UpdateVisuals();
+        }
+
+        public void UpdateVisuals()
+        {
+            buttonImage.sprite = isOn ? spriteOn : spriteOff;
+        }
     }
 }

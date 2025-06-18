@@ -4,6 +4,7 @@ using DataLayer;
 using DataLayer.DataTypes;
 using DG.Tweening;
 using ServiceLayer.GameScenes;
+using ServiceLayer.SettingsService;
 using ServiceLayer.Signals.SignalsClasses;
 using TMPro;
 using UnityEngine;
@@ -38,6 +39,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 
         #region Injects
 
+        [Inject]
+        private IGameSettingsService  _gameSettingsService;
+        
         #endregion
 
         #region Methods
@@ -45,6 +49,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         public void Initialize(ISettingsMenuActions settingsMenuActions)
         {
             _settingsMenuActions = settingsMenuActions;
+            _musicToggle.SetState(_gameSettingsService.Settings.IsMusicOn);
+            _sfxToggle.SetState(_gameSettingsService.Settings.IsSoundEffectsOn);
+            _vibrationToggle.SetState(_gameSettingsService.Settings.IsVibrationOn);
         }
         
         public void OnContinueBtnClick() => Close();

@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
+using ServiceLayer.SettingsService;
 using UnityEngine;
 using VisualLayer.Loader;
 using Zenject;
@@ -19,19 +20,25 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         [Inject]
         private GameLevelType _currentLevelType;
         
+        [Inject]
+        private IGameSettingsService _gameScenesService;
+        
         public void OnToggleMusic()
         {
-           
+            bool isOn = !_gameScenesService.Settings.IsMusicOn;
+            _gameScenesService.SetMusic(isOn);
         }
 
         public void OnToggleSfx()
         {
-            
+            bool isOn = !_gameScenesService.Settings.IsSoundEffectsOn;
+            _gameScenesService.SetSoundEffects(isOn);
         }
 
         public void OnToggleVibration()
         {
-            
+            bool isOn = !_gameScenesService.Settings.IsVibrationOn;
+            _gameScenesService.SetVibration(isOn);
         }
 
         public async UniTask OnRestartGame()
