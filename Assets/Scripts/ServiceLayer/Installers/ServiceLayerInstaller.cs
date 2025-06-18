@@ -5,6 +5,7 @@ using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
 using ServiceLayer.TimeControl;
+using ServiceLayer.Utilis;
 using UnityEngine;
 using Zenject;
 
@@ -44,6 +45,8 @@ namespace ServiceLayer.Installers
                 .Bind<IGameSettingsService>()
                 .To<GameSettingsService>()
                 .AsSingle();
+            
+            Container.Bind<GameStartupCoordinator>().AsSingle();
         }
     }
 }

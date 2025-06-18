@@ -8,6 +8,7 @@ using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
 using ServiceLayer.Signals.SignalsClasses;
+using ServiceLayer.Utilis;
 using Unity.VisualScripting;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
@@ -23,20 +24,8 @@ namespace VisualLayer.Loader
         [Inject]
         private IServerService _serverService;
         
-        [Inject] 
-        private IDataLayer _dataLayer;
-        
         [Inject]
-        private AbilityManager _abilityManager;
-        
-        [Inject]
-        private ISaveSystem _saveSystem;
-        
-        [Inject]
-        private SignalBus _signalBus;
-        
-        [Inject]
-        private IGameSettingsService  _settingsService;
+        private GameStartupCoordinator  _gameStartupCoordinator;
         
         #region Loader
 
@@ -67,8 +56,8 @@ namespace VisualLayer.Loader
             _loader.SetProgress(0.2f, "Loading Level 20%");
             
             await _serverService.Login();
-            
-            await _dataLayer.Balances.LoadFromServer();
+
+            await _gameStartupCoordinator.LoadAllDataFromServer();
             
             await UniTask.Delay(1000);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
@@ -81,13 +70,7 @@ namespace VisualLayer.Loader
             await UniTask.DelayFrame(100);
             _loader.SetProgress(0.7f, "Loading Level 70%");
             
-            await _abilityManager.LoadFromServer();
-            
-            await _settingsService.LoadFromServer();
-            
             await UniTask.Delay(500);
-            
-            await _saveSystem.Load();
             
             _loader.SetProgress(1f, "Loading Level 100%");
             
