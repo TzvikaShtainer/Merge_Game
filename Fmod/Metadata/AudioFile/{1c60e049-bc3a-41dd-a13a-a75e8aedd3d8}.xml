@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1c60e049-bc3a-41dd-a13a-a75e8aedd3d8}">
+		<property name="assetPath">
+			<value>ESM_GB_fx_foley_one_shot_toonpop_bubbles_single_pop_gurgle_cartoon.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.89756250000000004</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{190d7b75-57f6-47da-b47b-77373f1599d1}</destination>
+		</relationship>
+	</object>
+</objects>

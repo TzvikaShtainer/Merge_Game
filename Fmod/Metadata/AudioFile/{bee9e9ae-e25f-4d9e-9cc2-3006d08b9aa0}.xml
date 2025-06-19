@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{bee9e9ae-e25f-4d9e-9cc2-3006d08b9aa0}">
+		<property name="assetPath">
+			<value>ESM_Epic_Game_Power_Up_Touch_Futuristic_Mobile_App_Pick_Up_Sci_fi (1).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.60934240362811787</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{190d7b75-57f6-47da-b47b-77373f1599d1}</destination>
+		</relationship>
+	</object>
+</objects>

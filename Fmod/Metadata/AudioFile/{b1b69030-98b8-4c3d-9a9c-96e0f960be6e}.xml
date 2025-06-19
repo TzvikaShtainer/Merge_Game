@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{b1b69030-98b8-4c3d-9a9c-96e0f960be6e}">
+		<property name="assetPath">
+			<value>ESM_Arcade_Game_Jump_1_Classic_Retro_8_Bit_.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.18859410430839002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{190d7b75-57f6-47da-b47b-77373f1599d1}</destination>
+		</relationship>
+	</object>
+</objects>
