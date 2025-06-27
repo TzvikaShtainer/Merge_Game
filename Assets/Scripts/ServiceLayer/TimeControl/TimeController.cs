@@ -8,7 +8,7 @@ namespace ServiceLayer.TimeControl
 
         public void PauseGameplay()
         {
-            Debug.Log("Pause Gameplay");
+            //Debug.Log("Pause Gameplay");
             Time.timeScale = 0f;
         }
 
