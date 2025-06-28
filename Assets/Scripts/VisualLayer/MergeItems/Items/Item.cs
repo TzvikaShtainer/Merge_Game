@@ -120,5 +120,16 @@ namespace VisualLayer.MergeItems
         {
             gameObject.layer = LayerMask.NameToLayer("StandingFruit");
         }
+        
+        public void SetGravity(bool enabled)
+        {
+            _rigidbody.gravityScale = enabled ? 1 : 0;
+        }
+        
+        public void ResetItem(Vector2 pos)
+        {
+            transform.position = pos;
+            SetGravity(false);
+        }
     }
 }

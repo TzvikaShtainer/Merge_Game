@@ -12,6 +12,11 @@ namespace VisualLayer.GamePlay.Handlers
     { 
         public event Action NextItemCreated;
         
+        //fixed positions
+        private const float SpawnHeight = 2.5f;
+        private const float SpawnXClamp = 1.4f;
+        private Vector2 _nextItemUiPosition = new Vector2(10, 10);
+        
         private int _minLvlSpawn = 0;
         private int _maxLvlSpawn = 3;
 
@@ -68,35 +73,31 @@ namespace VisualLayer.GamePlay.Handlers
         
         public void SetCurrItemPosByLocation(Vector2 pos)
         {
-            _currentItem.GetComponent<Rigidbody2D>().gravityScale = 0;
-            
+            _currentItem.SetGravity(false);
             _currentItem.transform.position = pos;
         }
 
         public void CreateNextItem()
         {
-            _nextItem = CreateItem(new Vector2(10, 10));
+            _nextItem = CreateItem(_nextItemUiPosition);
             
-            _nextItem.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //_nextItem.transform.position = new Vector2(10, 10);
+            _nextItem.SetGravity(false);
 
             NextItemCreated?.Invoke();
         }
         
         public void DropCurrentItem()
         {
-            _currentItem.GetComponent<Rigidbody2D>().gravityScale = 1;
+            _currentItem.SetGravity(true);
         }
 
         public void SetNextItem(Vector2 posOfClick)
         {
             _currentItem = _nextItem;
 
-            posOfClick.x = Mathf.Clamp(posOfClick.x, -1.4f, 1.4f);
+            posOfClick.x = Mathf.Clamp(posOfClick.x, -SpawnXClamp, SpawnXClamp);
             
-            SetCurrItemPosByLocation(new Vector2(posOfClick.x, 2.5f));
+            SetCurrItemPosByLocation(new Vector2(posOfClick.x, SpawnHeight));
         }
-
-       
     }
 }
