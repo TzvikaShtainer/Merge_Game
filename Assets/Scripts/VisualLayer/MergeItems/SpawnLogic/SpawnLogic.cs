@@ -9,7 +9,9 @@ namespace VisualLayer.MergeItems.SpawnLogic
     {
         [Inject]
         private IGameLogicHandler _gameLogicHandler;
-        
+
+        private float _manXValue = 1.7f;
+        private float _minXValue = -1.7f;
         public void Spawn(Vector2 posToSpawn)
         {
             _gameLogicHandler.DropCurrentItem(); 
@@ -23,7 +25,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
 
         public void UpdateDraggingPosition(Vector2 pos)
         {
-            pos.x = Mathf.Clamp(pos.x, -1.4f, 1.4f);
+            pos.x = Mathf.Clamp(pos.x, _minXValue, _manXValue);
             
             _gameLogicHandler.SetCurrItemPosByLocation(pos);
         }
