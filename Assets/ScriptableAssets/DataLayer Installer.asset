@@ -61,16 +61,16 @@ MonoBehaviour:
   - _itemName: 
     _itemId: 9
     _itemPrefabRef: {fileID: 2284559540579497787, guid: b22ee4ee739677e4296f8304a86214ec, type: 3}
-    _itemPreviewSprite: {fileID: 21300000, guid: f09a9715846dcaf4fba56f72f5919924, type: 3}
-    _itemSadSprite: {fileID: 21300000, guid: 26d01553be57daf4289623bcd9a527d2, type: 3}
+    _itemPreviewSprite: {fileID: 21300000, guid: 8b5c44d221a7cd349a990e34bb53248e, type: 3}
+    _itemSadSprite: {fileID: -3752711834126370623, guid: 7741dcf472fedd0479d52be05a0e0499, type: 3}
   - _itemName: 
     _itemId: 10
     _itemPrefabRef: {fileID: 2284559540579497787, guid: a8b6f2787790b4247ae38c1535fc13e3, type: 3}
     _itemPreviewSprite: {fileID: 21300000, guid: e689e00c26c973945813c4497d425cb8, type: 3}
     _itemSadSprite: {fileID: 21300000, guid: 56c1ba7c440f20d4eaf99d77a10ae29e, type: 3}
   _playerBalances:
-    _coins: 0
-    _highScore: 0
+    _coins: 560
+    _highScore: 760
     _currentScore: 0
   _levelsMetadata:
   - _levelType: 0
