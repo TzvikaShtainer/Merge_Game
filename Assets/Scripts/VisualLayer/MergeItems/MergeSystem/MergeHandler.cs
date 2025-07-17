@@ -10,6 +10,8 @@ namespace VisualLayer.MergeItems.MergeSystem
 {
     public class MergeHandler : IMergeHandler
     {
+
+        private int _itemLvlToGetCoins = 0;
         [Inject]
         private IDataLayer _dataLayer;
         
@@ -45,7 +47,7 @@ namespace VisualLayer.MergeItems.MergeSystem
                 MergeItems(item1, item2, fruitNextLevel);
             }
            
-            if (fruitNextLevel >= 8)
+            if (fruitNextLevel >= _itemLvlToGetCoins)
             {
                 _signalBus.Fire<AddCoinsSignal>();
             }

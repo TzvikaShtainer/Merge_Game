@@ -22,7 +22,6 @@ namespace DataLayer.Balances
         
         int CurrentScore{get;}
         
-
         #endregion
 
         #region Methods
@@ -36,9 +35,13 @@ namespace DataLayer.Balances
         void AddCurrentScore(int newCurrentScore);
         
         void SetCurrentScore(int newCurrentScore);
+        
+        int GetCurrentScore();
 
         public UniTask LoadFromServer();
 
         #endregion
+
+        
     }
 }

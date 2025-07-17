@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using DataLayer;
+using UnityEngine;
 using Zenject;
 
 namespace ServiceLayer.SaveSystem
 {
     public class SaveSystemGameObject : MonoBehaviour
     {
-        [Inject] private ISaveSystem _saveService;
+        [Inject] 
+        private ISaveSystem _saveService;
         
         private void OnApplicationPause(bool pause)
         {

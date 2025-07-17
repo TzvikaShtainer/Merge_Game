@@ -89,16 +89,28 @@ namespace VisualLayer.GamePlay.UI
 
             _abilityManager.OnAbilityChanged += SyncAbilityCountData;
             
-            _currentScoreText.text = "0";
-            
-            _dataLayer.Balances.SetCurrentScore(0);
-            
+            HandleCurrentScore();
+
             SyncUiWithData();
 
             SyncAbilityCountData("DestroyAllLowestLevelFruitsAbility", _abilityManager.GetAbilityCount("DestroyAllLowestLevelFruitsAbility"));
             SyncAbilityCountData("DestroySpecificFruitAbility", _abilityManager.GetAbilityCount("DestroySpecificFruitAbility"));
             SyncAbilityCountData("ShakeBoxAbility", _abilityManager.GetAbilityCount("ShakeBoxAbility"));
             SyncAbilityCountData("UpgradeSpecificFruitAbility", _abilityManager.GetAbilityCount("UpgradeSpecificFruitAbility"));
+        }
+
+        private void HandleCurrentScore()
+        {
+            int currentScore = _dataLayer.Balances.GetCurrentScore();
+            if (currentScore > 0)
+            {
+                _currentScoreText.text = currentScore.ToString();
+            }
+            else
+            {
+                _dataLayer.Balances.SetCurrentScore(0);
+                _currentScoreText.text = "0";
+            }
         }
 
         private void SyncUiWithData()
@@ -132,7 +144,6 @@ namespace VisualLayer.GamePlay.UI
 
         public void OnPlusButtonClick(string abilityId)
         {
-            
             _plusCurrencyClickHandler.Execute(abilityId);
         }
         

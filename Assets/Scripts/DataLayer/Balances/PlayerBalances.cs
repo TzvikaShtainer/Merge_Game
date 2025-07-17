@@ -104,18 +104,33 @@ namespace DataLayer.Balances
         {
             _currentScore += newCurrentScore;
             ScoreChanged?.Invoke();
+            
+            _serverService.SetUserData(new Dictionary<string, string>
+            {
+                { "CurrentScore", _currentScore.ToString() }
+            }).Forget();
         }
 
         public void SetCurrentScore(int newCurrentScore)
         {
             _currentScore = newCurrentScore;
             ScoreChanged?.Invoke();
+            
+            _serverService.SetUserData(new Dictionary<string, string>
+            {
+                { "CurrentScore", _currentScore.ToString() }
+            }).Forget();
+        }
+
+        public int GetCurrentScore()
+        {
+            return _currentScore;
         }
         
         public async UniTask LoadFromServer()
         {
             Debug.Log("Loading player balances");
-            var data = await _serverService.GetUserData("Coins", "HighScore");
+            var data = await _serverService.GetUserData("Coins", "HighScore", "CurrentScore");
 
             if (data.TryGetValue("Coins", out var coinsStr) && int.TryParse(coinsStr, out var coins))
             {
@@ -129,11 +144,17 @@ namespace DataLayer.Balances
                 _highScore = highScore;
                 HighScoreChanged?.Invoke();
             }
+
+            if (data.TryGetValue("CurrentScore", out var currentStr) && int.TryParse(currentStr, out var currentScore))
+            {
+                _currentScore = currentScore;
+                ScoreChanged?.Invoke();
+            }
             
-            Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore);
+            Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore +" CurrentScore: " +_currentScore);
         }
         
-        
+
         #endregion
         
     }
