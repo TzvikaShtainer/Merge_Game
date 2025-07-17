@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.SettingsService;
@@ -22,6 +23,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         
         [Inject]
         private IGameSettingsService _gameScenesService;
+        
+        [Inject]
+        private IDataLayer _dataLayer;
         
         public void OnToggleMusic()
         {
@@ -56,6 +60,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             
             //load lvl selection scene
             _loader.SetProgress(0.7f, "Loading Level 70%");
+            
+            _dataLayer.Balances.SetCurrentScore(0);
+            
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.Loader);

@@ -80,7 +80,9 @@
                     _loader.SetProgress(0.2f, "Loading Level 20%");
                     await UniTask.Delay(TimeSpan.FromSeconds(1));
                     _loader.SetProgress(0.5f, "Loading Level 50%");
-                
+                        
+                    _dataLayer.Balances.SetCurrentScore(0);
+                    
                     //unload gameplay lvl scene
                     await _scenesService.UnloadLevelScene(_currentLevelType);
                 
