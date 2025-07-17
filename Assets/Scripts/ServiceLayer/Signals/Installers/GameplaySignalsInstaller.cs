@@ -31,6 +31,9 @@ namespace ServiceLayer.Signals.Installers
             Container.DeclareSignal<ReachedColliderLoseSignal>();
             Container.DeclareSignal<HandleItemsCollisionAfterLoseSignal>();
             
+            Container.DeclareSignal<EnableLoseCollider>();
+            Container.DeclareSignal<DisableLoseCollider>();
+            
             Container.DeclareSignal<OnContinueClickedSignal>();
             
             Container.DeclareSignal<GamePlayReadySignal>();

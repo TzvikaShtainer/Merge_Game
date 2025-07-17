@@ -50,7 +50,7 @@
                     Text = "You Lose!",
                     IsNoButtonVisible = true,
                     YesCaption = "Go Home",
-                    NoCaption = $"Try Again ({_coinsForTryAgain}$)",
+                    NoCaption = $"Try Again({_coinsForTryAgain}$)",
                 };
                 
                 if (_dataLayer.Balances.GetCurrentScore() < _coinsForTryAgain)

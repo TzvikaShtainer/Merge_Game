@@ -17,6 +17,10 @@ namespace VisualLayer.GamePlay.Handlers
         private void Awake()
         {
             _signalBus.Subscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
+            
+            _signalBus.Subscribe<DisableLoseCollider>(()=> detectionZone.gameObject.SetActive(false));
+            _signalBus.Subscribe<EnableLoseCollider>(()=> detectionZone.gameObject.SetActive(true));
+
         }
 
         private void OnPlayerContinueClicked()

@@ -60,6 +60,7 @@ namespace VisualLayer.GamePlay.Abilities
             base.DisableEnvironment();
             
             SignalBus.Fire<PauseInputSignal>();
+            SignalBus.Fire<DisableLoseCollider>();
         }
 
 
@@ -179,6 +180,7 @@ namespace VisualLayer.GamePlay.Abilities
         {
             SignalBus.Fire<UnpauseInputSignal>();
             SignalBus.Fire<EnableUISignal>();
+            SignalBus.Fire<EnableLoseCollider>();
             
             EnableItemsOutsideTheJar();
         }
