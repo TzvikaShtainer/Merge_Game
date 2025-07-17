@@ -38,6 +38,8 @@
             
             [Inject]
             private IDataLayer  _dataLayer;
+
+            private int _coinsForTryAgain = 20;
             
             public async void Execute()
             {
@@ -47,9 +49,12 @@
                 {
                     Text = "You Lose!",
                     IsNoButtonVisible = true,
-                    YesCaption = "Try Again?",
-                    NoCaption = "Go Home",
+                    YesCaption = "Go Home",
+                    NoCaption = $"Try Again ({_coinsForTryAgain}$)",
                 };
+                
+                if (_dataLayer.Balances.GetCurrentScore() < _coinsForTryAgain)
+                    popupArgs.IsNoButtonVisible =  false;
                 
                 var popup = _yesNoPopupFactory.Create(popupArgs);
                 
@@ -61,14 +66,15 @@
                 
                 _timeController.UnpauseGameplay();
                 
-                if (result.IsYes)
+                if (!result.IsYes)
                 {
                     _signalBus.Fire<UnpauseInputSignal>();
-                    _signalBus.Fire<OnContinueClickedSignal>();
                     
                     _abilityManager.UseAbility("DestroyItemsAfterContinue");
                     _dataLayer.Balances.RemoveCoins(20);
                     await UniTask.Delay(TimeSpan.FromSeconds(0.5));
+                    
+                    _signalBus.Fire<OnContinueClickedSignal>();
                 }
                 else
                 {
