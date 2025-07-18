@@ -81,7 +81,7 @@ namespace VisualLayer.GamePlay.Abilities
                 _jarTransform.DORotate(
                     new Vector3(startRotation.x, startRotation.y, startRotation.z + shakeAngle),
                     shakeDuration
-                ).SetEase(Ease.InOutSine)
+                ).SetEase(Ease.InOutSine).SetUpdate(UpdateType.Fixed)
             );
             
             //Middle back
@@ -89,7 +89,7 @@ namespace VisualLayer.GamePlay.Abilities
                 _jarTransform.DORotate(
                     new Vector3(startRotation.x, startRotation.y, startRotation.z),
                     shakeDuration
-                ).SetEase(Ease.InOutSine)
+                ).SetEase(Ease.InOutSine).SetUpdate(UpdateType.Fixed)
             );
              
             //Left shake
@@ -97,7 +97,7 @@ namespace VisualLayer.GamePlay.Abilities
                 _jarTransform.DORotate(
                     new Vector3(startRotation.x, startRotation.y, startRotation.z - shakeAngle),
                     shakeDuration
-                ).SetEase(Ease.InOutSine)
+                ).SetEase(Ease.InOutSine).SetUpdate(UpdateType.Fixed)
             );
 
             //Middle back
@@ -105,7 +105,7 @@ namespace VisualLayer.GamePlay.Abilities
                 _jarTransform.DORotate(
                     new Vector3(startRotation.x, startRotation.y, startRotation.z),
                     shakeDuration
-                ).SetEase(Ease.InOutSine)
+                ).SetEase(Ease.InOutSine).SetUpdate(UpdateType.Fixed)
             );
 
             //How Many Times
