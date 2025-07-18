@@ -1,5 +1,6 @@
 ﻿using DataLayer.DataTypes;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.Signals.SignalsClasses;
 using ServiceLayer.Utilis;
 using UnityEngine;
@@ -21,6 +22,9 @@ namespace VisualLayer.Components.UI
         
         [Inject] 
         private IEffectsManager _effectsManager;
+        
+        [Inject]
+        private ISfxService  _sfxService;
         
         private DelayTimer _delayTimer;
         private bool _waitingForNextItem = false;
@@ -78,6 +82,7 @@ namespace VisualLayer.Components.UI
             _spawn.Spawn(_lastClickedPos); 
             
             _effectsManager.PlayEffect(EffectType.Release, _playerInput.GetClickPosition); //_lastClickedPos just for now, need to change
+            _sfxService.PlaySfxType(SfxType.Release);
             
             _waitingForNextItem = true;
             _delayTimer.Reset();

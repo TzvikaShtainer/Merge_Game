@@ -7,6 +7,7 @@ using DataLayer;
 using DataLayer.DataTypes;
 using DataLayer.DataTypes.abilities;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.Components.UI;
@@ -31,6 +32,9 @@ namespace VisualLayer.GamePlay.Abilities
         
         [Inject]
         private ItemFactory _itemFactory;
+        
+        [Inject]
+        private ISfxService  _sfxService;
         
         private bool _isWaitingForClick = false;
         
@@ -96,16 +100,21 @@ namespace VisualLayer.GamePlay.Abilities
             
             Object.Destroy(clickedItem.gameObject);
             
+            _sfxService.PlaySfxType(SfxType.UpgradeSpecificItemAbility);
+            
             int upgradedLevel = currentLevel + 1;
 
             if (upgradedLevel >= 11)
             {
                 _effectsManager.PlayEffect(EffectType.DestroyAbility, currItemPos);
+                _sfxService.PlaySfxType(SfxType.DestroyAbility);
                 return;
             }
             
             var newItem = _itemFactory.Create(upgradedLevel,currItemPos);
+            
             _effectsManager.PlayEffect(EffectType.DestroyAbility, currItemPos);
+            _sfxService.PlaySfxType(SfxType.DestroyAbility);
             
             // if (newItem != null)
             // {

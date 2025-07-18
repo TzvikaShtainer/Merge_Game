@@ -6,6 +6,7 @@ using DataLayer;
 using DataLayer.DataTypes;
 using DataLayer.DataTypes.abilities;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.Signals.SignalsClasses;
 using ServiceLayer.TimeControl;
 using UnityEngine;
@@ -19,6 +20,9 @@ namespace VisualLayer.GamePlay.Abilities
     {
         [Inject] 
         private IEffectsManager _effectsManager;
+        
+        [Inject]
+        private ISfxService  _sfxService;
 
         public override async void UseAbility()
         {
@@ -73,6 +77,7 @@ namespace VisualLayer.GamePlay.Abilities
                 {
                     Object.Destroy(currItem.gameObject);
                     _effectsManager.PlayEffect(EffectType.DestroyAbility, currItem.gameObject.transform.position);
+                    _sfxService.PlaySfxType(SfxType.DestroyAbility);
                 }
             }
         }

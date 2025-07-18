@@ -2,6 +2,7 @@
 using DataLayer.DataTypes;
 using DataLayer.Metadata;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -28,9 +29,16 @@ namespace DataLayer.Installers
         [SerializeField] 
         private EffectsDatabase _effectsDatabase;
         
+        [SerializeField] 
+        private SfxDatabase _sfxDatabase;
         
         public override void InstallBindings()
         {
+            Container
+                .Bind<SfxDatabase>()
+                .FromInstance(_sfxDatabase)
+                .AsSingle();
+            
             Container
                 .Bind<EffectsDatabase>()
                 .FromInstance(_effectsDatabase)

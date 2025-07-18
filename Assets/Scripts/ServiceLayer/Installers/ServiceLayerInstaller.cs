@@ -1,6 +1,7 @@
 ﻿using Blast.ServiceLayer.GameScenes;
 using ServiceLayer.EffectsService;
 using ServiceLayer.GameScenes;
+using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
@@ -44,6 +45,16 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<IGameSettingsService>()
                 .To<GameSettingsService>()
+                .AsSingle();
+            
+            Container
+                .Bind<IMusicService>()
+                .To<FMODMusicService>()
+                .AsSingle();
+            
+            Container
+                .Bind<ISfxService>()
+                .To<FMODSfxService>()
                 .AsSingle();
             
             Container.Bind<GameStartupCoordinator>().AsSingle();

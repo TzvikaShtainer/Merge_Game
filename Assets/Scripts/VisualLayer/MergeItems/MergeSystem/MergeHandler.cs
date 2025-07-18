@@ -1,6 +1,7 @@
 ﻿using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.Factories;
@@ -23,6 +24,9 @@ namespace VisualLayer.MergeItems.MergeSystem
         
         [Inject]
         private IEffectsManager _effectsManager;
+        
+        [Inject]
+        private ISfxService  _sfxService;
         
         public bool CanMerge(Item item1, Item item2)
         {
@@ -72,6 +76,7 @@ namespace VisualLayer.MergeItems.MergeSystem
             Object.Destroy(item2.gameObject);
             
             _effectsManager.PlayEffect(EffectType.Merge, newPosition);
+            _sfxService.PlaySfxType(SfxType.Merge);
             
             _signalBus.Fire<ItemMergedSignal>();
         }

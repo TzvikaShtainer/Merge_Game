@@ -4,7 +4,6 @@
     {
         Release,
         Merge,
-        Destroy,
         DestroyAbility
     }
 }

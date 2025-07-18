@@ -8,6 +8,7 @@ using DataLayer;
 using DataLayer.DataTypes;
 using DataLayer.DataTypes.abilities;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.Components.UI;
@@ -32,6 +33,9 @@ namespace VisualLayer.GamePlay.Abilities
         
         [Inject]
         private ItemFactory _itemFactory;
+        
+        [Inject]
+        private ISfxService  _sfxService;
         
         public AbilityDataSO Data => _abilityDataSo;
         
@@ -96,6 +100,7 @@ namespace VisualLayer.GamePlay.Abilities
         private void DestroySpecificFruit(Item clickedItem)
         {
             _effectsManager.PlayEffect(EffectType.DestroyAbility, clickedItem.transform.position);
+            _sfxService.PlaySfxType(SfxType.DestroyAbility);
             Object.Destroy(clickedItem.gameObject);
         }
         

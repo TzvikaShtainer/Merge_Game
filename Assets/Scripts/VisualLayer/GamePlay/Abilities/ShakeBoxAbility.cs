@@ -6,6 +6,7 @@ using DataLayer;
 using DataLayer.DataTypes.abilities;
 using DG.Tweening;
 using ServiceLayer.EffectsService;
+using ServiceLayer.MusicService;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.MergeItems;
@@ -16,14 +17,14 @@ namespace VisualLayer.GamePlay.Abilities
 {
     public class ShakeBoxAbility : BaseAbility
     {
-        [Inject] 
-        private IEffectsManager _effectsManager;
-        
         [Inject(Id = "ShakeBoxJar")]
         private Transform _jarTransform;
         
         [Inject(Id = "MainGameplayCamera")]
         private Camera _mainCamera;
+        
+        [Inject]
+        private ISfxService  _sfxService;
         
         private float _originalOrthoSize;
         
@@ -74,6 +75,8 @@ namespace VisualLayer.GamePlay.Abilities
             float shakeAngle = 15f; 
             float shakeDuration = 0.3f;
 
+            _sfxService.PlaySfxType(SfxType.ShakeBoxAbility);
+            
             Sequence shakeSequence = DOTween.Sequence();
             
             //Right shake
