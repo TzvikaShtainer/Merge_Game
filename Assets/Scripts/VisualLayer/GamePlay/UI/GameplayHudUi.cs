@@ -1,5 +1,6 @@
 ﻿using System;
 using DataLayer;
+using ServiceLayer.MusicService;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,6 +56,9 @@ namespace VisualLayer.GamePlay.UI
         
         [Inject]
         private AbilityManager _abilityManager;
+        
+        [Inject]
+        private ISfxService  _sfxService;
 
         #endregion
 
@@ -135,16 +139,19 @@ namespace VisualLayer.GamePlay.UI
         public async void OnBackButtonClick()
         {
             _backClickHandler.Execute();
+            _sfxService.PlaySfxType(SfxType.Click);
         }
 
         public void OnAbilityButtonClick(string abilityId)
         {
             _abilityManager.UseAbility(abilityId);
+            _sfxService.PlaySfxType(SfxType.OpenPopup);
         }
 
         public void OnPlusButtonClick(string abilityId)
         {
             _plusCurrencyClickHandler.Execute(abilityId);
+            _sfxService.PlaySfxType(SfxType.Click);
         }
         
         #endregion

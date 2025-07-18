@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SfxDatabase
   m_EditorClassIdentifier: 
   entries:
-  - sfxType: 1
+  - sfxType: 0
     fmodEvent:
       Guid:
         Data1: -1336962029
@@ -21,7 +21,7 @@ MonoBehaviour:
         Data3: -81529699
         Data4: -671388673
       Path: event:/SFX/Click
-  - sfxType: 0
+  - sfxType: 1
     fmodEvent:
       Guid:
         Data1: -1482801989
@@ -29,3 +29,51 @@ MonoBehaviour:
         Data3: -613523313
         Data4: 2048741173
       Path: event:/SFX/Merge
+  - sfxType: 2
+    fmodEvent:
+      Guid:
+        Data1: -1482801989
+        Data2: 1188518002
+        Data3: -613523313
+        Data4: 2048741173
+      Path: event:/SFX/Merge
+  - sfxType: 3
+    fmodEvent:
+      Guid:
+        Data1: -2108267826
+        Data2: 1194014123
+        Data3: -1962721916
+        Data4: 701479770
+      Path: event:/SFX/DestroyAllLowestLevelFruit
+  - sfxType: 4
+    fmodEvent:
+      Guid:
+        Data1: 302531652
+        Data2: 1152852857
+        Data3: -655107453
+        Data4: -1160941096
+      Path: event:/SFX/ShakeBox
+  - sfxType: 5
+    fmodEvent:
+      Guid:
+        Data1: 1897962895
+        Data2: 1255629183
+        Data3: 796208569
+        Data4: 1584477007
+      Path: event:/SFX/UpgradeSpecificFruit
+  - sfxType: 7
+    fmodEvent:
+      Guid:
+        Data1: 678089300
+        Data2: 1092254168
+        Data3: -662036089
+        Data4: 1854724377
+      Path: event:/SFX/Popup
+  - sfxType: 6
+    fmodEvent:
+      Guid:
+        Data1: 2029341521
+        Data2: 1116437256
+        Data3: 1480507298
+        Data4: 1645890729
+      Path: event:/SFX/ClosePopup

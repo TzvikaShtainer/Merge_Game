@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
+using ServiceLayer.MusicService;
 using ServiceLayer.SettingsService;
 using UnityEngine;
 using VisualLayer.Loader;
@@ -27,26 +28,37 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         [Inject]
         private IDataLayer _dataLayer;
         
+        [Inject]
+        private ISfxService  _sfxService;
+        
         public void OnToggleMusic()
         {
             bool isOn = !_gameScenesService.Settings.IsMusicOn;
             _gameScenesService.SetMusic(isOn);
+            
+            _sfxService.PlaySfxType(SfxType.Click);
         }
 
         public void OnToggleSfx()
         {
             bool isOn = !_gameScenesService.Settings.IsSoundEffectsOn;
             _gameScenesService.SetSoundEffects(isOn);
+            
+            _sfxService.PlaySfxType(SfxType.Click);
         }
 
         public void OnToggleVibration()
         {
             bool isOn = !_gameScenesService.Settings.IsVibrationOn;
             _gameScenesService.SetVibration(isOn);
+            
+            _sfxService.PlaySfxType(SfxType.Click);
         }
 
         public async UniTask OnRestartGame()
         {
+            _sfxService.PlaySfxType(SfxType.Click);
+            
             _loader.ResetData();
             await _loader.FadeIn();
             _loader.SetProgress(0.2f, "Loading Level 20%");
