@@ -30,7 +30,6 @@ namespace VisualLayer.GamePlay.Score
         private void ItemMergedSignalHandler()
         {
             _dataLayer.Balances.AddCurrentScore(_params.ItemsMerged); //multi by lvl merge mybe?
-            _dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
 
             if ( _dataLayer.Balances.CurrentScore > _dataLayer.Balances.HighScore)
             {
