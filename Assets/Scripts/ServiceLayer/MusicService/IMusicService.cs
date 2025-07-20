@@ -1,7 +1,10 @@
-﻿namespace ServiceLayer.MusicService
+﻿using FMODUnity;
+
+namespace ServiceLayer.MusicService
 {
     public interface  IMusicService
     {
+        void PlayMusic(EventReference musicRef);
         void PlayLoadingMusic();
         void PlayGameMusic();
         void StopMusic();

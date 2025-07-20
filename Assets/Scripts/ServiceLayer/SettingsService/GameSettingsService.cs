@@ -17,6 +17,9 @@ namespace ServiceLayer.SettingsService
         [Inject]
         private ISfxService  _sfxService;
         
+        [Inject]
+        private IMusicService  _musicService;
+        
         public GameSettings Settings { get; private set; } = new GameSettings();
         
         private string[] gameSettingsArray = { "HasBGMusic", "HasSFX", "HasVibration" };
@@ -24,6 +27,8 @@ namespace ServiceLayer.SettingsService
         {
             Settings.IsMusicOn  = isOn;
             Save("HasBGMusic",  isOn);
+            
+            _musicService.SetMusicEnabled(isOn);
         }
 
         public void SetSoundEffects(bool isOn)
@@ -44,19 +49,28 @@ namespace ServiceLayer.SettingsService
         {
             var data = await _serverService.GetUserData(gameSettingsArray);
             bool shouldSaveDefaults = false;
-            
+
             if (data.TryGetValue("HasBGMusic", out var bgMusicValue))
+            {
                 Settings.IsMusicOn = bgMusicValue == "1" || bgMusicValue.Equals("true", StringComparison.OrdinalIgnoreCase);
+                SetMusic(Settings.IsMusicOn);
+            }
             else
                 shouldSaveDefaults = true;
 
             if (data.TryGetValue("HasSFX", out var sfxValue))
+            {
                 Settings.IsSoundEffectsOn = sfxValue == "1" || sfxValue.Equals("true", StringComparison.OrdinalIgnoreCase);
+                SetSoundEffects(Settings.IsSoundEffectsOn);
+            }
             else
                 shouldSaveDefaults = true;
 
             if (data.TryGetValue("HasVibration", out var vibrationValue))
+            {
                 Settings.IsVibrationOn = vibrationValue == "1" || vibrationValue.Equals("true", StringComparison.OrdinalIgnoreCase);
+                SetVibration(Settings.IsVibrationOn);
+            }
             else
                 shouldSaveDefaults = true;
 

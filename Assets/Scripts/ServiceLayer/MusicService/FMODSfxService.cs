@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FMODUnity;
+using UnityEngine;
 
 namespace ServiceLayer.MusicService
 {
@@ -7,8 +8,6 @@ namespace ServiceLayer.MusicService
     {
         private bool _sfxEnabled = true;
         private readonly Dictionary<SfxType, EventReference> _sfxMap;
-
-        public bool IsSfxEnabled => _sfxEnabled;
 
         public FMODSfxService(SfxDatabase eventMap)
         {
@@ -27,6 +26,7 @@ namespace ServiceLayer.MusicService
         public void SetSfxEnabled(bool enabled)
         {
             _sfxEnabled = enabled;
+            //Debug.Log("_sfxEnabled: "+_sfxEnabled);
         }
     }
 }
