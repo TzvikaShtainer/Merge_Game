@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,9 @@ namespace ServiceLayer.SettingsService
     {
         [Inject]
         private IServerService _serverService;
+        
+        [Inject]
+        private ISfxService  _sfxService;
         
         public GameSettings Settings { get; private set; } = new GameSettings();
         
@@ -26,6 +30,8 @@ namespace ServiceLayer.SettingsService
         {
             Settings.IsSoundEffectsOn  = isOn;
             Save("HasSFX",  isOn);
+            
+            _sfxService.SetSfxEnabled(isOn);
         }
 
         public void SetVibration(bool isOn)
