@@ -27,6 +27,9 @@ namespace VisualLayer.Loader
         [Inject]
         private GameStartupCoordinator  _gameStartupCoordinator;
         
+        [Inject]
+        private SignalBus _signalBus;
+        
         #region Loader
 
         [SerializeField]
@@ -97,6 +100,9 @@ namespace VisualLayer.Loader
             _loader.SetProgress(1f, "Loading Level 100%");
             
             _loader.FadeOut();
+            
+            _signalBus.Fire<UnpauseInputSignal>();
+            Debug.Log("Fire UnpauseInputSignal");
         }
     }
 }

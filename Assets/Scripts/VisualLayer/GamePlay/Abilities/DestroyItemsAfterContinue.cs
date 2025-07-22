@@ -27,7 +27,7 @@ namespace VisualLayer.GamePlay.Abilities
 
             FindAndDestroyTwoLowestItems();    
             
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5));
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5));
             
             EnableEnvironment();
         }

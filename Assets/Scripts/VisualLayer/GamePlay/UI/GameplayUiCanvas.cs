@@ -17,6 +17,8 @@ namespace VisualLayer.GamePlay.UI
         
         public void Awake()
         {
+            _joystick.SetActive(false);
+            
             _signalBus.Subscribe<PauseInputSignal>(PauseInputDriven);
             _signalBus.Subscribe<UnpauseInputSignal>(UnpauseInputDriven);
             
@@ -26,11 +28,13 @@ namespace VisualLayer.GamePlay.UI
 
         private void UnpauseInputDriven()
         {
+            Debug.Log("UnpauseInputDriven");
             _joystick.SetActive(true);
         }
 
         private void PauseInputDriven()
         {
+            Debug.Log("PauseInputDriven");
             _joystick.SetActive(false);
         }
 

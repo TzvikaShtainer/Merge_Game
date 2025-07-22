@@ -16,10 +16,10 @@ namespace ServiceLayer.MusicService
         
         public FMODMusicService()
         {
-            Debug.Log("FMODMusicService Constructor");
+            //Debug.Log("FMODMusicService Constructor");
             _loadingMusicRef = RuntimeManager.PathToEventReference("event:/Music/Loading");
             _gameMusicRef = RuntimeManager.PathToEventReference("event:/Music/GameplayMusic");
-            Debug.Log("_gameMusicRef: "+_gameMusicRef);
+            //Debug.Log("_gameMusicRef: "+_gameMusicRef);
         }
         
         public void PlayMusic(EventReference musicRef)
