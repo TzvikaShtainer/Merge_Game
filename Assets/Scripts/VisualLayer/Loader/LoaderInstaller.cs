@@ -102,7 +102,7 @@ namespace VisualLayer.Loader
             _loader.FadeOut();
             
             _signalBus.Fire<UnpauseInputSignal>();
-            Debug.Log("Fire UnpauseInputSignal");
+            //Debug.Log("Fire UnpauseInputSignal");
         }
     }
 }

@@ -77,6 +77,8 @@ namespace VisualLayer.GamePlay.Abilities
                     {  ability.Id, ability.Count.ToString() }
                 }).Forget();
             }
+
+            SetFirstTimeFlagFromData(abilityId, true);
         }
 
         public int GetAbilityCount(string abilityId)
@@ -120,6 +122,26 @@ namespace VisualLayer.GamePlay.Abilities
             }
 
             //Debug.Log("✅ Finished loading abilities from server.");
+        }
+        public IEnumerable<string> GetAllAbilityIds()
+        {
+            return _abilitiesDict.Keys;
+        }
+        public bool IsAbilityFirstTime(string abilityId)
+        {
+            return _abilitiesDict.TryGetValue(abilityId, out var ability) && ability.IsFirstTime();
+        }
+
+        public void SetFirstTimeFlagFromData(string abilityId, bool value)
+        {
+            if (_abilitiesDict.TryGetValue(abilityId, out var ability))
+            {
+                ability.SetFirstTime(value);
+            }
+            else
+            {
+                Debug.LogWarning($"Tried to set first-time flag for unknown ability: {abilityId}");
+            }
         }
     }
 }

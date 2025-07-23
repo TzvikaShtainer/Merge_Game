@@ -7,5 +7,6 @@ namespace ServiceLayer.SaveSystem
     public class SaveData
     {
         public List<MergeItemSaveData> Items;
+        public List<AbilityFirstTimeEntry> AbilitiesFirstTimeMap;
     }
 }

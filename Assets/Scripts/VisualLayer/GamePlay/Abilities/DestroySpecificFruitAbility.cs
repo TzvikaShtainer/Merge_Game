@@ -50,6 +50,9 @@ namespace VisualLayer.GamePlay.Abilities
             if (IsJarEmpty())
                 return;
             
+            if (!IsFirstTimeUse)
+                IsFirstTimeUse = true;
+            
             Count--;
             
             DisableEnvironment(); 

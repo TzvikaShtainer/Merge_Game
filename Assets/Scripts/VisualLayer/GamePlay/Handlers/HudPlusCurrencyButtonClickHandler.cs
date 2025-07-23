@@ -9,7 +9,7 @@ namespace VisualLayer.GamePlay.Handlers
     public class HudPlusCurrencyButtonClickHandler : IHudPlusCurrencyClickHandler
     {
         [Inject]
-        AddSkillsPopup.Factory _addSkillsPopupFactory;
+        private AddSkillsPopup.Factory _addSkillsPopupFactory;
         
         [Inject] 
         private AbilityManager _abilityManager;

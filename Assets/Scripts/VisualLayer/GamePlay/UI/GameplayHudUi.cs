@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.Handlers;
+using VisualLayer.GamePlay.Popups.AddSkillsPopup;
 using Zenject;
 
 namespace VisualLayer.GamePlay.UI
@@ -59,6 +60,9 @@ namespace VisualLayer.GamePlay.UI
         
         [Inject]
         private ISfxService  _sfxService;
+        
+        [Inject]
+        private AddSkillsPopup.Factory _addSkillsPopupFactory;
 
         #endregion
 
@@ -144,8 +148,16 @@ namespace VisualLayer.GamePlay.UI
 
         public void OnAbilityButtonClick(string abilityId)
         {
+            //Debug.Log("abilityId: "+ abilityId +"firstTime: "+ _abilityManager.IsAbilityFirstTime(abilityId));
+            if (!_abilityManager.IsAbilityFirstTime(abilityId))
+            {
+                _sfxService.PlaySfxType(SfxType.OpenPopup);
+                
+                _plusCurrencyClickHandler.Execute(abilityId);
+            }
+            
             _abilityManager.UseAbility(abilityId);
-            _sfxService.PlaySfxType(SfxType.OpenPopup);
+            
         }
 
         public void OnPlusButtonClick(string abilityId)

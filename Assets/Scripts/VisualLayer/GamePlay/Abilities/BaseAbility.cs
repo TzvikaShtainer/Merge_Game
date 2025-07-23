@@ -16,6 +16,8 @@ namespace VisualLayer.GamePlay.Abilities
         protected List<Item> ItemsToToggle;
             
         protected List<Item> AllItems;
+
+        protected bool IsFirstTimeUse = false;
         
         public AbilityDataSO Data => AbilityDataSo;
         
@@ -44,7 +46,12 @@ namespace VisualLayer.GamePlay.Abilities
             
             DataLayer.Balances.RemoveCoins(AbilityDataSo.Cost);
         }
-        
+
+        public bool IsFirstTime()
+        {
+            return IsFirstTimeUse;
+        }
+
         protected virtual void DisableEnvironment()
         {
             ItemsToToggle = new List<Item>();
@@ -113,5 +120,10 @@ namespace VisualLayer.GamePlay.Abilities
         public abstract void EnableEnvironment();
 
         public abstract void UseAbility();
+        
+        public void SetFirstTime(bool value)
+        {
+            IsFirstTimeUse = value;
+        }
     }
 }
