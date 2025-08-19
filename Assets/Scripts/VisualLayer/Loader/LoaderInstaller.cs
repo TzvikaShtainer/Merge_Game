@@ -58,30 +58,8 @@ namespace VisualLayer.Loader
             await UniTask.Delay(500);
             _loader.SetProgress(0.2f, "Loading Level 20%");
             
-            const int maxRetries = 3;
-            const int delayBetweenRetriesMs = 1500;
+            if (await LoginHandler()) return;
 
-            bool isLoggedIn = false;
-            for (int attempt = 1; attempt <= maxRetries; attempt++)
-            {
-                isLoggedIn = await _serverService.Login();
-                if (isLoggedIn)
-                {
-                    Debug.Log($"✅ Login succeeded on attempt {attempt}");
-                    break;
-                }
-
-                Debug.LogWarning($"❌ Login failed. Retrying ({attempt}/{maxRetries})...");
-                await UniTask.Delay(delayBetweenRetriesMs);
-            }
-
-            if (!isLoggedIn)
-            {
-                Debug.LogError("🚫 Failed to login after multiple attempts.");
-                //Create UI For Faild Login
-                return;
-            }
-            
             await UniTask.Delay(500);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
             
@@ -103,6 +81,35 @@ namespace VisualLayer.Loader
             
             _signalBus.Fire<UnpauseInputSignal>();
             //Debug.Log("Fire UnpauseInputSignal");
+        }
+
+        private async Task<bool> LoginHandler()
+        {
+            const int maxRetries = 3;
+            const int delayBetweenRetriesMs = 1500;
+
+            bool isLoggedIn = false;
+            for (int attempt = 1; attempt <= maxRetries; attempt++)
+            {
+                isLoggedIn = await _serverService.Login();
+                if (isLoggedIn)
+                {
+                    Debug.Log($"✅ Login succeeded on attempt {attempt}");
+                    break;
+                }
+
+                Debug.LogWarning($"❌ Login failed. Retrying ({attempt}/{maxRetries})...");
+                await UniTask.Delay(delayBetweenRetriesMs);
+            }
+
+            if (!isLoggedIn)
+            {
+                Debug.LogError("🚫 Failed to login after multiple attempts.");
+                //Create UI For Faild Login
+                return true;
+            }
+
+            return false;
         }
     }
 }
