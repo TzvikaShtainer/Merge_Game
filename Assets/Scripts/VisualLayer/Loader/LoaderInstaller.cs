@@ -47,6 +47,8 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
+            Application.targetFrameRate = 60;
+            
             await LoadGameScene();
         }
 
