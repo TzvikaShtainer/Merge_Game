@@ -61,17 +61,23 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             
             _loader.ResetData();
             await _loader.FadeIn();
-            _loader.SetProgress(0.2f, "Loading Level 20%");
+            //_loader.SetProgress(0.2f, "Loading Level 20%");
             await UniTask.Delay(TimeSpan.FromSeconds(1));
+            await _loader.AnimateProgressTo(0.2f, 0.3f);
+
 
             
             //unload gameplay lvl scene
-            _loader.SetProgress(0.5f, "Loading Level 50%");
+            //_loader.SetProgress(0.5f, "Loading Level 50%");
+            await _loader.AnimateProgressTo(0.5f, 0.5f);
+
             await _scenesService.UnloadLevelScene(_currentLevelType);
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             
             //load lvl selection scene
-            _loader.SetProgress(0.7f, "Loading Level 70%");
+           // _loader.SetProgress(0.7f, "Loading Level 70%");
+           await _loader.AnimateProgressTo(0.7f, 0.5f);
+
             
             _dataLayer.Balances.SetCurrentScore(0);
             
@@ -81,7 +87,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
             
             await UniTask.Delay(TimeSpan.FromSeconds(1));
-            _loader.SetProgress(1f, "Loading Level 100%");
+            //_loader.SetProgress(1f, "Loading Level 100%");
+            await _loader.AnimateProgressTo(1f, 0.5f);
+
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             await _loader.FadeOut();
         }

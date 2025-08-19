@@ -27,8 +27,9 @@ namespace VisualLayer.GamePlay.Handlers
         {
             _loader.ResetData();
             await _loader.FadeIn();
-            await UniTask.Delay(500);
-            _loader.SetProgress(0.2f, "Loading Level 20%");
+            //await UniTask.Delay(500);
+            //_loader.SetProgress(0.2f, "Loading Level 20%");
+            await _loader.AnimateProgressTo(0.2f, 0.5f);
 
             await _serverService.Login();
             await _dataLayer.Balances.LoadFromServer();
@@ -37,12 +38,16 @@ namespace VisualLayer.GamePlay.Handlers
             
             await scenesService.UnloadLevelScene(GameLevelType.StartScreen);
                 
-            await UniTask.Delay(1000);
-            _loader.SetProgress(0.5f, "Loading Level 50%");
+            //await UniTask.Delay(1000);
+            //_loader.SetProgress(0.5f, "Loading Level 50%");
+            await _loader.AnimateProgressTo(0.5f, 1f);
+
 
             await scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
-            await UniTask.Delay(500);
-            _loader.SetProgress(1f, "Loading Level 100%");
+            //await UniTask.Delay(500);
+            //_loader.SetProgress(1f, "Loading Level 100%");
+            await _loader.AnimateProgressTo(1f, 0.5f);
+
             
             _loader.FadeOut();
         }

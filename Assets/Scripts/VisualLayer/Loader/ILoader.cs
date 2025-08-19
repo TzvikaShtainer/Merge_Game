@@ -16,6 +16,8 @@ namespace VisualLayer.Loader
         
         void SetProgress(float progress, string text);
 
+        UniTask AnimateProgressTo(float targetProgress, float duration);
+
         #endregion
     }
 }

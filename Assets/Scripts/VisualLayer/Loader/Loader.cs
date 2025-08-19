@@ -51,6 +51,25 @@ namespace VisualLayer.Loader
             _loaderSlider.value = progress;
             _loaderText.text = text;
         }
+        
+        public async UniTask AnimateProgressTo(float targetProgress, float duration)
+        {
+            float initialProgress = _loaderSlider.value;
+            float time = 0f;
+
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                float t = Mathf.Clamp01(time / duration);
+                float currentValue = Mathf.Lerp(initialProgress, targetProgress, t);
+                _loaderSlider.value = currentValue;
+                _loaderText.text = $"Loading {Mathf.RoundToInt(currentValue * 100)}%";
+                await UniTask.Yield();
+            }
+
+            _loaderSlider.value = targetProgress;
+            //_loaderText.text = text;
+        }
 
         #endregion
     }

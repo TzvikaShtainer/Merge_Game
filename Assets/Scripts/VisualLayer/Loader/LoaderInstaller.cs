@@ -58,26 +58,29 @@ namespace VisualLayer.Loader
             await _loader.FadeIn();
             
             await UniTask.Delay(500);
-            _loader.SetProgress(0.2f, "Loading Level 20%");
+            //_loader.SetProgress(0.2f, "Loading Level 20%");
+            await _loader.AnimateProgressTo(0.2f, 0.5f);
             
             if (await LoginHandler()) return;
 
             await UniTask.Delay(500);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
             
-            await UniTask.Delay(500);
-            _loader.SetProgress(0.5f, "Loading Level 50%");
+            //await UniTask.Delay(500);
+            //_loader.SetProgress(0.5f, "Loading Level 50%");
+            await _loader.AnimateProgressTo(0.5f, 0.5f);
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
-            await UniTask.DelayFrame(100);
-            _loader.SetProgress(0.7f, "Loading Level 70%");
+            //await UniTask.DelayFrame(100);
+            //_loader.SetProgress(0.7f, "Loading Level 70%");
+            await _loader.AnimateProgressTo(0.7f, 0.5f);
             
             await _gameStartupCoordinator.LoadAllDataFromServer();
             
-            await UniTask.Delay(1000);
-            
-            _loader.SetProgress(1f, "Loading Level 100%");
+            //await UniTask.Delay(1000);
+            //_loader.SetProgress(1f, "Loading Level 100%");
+            await _loader.AnimateProgressTo(1.0f, 0.5f);
             
             _loader.FadeOut();
             
