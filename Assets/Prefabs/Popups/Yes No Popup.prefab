@@ -55,10 +55,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -633,6 +633,10 @@ PrefabInstance:
     - target: {fileID: 4641298007127220811, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_Name
       value: yesButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641298007127220811, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_Pivot.x
