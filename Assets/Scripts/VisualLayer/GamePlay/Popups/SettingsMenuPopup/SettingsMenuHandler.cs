@@ -5,6 +5,7 @@ using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.MusicService;
 using ServiceLayer.SettingsService;
+using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
 using VisualLayer.Loader;
 using Zenject;
@@ -31,6 +32,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         [Inject]
         private ISfxService  _sfxService;
         
+        [Inject]
+        private SignalBus _signalBus;
+        
         public void OnToggleMusic()
         {
             bool isOn = !_gameScenesService.Settings.IsMusicOn;
@@ -56,7 +60,7 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         }
 
         public async UniTask OnRestartGame()
-        {
+        { 
             _sfxService.PlaySfxType(SfxType.Click);
             
             _loader.ResetData();
@@ -64,8 +68,6 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             //_loader.SetProgress(0.2f, "Loading Level 20%");
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             await _loader.AnimateProgressTo(0.2f, 0.3f);
-
-
             
             //unload gameplay lvl scene
             //_loader.SetProgress(0.5f, "Loading Level 50%");
@@ -75,10 +77,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             
             //load lvl selection scene
-           // _loader.SetProgress(0.7f, "Loading Level 70%");
-           await _loader.AnimateProgressTo(0.7f, 0.5f);
-
-            
+            // _loader.SetProgress(0.7f, "Loading Level 70%");
+            await _loader.AnimateProgressTo(0.7f, 0.5f);
+           
             _dataLayer.Balances.SetCurrentScore(0);
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
@@ -92,6 +93,8 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             await _loader.FadeOut();
+            
+            _signalBus.Fire<UnpauseInputSignal>();
         }
     }
 }

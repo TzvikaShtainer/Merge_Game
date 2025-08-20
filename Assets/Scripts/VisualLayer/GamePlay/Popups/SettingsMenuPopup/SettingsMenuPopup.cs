@@ -75,11 +75,11 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
             _settingsMenuActions.OnToggleVibration();
         }
 
-        public async void OnRestartBtnClick()
+        public void OnRestartBtnClick()
         {
-            _settingsMenuActions.OnRestartGame();
-
             Close();
+            
+            _settingsMenuActions.OnRestartGame();
         }
 
         #endregion

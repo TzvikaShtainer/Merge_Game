@@ -28,13 +28,13 @@ namespace VisualLayer.GamePlay.UI
 
         private void UnpauseInputDriven()
         {
-            //Debug.Log("UnpauseInputDriven");
+            Debug.Log("Un    pauseInputDriven");
             _joystick.SetActive(true);
         }
 
         private void PauseInputDriven()
         {
-            //Debug.Log("PauseInputDriven");
+            Debug.Log("PauseInputDriven");
             _joystick.SetActive(false);
         }
 
