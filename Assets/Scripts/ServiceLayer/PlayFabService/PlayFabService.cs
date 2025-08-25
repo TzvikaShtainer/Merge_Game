@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using PlayFab;
@@ -11,15 +12,17 @@ namespace ServiceLayer.PlayFabService
     {
         public async UniTask<bool> Login()
         {
+            int tryConnectionTimeInSeconds = 5;
             var tcs = new UniTaskCompletionSource<bool>();
-            
+
             var request = new LoginWithCustomIDRequest
             {
                 CustomId = SystemInfo.deviceUniqueIdentifier,
                 CreateAccount = true
             };
-            
-            PlayFabClientAPI.LoginWithCustomID(request,
+
+            PlayFabClientAPI.LoginWithCustomID(
+                request,
                 result =>
                 {
                     Debug.Log("Login Success");
@@ -27,14 +30,24 @@ namespace ServiceLayer.PlayFabService
                 },
                 error =>
                 {
-                    Debug.Log("Login Failed");
+                    Debug.Log($"Login Failed: {error.ErrorMessage}");
                     tcs.TrySetResult(false);
                 });
-            
-            return await tcs.Task;
-        }
 
-        public async UniTask SetUserData(Dictionary<string, string> data)
+            var (isTimeout, result) = await tcs.Task.TimeoutWithoutException(
+                TimeSpan.FromSeconds(tryConnectionTimeInSeconds));
+
+            if (isTimeout)
+            {
+                Debug.LogWarning($"Login timeout after {tryConnectionTimeInSeconds} seconds");
+                return false;
+            }
+
+            return result;
+        }
+        
+
+public async UniTask SetUserData(Dictionary<string, string> data)
         {
             var tcs = new UniTaskCompletionSource<UpdateUserDataResult>();
 

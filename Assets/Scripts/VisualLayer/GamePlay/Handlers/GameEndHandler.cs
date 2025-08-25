@@ -53,7 +53,7 @@
                     NoCaption = $"Try Again({_coinsForTryAgain}$)",
                 };
                 
-                if (_dataLayer.Balances.GetCurrentScore() < _coinsForTryAgain)
+                if (_dataLayer.Balances.GetCurrentCoins() < _coinsForTryAgain)
                     popupArgs.IsNoButtonVisible =  false;
                 
                 var popup = _yesNoPopupFactory.Create(popupArgs);

@@ -126,6 +126,11 @@ namespace DataLayer.Balances
         {
             return _currentScore;
         }
+
+        public int GetCurrentCoins()
+        {
+            return _coins;
+        }
         
         public async UniTask LoadFromServer()
         {

@@ -10,8 +10,8 @@ namespace VisualLayer.MergeItems.SpawnLogic
         [Inject]
         private IGameLogicHandler _gameLogicHandler;
 
-        private float _manXValue = 1.7f;
-        private float _minXValue = -1.7f;
+        private float _manXValue = 1.8f;
+        private float _minXValue = -1.8f;
         public void Spawn(Vector2 posToSpawn)
         {
             _gameLogicHandler.DropCurrentItem(); 

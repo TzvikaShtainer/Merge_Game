@@ -38,6 +38,8 @@ namespace DataLayer.Balances
         
         int GetCurrentScore();
 
+        int GetCurrentCoins();
+
         public UniTask LoadFromServer();
 
         #endregion
