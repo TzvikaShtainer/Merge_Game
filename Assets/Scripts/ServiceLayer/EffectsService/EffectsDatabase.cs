@@ -3,7 +3,7 @@ using DataLayer.DataTypes;
 using UnityEngine;
 
 namespace ServiceLayer.EffectsService
-{
+{//
     [CreateAssetMenu(menuName = "Merge/Data/Effects Database", fileName = "EffectsDatabase")]
     public class EffectsDatabase : ScriptableObject
     {

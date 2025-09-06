@@ -117,7 +117,7 @@ namespace VisualLayer.GamePlay.Abilities
                 }
                 else
                 {
-                    Debug.LogWarning($"❗ No data for ability {id}, using default count: {ability.Count}");
+                    //Debug.LogWarning($"❗ No data for ability {id}, using default count: {ability.Count}");
                 }
             }
 
@@ -140,7 +140,7 @@ namespace VisualLayer.GamePlay.Abilities
             }
             else
             {
-                Debug.LogWarning($"Tried to set first-time flag for unknown ability: {abilityId}");
+               // Debug.LogWarning($"Tried to set first-time flag for unknown ability: {abilityId}");
             }
         }
     }

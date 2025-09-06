@@ -128,7 +128,7 @@ namespace VisualLayer.GamePlay.Abilities
         {
             if (_mainCamera == null)
             {
-                Debug.LogWarning("Main camera not assigned!");
+                //Debug.LogWarning("Main camera not assigned!");
                 return;
             }
 
@@ -151,7 +151,7 @@ namespace VisualLayer.GamePlay.Abilities
             }
             else
             {
-                Debug.LogWarning("Camera is not orthographic, expected orthographic mode.");
+                //Debug.LogWarning("Camera is not orthographic, expected orthographic mode.");
             }
         }
 
@@ -159,7 +159,7 @@ namespace VisualLayer.GamePlay.Abilities
         {
             if (_mainCamera == null)
             {
-                Debug.LogWarning("Main camera not assigned!");
+               // Debug.LogWarning("Main camera not assigned!");
                 return;
             }
 
@@ -178,7 +178,7 @@ namespace VisualLayer.GamePlay.Abilities
             }
             else
             {
-                Debug.LogWarning("Camera is not orthographic, expected orthographic mode.");
+                //Debug.LogWarning("Camera is not orthographic, expected orthographic mode.");
             }
         }
         

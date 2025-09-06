@@ -47,7 +47,7 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 360;
             
             await LoadGameScene();
         }
@@ -99,17 +99,17 @@ namespace VisualLayer.Loader
                 isLoggedIn = await _serverService.Login();
                 if (isLoggedIn)
                 {
-                    Debug.Log($"✅ Login succeeded on attempt {attempt}");
+                    //Debug.Log($"✅ Login succeeded on attempt {attempt}");
                     break;
                 }
 
-                Debug.LogWarning($"❌ Login failed. Retrying ({attempt}/{maxRetries})...");
+                //Debug.LogWarning($"❌ Login failed. Retrying ({attempt}/{maxRetries})...");
                 await UniTask.Delay(delayBetweenRetriesMs);
             }
 
             if (!isLoggedIn)
             {
-                Debug.LogError("🚫 Failed to login after multiple attempts.");
+               // Debug.LogError("🚫 Failed to login after multiple attempts.");
                 return true;
             }
 

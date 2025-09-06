@@ -11,7 +11,7 @@ namespace VisualLayer.GamePlay.Buttons
         
         private void Awake()
         {
-            Debug.Log("Start Btn Awake. Handler is " + (_enterLevelHandler != null));
+            //Debug.Log("Start Btn Awake. Handler is " + (_enterLevelHandler != null));
         }
         
         public void OnClick()

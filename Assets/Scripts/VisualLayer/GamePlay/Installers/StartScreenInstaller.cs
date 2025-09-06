@@ -17,7 +17,7 @@ namespace VisualLayer.GamePlay.Installers
     
         public override void InstallBindings()
         {
-            Debug.Log("InstallBindings Started");
+            //Debug.Log("InstallBindings Started");
             
             // Container
             //     .Bind<IPlayerInput>()
@@ -35,12 +35,12 @@ namespace VisualLayer.GamePlay.Installers
                 .To<StartGameClickHandler>()
                 .AsSingle();
             
-            Debug.Log("InstallBindings Ended");
+            //Debug.Log("InstallBindings Ended");
         }
 
         private void Awake()
         {
-            Debug.Log("StartScreenInstaller Awake");
+            //Debug.Log("StartScreenInstaller Awake");
             //InstallBindings();
         }
     }

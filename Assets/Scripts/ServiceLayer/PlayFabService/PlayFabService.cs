@@ -25,12 +25,12 @@ namespace ServiceLayer.PlayFabService
                 request,
                 result =>
                 {
-                    Debug.Log("Login Success");
+                    //Debug.Log("Login Success");
                     tcs.TrySetResult(true);
                 },
                 error =>
                 {
-                    Debug.Log($"Login Failed: {error.ErrorMessage}");
+                    //Debug.Log($"Login Failed: {error.ErrorMessage}");
                     tcs.TrySetResult(false);
                 });
 
@@ -39,7 +39,7 @@ namespace ServiceLayer.PlayFabService
 
             if (isTimeout)
             {
-                Debug.LogWarning($"Login timeout after {tryConnectionTimeInSeconds} seconds");
+                //Debug.LogWarning($"Login timeout after {tryConnectionTimeInSeconds} seconds");
                 return false;
             }
 
@@ -60,7 +60,7 @@ public async UniTask SetUserData(Dictionary<string, string> data)
                 result => tcs.TrySetResult(result),
                 error =>
                 {
-                    Debug.Log("UpdateUserData Failed");
+                    //Debug.Log("UpdateUserData Failed");
                     tcs.TrySetException(new System.Exception(error.ErrorMessage));
                 });
             
@@ -81,7 +81,7 @@ public async UniTask SetUserData(Dictionary<string, string> data)
                 result => tcs.TrySetResult(result),
                 error =>
                 {
-                    Debug.LogError($"❌ GetUserData failed: {error.ErrorMessage}");
+                    //Debug.LogError($"❌ GetUserData failed: {error.ErrorMessage}");
                     tcs.TrySetException(new System.Exception(error.ErrorMessage));
                 });
             

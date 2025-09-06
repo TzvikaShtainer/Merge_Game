@@ -62,7 +62,7 @@ namespace VisualLayer.GamePlay.Abilities
 
             if (allItems.Count == 0)
             {
-                Debug.Log("No items found");
+                //Debug.Log("No items found");
                 return;
             }
 
