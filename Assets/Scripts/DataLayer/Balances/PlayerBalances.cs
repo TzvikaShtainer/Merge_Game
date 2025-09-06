@@ -134,6 +134,10 @@ namespace DataLayer.Balances
         
         public async UniTask LoadFromServer()
         {
+            _coins = 0;
+            _highScore = 0;
+            _currentScore = 0;
+            
             //Debug.Log("Loading player balances");
             var data = await _serverService.GetUserData("Coins", "HighScore", "CurrentScore");
 
