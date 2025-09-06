@@ -97,7 +97,7 @@ namespace VisualLayer.GamePlay.UI
 
             _abilityManager.OnAbilityChanged += SyncAbilityCountData;
             
-            HandleCurrentScore();
+            //HandleCurrentScore();
 
             SyncUiWithData();
 
