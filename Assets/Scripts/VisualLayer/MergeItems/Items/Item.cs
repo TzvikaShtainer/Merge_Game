@@ -75,7 +75,7 @@ namespace VisualLayer.MergeItems
 
         private bool IsStandingAfterFall()
         {
-            if (_rigidbody.linearVelocity.magnitude < 0.1f)
+            if (_rigidbody.linearVelocity.magnitude < 0.1f && _rigidbody.gravityScale != 0)
             {
                 if (gameObject.layer == LayerMask.NameToLayer("FallingFruit") && _isLosing)
                 {
@@ -99,7 +99,7 @@ namespace VisualLayer.MergeItems
             {
                 HandleCollisionWithSameItem(otherItem);
             }
-            else
+            else if (_rigidbody.gravityScale != 0)
             {
                 HandleCollisionWithJar();
             }

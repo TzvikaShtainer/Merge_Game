@@ -73,7 +73,7 @@ namespace DataLayer.Balances
 
         public bool RemoveCoins(int coinsToRemove)
         {
-            if (coinsToRemove <= 0 && coinsToRemove > _coins)
+            if (coinsToRemove <= 0 || coinsToRemove > _coins)
             {
                 throw new NotImplementedException();
             }
