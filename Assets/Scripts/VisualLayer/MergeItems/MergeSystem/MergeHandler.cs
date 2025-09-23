@@ -37,7 +37,6 @@ namespace VisualLayer.MergeItems.MergeSystem
         {
             int fruitNextLevel = item1.GetItemId() + 1;
             
-            
             if (HasNextLevel(fruitNextLevel)) 
             {
                 _signalBus.Fire<ItemMergedSignal>();
@@ -70,7 +69,8 @@ namespace VisualLayer.MergeItems.MergeSystem
             Item newItem = _itemFactory.Create(newLevel, newPosition);
            // newItem.transform.position = newPosition;
             
-            newItem.gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+            newItem.gameObject.layer = ItemLayer.StandingFruit.ToLayer();
+            newItem.MakeItemFall(true);
             
             Object.Destroy(item1.gameObject);
             Object.Destroy(item2.gameObject);

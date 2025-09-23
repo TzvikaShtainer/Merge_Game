@@ -73,7 +73,7 @@ namespace VisualLayer.GamePlay.Handlers
         
         public void SetCurrItemPosByLocation(Vector2 pos)
         {
-            _currentItem.SetGravity(false);
+            _currentItem.MakeItemFall(false);
             _currentItem.transform.position = pos;
         }
 
@@ -81,14 +81,14 @@ namespace VisualLayer.GamePlay.Handlers
         {
             _nextItem = CreateItem(_nextItemUiPosition);
             
-            _nextItem.SetGravity(false);
+            _nextItem.MakeItemFall(false);
 
             NextItemCreated?.Invoke();
         }
         
         public void DropCurrentItem()
         {
-            _currentItem.SetGravity(true);
+            _currentItem.MakeItemFall(true);
         }
 
         public void SetNextItem(Vector2 posOfClick)
