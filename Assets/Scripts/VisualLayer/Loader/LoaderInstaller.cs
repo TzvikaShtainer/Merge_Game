@@ -12,6 +12,7 @@ using ServiceLayer.Utilis;
 using Unity.VisualScripting;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
+using VisualLayer.GamePlay.Popups.YesNoPopup;
 using Zenject;
 
 namespace VisualLayer.Loader
@@ -29,6 +30,9 @@ namespace VisualLayer.Loader
         
         [Inject]
         private SignalBus _signalBus;
+        
+        //[Inject]
+        //private YesNoPopup.Factory _yesNoPopupFactory;
         
         #region Loader
 
@@ -58,62 +62,73 @@ namespace VisualLayer.Loader
             await _loader.FadeIn();
             
             await UniTask.Delay(500);
-            //_loader.SetProgress(0.2f, "Loading Level 20%");
             await _loader.AnimateProgressTo(0.2f, 0.5f);
             
-            if (await LoginHandler()) return;
-
             await UniTask.Delay(500);
             await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
             
-            //await UniTask.Delay(500);
-            //_loader.SetProgress(0.5f, "Loading Level 50%");
-            await _loader.AnimateProgressTo(0.5f, 0.5f);
-            
-            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
-            
-            //await UniTask.DelayFrame(100);
-            //_loader.SetProgress(0.7f, "Loading Level 70%");
-            await _loader.AnimateProgressTo(0.7f, 0.5f);
-            
-            await _gameStartupCoordinator.LoadAllDataFromServer();
-            
-            //await UniTask.Delay(1000);
-            //_loader.SetProgress(1f, "Loading Level 100%");
-            await _loader.AnimateProgressTo(1.0f, 0.5f);
-            
-            _loader.FadeOut();
-            
-            _signalBus.Fire<UnpauseInputSignal>();
-            //Debug.Log("Fire UnpauseInputSignal");
+            if (await TryLoginToGame())
+            {
+                await LoadGame();
+            }
+            else
+            {
+                HandleFailedToLoginGame();
+            }
         }
 
-        private async Task<bool> LoginHandler()
+        private void HandleFailedToLoginGame()
         {
-            const int maxRetries = 3;
+            var popupArgs = new YesNoPopupArgs()
+            {
+                Text = "Failed to login to game",
+                YesCaption = "Try again",
+                NoCaption = "Exit Game",
+                IsNoButtonVisible = true,
+            };
+            
+            //var yesNoPopup = _yesNoPopupFactory.Create(popupArgs);
+        }
+
+        private async Task<bool> TryLoginToGame()
+        {
+            const int maxRetries = 1; //cahange to 3
             const int delayBetweenRetriesMs = 1500;
 
-            bool isLoggedIn = false;
+            
             for (int attempt = 1; attempt <= maxRetries; attempt++)
             {
-                isLoggedIn = await _serverService.Login();
+                bool isLoggedIn = await _serverService.Login();
                 if (isLoggedIn)
                 {
                     //Debug.Log($"✅ Login succeeded on attempt {attempt}");
-                    break;
+                    return true;
                 }
 
                 //Debug.LogWarning($"❌ Login failed. Retrying ({attempt}/{maxRetries})...");
                 await UniTask.Delay(delayBetweenRetriesMs);
             }
 
-            if (!isLoggedIn)
-            {
-               // Debug.LogError("🚫 Failed to login after multiple attempts.");
-                return true;
-            }
-
-            return false;
+            //Debug.LogError("🚫 Failed to login after multiple attempts.");
+            return false; 
+            
+        }
+        
+        private async Task LoadGame()
+        {
+            await _loader.AnimateProgressTo(0.5f, 0.5f);
+            
+            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+            
+            await _loader.AnimateProgressTo(0.7f, 0.5f);
+            
+            await _gameStartupCoordinator.LoadAllDataFromServer();
+            
+            await _loader.AnimateProgressTo(1.0f, 0.5f);
+            
+            _loader.FadeOut();
+            
+            _signalBus.Fire<UnpauseInputSignal>();
         }
     }
 }
