@@ -53,27 +53,35 @@ namespace ServiceLayer.SettingsService
             if (data.TryGetValue("HasBGMusic", out var bgMusicValue))
             {
                 Settings.IsMusicOn = bgMusicValue == "1" || bgMusicValue.Equals("true", StringComparison.OrdinalIgnoreCase);
-                SetMusic(Settings.IsMusicOn);
             }
             else
+            {
+                Settings.IsMusicOn = true; 
                 shouldSaveDefaults = true;
+            }
+            SetMusic(Settings.IsMusicOn);
 
             if (data.TryGetValue("HasSFX", out var sfxValue))
             {
                 Settings.IsSoundEffectsOn = sfxValue == "1" || sfxValue.Equals("true", StringComparison.OrdinalIgnoreCase);
-                SetSoundEffects(Settings.IsSoundEffectsOn);
             }
             else
+            {
+                Settings.IsSoundEffectsOn = true;
                 shouldSaveDefaults = true;
+            }
+            SetSoundEffects(Settings.IsSoundEffectsOn);
 
             if (data.TryGetValue("HasVibration", out var vibrationValue))
             {
                 Settings.IsVibrationOn = vibrationValue == "1" || vibrationValue.Equals("true", StringComparison.OrdinalIgnoreCase);
-                SetVibration(Settings.IsVibrationOn);
             }
-            else
+            {
+                Settings.IsVibrationOn = true; 
                 shouldSaveDefaults = true;
-
+            }
+            SetVibration(Settings.IsVibrationOn);
+            
             if (shouldSaveDefaults)
                 SaveAll();
         }
