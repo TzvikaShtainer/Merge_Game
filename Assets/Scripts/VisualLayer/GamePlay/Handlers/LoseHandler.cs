@@ -1,6 +1,7 @@
 ﻿using System;
 using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
+using VisualLayer.MergeItems;
 using Zenject;
 
 namespace VisualLayer.GamePlay.Handlers
@@ -45,7 +46,7 @@ namespace VisualLayer.GamePlay.Handlers
 
         private void CustomTriggerBehavior(Collider2D collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("StandingFruit") && !_isTriggered)
+            if (collision.gameObject.layer == ItemLayer.StandingFruit.ToLayer() && !_isTriggered)
             {
                 _signalBus.Fire<HandleItemsCollisionAfterLoseSignal>();
                 

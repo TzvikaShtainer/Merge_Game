@@ -66,20 +66,18 @@
                 
                 _timeController.UnpauseGameplay();
                 
-                if (!result.IsYes)
+                if (result.IsNo)
                 {
                     _signalBus.Fire<UnpauseInputSignal>();
                     
                     _abilityManager.UseAbility("DestroyItemsAfterContinue");
-                    _dataLayer.Balances.RemoveCoins(20);
+                    _dataLayer.Balances.RemoveCoins(_coinsForTryAgain);
                     await UniTask.Delay(TimeSpan.FromSeconds(0.5));
-                    
+
                     _signalBus.Fire<OnContinueClickedSignal>();
                 }
                 else
                 {
-                    _signalBus.Fire<UnpauseInputSignal>();
-                
                     _loader.ResetData();
                     await _loader.FadeIn();
                     //await UniTask.Delay(TimeSpan.FromSeconds(1));
@@ -107,6 +105,8 @@
                 
                     await UniTask.Delay(TimeSpan.FromSeconds(1));
                     await _loader.FadeOut();
+                    
+                    _signalBus.Fire<UnpauseInputSignal>();
                 }
             }
         }

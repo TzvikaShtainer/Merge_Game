@@ -121,6 +121,7 @@ namespace ServiceLayer.SaveSystem
                 var item = _gameLogicHandler.CreateItemFromSave(itemData.typeId, itemData.position);
                 item.transform.rotation = itemData.rotation.ToQuaternion();
                 item.GetComponent<Rigidbody2D>().linearVelocity = itemData.velocity.ToVector2();
+                item.MakeItemFall(true);
             }
         }
         

@@ -10,6 +10,20 @@ using Zenject;
 
 namespace VisualLayer.MergeItems
 {
+    public enum ItemLayer
+    {
+        FallingFruit,
+        StandingFruit,
+        CreatedFruit
+    }
+
+    public static class ItemLayerExtensions
+    {
+        public static int ToLayer(this ItemLayer layer)
+        {
+            return LayerMask.NameToLayer(layer.ToString());
+        }
+    }
     public class Item : MonoBehaviour
     {
         [SerializeField] 
@@ -29,6 +43,7 @@ namespace VisualLayer.MergeItems
         
         private bool _isMerging = false;
         private Rigidbody2D _rigidbody;
+        private CircleCollider2D _circleCollider2D;
         private bool _isLosing = false;
       
 
@@ -45,7 +60,7 @@ namespace VisualLayer.MergeItems
             if (this == null) return;
             
             _isLosing = true;
-            gameObject.layer = LayerMask.NameToLayer("CreatedFruit");
+            gameObject.layer = ItemLayer.CreatedFruit.ToLayer();
             
             itemSprite.sprite = itemMetadata.ItemSadSprite;
         }
@@ -61,6 +76,9 @@ namespace VisualLayer.MergeItems
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _circleCollider2D = GetComponent<CircleCollider2D>();
+            
+            _circleCollider2D.enabled = false;
         }
         
 
@@ -69,7 +87,7 @@ namespace VisualLayer.MergeItems
             if (IsStandingAfterFall())
             {
                 //Debug.Log("Standing");
-                gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+                gameObject.layer = ItemLayer.StandingFruit.ToLayer();
             }
         }
 
@@ -77,7 +95,7 @@ namespace VisualLayer.MergeItems
         {
             if (_rigidbody.linearVelocity.magnitude < 0.1f && _rigidbody.gravityScale != 0)
             {
-                if (gameObject.layer == LayerMask.NameToLayer("FallingFruit") && _isLosing)
+                if (gameObject.layer == ItemLayer.FallingFruit.ToLayer() && _isLosing)
                 {
                     //Debug.Log("IsStandingAfterFall true");
                     return true;
@@ -95,7 +113,7 @@ namespace VisualLayer.MergeItems
             
             Item otherItem = other.gameObject.GetComponent<Item>();
 
-            if (otherItem != null && itemMetadata.ItemId == otherItem.itemMetadata.ItemId)
+            if (CanMergeItems(otherItem))
             {
                 HandleCollisionWithSameItem(otherItem);
             }
@@ -104,7 +122,13 @@ namespace VisualLayer.MergeItems
                 HandleCollisionWithJar();
             }
         }
-        
+
+        private bool CanMergeItems(Item otherItem)
+        {
+            return otherItem != null
+                   && itemMetadata.ItemId == otherItem.itemMetadata.ItemId;
+        }
+
         private void HandleCollisionWithSameItem(Item otherItem)
         {
             if (_mergeHandler.CanMerge(this, otherItem))
@@ -118,18 +142,17 @@ namespace VisualLayer.MergeItems
         
         private void HandleCollisionWithJar()
         {
-            gameObject.layer = LayerMask.NameToLayer("StandingFruit");
+            gameObject.layer = ItemLayer.StandingFruit.ToLayer();
         }
         
-        public void SetGravity(bool enabled)
+        public void MakeItemFall(bool enabled)
         {
             _rigidbody.gravityScale = enabled ? 1 : 0;
-        }
-        
-        public void ResetItem(Vector2 pos)
-        {
-            transform.position = pos;
-            SetGravity(false);
+            
+            if ( Mathf.Approximately(_rigidbody.gravityScale, 1))
+            {
+                _circleCollider2D.enabled = true;
+            }
         }
     }
 }
