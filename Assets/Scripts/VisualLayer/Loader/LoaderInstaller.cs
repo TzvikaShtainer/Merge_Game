@@ -8,6 +8,7 @@ using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
 using ServiceLayer.Signals.SignalsClasses;
+using ServiceLayer.TimeControl;
 using ServiceLayer.Utilis;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -31,8 +32,11 @@ namespace VisualLayer.Loader
         [Inject]
         private SignalBus _signalBus;
         
-        //[Inject]
-        //private YesNoPopup.Factory _yesNoPopupFactory;
+        [Inject]
+        private YesNoPopup.Factory _yesNoPopupFactory;
+        
+        [Inject]
+        private ITimeController _timeController;
         
         #region Loader
 
@@ -77,18 +81,39 @@ namespace VisualLayer.Loader
             }
         }
 
-        private void HandleFailedToLoginGame()
+        private async void HandleFailedToLoginGame()
         {
-            var popupArgs = new YesNoPopupArgs()
+            bool connected = false;
+
+            while (!connected)
             {
-                Text = "Failed to login to game",
-                YesCaption = "Try again",
-                NoCaption = "Exit Game",
-                IsNoButtonVisible = true,
-            };
-            
-            //var yesNoPopup = _yesNoPopupFactory.Create(popupArgs);
+                var popupArgs = new YesNoPopupArgs()
+                {
+                    Text = "Failed to login to game",
+                    YesCaption = "Try again",
+                    NoCaption = "Exit Game",
+                    IsNoButtonVisible = true,
+                };
+
+                var yesNoPopup = _yesNoPopupFactory.Create(popupArgs);
+                var result = await yesNoPopup.WaitForResult();
+
+                if (result.IsYes)
+                {
+                    connected = await TryLoginToGame();
+                    if (connected)
+                    {
+                        await LoadGame();
+                        break;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Exit Game");
+                }
+            }
         }
+        
 
         private async Task<bool> TryLoginToGame()
         {

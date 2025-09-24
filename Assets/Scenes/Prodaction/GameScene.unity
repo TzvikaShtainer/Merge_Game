@@ -3135,7 +3135,7 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames:
-  - Popups
+  - Loader
 --- !u!4 &1510487346
 Transform:
   m_ObjectHideFlags: 0

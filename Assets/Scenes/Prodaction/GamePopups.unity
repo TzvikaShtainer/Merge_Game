@@ -199,7 +199,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 90
+  m_SortingOrder: 500
   m_TargetDisplay: 0
 --- !u!224 &757602815
 RectTransform:
@@ -250,7 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
   _monoInstallers:
   - {fileID: 1239954548}
   _installerPrefabs: []
@@ -270,8 +271,7 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames:
   - Popups
-  _parentContractNames:
-  - Loader
+  _parentContractNames: []
 --- !u!4 &1239954547
 Transform:
   m_ObjectHideFlags: 0

@@ -1062,8 +1062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers:
-  - {fileID: 11400000, guid: fff34ad03f349a94d887a13555bbb987, type: 2}
+  _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1452349660}
   _installerPrefabs: []
@@ -1083,7 +1082,8 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames:
   - Loader
-  _parentContractNames: []
+  _parentContractNames:
+  - Popups
 --- !u!4 &1452349659
 Transform:
   m_ObjectHideFlags: 0
