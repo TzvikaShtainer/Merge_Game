@@ -58,7 +58,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
         {
             Application.targetFrameRate = 60;
 
+        #if !UNITY_EDITOR
             SceneManager.LoadSceneAsync("Loader", LoadSceneMode.Additive);
+        #endif
         }
     }
 }
