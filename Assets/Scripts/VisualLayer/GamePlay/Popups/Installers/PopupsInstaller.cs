@@ -1,5 +1,8 @@
-﻿using DataLayer.DataTypes.abilities;
+﻿using DataLayer.DataTypes;
+using DataLayer.DataTypes.abilities;
+using ServiceLayer.GameScenes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
@@ -9,6 +12,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
 {
     public class PopupsInstaller : MonoInstaller<PopupsInstaller>
     {
+        [Inject]
+        private IGameScenesService _scenesService;
+        
         [SerializeField] 
         private RectTransform _parentPopupCanvasTransform;
         
@@ -20,6 +26,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
         
         [SerializeField]
         private SettingsMenuPopup settingsMenuPopupPrefabRef;
+        
+        [SerializeField]
+        private InternetConnectionPopup.InternetConnectionPopup _internetConnectionPopup;
         public override void InstallBindings()
         {
             Container
@@ -38,8 +47,18 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .BindFactory<SettingsMenuPopup, SettingsMenuPopup.Factory>()
                 .FromComponentInNewPrefab(settingsMenuPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
+            
+            Container
+                .BindFactory<YesNoPopupArgs, InternetConnectionPopup.InternetConnectionPopup,  InternetConnectionPopup.InternetConnectionPopup.Factory>()
+                .FromComponentInNewPrefab(_internetConnectionPopup)
+                .UnderTransform(_parentPopupCanvasTransform);
         }
         
-        
+        private async void Awake()
+        {
+            Application.targetFrameRate = 60;
+
+            SceneManager.LoadSceneAsync("Loader", LoadSceneMode.Additive);
+        }
     }
 }

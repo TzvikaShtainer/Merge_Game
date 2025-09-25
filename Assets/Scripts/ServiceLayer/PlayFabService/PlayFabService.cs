@@ -12,7 +12,7 @@ namespace ServiceLayer.PlayFabService
     {
         public async UniTask<bool> Login()
         {
-            int tryConnectionTimeInSeconds = 5;
+            int tryConnectionTimeInSeconds = 3;
             var tcs = new UniTaskCompletionSource<bool>();
 
             var request = new LoginWithCustomIDRequest

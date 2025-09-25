@@ -13,6 +13,7 @@ using ServiceLayer.Utilis;
 using Unity.VisualScripting;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
+using VisualLayer.GamePlay.Popups.InternetConnectionPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
 using Zenject;
 
@@ -33,7 +34,7 @@ namespace VisualLayer.Loader
         private SignalBus _signalBus;
         
         [Inject]
-        private YesNoPopup.Factory _yesNoPopupFactory;
+        private InternetConnectionPopup.Factory _internetConnectionPopupFactory;
         
         [Inject]
         private ITimeController _timeController;
@@ -55,8 +56,6 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
-            Application.targetFrameRate = 360;
-            
             await LoadGameScene();
         }
 
@@ -89,14 +88,14 @@ namespace VisualLayer.Loader
             {
                 var popupArgs = new YesNoPopupArgs()
                 {
-                    Text = "Failed to login to game",
+                    Text = "Failed To Login To Game",
                     YesCaption = "Try again",
                     NoCaption = "Exit Game",
                     IsNoButtonVisible = true,
                 };
 
-                var yesNoPopup = _yesNoPopupFactory.Create(popupArgs);
-                var result = await yesNoPopup.WaitForResult();
+                var internetConnectionPopup = _internetConnectionPopupFactory.Create(popupArgs);
+                var result = await internetConnectionPopup.WaitForResult();
 
                 if (result.IsYes)
                 {
@@ -109,7 +108,7 @@ namespace VisualLayer.Loader
                 }
                 else
                 {
-                    Debug.Log("Exit Game");
+                   Application.Quit();
                 }
             }
         }
@@ -117,7 +116,7 @@ namespace VisualLayer.Loader
 
         private async Task<bool> TryLoginToGame()
         {
-            const int maxRetries = 1; //cahange to 3
+            const int maxRetries = 3; 
             const int delayBetweenRetriesMs = 1500;
 
             
