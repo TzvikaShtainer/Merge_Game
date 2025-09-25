@@ -115,6 +115,7 @@ namespace VisualLayer.GamePlay.Abilities
             }
             
             var newItem = _itemFactory.Create(upgradedLevel,currItemPos);
+            newItem.MakeItemFall(true);
             
             _effectsManager.PlayEffect(EffectType.DestroyAbility, currItemPos);
             _sfxService.PlaySfxType(SfxType.DestroyAbility);
