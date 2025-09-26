@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prodaction/Loader.unity
     guid: cf1590683129f1e4eafde84788f4521d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Prodaction/StartScreen.unity
     guid: 27e02daecc0e9e64e95fcb81885f56a0
   - enabled: 1

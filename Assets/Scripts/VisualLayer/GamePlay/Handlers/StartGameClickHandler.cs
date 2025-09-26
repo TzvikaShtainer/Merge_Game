@@ -3,6 +3,8 @@ using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
+using ServiceLayer.Signals.SignalsClasses;
+using ServiceLayer.Utilis;
 using VisualLayer.Loader;
 using Zenject;
 
@@ -14,7 +16,7 @@ namespace VisualLayer.GamePlay.Handlers
         private ILoader _loader;
         
         [Inject]
-        private IGameScenesService scenesService;
+        private IGameScenesService _scenesService;
 
         [Inject] 
         private IDataLayer _dataLayer;
@@ -22,34 +24,38 @@ namespace VisualLayer.GamePlay.Handlers
         [Inject]
         private IServerService _serverService;
         
+        [Inject]
+        private GameStartupCoordinator  _gameStartupCoordinator;
+        
+        [Inject]
+        private SignalBus _signalBus;
+        
         
         public async void Execute()
         {
             _loader.ResetData();
             await _loader.FadeIn();
-            //await UniTask.Delay(500);
-            //_loader.SetProgress(0.2f, "Loading Level 20%");
             await _loader.AnimateProgressTo(0.2f, 0.5f);
 
-            await _serverService.Login();
-            await _dataLayer.Balances.LoadFromServer();
+            //await _serverService.Login();
+            //await _dataLayer.Balances.LoadFromServer();
             
             await UniTask.Delay(1000);
             
-            await scenesService.UnloadLevelScene(GameLevelType.StartScreen);
-                
-            //await UniTask.Delay(1000);
-            //_loader.SetProgress(0.5f, "Loading Level 50%");
+            await _scenesService.UnloadLevelScene(GameLevelType.StartScreen);
+            
             await _loader.AnimateProgressTo(0.5f, 1f);
 
 
-            await scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
-            //await UniTask.Delay(500);
-            //_loader.SetProgress(1f, "Loading Level 100%");
+            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+            
+            await _gameStartupCoordinator.LoadAllDataFromServer();
+            
             await _loader.AnimateProgressTo(1f, 0.5f);
-
             
             _loader.FadeOut();
+            
+            _signalBus.Fire<UnpauseInputSignal>();
         }
     }
 }

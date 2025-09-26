@@ -142,11 +142,12 @@ namespace VisualLayer.Loader
         {
             await _loader.AnimateProgressTo(0.5f, 0.5f);
             
-            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+            //await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
             
             await _loader.AnimateProgressTo(0.7f, 0.5f);
             
-            await _gameStartupCoordinator.LoadAllDataFromServer();
+           // await _gameStartupCoordinator.LoadAllDataFromServer();
             
             await _loader.AnimateProgressTo(1.0f, 0.5f);
             
