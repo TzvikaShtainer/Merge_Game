@@ -1,6 +1,7 @@
 ﻿using Blast.ServiceLayer.GameScenes;
 using ServiceLayer.EffectsService;
 using ServiceLayer.GameScenes;
+using ServiceLayer.HourlyCoinsService;
 using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
@@ -55,6 +56,11 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<ISfxService>()
                 .To<FMODSfxService>()
+                .AsSingle();
+            
+            Container
+                .Bind<IHourlyCoinsService>()
+                .To<PlayFabHourlyCoinsService>()
                 .AsSingle();
             
             Container.Bind<GameStartupCoordinator>().AsSingle();

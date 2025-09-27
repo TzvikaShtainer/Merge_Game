@@ -146,6 +146,8 @@ namespace VisualLayer.Loader
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
             
+            await _gameStartupCoordinator.LoadAllDataFromServer();
+            
             await _loader.FadeOut();
             
             _signalBus.Fire<UnpauseInputSignal>();

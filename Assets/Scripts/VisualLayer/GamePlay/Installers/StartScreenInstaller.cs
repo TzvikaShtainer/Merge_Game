@@ -1,7 +1,10 @@
 ﻿using System;
 using DataLayer.DataTypes;
+using ServiceLayer.HourlyCoinsService;
+using Unity.VisualScripting;
 using UnityEngine;
 using VisualLayer.Factories;
+using VisualLayer.GamePlay.Buttons;
 using VisualLayer.GamePlay.Handlers;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.MergeItems;
@@ -33,6 +36,11 @@ namespace VisualLayer.GamePlay.Installers
             Container
                 .Bind<IStartGameClickHandler>()
                 .To<StartGameClickHandler>()
+                .AsSingle();
+            
+            Container
+                .Bind<IHourlyCoinsClickHandler>()
+                .To<HourlyCoinsClickHandler>()
                 .AsSingle();
             
             //Debug.Log("InstallBindings Ended");

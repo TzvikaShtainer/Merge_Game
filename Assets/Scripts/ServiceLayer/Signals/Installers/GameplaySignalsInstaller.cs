@@ -38,7 +38,7 @@ namespace ServiceLayer.Signals.Installers
             
             Container.DeclareSignal<GamePlayReadySignal>();
             
-            Debug.Log("FINISH SIGNAL BUS");
+            //Debug.Log("FINISH SIGNAL BUS");
         }
     }
 }
