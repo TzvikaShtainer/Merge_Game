@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Extensions;
 using TMPro;
@@ -29,6 +30,12 @@ namespace VisualLayer.Loader
         #endregion
         
         #region Methods
+
+        public async UniTask InitLoader()
+        {
+            ResetData();
+            await FadeIn();
+        }
 
         public void ResetData()
         {

@@ -56,13 +56,12 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
-            await LoadGameScene();
+            await LoadScene();
         }
 
-        private async Task LoadGameScene()
+        private async Task LoadScene()
         {
-            _loader.ResetData();
-            await _loader.FadeIn();
+            await _loader.InitLoader();
             
             await UniTask.Delay(500);
             await _loader.AnimateProgressTo(0.2f, 0.5f);
@@ -137,21 +136,17 @@ namespace VisualLayer.Loader
             return false; 
             
         }
-        
         private async Task LoadGame()
         {
             await _loader.AnimateProgressTo(0.5f, 0.5f);
             
-            //await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
-            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
-            
             await _loader.AnimateProgressTo(0.7f, 0.5f);
-            
-           // await _gameStartupCoordinator.LoadAllDataFromServer();
             
             await _loader.AnimateProgressTo(1.0f, 0.5f);
             
-            _loader.FadeOut();
+            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
+            
+            await _loader.FadeOut();
             
             _signalBus.Fire<UnpauseInputSignal>();
         }

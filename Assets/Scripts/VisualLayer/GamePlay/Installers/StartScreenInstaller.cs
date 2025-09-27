@@ -37,11 +37,5 @@ namespace VisualLayer.GamePlay.Installers
             
             //Debug.Log("InstallBindings Ended");
         }
-
-        private void Awake()
-        {
-            //Debug.Log("StartScreenInstaller Awake");
-            //InstallBindings();
-        }
     }
 }

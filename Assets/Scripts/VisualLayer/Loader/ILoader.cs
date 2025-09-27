@@ -1,5 +1,6 @@
 ﻿
 
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
 namespace VisualLayer.Loader
@@ -8,6 +9,7 @@ namespace VisualLayer.Loader
     {
         #region Methods
 
+        UniTask InitLoader();
         void ResetData();
         
         UniTask FadeIn();

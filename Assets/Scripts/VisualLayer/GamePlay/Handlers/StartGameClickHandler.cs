@@ -33,27 +33,23 @@ namespace VisualLayer.GamePlay.Handlers
         
         public async void Execute()
         {
-            _loader.ResetData();
-            await _loader.FadeIn();
+            await _loader.InitLoader();
+            
             await _loader.AnimateProgressTo(0.2f, 0.5f);
-
-            //await _serverService.Login();
-            //await _dataLayer.Balances.LoadFromServer();
             
             await UniTask.Delay(1000);
             
             await _scenesService.UnloadLevelScene(GameLevelType.StartScreen);
             
             await _loader.AnimateProgressTo(0.5f, 1f);
-
-
+            
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
             await _gameStartupCoordinator.LoadAllDataFromServer();
             
             await _loader.AnimateProgressTo(1f, 0.5f);
             
-            _loader.FadeOut();
+            await _loader.FadeOut();
             
             _signalBus.Fire<UnpauseInputSignal>();
         }

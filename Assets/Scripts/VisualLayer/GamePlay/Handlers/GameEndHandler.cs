@@ -78,8 +78,8 @@
                 }
                 else
                 {
-                    _loader.ResetData();
-                    await _loader.FadeIn();
+                    await _loader.InitLoader();
+                    
                     //await UniTask.Delay(TimeSpan.FromSeconds(1));
                     //_loader.SetProgress(0.2f, "Loading Level 20%");
                     await _loader.AnimateProgressTo(0.2f, 1f);
