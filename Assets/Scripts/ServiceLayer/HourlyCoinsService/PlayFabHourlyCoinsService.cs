@@ -16,7 +16,7 @@ namespace ServiceLayer.HourlyCoinsService
         [Inject]
         private IDataLayer _dataLayer;
         
-        private const int CooldownSeconds = 60;  //3600
+        private const int CooldownSeconds = 3600;  //3600
         private DateTime _lastClaimUtc;
         private int _hourlyCoinsToAdd = 10;
         
