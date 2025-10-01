@@ -4,7 +4,7 @@ using Zenject;
 
 namespace VisualLayer.GamePlay.Buttons
 {
-    public class EnterLevelButton : MonoBehaviour
+    public class EnterLevelButton : UIButtonFeedback
     {
         [Inject]
         private IStartGameClickHandler _enterLevelHandler;
@@ -12,6 +12,7 @@ namespace VisualLayer.GamePlay.Buttons
         
         public void OnClick()
         {
+            base.OnClick();
             _enterLevelHandler.Execute();
         }
     }

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace VisualLayer.GamePlay.Buttons
 {
-    public class HourlyCoinsButton : MonoBehaviour
+    public class HourlyCoinsButton : UIButtonFeedback
     {
         [Inject]
         private IHourlyCoinsClickHandler _hourlyCoinsClickHandler;
@@ -34,6 +34,7 @@ namespace VisualLayer.GamePlay.Buttons
 
         public void OnClick()
         {
+            base.OnClick();
             _hourlyCoinsClickHandler.Execute();
         }
     }
