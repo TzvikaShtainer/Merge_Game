@@ -28,12 +28,12 @@ namespace ServiceLayer.HourlyCoinsService
             if (data.TryGetValue("LastClaimUtc", out var lastClaimUtcSaved))
             {
                 _lastClaimUtc = DateTime.Parse(lastClaimUtcSaved).ToUniversalTime();
-                Debug.Log("have lasttime");
+                //Debug.Log("have lasttime");
             }
             else
             {
                 _lastClaimUtc = DateTime.MinValue;
-                Debug.Log("else");
+                //Debug.Log("else");
             }
         }
 

@@ -16,11 +16,6 @@ namespace VisualLayer.GamePlay.Handlers
             {
                 _hourlyCoinsService.Claim();
             }
-            else
-            {
-                Debug.Log(
-                    $"⏳ עוד {remaining.Minutes:D2}:{remaining.Seconds:D2} עד שזמין שוב");
-            }
         }
     }
 }
