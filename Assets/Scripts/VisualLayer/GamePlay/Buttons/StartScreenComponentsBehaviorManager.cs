@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using ServiceLayer.Signals.SignalsClasses;
 using UnityEngine;
+using Zenject;
 
 namespace VisualLayer.GamePlay.Buttons
 {
@@ -14,6 +17,9 @@ namespace VisualLayer.GamePlay.Buttons
     }
     public class StartScreenComponentsBehaviorManager : MonoBehaviour
     {
+        [Inject]
+        private SignalBus  _signalBus;
+        
         [SerializeField] 
         private MonoBehaviour[] _UIComponents;
         
@@ -25,6 +31,19 @@ namespace VisualLayer.GamePlay.Buttons
         private void Awake()
         {
             _components = _UIComponents.OfType<IUIComponentBehavior>().ToArray();
+            
+            _signalBus.Subscribe<UIComponentsInBehaviorSignal>(UIComponentsInBehavior);
+            _signalBus.Subscribe<UIComponentsOutBehaviorSignal>(UIComponentsOutBehavior);
+        }
+
+        private async void UIComponentsOutBehavior()
+        {
+            await UniTask.WhenAll(_components.Select(c => c.AnimateOut(animationDuration)));
+        }
+
+        private async void UIComponentsInBehavior()
+        {
+            await UniTask.WhenAll(_components.Select(c => c.AnimateIn(animationDuration)));
         }
 
         private async void Start()
@@ -33,14 +52,6 @@ namespace VisualLayer.GamePlay.Buttons
             {
                 component.PrepareOffscreen();
             }
-            
-            await UniTask.Delay(7000); //change to signal
-            
-            await UniTask.WhenAll(_components.Select(c => c.AnimateIn(animationDuration)));
-            
-            //For Animation Out
-            //await UniTask.WhenAll(_components.Select(c => c.AnimateOut(animationDuration)));
-
         }
     }
 }

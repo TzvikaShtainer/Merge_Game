@@ -25,6 +25,8 @@ namespace ServiceLayer.Signals.Installers
             //UI Signals
             Container.DeclareSignal<EnableUISignal>();
             Container.DeclareSignal<DisableUISignal>();
+            Container.DeclareSignal<UIComponentsInBehaviorSignal>();
+            Container.DeclareSignal<UIComponentsOutBehaviorSignal>();
 
             
             //Psychics Signals

@@ -151,6 +151,8 @@ namespace VisualLayer.Loader
             await _loader.FadeOut();
             
             _signalBus.Fire<UnpauseInputSignal>();
+            
+            _signalBus.Fire<UIComponentsInBehaviorSignal>();
         }
     }
 }
