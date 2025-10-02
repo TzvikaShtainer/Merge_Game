@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using EasyUI.PickerWheelUI;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using VisualLayer.GamePlay.Handlers;
 using Zenject;
@@ -15,7 +18,14 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         #endregion
         
         #region Editor
-        [SerializeField] Button _spinTheWheelButton;
+        [SerializeField] 
+        private Button _spinTheWheelButton;
+        
+        [SerializeField]
+        private TextMeshProUGUI  _spinTheWheelText;
+        
+        [SerializeField]
+        private PickerWheel _pickerWheel;
         
         #endregion
         
@@ -24,8 +34,28 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
 
         public void OnSpinBtnClick()
         {
-            Close();
+            _pickerWheel.Spin();
         }
+
+        private void Start()
+        {
+            _spinTheWheelButton.onClick.AddListener(() =>
+            {
+                _spinTheWheelButton.interactable = false;
+                _spinTheWheelText.text = "Spinning";
+                
+                _pickerWheel.OnSpinEnd(wheelPiece =>
+                {
+                    _spinTheWheelButton.interactable = true;
+                    _spinTheWheelText.text = "Spin";
+                });
+                
+                
+                
+                _pickerWheel.Spin();
+            });
+        }
+
         #endregion
     }
 }

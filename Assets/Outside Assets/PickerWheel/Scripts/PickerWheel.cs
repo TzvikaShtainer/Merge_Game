@@ -27,7 +27,8 @@ namespace EasyUI.PickerWheelUI {
 
       [Space]
       [Header ("Picker wheel settings :")]
-      [Range (1, 20)] public int spinDuration = 8 ;
+      [SerializeField] private int spinRounds = 5;
+      [SerializeField] private float spinTime = 3f; 
       [SerializeField] [Range (.2f, 2f)] private float wheelSize = 1f ;
 
       [Space]
@@ -116,59 +117,28 @@ namespace EasyUI.PickerWheelUI {
       }
 
 
-      public void Spin () {
-         if (!_isSpinning) {
-            _isSpinning = true ;
-            if (onSpinStartEvent != null)
-               onSpinStartEvent.Invoke () ;
+      public void Spin () 
+      {
+         if (_isSpinning) return;
 
-            int index = GetRandomPieceIndex () ;
-            WheelPiece piece = wheelPieces [ index ] ;
+         _isSpinning = true;
 
-            if (piece.Chance == 0 && nonZeroChancesIndices.Count != 0) {
-               index = nonZeroChancesIndices [ Random.Range (0, nonZeroChancesIndices.Count) ] ;
-               piece = wheelPieces [ index ] ;
-            }
+         int index = GetRandomPieceIndex();
+         WheelPiece piece = wheelPieces[index];
 
-            float angle = -(pieceAngle * index) ;
+         float anglePerPiece = 360f / wheelPieces.Length;
+         float targetAngle = -(anglePerPiece * index);
 
-            float rightOffset = (angle - halfPieceAngleWithPaddings) % 360 ;
-            float leftOffset = (angle + halfPieceAngleWithPaddings) % 360 ;
+         float totalAngle = targetAngle - (360f * spinRounds);
 
-            float randomAngle = Random.Range (leftOffset, rightOffset) ;
-
-            Vector3 targetRotation = Vector3.back * (randomAngle + 2 * 360 * spinDuration) ;
-
-            //float prevAngle = wheelCircle.eulerAngles.z + halfPieceAngle ;
-            float prevAngle, currentAngle ;
-            prevAngle = currentAngle = wheelCircle.eulerAngles.z ;
-
-            bool isIndicatorOnTheLine = false ;
-
-            wheelCircle
-            .DORotate (targetRotation, spinDuration, RotateMode.Fast)
-            .SetEase (Ease.InOutQuart)
-            .OnUpdate (() => {
-               float diff = Mathf.Abs (prevAngle - currentAngle) ;
-               if (diff >= halfPieceAngle) {
-                  if (isIndicatorOnTheLine) {
-                     audioSource.PlayOneShot (audioSource.clip) ;
-                  }
-                  prevAngle = currentAngle ;
-                  isIndicatorOnTheLine = !isIndicatorOnTheLine ;
-               }
-               currentAngle = wheelCircle.eulerAngles.z ;
-            })
-            .OnComplete (() => {
-               _isSpinning = false ;
-               if (onSpinEndEvent != null)
-                  onSpinEndEvent.Invoke (piece) ;
-
-               onSpinStartEvent = null ; 
-               onSpinEndEvent = null ;
-            }) ;
-
-         }
+         wheelCircle
+            .DORotate(new Vector3(0, 0, totalAngle), spinTime, RotateMode.FastBeyond360)
+            .SetEase(Ease.OutCubic) 
+            .OnComplete(() =>
+            {
+               _isSpinning = false;
+               onSpinEndEvent?.Invoke(piece);
+            });
       }
 
       private void FixedUpdate () {
