@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using VisualLayer.GamePlay.Handlers;
 using Zenject;
 
 namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
@@ -20,6 +21,11 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         
         #region Methods
         public void OnCloseBtnClick() => Close();
+
+        public void OnSpinBtnClick()
+        {
+            Close();
+        }
         #endregion
     }
 }

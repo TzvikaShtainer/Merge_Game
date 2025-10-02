@@ -14,6 +14,9 @@ namespace VisualLayer.GamePlay.Buttons
 
         protected  void Awake()
         {
+            if (button == null)
+                button = GetComponent<Button>();
+            
             _originalScale = transform.localScale;
             button.onClick.AddListener(OnClick);
         }

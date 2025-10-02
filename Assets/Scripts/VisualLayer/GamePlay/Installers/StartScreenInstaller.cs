@@ -44,8 +44,8 @@ namespace VisualLayer.GamePlay.Installers
                 .AsSingle();
 
             Container
-                .Bind<ISpinTheWheelHandler>()
-                .To<SpinTheWheelHandler>()
+                .Bind<ISpinTheWheelStartScreenHandler>()
+                .To<SpinTheWheelStartScreenHandler>()
                 .AsSingle();
 
             //Debug.Log("InstallBindings Ended");

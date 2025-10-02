@@ -1,6 +1,6 @@
 ﻿namespace VisualLayer.GamePlay.Handlers
 {
-    public interface ISpinTheWheelHandler
+    public interface ISpinTheWheelStartScreenHandler
     {
         void Execute();
     }

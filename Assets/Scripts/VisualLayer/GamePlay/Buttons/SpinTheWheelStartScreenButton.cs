@@ -3,14 +3,14 @@ using Zenject;
 
 namespace VisualLayer.GamePlay.Buttons
 {
-    public class SpinTheWheelButton : UIButtonFeedback
+    public class SpinTheWheelStartScreenButton : UIButtonFeedback
     {
         [Inject]
-        private ISpinTheWheelHandler  _spinTheWheelHandler;
+        private ISpinTheWheelStartScreenHandler  _spinTheWheelStartScreenHandler;
         public void OnClick()
         {
             base.OnClick();
-            _spinTheWheelHandler.Execute();
+            _spinTheWheelStartScreenHandler.Execute();
         }
     }
 }

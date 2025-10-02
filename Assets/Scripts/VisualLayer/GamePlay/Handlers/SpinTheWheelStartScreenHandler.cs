@@ -4,7 +4,7 @@ using Zenject;
 
 namespace VisualLayer.GamePlay.Handlers
 {
-    public class SpinTheWheelHandler : ISpinTheWheelHandler
+    public class SpinTheWheelStartScreenHandler : ISpinTheWheelStartScreenHandler
     {
         [Inject]
         private SpinTheWheelPopup.Factory _spinTheWheelPopupFactory;
