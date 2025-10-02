@@ -42,7 +42,12 @@ namespace VisualLayer.GamePlay.Installers
                 .Bind<IHourlyCoinsClickHandler>()
                 .To<HourlyCoinsClickHandler>()
                 .AsSingle();
-            
+
+            Container
+                .Bind<ISpinTheWheelHandler>()
+                .To<SpinTheWheelHandler>()
+                .AsSingle();
+
             //Debug.Log("InstallBindings Ended");
         }
     }

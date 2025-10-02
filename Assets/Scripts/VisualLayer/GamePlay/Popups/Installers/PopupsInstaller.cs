@@ -29,6 +29,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
         
         [SerializeField]
         private InternetConnectionPopup.InternetConnectionPopup _internetConnectionPopup;
+        
+        [SerializeField]
+        private SpinTheWheelPopup.SpinTheWheelPopup  _spinTheWheelPopupPrefabRef;
         public override void InstallBindings()
         {
             Container
@@ -51,6 +54,11 @@ namespace VisualLayer.GamePlay.Popups.Installers
             Container
                 .BindFactory<YesNoPopupArgs, InternetConnectionPopup.InternetConnectionPopup,  InternetConnectionPopup.InternetConnectionPopup.Factory>()
                 .FromComponentInNewPrefab(_internetConnectionPopup)
+                .UnderTransform(_parentPopupCanvasTransform);
+            
+            Container
+                .BindFactory<SpinTheWheelPopup.SpinTheWheelPopup, SpinTheWheelPopup.SpinTheWheelPopup.Factory>()
+                .FromComponentInNewPrefab(_spinTheWheelPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
         }
         

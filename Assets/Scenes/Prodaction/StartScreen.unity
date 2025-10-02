@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 77400773}
   - component: {fileID: 77400772}
   - component: {fileID: 77400771}
+  - component: {fileID: 77400774}
   m_Layer: 5
   m_Name: WheelBtn
   m_TagString: Untagged
@@ -381,7 +382,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 77400772}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 77400774}
+        m_TargetAssemblyTypeName: VisualLayer.GamePlay.Buttons.SpinTheWheelButton,
+          Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &77400772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +434,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77400769}
   m_CullTransparentMesh: 1
+--- !u!114 &77400774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77400769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4581ad8688484735b8b8cf24d225a015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 77400771}
+  scaleUp: 1.1
+  scaleDuration: 0.1
 --- !u!1 &346768068
 GameObject:
   m_ObjectHideFlags: 0
