@@ -47,6 +47,14 @@ namespace VisualLayer.GamePlay.Abilities
             DataLayer.Balances.RemoveCoins(AbilityDataSo.Cost);
         }
 
+        public void AddAbilityCount(int amountToAdd)
+        {
+            Count += amountToAdd;
+            Debug.Log("AddAbilityCount");
+            Debug.Log($"Adding ability count {amountToAdd}");
+            Debug.Log($"Adding  count Now {Count}");
+        }
+
         public bool IsFirstTime()
         {
             return IsFirstTimeUse;

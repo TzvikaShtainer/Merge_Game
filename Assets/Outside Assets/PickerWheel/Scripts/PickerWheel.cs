@@ -133,11 +133,25 @@ namespace EasyUI.PickerWheelUI {
 
          wheelCircle
             .DORotate(new Vector3(0, 0, totalAngle), spinTime, RotateMode.FastBeyond360)
-            .SetEase(Ease.OutCubic) 
+            .SetEase(Ease.OutCubic)
             .OnComplete(() =>
             {
                _isSpinning = false;
-               onSpinEndEvent?.Invoke(piece);
+               
+               float finalZ = wheelCircle.eulerAngles.z % 360f;
+               if (finalZ < 0) finalZ += 360f;
+
+               float anglePerPiece = 360f / wheelPieces.Length;
+               
+               finalZ += anglePerPiece / 2f;
+               finalZ %= 360f;
+
+               int finalIndex = Mathf.FloorToInt(finalZ / anglePerPiece);
+               WheelPiece finalPiece = wheelPieces[finalIndex];
+
+               //Debug.Log($"🎯 Corrected Index: {finalIndex}, Label: {finalPiece.Label}, Amount: {finalPiece.Amount}");
+
+               onSpinEndEvent?.Invoke(finalPiece);
             });
       }
 
@@ -180,9 +194,6 @@ namespace EasyUI.PickerWheelUI {
                nonZeroChancesIndices.Add (i) ;
          }
       }
-
-
-
 
       private void OnValidate () {
          if (PickerWheelTransform != null)

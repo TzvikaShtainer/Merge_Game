@@ -304,6 +304,7 @@ MonoBehaviour:
   settingsMenuPopupPrefabRef: {fileID: 97610254448028388, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
   _internetConnectionPopup: {fileID: 2295269995137708215, guid: 290d16d5908a51244a83a9624e13f5c1, type: 3}
   _spinTheWheelPopupPrefabRef: {fileID: -2871210500984260776, guid: 3c92501a5ec95d646a71c53718fb6d51, type: 3}
+  _pickerWheel: {fileID: 0}
 --- !u!1001 &1910715666
 PrefabInstance:
   m_ObjectHideFlags: 0

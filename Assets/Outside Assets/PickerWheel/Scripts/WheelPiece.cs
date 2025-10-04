@@ -1,10 +1,12 @@
 ﻿using UnityEngine ;
+using VisualLayer.GamePlay.RewardSystem;
 
 namespace EasyUI.PickerWheelUI {
    [System.Serializable]
    public class WheelPiece {
       public UnityEngine.Sprite Icon ;
       public string Label ;
+      public RewardType rewardType ;
 
       [Tooltip ("Reward amount")] public int Amount ;
 

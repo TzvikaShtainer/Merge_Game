@@ -23,8 +23,8 @@ namespace VisualLayer.GamePlay.Popups
         {
             transform.localScale = Vector3.zero;
         }
-        
-        private void OnEnable()
+
+        protected void OnEnable()
         {
             transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
         }

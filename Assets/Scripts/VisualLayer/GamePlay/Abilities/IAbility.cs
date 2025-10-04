@@ -9,6 +9,8 @@ namespace VisualLayer.GamePlay.Abilities
         AbilityDataSO Data { get; }
         public void UseAbility();
         public void Buy();
+
+        public void AddAbilityCount(int amountToAdd);
         public bool IsFirstTime();
         void SetFirstTime(bool value);
     }

@@ -1,11 +1,14 @@
 ﻿using DataLayer.DataTypes;
 using DataLayer.DataTypes.abilities;
+using EasyUI.PickerWheelUI;
 using ServiceLayer.GameScenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using VisualLayer.GamePlay.Handlers.StartScene;
 using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
+using VisualLayer.GamePlay.RewardSystem;
 using Zenject;
 
 namespace VisualLayer.GamePlay.Popups.Installers
@@ -32,6 +35,7 @@ namespace VisualLayer.GamePlay.Popups.Installers
         
         [SerializeField]
         private SpinTheWheelPopup.SpinTheWheelPopup  _spinTheWheelPopupPrefabRef;
+        
         public override void InstallBindings()
         {
             Container
@@ -60,6 +64,17 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .BindFactory<SpinTheWheelPopup.SpinTheWheelPopup, SpinTheWheelPopup.SpinTheWheelPopup.Factory>()
                 .FromComponentInNewPrefab(_spinTheWheelPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
+
+            Container
+                .Bind<IRewardSystem>()
+                .To<RewardSystem.RewardSystem>()
+                .AsSingle();
+            
+            Container
+                .Bind<IWheelHandler>()
+                .To<WheelHandler>()
+                .AsSingle();
+
         }
         
         private async void Awake()
