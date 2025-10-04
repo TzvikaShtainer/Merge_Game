@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using VisualLayer.GamePlay.Handlers.StartScene;
 using VisualLayer.GamePlay.Popups.MusicMenuPopup;
+using VisualLayer.GamePlay.Popups.SpinTheWheelPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
 using VisualLayer.GamePlay.RewardSystem;
 using Zenject;
@@ -35,6 +36,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
         
         [SerializeField]
         private SpinTheWheelPopup.SpinTheWheelPopup  _spinTheWheelPopupPrefabRef;
+        
+        [SerializeField]
+        private SpinWinPopup  _spinWinPopupPrefabRef;
         
         public override void InstallBindings()
         {
@@ -74,6 +78,11 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .Bind<IWheelHandler>()
                 .To<WheelHandler>()
                 .AsSingle();
+            
+            Container
+                .BindFactory<Sprite, int, SpinWinPopup, SpinWinPopup.Factory>()
+                .FromComponentInNewPrefab(_spinWinPopupPrefabRef)
+                .UnderTransform(_parentPopupCanvasTransform);
 
         }
         

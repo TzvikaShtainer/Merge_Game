@@ -14,6 +14,9 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         [Inject]
         private IWheelHandler  _wheelHandler;
         
+        [Inject]
+        private SpinWinPopup.Factory _spinWinPopupFactory;
+        
         #region Factories
         public class Factory : PlaceholderFactory<SpinTheWheelPopup>
         {
@@ -71,6 +74,8 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         {
             _spinTheWheelButton.interactable = true;
             _spinTheWheelText.text = "Spin";
+
+            _spinWinPopupFactory.Create(wheelPiece.Icon, wheelPiece.Amount);
         }
 
         #endregion
