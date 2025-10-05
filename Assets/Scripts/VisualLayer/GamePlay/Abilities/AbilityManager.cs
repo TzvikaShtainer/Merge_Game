@@ -81,19 +81,19 @@ namespace VisualLayer.GamePlay.Abilities
             SetFirstTimeFlagFromData(abilityId, true);
         }
 
-        public void AddAbilityCount(string abilityId, int amountToAdd)
+        public async void AddAbilityCount(string abilityId, int amountToAdd)
         {
-            Debug.Log($"Adding ability count {abilityId}");
-            if (_abilitiesDict.TryGetValue(abilityId, out var ability))
-            {
-                Debug.Log("inside");
-                ability.AddAbilityCount(amountToAdd);
+            var data = await _serverService.GetUserData(abilityId); 
+            
+            var abilityCount = data.Count;
+            abilityCount += amountToAdd;
+            
+            OnAbilityChanged?.Invoke(abilityId, abilityCount);
                 
-                _serverService.SetUserData(new Dictionary<string, string>
-                {
-                    {  ability.Id, ability.Count.ToString() }
-                }).Forget();
-            }
+            _serverService.SetUserData(new Dictionary<string, string>
+            {
+                {  abilityId, abilityCount.ToString() }
+            }).Forget();
             
             SetFirstTimeFlagFromData(abilityId, true);
         }
