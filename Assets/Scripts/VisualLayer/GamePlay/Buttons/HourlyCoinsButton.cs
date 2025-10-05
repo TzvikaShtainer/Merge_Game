@@ -23,7 +23,7 @@ namespace VisualLayer.GamePlay.Buttons
             if (_coinsService.CanClaim(out TimeSpan remaining))
             {
                 _hourlyCoinsButton.interactable = true;
-                _hourlyCoinsButtonText.text = $"{_coinsService.GetHourlyCoinsAmount().ToString()}";
+                _hourlyCoinsButtonText.text = $"{_coinsService.GetRewardAmount().ToString()}";
             }
             else
             {

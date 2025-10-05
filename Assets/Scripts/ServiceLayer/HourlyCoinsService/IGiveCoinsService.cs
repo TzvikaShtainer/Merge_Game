@@ -4,13 +4,8 @@ using ServiceLayer.PlayFabService;
 
 namespace ServiceLayer.HourlyCoinsService
 {
-    public interface IHourlyCoinsService
+    public interface IHourlyCoinsService : ICooldownService
     {
-        UniTask LoadFromServer();
-        UniTask<DateTime> GetServerTimeUtc();
-        bool CanClaim(out TimeSpan timeRemaining);
-        void Claim();
-        DateTime LastClaimTimeUtc { get; }
-        int GetHourlyCoinsAmount();
+        
     }
 }

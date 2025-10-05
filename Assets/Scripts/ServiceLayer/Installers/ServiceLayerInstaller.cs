@@ -63,6 +63,12 @@ namespace ServiceLayer.Installers
                 .To<PlayFabHourlyCoinsService>()
                 .AsSingle();
             
+            //---Zenject Dont Need To Bind An Abstract Class
+            /*Container
+                .Bind<ICooldownService>()
+                .To<BaseCooldownService>()
+                .AsSingle();*/
+            
             Container.Bind<GameStartupCoordinator>().AsSingle();
         }
     }
