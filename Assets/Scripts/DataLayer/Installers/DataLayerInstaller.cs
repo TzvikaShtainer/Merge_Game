@@ -7,6 +7,7 @@ using ServiceLayer.PlayFabService;
 using Unity.VisualScripting;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
+using VisualLayer.GamePlay.RewardSystem;
 using Zenject;
 
 namespace DataLayer.Installers
@@ -31,6 +32,9 @@ namespace DataLayer.Installers
         
         [SerializeField] 
         private SfxDatabase _sfxDatabase;
+        
+        [SerializeField]
+        public DailyRewardsConfig dailyRewardsConfig;
         
         public override void InstallBindings()
         {
@@ -109,6 +113,12 @@ namespace DataLayer.Installers
             Container
                 .Bind<AbilityManager>()
                 .AsSingle();
+            
+            Container
+                .BindInstance(dailyRewardsConfig)
+                .AsSingle();
+            
+            
         }
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine;
 using VisualLayer.Factories;
 using VisualLayer.GamePlay.Buttons;
 using VisualLayer.GamePlay.Handlers;
+using VisualLayer.GamePlay.Handlers.StartScene;
 using VisualLayer.GamePlay.PlayerInput;
+using VisualLayer.GamePlay.Popups.DailyRewardPopup;
 using VisualLayer.MergeItems;
 using VisualLayer.MergeItems.MergeSystem;
 using Zenject;
@@ -47,7 +49,12 @@ namespace VisualLayer.GamePlay.Installers
                 .Bind<ISpinTheWheelStartScreenHandler>()
                 .To<SpinTheWheelStartScreenHandler>()
                 .AsSingle();
-
+            
+            Container
+                .Bind<IDailyRewardHandler>()
+                .To<DailyRewardHandler>()
+                .AsSingle();
+            
             //Debug.Log("InstallBindings Ended");
         }
     }

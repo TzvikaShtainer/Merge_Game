@@ -10,6 +10,7 @@ using ServiceLayer.SpinTheWheelCooldownService;
 using ServiceLayer.TimeControl;
 using ServiceLayer.Utilis;
 using UnityEngine;
+using VisualLayer.GamePlay.Popups.DailyRewardPopup;
 using Zenject;
 
 namespace ServiceLayer.Installers
@@ -67,6 +68,11 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<ISpinTheWheelCooldownService>()
                 .To<PlayFabSpinTheWheelCooldownService>()
+                .AsSingle();
+            
+            Container
+                .Bind<IDailyRewardCooldownService>()
+                .To<PlayFabDailyRewardCooldownService>()
                 .AsSingle();
             
             //---Zenject Dont Need To Bind An Abstract Class

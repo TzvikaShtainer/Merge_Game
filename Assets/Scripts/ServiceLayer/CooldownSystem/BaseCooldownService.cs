@@ -26,9 +26,9 @@ namespace ServiceLayer
         private TimeSpan _serverOffset;
 
         public DateTime LastClaimTimeUtc => _lastClaimUtc;
-        
 
-        public async UniTask LoadFromServer()
+
+        public virtual async UniTask LoadFromServer()
         {
             var serverTime = await GetServerTimeUtc();
             _serverOffset = serverTime - DateTime.UtcNow;

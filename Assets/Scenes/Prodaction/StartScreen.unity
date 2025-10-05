@@ -899,6 +899,7 @@ GameObject:
   - component: {fileID: 549484476}
   - component: {fileID: 549484475}
   - component: {fileID: 549484474}
+  - component: {fileID: 549484477}
   m_Layer: 5
   m_Name: DailyRewardsBtn
   m_TagString: Untagged
@@ -969,7 +970,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 549484475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 549484477}
+        m_TargetAssemblyTypeName: VisualLayer.GamePlay.Handlers.StartScene.DailyRewardButton,
+          Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &549484475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,6 +1022,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549484472}
   m_CullTransparentMesh: 1
+--- !u!114 &549484477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549484472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aff412724e14b9e90cb3d8a80521cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
+  scaleUp: 1.1
+  scaleDuration: 0.1
 --- !u!1 &597116153
 GameObject:
   m_ObjectHideFlags: 0

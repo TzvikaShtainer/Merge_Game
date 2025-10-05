@@ -40,6 +40,9 @@ namespace VisualLayer.GamePlay.Popups.Installers
         [SerializeField]
         private SpinWinPopup  _spinWinPopupPrefabRef;
         
+        [SerializeField]
+        private DailyRewardPopup.DailyRewardPopup  _dailyRewardPopupPrefabRef;
+        
         public override void InstallBindings()
         {
             Container
@@ -83,7 +86,11 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .BindFactory<Sprite, int, SpinWinPopup, SpinWinPopup.Factory>()
                 .FromComponentInNewPrefab(_spinWinPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
-
+            
+            Container
+                .BindFactory<DailyRewardPopup.DailyRewardPopup,  DailyRewardPopup.DailyRewardPopup.Factory>()
+                .FromComponentInNewPrefab(_dailyRewardPopupPrefabRef)
+                .UnderTransform(_parentPopupCanvasTransform);
         }
         
         private async void Awake()
