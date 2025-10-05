@@ -1,5 +1,7 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using EasyUI.PickerWheelUI;
+using ServiceLayer.SpinTheWheelCooldownService;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +18,9 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         
         [Inject]
         private SpinWinPopup.Factory _spinWinPopupFactory;
+        
+        [Inject] 
+        private ISpinTheWheelCooldownService _spinTheWheelService;
         
         #region Factories
         public class Factory : PlaceholderFactory<SpinTheWheelPopup>
@@ -34,6 +39,8 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         [SerializeField]
         private PickerWheel _pickerWheel;
         public PickerWheel PickerWheel => _pickerWheel;
+        
+        private bool _isSpinning;
         
         #endregion
         
@@ -54,28 +61,45 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         {
             base.OnEnable();
             
-            _wheelHandler.OnSpinStarted += OnSpinStart;
+            _wheelHandler.OnSpinStarted += OnSpinStarted;
             _wheelHandler.OnSpinEnded += OnSpinEnd;
         }
 
         private void OnDisable()
         {
-            _wheelHandler.OnSpinStarted -= OnSpinStart;
+            _wheelHandler.OnSpinStarted -= OnSpinStarted;
             _wheelHandler.OnSpinEnded -= OnSpinEnd;
         }
 
-        private void OnSpinStart()
+        private void OnSpinStarted()
         {
+            _isSpinning = true;
             _spinTheWheelButton.interactable = false;
             _spinTheWheelText.text = "Spinning";
         }
-        
-        private void OnSpinEnd(WheelPiece wheelPiece)
-        {
-            _spinTheWheelButton.interactable = true;
-            _spinTheWheelText.text = "Spin";
 
+        private async  void OnSpinEnd(WheelPiece wheelPiece)
+        {
+            _isSpinning = false;
             _spinWinPopupFactory.Create(wheelPiece.Icon, wheelPiece.Amount);
+            await UniTask.Yield(); //for not spamming the spin btn
+        }
+        
+        private void Update()
+        {
+            if (_isSpinning)
+                return;
+            
+            if (_wheelHandler.CanSpin(out TimeSpan remaining))
+            {
+                _spinTheWheelButton.interactable = true;
+                _spinTheWheelText.text = "Spin";
+            }
+            else
+            {
+                _spinTheWheelButton.interactable = false;
+                _spinTheWheelText.text = $"{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+            }
         }
 
         #endregion

@@ -6,6 +6,7 @@ using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
+using ServiceLayer.SpinTheWheelCooldownService;
 using ServiceLayer.TimeControl;
 using ServiceLayer.Utilis;
 using UnityEngine;
@@ -61,6 +62,11 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<IHourlyCoinsService>()
                 .To<PlayFabHourlyCoinsService>()
+                .AsSingle();
+            
+            Container
+                .Bind<ISpinTheWheelCooldownService>()
+                .To<PlayFabSpinTheWheelCooldownService>()
                 .AsSingle();
             
             //---Zenject Dont Need To Bind An Abstract Class

@@ -31,19 +31,13 @@ namespace ServiceLayer
         public async UniTask LoadFromServer()
         {
             var serverTime = await GetServerTimeUtc();
-            _serverOffset = serverTime -  DateTime.UtcNow;
-            
-            var data = await _serverService.GetUserData("LastClaimUtc");
-            if (data.TryGetValue("LastClaimUtc", out var lastClaimUtcSaved))
-            {
-                _lastClaimUtc = DateTime.Parse(lastClaimUtcSaved).ToUniversalTime();
-                //Debug.Log("have lasttime");
-            }
+            _serverOffset = serverTime - DateTime.UtcNow;
+
+            var data = await _serverService.GetUserData(CooldownKey);
+            if (data.TryGetValue(CooldownKey, out var saved))
+                _lastClaimUtc = DateTime.Parse(saved).ToUniversalTime();
             else
-            {
                 _lastClaimUtc = DateTime.MinValue;
-                //Debug.Log("else");
-            }
         }
         
         public async UniTask<DateTime> GetServerTimeUtc()
@@ -91,7 +85,7 @@ namespace ServiceLayer
             
             _serverService.SetUserData(new Dictionary<string, string>
             {
-                {"LastClaimUtc", _lastClaimUtc.ToString("o")},
+                {CooldownKey, _lastClaimUtc.ToString("o")},
             });
 
             OnClaim();

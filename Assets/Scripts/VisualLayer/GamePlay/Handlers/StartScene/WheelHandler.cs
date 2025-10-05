@@ -1,5 +1,6 @@
 ﻿using System;
 using EasyUI.PickerWheelUI;
+using ServiceLayer.SpinTheWheelCooldownService;
 using UnityEngine;
 using VisualLayer.GamePlay.Popups.SpinTheWheelPopup;
 using VisualLayer.GamePlay.RewardSystem;
@@ -15,6 +16,9 @@ namespace VisualLayer.GamePlay.Handlers.StartScene
         [Inject]
         private IRewardSystem  _rewardSystem;
         
+        [Inject] 
+        private ISpinTheWheelCooldownService _cooldownService;
+        
         private PickerWheel _pickerWheel;
 
         public void SetWheel(PickerWheel wheel)
@@ -26,15 +30,23 @@ namespace VisualLayer.GamePlay.Handlers.StartScene
         private void OnWheelSpinEnd(WheelPiece wheelPiece)
         {
             _rewardSystem.GrandReward(wheelPiece);
-            
+            _cooldownService.Claim();
             OnSpinEnded?.Invoke(wheelPiece);
         }
         
+        public bool CanSpin(out TimeSpan remaining)
+        {
+            return _cooldownService.CanClaim(out remaining);
+        }
+
+        
         public void SpinWheel()
         {
-            _pickerWheel?.Spin();
+            if (!_cooldownService.CanClaim(out _)) return;
             
             OnSpinStarted?.Invoke();
+            
+            _pickerWheel?.Spin();
         }
     }
 }

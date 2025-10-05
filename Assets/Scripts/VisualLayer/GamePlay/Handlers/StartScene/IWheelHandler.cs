@@ -11,5 +11,7 @@ namespace VisualLayer.GamePlay.Handlers.StartScene
         public void SpinWheel();
 
         void SetWheel(PickerWheel pickerWheel);
+
+        public bool CanSpin(out TimeSpan remaining);
     }
 }
