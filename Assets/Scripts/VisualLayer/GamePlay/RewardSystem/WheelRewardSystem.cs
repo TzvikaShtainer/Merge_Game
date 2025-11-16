@@ -12,7 +12,7 @@ namespace VisualLayer.GamePlay.RewardSystem
         Skill
     }
     
-    public class RewardSystem : IRewardSystem
+    public class WheelRewardSystem : IRewardSystem
     {
         [Inject]
         private IDataLayer  _dataLayer;

@@ -12,7 +12,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
     public class PlayFabDailyRewardCooldownService : BaseCooldownService,  IDailyRewardCooldownService
     {
         protected override string CooldownKey => "DailyRewardLastClaimUtc";
-        protected override int CooldownSeconds => 10; //86400
+        protected override int CooldownSeconds => 1; //86400
         protected override int RewardAmount => 0; //no need
         
         private const string DayIndexKey = "DailyRewardDayIndex";
@@ -45,7 +45,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             _currentDayIndex++;
             
             if (_currentDayIndex > MaxDaysInWeek)
-                _currentDayIndex = 1;
+                _currentDayIndex = MaxDaysInWeek;
             
             var reward = _dailyRewardsConfig.GetRewardForDay(_currentDayIndex);
             

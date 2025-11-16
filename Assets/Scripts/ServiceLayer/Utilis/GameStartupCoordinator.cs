@@ -42,7 +42,7 @@ namespace ServiceLayer.Utilis
              await _gameSettingsService.LoadFromServer();
              await _hourlyCoinsService.LoadFromServer();
              await _spinTheWheelCooldownService.LoadFromServer();
-             await _dailyRewardCooldownService.LoadFromServer();
+             //await _dailyRewardCooldownService.LoadFromServer();
         }
 
         public async UniTask LoadAllDataFromDevice()

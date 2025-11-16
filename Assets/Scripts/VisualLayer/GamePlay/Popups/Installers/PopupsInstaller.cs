@@ -74,7 +74,7 @@ namespace VisualLayer.GamePlay.Popups.Installers
 
             Container
                 .Bind<IRewardSystem>()
-                .To<RewardSystem.RewardSystem>()
+                .To<RewardSystem.WheelRewardSystem>()
                 .AsSingle();
             
             Container
