@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3fa22b13964a8c647aeed523807582af
+guid: 01e11951b21ec7a418411e9cd9a73d8e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 563030187612718281
-    second: Torox_0
+      213: 1609860797289695837
+    second: "\u05DE\u05EA\u05E0\u05D4 \u05D9\u05D5\u05DE\u05D9\u05EA_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Torox_0
+      name: "\u05DE\u05EA\u05E0\u05D4 \u05D9\u05D5\u05DE\u05D9\u05EA_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 204
-        height: 156
+        x: 15
+        y: 6
+        width: 318
+        height: 319
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c44a7af8f840d700800000000000000
-      internalID: 563030187612718281
+      spriteID: d5a8740addf575610800000000000000
+      internalID: 1609860797289695837
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Torox_0: 563030187612718281
+      "\u05DE\u05EA\u05E0\u05D4 \u05D9\u05D5\u05DE\u05D9\u05EA_0": 1609860797289695837
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
