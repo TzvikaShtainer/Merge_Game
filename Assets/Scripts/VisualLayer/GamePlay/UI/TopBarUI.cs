@@ -5,7 +5,7 @@ using Zenject;
 
 namespace VisualLayer.GamePlay.UI
 {
-    public class StartScreenHudUI : MonoBehaviour
+    public class TopBarUI : MonoBehaviour
     {
         [SerializeField] 
         private TextMeshProUGUI _coinsBalanceText;
