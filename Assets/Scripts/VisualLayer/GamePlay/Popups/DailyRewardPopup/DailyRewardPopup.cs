@@ -54,7 +54,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             if (_dailyRewardService.CanClaim(out var remaining))
             {
                 claimButton.interactable = true;
-                timerText.text = "Claim Reward!";
+                timerText.text = "Tap to Collect";
             }
             else
             {

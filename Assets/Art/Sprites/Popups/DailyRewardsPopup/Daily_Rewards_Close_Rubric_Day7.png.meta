@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b2716162f46058e4a9525a7ad52001df
+guid: 2867da3a02c89d745bd9ed78867271aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4574005987340102277
-    second: LoseCockiesIcon_0
+      213: -1777514995295709437
+    second: "\u05DE\u05EA\u05E0\u05D4 \u05D1\u05E0\u05E4\u05E8\u05D3_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LoseCockiesIcon_0
+      name: "\u05DE\u05EA\u05E0\u05D4 \u05D1\u05E0\u05E4\u05E8\u05D3_0"
       rect:
         serializedVersion: 2
-        x: 39
-        y: 28
-        width: 646
-        height: 437
+        x: 22
+        y: 15
+        width: 638
+        height: 215
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58aaaeb16322a7f30800000000000000
-      internalID: 4574005987340102277
+      spriteID: 307187a878ff457e0800000000000000
+      internalID: -1777514995295709437
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LoseCockiesIcon_0: 4574005987340102277
+      "\u05DE\u05EA\u05E0\u05D4 \u05D1\u05E0\u05E4\u05E8\u05D3_0": -1777514995295709437
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
