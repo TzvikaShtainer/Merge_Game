@@ -1,6 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VisualLayer.GamePlay.RewardSystem;
+using VisualLayer.GamePlay.UI;
 using Zenject;
 
 namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
@@ -11,6 +13,9 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
 
         [Inject] 
         private IDailyRewardCooldownService _dailyRewardService;
+        
+        [Inject]
+        private DailyRewardsConfig _dailyRewardsConfig;
 
         #endregion
         
@@ -21,11 +26,21 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
         #endregion
 
         #region Editor
+        
+        [System.Serializable]
+        public class DailyRewardDayUI
+        {
+            public Transform rewardsContainer;
+            public GameObject hider;
+        }
+        
 
         [SerializeField] private Button claimButton;
         [SerializeField] private TextMeshProUGUI timerText;
         [SerializeField] private TextMeshProUGUI dayText;
-        [SerializeField] private Transform rewardsHidersTransforms;
+        
+        [SerializeField] private DailyRewardDayUI[] daysUI;
+        [SerializeField] private DailyRewardItemUI rewardItemPrefab;
 
         #endregion
 
@@ -46,7 +61,40 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
         
         private void RefreshStaticUI()
         {
-            SetRewardsHidersTransforms();
+            SetupRewardsVisuals();
+            UpdateHiders();
+        }
+
+        private void SetupRewardsVisuals()
+        {
+            if (rewardItemPrefab == null || _dailyRewardsConfig == null || daysUI == null || daysUI.Length == 0)
+                return;
+
+            int totalDays = Mathf.Min(_dailyRewardsConfig.TotalDays, daysUI.Length);
+
+            for (int day = 1; day <= totalDays; day++)
+            {
+                var dayUI = daysUI[day - 1];
+                var configDay = _dailyRewardsConfig.GetRewardForDay(day);
+
+                if (dayUI.rewardsContainer == null)
+                    continue;
+                
+                //clean childs
+                for (int i = dayUI.rewardsContainer.childCount - 1; i >= 0; i--)
+                {
+                    Destroy(dayUI.rewardsContainer.GetChild(i).gameObject);
+                }
+
+                if (configDay?.DailyRewards == null || configDay.DailyRewards.Count == 0)
+                    continue;
+
+                foreach (var reward in configDay.DailyRewards)
+                {
+                    var rewardItem = Instantiate(rewardItemPrefab, dayUI.rewardsContainer);
+                    rewardItem.Init(reward);
+                }
+            }
         }
 
         private void UpdateTimerAndButton()
@@ -65,24 +113,27 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             dayText.text = $"Day {_dailyRewardService.CurrentDayIndex()}/7";
         }
 
-        private void SetRewardsHidersTransforms()
+        private void UpdateHiders()
         {
-            int totalSlots = rewardsHidersTransforms.childCount;
-            int currentDayIndex = _dailyRewardService.CurrentDayIndex();
-            int claimedCount = Mathf.Clamp(currentDayIndex, 0, totalSlots);
+            int currentDayIndex = _dailyRewardService.CurrentDayIndex(); 
 
-            for (int i = 0; i < totalSlots; i++)
+            for (int i = 0; i < daysUI.Length; i++)
             {
-                bool isClaimed = i < claimedCount;
-                var hider = rewardsHidersTransforms.GetChild(i).gameObject;
-                hider.SetActive(!isClaimed);
+                var dayUI = daysUI[i];
+                if (dayUI.hider == null)
+                    continue;
+                
+                bool isClaimed = i < currentDayIndex; // i=0 => Day 1
+
+                dayUI.hider.SetActive(!isClaimed);
             }
         }
 
         public void OnClaimButtonClick()
         {
             _dailyRewardService.Claim();
-            SetRewardsHidersTransforms();
+            UpdateTimerAndButton();
+            UpdateHiders();
         }
         
         public void OnCloseBtnClick()

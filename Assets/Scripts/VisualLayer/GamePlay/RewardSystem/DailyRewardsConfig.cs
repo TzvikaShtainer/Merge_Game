@@ -21,7 +21,7 @@ namespace VisualLayer.GamePlay.RewardSystem
         }
 
         [Tooltip("List of rewards for 7 days")]
-        public List<DailyReward> rewards = new List<DailyReward>(7);
+        public List<DailyReward> rewards = new List<DailyReward>(6);
         
         public DailyReward GetRewardForDay(int dayIndex)
         {
