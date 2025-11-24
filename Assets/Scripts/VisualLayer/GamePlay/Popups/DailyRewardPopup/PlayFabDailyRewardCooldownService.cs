@@ -51,9 +51,9 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             
             var reward = _dailyRewardsConfig.GetRewardForDay(_currentDayIndex);
             
-            Debug.Log($"🎁 Claimed Day {_currentDayIndex}: {reward.rewardName} (+{reward.coins})");
+            //Debug.Log($"🎁 Claimed Day {_currentDayIndex}: {reward.rewardName} (+{reward.coins})");
             
-            _dataLayer.Balances.AddCoins(reward.coins);
+            //_dataLayer.Balances.AddCoins(reward.coins);
             
             _serverService.SetUserData(new Dictionary<string, string>
             {

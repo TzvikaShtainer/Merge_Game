@@ -1405,7 +1405,7 @@ MonoBehaviour:
   _nextText: {fileID: 924777981}
   _CollectText: {fileID: 275148060}
   _hourlyCoinsButtonText: {fileID: 414137212}
-  _timerText: {fileID: 0}
+  _timerText: {fileID: 674568194}
   _coinsImg: {fileID: 389545378}
 --- !u!1 &667140189
 GameObject:

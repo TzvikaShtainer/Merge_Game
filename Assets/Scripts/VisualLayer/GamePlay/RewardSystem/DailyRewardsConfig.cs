@@ -9,9 +9,15 @@ namespace VisualLayer.GamePlay.RewardSystem
         [System.Serializable]
         public class DailyReward
         {
-            public string rewardName;
-            public int coins;
-            public Sprite icon;
+            public List<Reward> DailyRewards;
+        }
+        
+        [System.Serializable]
+        public class Reward
+        {
+            public string RewardName;
+            public int RewardAmount;
+            public Sprite RewardIcon;
         }
 
         [Tooltip("List of rewards for 7 days")]

@@ -83,19 +83,44 @@ namespace VisualLayer.GamePlay.Abilities
 
         public async void AddAbilityCount(string abilityId, int amountToAdd)
         {
-            var data = await _serverService.GetUserData(abilityId); 
-            
-            var abilityCount = data.Count;
-            abilityCount += amountToAdd;
-            
-            OnAbilityChanged?.Invoke(abilityId, abilityCount);
-                
-            _serverService.SetUserData(new Dictionary<string, string>
+            if (string.IsNullOrEmpty(abilityId))
             {
-                {  abilityId, abilityCount.ToString() }
-            }).Forget();
+                Debug.LogError("AddAbilityCount called with null or empty abilityId");
+                return;
+            }
+
+            try
+            {
+                var data = await _serverService.GetUserData(abilityId); 
+                
+                int currentCount = 0;
+
+                if (data.TryGetValue(abilityId, out var storedValue))
+                {
+                    if (!int.TryParse(storedValue, out currentCount))
+                    {
+                        Debug.LogWarning(
+                            $"Ability '{abilityId}' has invalid value '{storedValue}', resetting to 0.");
+                        currentCount = 0;
+                    }
+                }
+                
+                var newCount = currentCount + amountToAdd;
+                Debug.Log($"[Ability:{abilityId}] {currentCount} → {newCount} (+{amountToAdd})");
+                
+                OnAbilityChanged?.Invoke(abilityId, newCount);
+                
+                await _serverService.SetUserData(new Dictionary<string, string>
+                {
+                    {  abilityId, newCount.ToString() }
+                });
             
-            SetFirstTimeFlagFromData(abilityId, true);
+                SetFirstTimeFlagFromData(abilityId, true);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to update ability '{abilityId}': {ex}");
+            }
         }
 
         public int GetAbilityCount(string abilityId)

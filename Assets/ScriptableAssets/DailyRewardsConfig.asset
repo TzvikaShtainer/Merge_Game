@@ -13,24 +13,19 @@ MonoBehaviour:
   m_Name: DailyRewardsConfig
   m_EditorClassIdentifier: 
   rewards:
-  - rewardName: 
-    coins: 10
-    icon: {fileID: 0}
-  - rewardName: 
-    coins: 20
-    icon: {fileID: 0}
-  - rewardName: 
-    coins: 30
-    icon: {fileID: 0}
-  - rewardName: 
-    coins: 40
-    icon: {fileID: 0}
-  - rewardName: 
-    coins: 50
-    icon: {fileID: 0}
-  - rewardName: 
-    coins: 60
-    icon: {fileID: 0}
-  - rewardName: 
-    coins: 100
-    icon: {fileID: 0}
+  - DailyRewards: []
+  - DailyRewards:
+    - RewardName: 
+      RewardAmount: 0
+      RewardIcon: {fileID: 0}
+  - DailyRewards:
+    - RewardName: 
+      RewardAmount: 0
+      RewardIcon: {fileID: 0}
+    - RewardName: 
+      RewardAmount: 0
+      RewardIcon: {fileID: 0}
+  - DailyRewards: []
+  - DailyRewards: []
+  - DailyRewards: []
+  - DailyRewards: []
