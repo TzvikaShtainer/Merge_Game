@@ -4,6 +4,7 @@ using DataLayer;
 using ServiceLayer;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
+using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.RewardSystem;
 using Zenject;
 
@@ -24,6 +25,9 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
         
         [Inject] 
         private IDataLayer _dataLayer;
+        
+        [Inject] 
+        private AbilityManager _abilityManager;
         
         [Inject] 
         private DailyRewardsConfig _dailyRewardsConfig;
@@ -49,17 +53,38 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             if (_currentDayIndex > MaxDaysInWeek)
                 _currentDayIndex = MaxDaysInWeek;
             
-            var reward = _dailyRewardsConfig.GetRewardForDay(_currentDayIndex);
+            var dailyReward = _dailyRewardsConfig.GetRewardForDay(_currentDayIndex);
             
-            //Debug.Log($"🎁 Claimed Day {_currentDayIndex}: {reward.rewardName} (+{reward.coins})");
-            
-            //_dataLayer.Balances.AddCoins(reward.coins);
+            if (dailyReward?.DailyRewards != null && dailyReward.DailyRewards.Count > 0)
+            {
+                ApplyDailyRewards(dailyReward);
+            }
             
             _serverService.SetUserData(new Dictionary<string, string>
             {
                 {CooldownKey, LastClaimTimeUtc.ToString("o")},
                 {DayIndexKey,  _currentDayIndex.ToString()}
             }).Forget();
+        }
+        
+        private void ApplyDailyRewards(DailyRewardsConfig.DailyReward dailyReward)
+        {
+            foreach (var reward in dailyReward.DailyRewards)
+            {
+                ApplySingleReward(reward);
+            }
+        }
+        
+        private void ApplySingleReward(DailyRewardsConfig.Reward reward)
+        {
+            if (reward.RewardName == "Coins")
+            {
+                _dataLayer.Balances.AddCoins(reward.RewardAmount);
+            }
+            else
+            {
+                _abilityManager.AddAbilityCount(reward.RewardName, reward.RewardAmount);
+            }
         }
 
 private bool HasCooldownPassed()

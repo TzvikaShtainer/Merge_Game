@@ -106,7 +106,7 @@ namespace VisualLayer.GamePlay.Abilities
                 }
                 
                 var newCount = currentCount + amountToAdd;
-                Debug.Log($"[Ability:{abilityId}] {currentCount} → {newCount} (+{amountToAdd})");
+                //Debug.Log($"[Ability:{abilityId}] {currentCount} → {newCount} (+{amountToAdd})");
                 
                 OnAbilityChanged?.Invoke(abilityId, newCount);
                 
