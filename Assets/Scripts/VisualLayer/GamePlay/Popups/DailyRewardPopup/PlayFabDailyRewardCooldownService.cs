@@ -87,25 +87,25 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             }
         }
 
-private bool HasCooldownPassed()
-{
-    var elapsed = System.DateTime.UtcNow - LastClaimTimeUtc;
-    return elapsed.TotalSeconds >= CooldownSeconds;
-}
-
-private void TryResetWeekIfNeeded()
-{
-    if (_currentDayIndex >= MaxDaysInWeek && HasCooldownPassed())
-    {
-        _currentDayIndex = 0; 
-
-        _serverService.SetUserData(new Dictionary<string, string>
+        private bool HasCooldownPassed()
         {
-            {CooldownKey, LastClaimTimeUtc.ToString("o")},
-            {DayIndexKey,  _currentDayIndex.ToString()}
-        }).Forget();
-    }
-}
+            var elapsed = System.DateTime.UtcNow - LastClaimTimeUtc;
+            return elapsed.TotalSeconds >= CooldownSeconds;
+        }
+
+        private void TryResetWeekIfNeeded()
+        {
+            if (_currentDayIndex >= MaxDaysInWeek && HasCooldownPassed())
+            {
+                _currentDayIndex = 0; 
+
+                _serverService.SetUserData(new Dictionary<string, string>
+                {
+                    {CooldownKey, LastClaimTimeUtc.ToString("o")},
+                    {DayIndexKey,  _currentDayIndex.ToString()}
+                }).Forget();
+            }
+        }
         public int CurrentDayIndex()
         { 
             TryResetWeekIfNeeded();
