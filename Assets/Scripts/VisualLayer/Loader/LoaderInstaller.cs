@@ -1,18 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.PlayFabService;
-using ServiceLayer.SaveSystem;
-using ServiceLayer.SettingsService;
 using ServiceLayer.Signals.SignalsClasses;
 using ServiceLayer.TimeControl;
 using ServiceLayer.Utilis;
-using Unity.VisualScripting;
 using UnityEngine;
-using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.Popups.InternetConnectionPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
 using Zenject;
@@ -62,23 +56,41 @@ namespace VisualLayer.Loader
         private async Task LoadScene()
         {
             await _loader.InitLoader();
-            
+
             await UniTask.Delay(500);
             await _loader.AnimateProgressTo(0.2f, 0.5f);
-            
-            await UniTask.Delay(500);
-            await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
-            
-            await _loader.AnimateProgressTo(0.35f, 0.5f);
-            
+
             if (await TryLoginToGame())
             {
+                await _loader.AnimateProgressTo(0.35f, 0.5f);
+
+                await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
+        
                 await LoadGame();
             }
             else
             {
                 HandleFailedToLoginGame();
             }
+            
+            // await _loader.InitLoader();
+            //
+            // await UniTask.Delay(500);
+            // await _loader.AnimateProgressTo(0.2f, 0.5f);
+            //
+            // await UniTask.Delay(500);
+            // await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
+            //
+            // await _loader.AnimateProgressTo(0.35f, 0.5f);
+            //
+            // if (await TryLoginToGame())
+            // {
+            //     await LoadGame();
+            // }
+            // else
+            // {
+            //     HandleFailedToLoginGame();
+            // }
         }
 
         private async void HandleFailedToLoginGame()
@@ -157,6 +169,9 @@ namespace VisualLayer.Loader
             await UniTask.Delay(500);
             
             _signalBus.Fire<UIComponentsInBehaviorSignal>();
+            
+            _signalBus.Fire<StartInternetCheckSignal>();
+
         }
     }
 }

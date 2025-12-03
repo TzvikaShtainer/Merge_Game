@@ -40,6 +40,8 @@ namespace ServiceLayer.Signals.Installers
             
             Container.DeclareSignal<GamePlayReadySignal>();
             
+            Container.DeclareSignal<StartInternetCheckSignal>();
+            
             //Debug.Log("FINISH SIGNAL BUS");
         }
     }

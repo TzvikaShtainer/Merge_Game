@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using VisualLayer.GamePlay.Handlers.StartScene;
+using VisualLayer.GamePlay.Popups.InternetConnectionPopup;
 using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.GamePlay.Popups.SpinTheWheelPopup;
 using VisualLayer.GamePlay.Popups.YesNoPopup;
@@ -91,6 +92,11 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .BindFactory<DailyRewardPopup.DailyRewardPopup,  DailyRewardPopup.DailyRewardPopup.Factory>()
                 .FromComponentInNewPrefab(_dailyRewardPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
+            
+            Container
+                .BindInterfacesAndSelfTo<InternetConnectionService>()
+                .AsSingle()
+                .NonLazy();
         }
         
         private async void Awake()
