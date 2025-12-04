@@ -65,10 +65,12 @@ namespace DataLayer.Balances
             _coins += coinsToAdd;
             CoinsBalanceChanged?.Invoke();
             
-            _serverService.SetUserData(new Dictionary<string, string>
+            ScheduleSave();
+            
+            /*_serverService.SetUserData(new Dictionary<string, string>
             {
                 { "Coins", _coins.ToString() }
-            }).Forget();
+            }).Forget();*/
         }
 
         public bool RemoveCoins(int coinsToRemove)
@@ -81,10 +83,12 @@ namespace DataLayer.Balances
             _coins -= coinsToRemove;
             CoinsBalanceChanged?.Invoke();
             
-            _serverService.SetUserData(new Dictionary<string, string>
+            ScheduleSave();
+            
+            /*_serverService.SetUserData(new Dictionary<string, string>
             {
                 { "Coins", _coins.ToString() }
-            }).Forget();
+            }).Forget();*/
             
             return true;
         }
@@ -94,10 +98,12 @@ namespace DataLayer.Balances
             _highScore = newHighScore;
             HighScoreChanged?.Invoke();
             
-            _serverService.SetUserData(new Dictionary<string, string>
+            ScheduleSave();
+            
+            /*_serverService.SetUserData(new Dictionary<string, string>
             {
                 { "HighScore", _highScore.ToString() }
-            }).Forget();
+            }).Forget();*/
         }
 
         public void AddCurrentScore(int newCurrentScore)
@@ -105,10 +111,12 @@ namespace DataLayer.Balances
             _currentScore += newCurrentScore;
             ScoreChanged?.Invoke();
             
-            _serverService.SetUserData(new Dictionary<string, string>
+            ScheduleSave();
+            
+            /*_serverService.SetUserData(new Dictionary<string, string>
             {
                 { "CurrentScore", _currentScore.ToString() }
-            }).Forget();
+            }).Forget();*/
         }
 
         public void SetCurrentScore(int newCurrentScore)
@@ -116,10 +124,12 @@ namespace DataLayer.Balances
             _currentScore = newCurrentScore;
             ScoreChanged?.Invoke();
             
-            _serverService.SetUserData(new Dictionary<string, string>
+            ScheduleSave();
+            
+            /*_serverService.SetUserData(new Dictionary<string, string>
             {
                 { "CurrentScore", _currentScore.ToString() }
-            }).Forget();
+            }).Forget();*/
         }
 
         public int GetCurrentScore()
@@ -146,8 +156,7 @@ namespace DataLayer.Balances
                 _coins = coins;
                 CoinsBalanceChanged?.Invoke();
             }
-
-
+            
             if (data.TryGetValue("HighScore", out var highStr) && int.TryParse(highStr, out var highScore))
             {
                 _highScore = highScore;
@@ -163,8 +172,30 @@ namespace DataLayer.Balances
             //Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore +" CurrentScore: " +_currentScore);
         }
         
+        private bool _saveScheduled;
 
-        #endregion
+        private void ScheduleSave()
+        {
+            if (_saveScheduled)
+                return;
+
+            _saveScheduled = true;
+            SaveDebounced().Forget();
+        }
+
+        private async UniTaskVoid SaveDebounced()
+        {
+            await UniTask.Delay(500);
+            _saveScheduled = false;
+
+            await _serverService.SetUserData(new Dictionary<string, string>
+            {
+                { "Coins", _coins.ToString() },
+                { "HighScore", _highScore.ToString() },
+                { "CurrentScore", _currentScore.ToString() }
+            });
+        }
         
+        #endregion
     }
 }
