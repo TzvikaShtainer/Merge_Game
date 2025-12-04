@@ -4,6 +4,7 @@ using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.Signals.SignalsClasses;
+using ServiceLayer.Utilis;
 using UnityEngine;
 using VisualLayer.Loader;
 using Zenject;
@@ -26,6 +27,9 @@ namespace VisualLayer.GamePlay.Handlers
         
         [Inject]
         private IDataLayer _dataLayer;
+        
+        [Inject]
+        private GameStartupCoordinator  _gameStartupCoordinator;
         public async UniTask Execute()
         {
             _saveService.Save();

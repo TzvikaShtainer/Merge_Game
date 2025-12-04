@@ -20,6 +20,13 @@ namespace VisualLayer.GamePlay.UI
         private void InitializeView()
         {
             _dataLayer.Balances.CoinsBalanceChanged += SyncUiWithData;
+            
+            SyncUiWithData();
+        }
+
+        private void OnDestroy()
+        {
+            _dataLayer.Balances.CoinsBalanceChanged -= SyncUiWithData;
         }
 
         private void SyncUiWithData()
