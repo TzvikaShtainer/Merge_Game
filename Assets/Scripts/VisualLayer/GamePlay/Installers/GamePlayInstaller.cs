@@ -42,6 +42,11 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
             .AsSingle();
         
         Container
+            .Bind<IBackClickHandler>()
+            .To<BackClickHandler>()
+            .AsSingle();
+        
+        Container
             .Bind<ISettingsMenuClickHandler>()
             .To<SettingsMenuClickHandler>()
             .AsSingle();

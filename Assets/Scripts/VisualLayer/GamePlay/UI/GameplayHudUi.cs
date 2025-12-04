@@ -47,7 +47,10 @@ namespace VisualLayer.GamePlay.UI
         private IDataLayer _dataLayer;
         
         [Inject]
-        private ISettingsMenuClickHandler _backClickHandler; 
+        private ISettingsMenuClickHandler _settingsClickHandler; 
+        
+        [Inject]
+        private IBackClickHandler _backClickHandler; 
         
         [Inject]
         private IHudPlusCurrencyClickHandler _plusCurrencyClickHandler; 
@@ -138,6 +141,12 @@ namespace VisualLayer.GamePlay.UI
             if (abilityId == "DestroySpecificFruitAbility") _destroySpecificFruitAbilityText.text = newCount.ToString();
             if (abilityId == "ShakeBoxAbility") _shakeBoxAbilityText.text = newCount.ToString();
             if (abilityId == "UpgradeSpecificFruitAbility") _upgradeSpecificFruitAbilityText.text = newCount.ToString();
+        }
+        
+        public async void OnSettingsButtonClick()
+        {
+            _settingsClickHandler.Execute();
+            _sfxService.PlaySfxType(SfxType.Click);
         }
         
         public async void OnBackButtonClick()
