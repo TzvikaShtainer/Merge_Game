@@ -29,7 +29,7 @@ namespace VisualLayer.GamePlay.Buttons
                 _hourlyCoinsButton.interactable = true;
                 _nextText.text = "";
                 _timerText.text = "";
-                _CollectText.text = "Collect";
+                _CollectText.text = "Collect!";
                 _coinsImg.enabled = true;
                 _hourlyCoinsButtonText.text = $"{_coinsService.GetRewardAmount().ToString()}";
             }

@@ -27,11 +27,11 @@ namespace VisualLayer.GamePlay.Handlers
         [Inject]
         private GameStartupCoordinator  _gameStartupCoordinator;
         
-        [Inject]
+        [Inject] 
         private SignalBus _signalBus;
         
         
-        public async void Execute()
+        public async void Execute() 
         {
             await _loader.InitLoader();
             
