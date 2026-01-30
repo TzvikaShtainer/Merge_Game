@@ -16,7 +16,7 @@ namespace ServiceLayer.HourlyCoinsService
         [Inject] private IDataLayer _dataLayer;
 
         protected override string CooldownKey => "LastHourlyClaimUtc";
-        protected override int CooldownSeconds => 10; //3600
+        protected override int CooldownSeconds => 3600; //3600
         protected override int RewardAmount => 10;
         protected override void OnClaim()
         {
