@@ -107,10 +107,12 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             else
             {
                 claimButton.interactable = false;
-                timerText.text = $"{remaining.Hours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                timerText.text = "";
+                //timerText.text = $"{remaining.Hours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
             }
 
-            dayText.text = $"Day {_dailyRewardService.CurrentDayIndex()}/7";
+            dayText.text = "";
+            //dayText.text = $"Day {_dailyRewardService.CurrentDayIndex()}/7";
         }
 
         private void UpdateHiders()

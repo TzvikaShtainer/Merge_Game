@@ -19,9 +19,6 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
         [Inject]
         private SpinWinPopup.Factory _spinWinPopupFactory;
         
-        [Inject] 
-        private ISpinTheWheelCooldownService _spinTheWheelService;
-        
         #region Factories
         public class Factory : PlaceholderFactory<SpinTheWheelPopup>
         {
@@ -98,7 +95,7 @@ namespace VisualLayer.GamePlay.Popups.SpinTheWheelPopup
             else
             {
                 _spinTheWheelButton.interactable = false;
-                _spinTheWheelText.text = $"{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                _spinTheWheelText.text = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
             }
         }
 
