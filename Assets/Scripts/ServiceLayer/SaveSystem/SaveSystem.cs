@@ -23,7 +23,7 @@ namespace ServiceLayer.SaveSystem
         }
         
         private string SavePath => Path.Combine(Application.persistentDataPath, "GameItemsLocation.json");
-        //C:/Users/tzvik/AppData/LocalLow/DreamzStudio/Merge Delicious
+        //C:/Users/tzvik/AppData/LocalLow/DreamzzzStudio/Merge Delicious
         public void Save()
         {
             var itemsToSave = GameObject.FindObjectsOfType<Item>()
