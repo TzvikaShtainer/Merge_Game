@@ -67,10 +67,10 @@ namespace DataLayer.Balances
             
             ScheduleSave();
             
-            /*_serverService.SetUserData(new Dictionary<string, string>
+            _serverService.SetUserData(new Dictionary<string, string>
             {
                 { "Coins", _coins.ToString() }
-            }).Forget();*/
+            }).Forget();
         }
 
         public bool RemoveCoins(int coinsToRemove)
@@ -85,10 +85,10 @@ namespace DataLayer.Balances
             
             ScheduleSave();
             
-            /*_serverService.SetUserData(new Dictionary<string, string>
+            _serverService.SetUserData(new Dictionary<string, string>
             {
                 { "Coins", _coins.ToString() }
-            }).Forget();*/
+            }).Forget();
             
             return true;
         }
@@ -100,10 +100,10 @@ namespace DataLayer.Balances
             
             ScheduleSave();
             
-            /*_serverService.SetUserData(new Dictionary<string, string>
+            _serverService.SetUserData(new Dictionary<string, string>
             {
                 { "HighScore", _highScore.ToString() }
-            }).Forget();*/
+            }).Forget();
         }
 
         public void AddCurrentScore(int newCurrentScore)
@@ -113,10 +113,10 @@ namespace DataLayer.Balances
             
             ScheduleSave();
             
-            /*_serverService.SetUserData(new Dictionary<string, string>
+            _serverService.SetUserData(new Dictionary<string, string>
             {
                 { "CurrentScore", _currentScore.ToString() }
-            }).Forget();*/
+            }).Forget();
         }
 
         public void SetCurrentScore(int newCurrentScore)
@@ -126,10 +126,10 @@ namespace DataLayer.Balances
             
             ScheduleSave();
             
-            /*_serverService.SetUserData(new Dictionary<string, string>
+            _serverService.SetUserData(new Dictionary<string, string>
             {
                 { "CurrentScore", _currentScore.ToString() }
-            }).Forget();*/
+            }).Forget();
         }
 
         public int GetCurrentScore()

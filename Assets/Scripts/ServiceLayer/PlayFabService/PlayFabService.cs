@@ -47,7 +47,7 @@ namespace ServiceLayer.PlayFabService
         }
         
 
-public async UniTask SetUserData(Dictionary<string, string> data)
+        public async UniTask SetUserData(Dictionary<string, string> data)
         {
             var tcs = new UniTaskCompletionSource<UpdateUserDataResult>();
 
