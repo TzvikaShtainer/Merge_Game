@@ -81,6 +81,8 @@ namespace ServiceLayer.Installers
                 .To<BaseCooldownService>()
                 .AsSingle();*/
             
+            Container.BindInterfacesAndSelfTo<DataSyncService.DataSyncService>().AsSingle().NonLazy();
+            
             Container.Bind<GameStartupCoordinator>().AsSingle();
         }
     }

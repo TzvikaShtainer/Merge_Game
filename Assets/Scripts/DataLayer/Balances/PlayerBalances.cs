@@ -64,13 +64,6 @@ namespace DataLayer.Balances
             
             _coins += coinsToAdd;
             CoinsBalanceChanged?.Invoke();
-            
-            ScheduleSave();
-            
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "Coins", _coins.ToString() }
-            }).Forget();
         }
 
         public bool RemoveCoins(int coinsToRemove)
@@ -83,13 +76,6 @@ namespace DataLayer.Balances
             _coins -= coinsToRemove;
             CoinsBalanceChanged?.Invoke();
             
-            ScheduleSave();
-            
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "Coins", _coins.ToString() }
-            }).Forget();
-            
             return true;
         }
 
@@ -98,38 +84,18 @@ namespace DataLayer.Balances
             _highScore = newHighScore;
             HighScoreChanged?.Invoke();
             
-            ScheduleSave();
-            
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "HighScore", _highScore.ToString() }
-            }).Forget();
         }
 
         public void AddCurrentScore(int newCurrentScore)
         {
             _currentScore += newCurrentScore;
             ScoreChanged?.Invoke();
-            
-            ScheduleSave();
-            
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "CurrentScore", _currentScore.ToString() }
-            }).Forget();
         }
 
         public void SetCurrentScore(int newCurrentScore)
         {
             _currentScore = newCurrentScore;
             ScoreChanged?.Invoke();
-            
-            ScheduleSave();
-            
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "CurrentScore", _currentScore.ToString() }
-            }).Forget();
         }
 
         public int GetCurrentScore()
@@ -173,28 +139,6 @@ namespace DataLayer.Balances
         }
         
         private bool _saveScheduled;
-
-        private void ScheduleSave()
-        {
-            if (_saveScheduled)
-                return;
-
-            _saveScheduled = true;
-            SaveDebounced().Forget();
-        }
-
-        private async UniTaskVoid SaveDebounced()
-        {
-            await UniTask.Delay(500);
-            _saveScheduled = false;
-
-            await _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "Coins", _coins.ToString() },
-                { "HighScore", _highScore.ToString() },
-                { "CurrentScore", _currentScore.ToString() }
-            });
-        }
         
         #endregion
     }
