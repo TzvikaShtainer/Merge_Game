@@ -16,9 +16,6 @@ namespace VisualLayer.GamePlay.Handlers
         private const float SpawnHeight = 2.5f;
         private const float SpawnXClamp = 1.4f;
         private Vector2 _nextItemUiPosition = new Vector2(10, 10);
-        
-        private int _minLvlSpawn = 0;
-        private int _maxLvlSpawn = 3;
 
         [SerializeField]
         private Item _currentItem;
@@ -26,9 +23,10 @@ namespace VisualLayer.GamePlay.Handlers
         [SerializeField]
         private Item _nextItem;
         
-        
         [Inject]
         private ItemFactory _itemFactory;
+
+        [Inject] private IItemsGeneratorLogic _itemsGeneratorLogic;
 
         public Item GetNextItem() => _nextItem;
         
@@ -42,9 +40,6 @@ namespace VisualLayer.GamePlay.Handlers
 
         private void HandleFirstItemCreation()
         {
-            //_currentItem = CreateItem();
-            
-            
             // Convert screen center to world position
             Vector3 screenCenter = new Vector3(Screen.width / 2, 2.5f * Screen.height / Camera.main.orthographicSize, Camera.main.nearClipPlane);
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenCenter);
@@ -56,8 +51,8 @@ namespace VisualLayer.GamePlay.Handlers
 
         private Item CreateItem(Vector2 pos)
         {
-            int randomLvlToSpawn = Random.Range(_minLvlSpawn, _maxLvlSpawn);
-            var itemToSpawn = _itemFactory.Create(randomLvlToSpawn, pos);
+            int randomItemID = _itemsGeneratorLogic.GetRandomItemID();
+            var itemToSpawn = _itemFactory.Create(randomItemID, pos);
             return itemToSpawn;
         }
 

@@ -63,6 +63,11 @@ public class GamePlayInstaller : MonoInstaller<GamePlayInstaller>
         Container
             .BindInterfacesAndSelfTo<GameLogicHandler>()
             .AsSingle();
+
+        Container
+            .Bind<IItemsGeneratorLogic>()
+            .To<ItemsGeneratorLogic>()
+            .AsSingle();
         
         Container
             .BindFactory<int, Vector2, Item, ItemFactory>()
