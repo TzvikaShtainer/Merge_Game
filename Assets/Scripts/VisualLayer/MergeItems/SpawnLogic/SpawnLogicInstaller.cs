@@ -20,6 +20,8 @@ namespace VisualLayer.MergeItems.SpawnLogic
                 .Bind<ISpawn>()
                 .To<SpawnLogic>()
                 .AsSingle();
+            
+            Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
         }
     }
 }

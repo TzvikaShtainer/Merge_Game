@@ -9,9 +9,17 @@ namespace VisualLayer.MergeItems.SpawnLogic
     {
         [Inject]
         private IGameLogicHandler _gameLogicHandler;
-
-        private float _manXValue = 1.8f;
-        private float _minXValue = -1.8f;
+        
+        private readonly Camera _mainCamera;
+        private const float EdgePadding = 0.7f;
+        private float _manXValue = 1.7f;
+        private float _minXValue = -1.7f;
+        
+        [Inject]
+        public SpawnLogic(Camera mainCamera)
+        {
+            _mainCamera = mainCamera;
+        }
         public void Spawn(Vector2 posToSpawn)
         {
             _gameLogicHandler.DropCurrentItem(); 
@@ -25,7 +33,13 @@ namespace VisualLayer.MergeItems.SpawnLogic
 
         public void UpdateDraggingPosition(Vector2 pos)
         {
-            pos.x = Mathf.Clamp(pos.x, _minXValue, _manXValue);
+            float screenAspect = (float)Screen.width / Screen.height;
+            float orthoSize = _mainCamera.orthographicSize;
+            
+            float maxXBound = (orthoSize * screenAspect) - EdgePadding;
+            float minXBound = -maxXBound;
+
+            pos.x = Mathf.Clamp(pos.x, minXBound, maxXBound);
             
             _gameLogicHandler.SetCurrItemPosByLocation(pos);
         }
