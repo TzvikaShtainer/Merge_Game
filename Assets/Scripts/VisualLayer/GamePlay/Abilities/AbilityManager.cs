@@ -78,6 +78,7 @@ namespace VisualLayer.GamePlay.Abilities
                 }).Forget();
             }
 
+            //Debug.LogError("SetFirstTimeFlagFromData called 81");
             SetFirstTimeFlagFromData(abilityId, true);
         }
 
@@ -115,6 +116,7 @@ namespace VisualLayer.GamePlay.Abilities
                     {  abilityId, newCount.ToString() }
                 });
             
+                //Debug.LogError("SetFirstTimeFlagFromData called 119");
                 SetFirstTimeFlagFromData(abilityId, true);
             }
             catch (Exception ex)
@@ -179,6 +181,7 @@ namespace VisualLayer.GamePlay.Abilities
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
                 ability.SetFirstTime(value);
+                Debug.Log("SetFirstTimeFlagFromData: ability: "+abilityId +"value: "+value);
             }
             else
             {
