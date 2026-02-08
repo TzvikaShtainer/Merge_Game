@@ -181,7 +181,7 @@ namespace VisualLayer.GamePlay.Abilities
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
                 ability.SetFirstTime(value);
-                Debug.Log("SetFirstTimeFlagFromData: ability: "+abilityId +"value: "+value);
+                //Debug.Log("SetFirstTimeFlagFromData: ability: "+abilityId +"value: "+value);
             }
             else
             {

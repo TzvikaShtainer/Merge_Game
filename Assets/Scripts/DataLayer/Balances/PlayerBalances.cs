@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using ServiceLayer.DataSyncService;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
 using Zenject;
@@ -8,7 +9,7 @@ using Zenject;
 namespace DataLayer.Balances
 {
     [Serializable]
-    public class PlayerBalances : IPlayerBalances
+    public class PlayerBalances : IPlayerBalances, ISyncableService
     {
         #region Events
 
@@ -16,6 +17,8 @@ namespace DataLayer.Balances
         public event Action HighScoreChanged;
         
         public event Action ScoreChanged;
+        
+        public event Action OnDataChanged;
 
         #endregion
         
@@ -54,6 +57,17 @@ namespace DataLayer.Balances
         
 
         #region Methods
+        
+        public Dictionary<string, string> GetSyncData()
+        {
+            return new Dictionary<string, string>
+            {
+                { "Coins", _coins.ToString() },
+                { "HighScore", _highScore.ToString() },
+                { "CurrentScore", _currentScore.ToString() }
+            };
+
+        }
 
         public void AddCoins(int coinsToAdd)
         {
@@ -64,6 +78,8 @@ namespace DataLayer.Balances
             
             _coins += coinsToAdd;
             CoinsBalanceChanged?.Invoke();
+            
+            OnDataChanged?.Invoke();
         }
 
         public bool RemoveCoins(int coinsToRemove)
@@ -76,6 +92,8 @@ namespace DataLayer.Balances
             _coins -= coinsToRemove;
             CoinsBalanceChanged?.Invoke();
             
+            OnDataChanged?.Invoke();
+            
             return true;
         }
 
@@ -84,18 +102,24 @@ namespace DataLayer.Balances
             _highScore = newHighScore;
             HighScoreChanged?.Invoke();
             
+            OnDataChanged?.Invoke();
+            
         }
 
         public void AddCurrentScore(int newCurrentScore)
         {
             _currentScore += newCurrentScore;
             ScoreChanged?.Invoke();
+            
+            OnDataChanged?.Invoke();
         }
 
         public void SetCurrentScore(int newCurrentScore)
         {
             _currentScore = newCurrentScore;
             ScoreChanged?.Invoke();
+            
+            OnDataChanged?.Invoke();
         }
 
         public int GetCurrentScore()
@@ -137,8 +161,6 @@ namespace DataLayer.Balances
             
             //Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore +" CurrentScore: " +_currentScore);
         }
-        
-        private bool _saveScheduled;
         
         #endregion
     }

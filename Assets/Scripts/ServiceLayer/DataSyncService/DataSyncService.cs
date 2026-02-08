@@ -18,18 +18,22 @@ namespace ServiceLayer.DataSyncService
         private  IDataLayer _dataLayer;
         
         private bool _isSyncScheduled;
+        private List<ISyncableService> _servicesToSync;
+        
+        public DataSyncService([InjectOptional] List<ISyncableService> servicesToSync)
+        {
+            _servicesToSync = servicesToSync ?? new List<ISyncableService>();
+        }
         public void Initialize()
         {
-            _dataLayer.Balances.CoinsBalanceChanged += ScheduleSync;
-            _dataLayer.Balances.HighScoreChanged += ScheduleSync;
-            _dataLayer.Balances.ScoreChanged += ScheduleSync;
+            foreach (var serviceToSync in _servicesToSync)
+                serviceToSync.OnDataChanged += ScheduleSync;
         }
         
         public void Dispose()
         {
-            _dataLayer.Balances.CoinsBalanceChanged -= ScheduleSync;
-            _dataLayer.Balances.HighScoreChanged -= ScheduleSync;
-            _dataLayer.Balances.ScoreChanged -= ScheduleSync;
+            foreach (var serviceToSync in _servicesToSync)
+                serviceToSync.OnDataChanged -= ScheduleSync;
         }
         
         private void ScheduleSync()
@@ -43,19 +47,24 @@ namespace ServiceLayer.DataSyncService
         
         private async UniTaskVoid SyncRoutine()
         {
-            await UniTask.Delay(TimeSpan.FromMilliseconds(500));
+            await UniTask.Delay(TimeSpan.FromMilliseconds(800));
             _isSyncScheduled = false;
 
+            var combinedData = new Dictionary<string, string>();
+
+            foreach (var serviceToGetDataFrom in _servicesToSync)
+            {
+                var data = serviceToGetDataFrom.GetSyncData();
+                
+                foreach (var kvp in data)
+                {
+                    combinedData[kvp.Key] = kvp.Value;
+                }
+            }
+            
             try
             {
-                var data = new Dictionary<string, string>
-                {
-                    { "Coins", _dataLayer.Balances.Coins.ToString() },
-                    { "HighScore", _dataLayer.Balances.HighScore.ToString() },
-                    { "CurrentScore", _dataLayer.Balances.CurrentScore.ToString() }
-                };
-
-                await _serverService.SetUserData(data);
+                await _serverService.SetUserData(combinedData);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using DataLayer.Balances;
 using DataLayer.DataTypes;
 using DataLayer.Metadata;
+using ServiceLayer.DataSyncService;
 using ServiceLayer.EffectsService;
 using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
@@ -71,6 +72,13 @@ namespace DataLayer.Installers
                 .FromSubContainerResolve()
                 .ByMethod(SubContainerBindings)
                 .AsSingle();
+            
+            Container.Bind<ISyncableService>()
+                .FromMethod(ctx => {
+                    var dataLayer = ctx.Container.Resolve<IDataLayer>();
+                    return dataLayer.Balances as ISyncableService;
+                })
+                .AsCached();
         }
 
         private void SubContainerBindings(DiContainer subContainer)
@@ -85,9 +93,9 @@ namespace DataLayer.Installers
             _playerBalances.Initialize(serverService);
             
             subContainer
-                .Bind<IPlayerBalances>()
+                .Bind(typeof(IPlayerBalances), typeof(ISyncableService))
                 .To<PlayerBalances>()
-                .FromInstance(_playerBalances )
+                .FromInstance(_playerBalances)
                 .AsSingle();
             
             subContainer
