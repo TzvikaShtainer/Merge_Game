@@ -4,14 +4,17 @@ using Cysharp.Threading.Tasks;
 using DataLayer;
 using PlayFab;
 using PlayFab.ClientModels;
+using ServiceLayer.DataSyncService;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
 using Zenject;
 
 namespace ServiceLayer
 {
-    public abstract class BaseCooldownService: ICooldownService
+    public abstract class BaseCooldownService: ICooldownService, ISyncableService
     {
+        public event Action OnDataChanged;
+        
         [Inject]
         private IServerService _serverService;
         
@@ -26,8 +29,14 @@ namespace ServiceLayer
         private TimeSpan _serverOffset;
 
         public DateTime LastClaimTimeUtc => _lastClaimUtc;
-
-
+        
+        public virtual Dictionary<string, string> GetSyncData()
+        {
+            return new Dictionary<string, string>
+            {
+                {CooldownKey, _lastClaimUtc.ToString("o")}
+            };
+        }
         public virtual async UniTask LoadFromServer()
         {
             var serverTime = await GetServerTimeUtc();
@@ -83,15 +92,11 @@ namespace ServiceLayer
             var now = GetCurrentServerTime();
             _lastClaimUtc = now;
             
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                {CooldownKey, _lastClaimUtc.ToString("o")},
-            });
-
-            OnClaim();
+            OnDataChanged?.Invoke();
         }
-        
         protected abstract void OnClaim();
         public int GetRewardAmount() => RewardAmount;
+        
+        protected void NotifyDataChanged() => OnDataChanged?.Invoke();
     }
 }

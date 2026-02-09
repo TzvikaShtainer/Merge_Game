@@ -32,6 +32,12 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
         [Inject] 
         private DailyRewardsConfig _dailyRewardsConfig;
 
+        public override Dictionary<string, string> GetSyncData()
+        {
+            var data = base.GetSyncData();
+            data[DayIndexKey] = _currentDayIndex.ToString();
+            return data;
+        }
         public override async UniTask LoadFromServer()
         {
             await base.LoadFromServer();
@@ -60,11 +66,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
                 ApplyDailyRewards(dailyReward);
             }
             
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                {CooldownKey, LastClaimTimeUtc.ToString("o")},
-                {DayIndexKey,  _currentDayIndex.ToString()}
-            }).Forget();
+            NotifyDataChanged();
         }
         
         private void ApplyDailyRewards(DailyRewardsConfig.DailyReward dailyReward)
@@ -99,11 +101,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             {
                 _currentDayIndex = 0; 
 
-                _serverService.SetUserData(new Dictionary<string, string>
-                {
-                    {CooldownKey, LastClaimTimeUtc.ToString("o")},
-                    {DayIndexKey,  _currentDayIndex.ToString()}
-                }).Forget();
+                NotifyDataChanged();
             }
         }
         public int CurrentDayIndex()
