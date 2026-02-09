@@ -45,10 +45,7 @@ namespace ServiceLayer.Installers
                 .To<SaveSystem.SaveSystem>()
                 .AsSingle();
             
-            Container
-                .Bind<IGameSettingsService>()
-                .To<GameSettingsService>()
-                .AsSingle();
+            Container.BindInterfacesAndSelfTo<GameSettingsService>().AsSingle();
             
             Container
                 .Bind<IMusicService>()

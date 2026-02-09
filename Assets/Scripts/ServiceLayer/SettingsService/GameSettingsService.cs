@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using ServiceLayer.DataSyncService;
 using ServiceLayer.MusicService;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
@@ -9,8 +10,10 @@ using Zenject;
 
 namespace ServiceLayer.SettingsService
 {
-    public class GameSettingsService : IGameSettingsService
+    public class GameSettingsService : IGameSettingsService, ISyncableService
     {
+        public event Action OnDataChanged;
+        
         [Inject]
         private IServerService _serverService;
         
@@ -23,10 +26,19 @@ namespace ServiceLayer.SettingsService
         public GameSettings Settings { get; private set; } = new GameSettings();
         
         private string[] gameSettingsArray = { "HasBGMusic", "HasSFX", "HasVibration" };
+        public Dictionary<string, string> GetSyncData()
+        {
+            return new Dictionary<string, string>
+            {
+                {"HasBGMusic", Settings.IsMusicOn ? "1" : "0"},
+                {"HasSFX", Settings.IsSoundEffectsOn ? "1" : "0"},
+                {"HasVibration", Settings.IsVibrationOn ? "1" : "0"}
+            };
+        }
         public void SetMusic(bool isOn)
         {
             Settings.IsMusicOn  = isOn;
-            Save("HasBGMusic",  isOn);
+            OnDataChanged?.Invoke();
             
             _musicService.SetMusicEnabled(isOn);
         }
@@ -34,7 +46,7 @@ namespace ServiceLayer.SettingsService
         public void SetSoundEffects(bool isOn)
         {
             Settings.IsSoundEffectsOn  = isOn;
-            Save("HasSFX",  isOn);
+            OnDataChanged?.Invoke();
             
             _sfxService.SetSfxEnabled(isOn);
         }
@@ -42,7 +54,7 @@ namespace ServiceLayer.SettingsService
         public void SetVibration(bool isOn)
         {
             Settings.IsVibrationOn  = isOn;
-            Save("HasVibration",  isOn);
+            OnDataChanged?.Invoke();
         }
 
         public async UniTask LoadFromServer()
@@ -83,25 +95,7 @@ namespace ServiceLayer.SettingsService
             SetVibration(Settings.IsVibrationOn);
             
             if (shouldSaveDefaults)
-                SaveAll();
-        }
-
-        private void Save(string key, bool value)
-        {
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { key,  value ? "1" : "0" }
-            }).Forget();
-         }
-        
-        private void SaveAll()
-        {
-            _serverService.SetUserData(new Dictionary<string, string>
-            {
-                { "HasBGMusic", Settings.IsMusicOn ? "1" : "0" },
-                { "HasSFX", Settings.IsSoundEffectsOn ? "1" : "0" },
-                { "HasVibration", Settings.IsVibrationOn ? "1" : "0" }
-            }).Forget();
+                OnDataChanged?.Invoke();
         }
     }
 }
