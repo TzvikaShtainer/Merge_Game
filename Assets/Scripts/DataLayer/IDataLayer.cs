@@ -1,5 +1,6 @@
 ﻿using DataLayer.Balances;
 using DataLayer.Metadata;
+using VisualLayer.GamePlay.Abilities;
 
 namespace DataLayer
 {
@@ -8,5 +9,7 @@ namespace DataLayer
         IGameMetadata Metadata { get; }
         
         IPlayerBalances Balances { get; }
+        
+        AbilityManager AbilityManager { get; }
     }
 }

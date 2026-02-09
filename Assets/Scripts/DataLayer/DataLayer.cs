@@ -1,5 +1,6 @@
 ﻿using DataLayer.Balances;
 using DataLayer.Metadata;
+using VisualLayer.GamePlay.Abilities;
 using Zenject;
 
 namespace DataLayer
@@ -11,5 +12,8 @@ namespace DataLayer
         
         [Inject]
         public IPlayerBalances Balances { get; }
+        
+        [Inject]
+        public AbilityManager AbilityManager { get; }
     }
 }

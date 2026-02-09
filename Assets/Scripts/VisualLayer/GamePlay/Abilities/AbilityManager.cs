@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DataLayer.DataTypes.abilities;
+using ServiceLayer.DataSyncService;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
 using Zenject;
 
 namespace VisualLayer.GamePlay.Abilities
 {
-    public class AbilityManager
+    public class AbilityManager : ISyncableService
     {
+        public event Action OnDataChanged;
         public event Action<string, int> OnAbilityChanged;
         
         private Dictionary<string, IAbility> _abilitiesDict = new();
@@ -20,6 +22,21 @@ namespace VisualLayer.GamePlay.Abilities
         [Inject]
         private IServerService _serverService;
         
+        public Dictionary<string, string> GetSyncData()
+        {
+            var data = new Dictionary<string, string>();
+            foreach (var pair in _abilitiesDict)
+            {
+                if (pair.Key == "DestroyItemsAfterContinue")
+                    continue;
+                
+                data[pair.Key] = pair.Value.Count.ToString();
+            }
+            
+            Debug.Log($"[AbilityManager] GetSyncData returning {data.Count} abilities");
+    
+            return data;
+        }
         
         public void InitAbilities(List<IAbility> abilities)
         {
@@ -31,8 +48,6 @@ namespace VisualLayer.GamePlay.Abilities
             }
     
             _abilitiesDict = abilities.ToDictionary(a => a.Id, a => a);
-            
-            
             
             //Debug.Log($"Created dictionary with {_abilitiesDict.Count} abilities");
             foreach (var ability in abilities)
@@ -57,10 +72,12 @@ namespace VisualLayer.GamePlay.Abilities
                 }
                 OnAbilityChanged?.Invoke(abilityId, ability.Count);
                 
-                _serverService.SetUserData(new Dictionary<string, string>
-                {
-                    { ability.Id, ability.Count.ToString() }
-                }).Forget();
+                OnDataChanged?.Invoke();
+                
+                // _serverService.SetUserData(new Dictionary<string, string>
+                // {
+                //     { ability.Id, ability.Count.ToString() }
+                // }).Forget();
             }
         }
         
@@ -72,10 +89,12 @@ namespace VisualLayer.GamePlay.Abilities
                 
                 OnAbilityChanged?.Invoke(abilityId, ability.Count);
                 
-                _serverService.SetUserData(new Dictionary<string, string>
-                {
-                    {  ability.Id, ability.Count.ToString() }
-                }).Forget();
+                OnDataChanged?.Invoke();
+                
+                // _serverService.SetUserData(new Dictionary<string, string>
+                // {
+                //     {  ability.Id, ability.Count.ToString() }
+                // }).Forget();
             }
 
             //Debug.LogError("SetFirstTimeFlagFromData called 81");
@@ -90,38 +109,18 @@ namespace VisualLayer.GamePlay.Abilities
                 return;
             }
 
-            try
+            if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
-                var data = await _serverService.GetUserData(abilityId); 
+                ability.Count += amountToAdd;
                 
-                int currentCount = 0;
-
-                if (data.TryGetValue(abilityId, out var storedValue))
-                {
-                    if (!int.TryParse(storedValue, out currentCount))
-                    {
-                        Debug.LogWarning(
-                            $"Ability '{abilityId}' has invalid value '{storedValue}', resetting to 0.");
-                        currentCount = 0;
-                    }
-                }
-                
-                var newCount = currentCount + amountToAdd;
-                //Debug.Log($"[Ability:{abilityId}] {currentCount} → {newCount} (+{amountToAdd})");
-                
-                OnAbilityChanged?.Invoke(abilityId, newCount);
-                
-                await _serverService.SetUserData(new Dictionary<string, string>
-                {
-                    {  abilityId, newCount.ToString() }
-                });
-            
-                //Debug.LogError("SetFirstTimeFlagFromData called 119");
+                OnAbilityChanged?.Invoke(abilityId, ability.Count);
                 SetFirstTimeFlagFromData(abilityId, true);
+                
+                OnDataChanged?.Invoke();
             }
-            catch (Exception ex)
+            else
             {
-                Debug.LogError($"Failed to update ability '{abilityId}': {ex}");
+                Debug.LogWarning($"[AbilityManager] Attempted to add count to unknown ability: {abilityId}");
             }
         }
 

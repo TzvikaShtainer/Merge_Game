@@ -79,6 +79,10 @@ namespace DataLayer.Installers
                     return dataLayer.Balances as ISyncableService;
                 })
                 .AsCached();
+            
+            Container.Bind<ISyncableService>()
+                .FromMethod(ctx => ctx.Container.Resolve<IDataLayer>().AbilityManager as ISyncableService)
+                .AsCached();
         }
 
         private void SubContainerBindings(DiContainer subContainer)

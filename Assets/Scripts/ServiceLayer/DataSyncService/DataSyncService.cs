@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DataLayer;
 using DataLayer.Balances;
@@ -11,17 +12,15 @@ namespace ServiceLayer.DataSyncService
 {
     public class DataSyncService : IInitializable, IDisposable
     {
-        [Inject] 
         private IServerService _serverService;
-        
-        [Inject] 
-        private  IDataLayer _dataLayer;
-        
         private bool _isSyncScheduled;
         private List<ISyncableService> _servicesToSync;
         
-        public DataSyncService([InjectOptional] List<ISyncableService> servicesToSync)
+        public DataSyncService(
+            IServerService serverService, 
+            [Inject(Source = InjectSources.Any)] List<ISyncableService> servicesToSync)
         {
+            _serverService = serverService;
             _servicesToSync = servicesToSync ?? new List<ISyncableService>();
         }
         public void Initialize()
@@ -50,25 +49,44 @@ namespace ServiceLayer.DataSyncService
             await UniTask.Delay(TimeSpan.FromMilliseconds(800));
             _isSyncScheduled = false;
 
-            var combinedData = new Dictionary<string, string>();
+            var allData = new Dictionary<string, string>();
 
-            foreach (var serviceToGetDataFrom in _servicesToSync)
+            foreach (var service in _servicesToSync)
             {
-                var data = serviceToGetDataFrom.GetSyncData();
-                
-                foreach (var kvp in data)
+                var data = service.GetSyncData();
+                if (data == null) continue;
+                foreach (var kvp in data) 
                 {
-                    combinedData[kvp.Key] = kvp.Value;
+                    if (!string.IsNullOrEmpty(kvp.Key))
+                        allData[kvp.Key] = kvp.Value;
                 }
             }
+
+            if (allData.Count == 0) return;
+
+            var dataList = allData.ToList();
+            int batchSize = 10; 
+
+            for (int i = 0; i < dataList.Count; i += batchSize)
+            {
+                var batchDict = dataList
+                    .Skip(i)
+                    .Take(batchSize)
+                    .ToDictionary(x => x.Key, x => x.Value);
+
+                try
+                {
+                    Debug.Log($"[DataSync] Sending batch {i / batchSize + 1}: {string.Join(", ", batchDict.Keys)}");
             
-            try
-            {
-                await _serverService.SetUserData(combinedData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[DataSyncer] Sync Error: {ex.Message}");
+                    await _serverService.SetUserData(batchDict);
+            
+                    Debug.Log($"<color=green>[DataSync] Batch {i / batchSize + 1} Successful!</color>");
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"[DataSync] Batch starting at index {i} failed: {ex.Message}");
+                    Debug.LogError($"[DataSync] Failed keys in this batch: {string.Join(", ", batchDict.Keys)}");
+                }
             }
         }
     }

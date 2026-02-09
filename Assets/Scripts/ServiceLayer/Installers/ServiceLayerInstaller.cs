@@ -57,20 +57,11 @@ namespace ServiceLayer.Installers
                 .To<FMODSfxService>()
                 .AsSingle();
             
-            Container
-                .Bind<IHourlyCoinsService>()
-                .To<PlayFabHourlyCoinsService>()
-                .AsSingle();
-            
-            Container
-                .Bind<ISpinTheWheelCooldownService>()
-                .To<PlayFabSpinTheWheelCooldownService>()
-                .AsSingle();
-            
-            Container
-                .Bind<IDailyRewardCooldownService>()
-                .To<PlayFabDailyRewardCooldownService>()
-                .AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayFabHourlyCoinsService>().AsSingle();
+    
+            Container.BindInterfacesAndSelfTo<PlayFabSpinTheWheelCooldownService>().AsSingle();
+    
+            Container.BindInterfacesAndSelfTo<PlayFabDailyRewardCooldownService>().AsSingle();
             
             //---Zenject Dont Need To Bind An Abstract Class
             /*Container
