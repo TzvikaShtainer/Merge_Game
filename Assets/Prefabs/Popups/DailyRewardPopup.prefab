@@ -1704,6 +1704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Daily_Rewards_Btn
       objectReference: {fileID: 0}
+    - target: {fileID: 4641298007127220811, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4641298007127220812, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2062,6 +2066,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 5863505280419309686, guid: bd15f21ff4387f74f95942e508187c8a, type: 3}
+    - target: {fileID: 4641298007483600874, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600875, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

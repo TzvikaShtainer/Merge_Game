@@ -33,7 +33,7 @@ namespace VisualLayer.GamePlay.Abilities
                 data[pair.Key] = pair.Value.Count.ToString();
             }
             
-            Debug.Log($"[AbilityManager] GetSyncData returning {data.Count} abilities");
+            //Debug.Log($"[AbilityManager] GetSyncData returning {data.Count} abilities");
     
             return data;
         }

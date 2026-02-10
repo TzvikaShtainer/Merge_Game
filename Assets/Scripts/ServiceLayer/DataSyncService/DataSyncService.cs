@@ -15,6 +15,7 @@ namespace ServiceLayer.DataSyncService
         private IServerService _serverService;
         private bool _isSyncScheduled;
         private List<ISyncableService> _servicesToSync;
+        private bool _isInitialLoading = true;
         
         public DataSyncService(
             IServerService serverService, 
@@ -23,8 +24,11 @@ namespace ServiceLayer.DataSyncService
             _serverService = serverService;
             _servicesToSync = servicesToSync ?? new List<ISyncableService>();
         }
-        public void Initialize()
+        public async void Initialize()
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(7)); 
+            _isInitialLoading = false;
+            
             foreach (var serviceToSync in _servicesToSync)
                 serviceToSync.OnDataChanged += ScheduleSync;
         }
@@ -37,6 +41,12 @@ namespace ServiceLayer.DataSyncService
         
         private void ScheduleSync()
         {
+            if (_isInitialLoading)
+            {
+                //Debug.Log("[DataSync] Blocked sync attempt during initial loading window.");
+                return;
+            }
+            
             if (_isSyncScheduled)
                 return;
 
@@ -76,16 +86,16 @@ namespace ServiceLayer.DataSyncService
 
                 try
                 {
-                    Debug.Log($"[DataSync] Sending batch {i / batchSize + 1}: {string.Join(", ", batchDict.Keys)}");
+                    //Debug.Log($"[DataSync] Sending batch {i / batchSize + 1}: {string.Join(", ", batchDict.Keys)}");
             
                     await _serverService.SetUserData(batchDict);
             
-                    Debug.Log($"<color=green>[DataSync] Batch {i / batchSize + 1} Successful!</color>");
+                    //Debug.Log($"<color=green>[DataSync] Batch {i / batchSize + 1} Successful!</color>");
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError($"[DataSync] Batch starting at index {i} failed: {ex.Message}");
-                    Debug.LogError($"[DataSync] Failed keys in this batch: {string.Join(", ", batchDict.Keys)}");
+                    //Debug.LogError($"[DataSync] Batch starting at index {i} failed: {ex.Message}");
+                    //Debug.LogError($"[DataSync] Failed keys in this batch: {string.Join(", ", batchDict.Keys)}");
                 }
             }
         }

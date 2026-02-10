@@ -108,7 +108,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             {
                 claimButton.interactable = false;
                 timerText.text = "";
-                //timerText.text = $"{remaining.Hours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                timerText.text = $"{remaining.Hours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
             }
 
             dayText.text = "";

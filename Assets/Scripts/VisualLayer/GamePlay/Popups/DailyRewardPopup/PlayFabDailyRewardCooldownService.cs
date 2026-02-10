@@ -36,12 +36,11 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
         {
             var data = base.GetSyncData();
             data[DayIndexKey] = _currentDayIndex.ToString();
+            //Debug.Log($"<color=magenta>[DailyReward] Syncing Day: {_currentDayIndex}</color>");
             return data;
         }
         public override async UniTask LoadFromServer()
         {
-            await base.LoadFromServer();
-
             var data = await  _serverService.GetUserData(DayIndexKey);
             
             if (data.TryGetValue(DayIndexKey, out var savedIndex) && int.TryParse(savedIndex, out var index))
@@ -49,15 +48,21 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             else
                 _currentDayIndex = 0;
             
+            await base.LoadFromServer();
+            
             TryResetWeekIfNeeded();
             
         }
         protected override void OnClaim()
         {
-            _currentDayIndex++;
-            
-            if (_currentDayIndex > MaxDaysInWeek)
-                _currentDayIndex = MaxDaysInWeek;
+            if (_currentDayIndex >= MaxDaysInWeek)
+            {
+                _currentDayIndex = 1;
+            }
+            else
+            {
+                _currentDayIndex++;
+            }
             
             var dailyReward = _dailyRewardsConfig.GetRewardForDay(_currentDayIndex);
             
@@ -100,8 +105,6 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
             if (_currentDayIndex >= MaxDaysInWeek && HasCooldownPassed())
             {
                 _currentDayIndex = 0; 
-
-                NotifyDataChanged();
             }
         }
         public int CurrentDayIndex()
