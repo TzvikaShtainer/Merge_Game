@@ -92,6 +92,8 @@ namespace ServiceLayer
             var now = GetCurrentServerTime();
             _lastClaimUtc = now;
             
+            OnClaim();
+            
             OnDataChanged?.Invoke();
         }
         protected abstract void OnClaim();
