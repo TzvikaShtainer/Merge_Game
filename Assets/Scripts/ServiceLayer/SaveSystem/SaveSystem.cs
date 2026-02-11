@@ -50,7 +50,8 @@ namespace ServiceLayer.SaveSystem
                 }
             }
 
-            var itemsToSave = GameObject.FindObjectsOfType<Item>()
+            // Use FindObjectsOfType with includeInactive=true to ensure we save items even if they are temporarily disabled (e.g. by an ability)
+            var itemsToSave = Object.FindObjectsOfType<Item>(true)
                 .Select(item => new MergeItemSaveData
                 {
                     typeId = item.GetItemId().ToString(),
@@ -59,6 +60,12 @@ namespace ServiceLayer.SaveSystem
                     rotation = SerializableTypes.SerializableQuaternion.From(item.transform.rotation)
                 }).ToList();
             
+            //Debug.Log($"[SaveSystem] Saving {itemsToSave.Count} items.");
+            // if (itemsToSave.Count == 0)
+            // {
+            //     Debug.LogWarning("[SaveSystem] WARNING: Saving 0 items! This will result in an empty board on load.");
+            // }
+
             var isAbilitiesFirstTime = _abilityManager
                 .GetAllAbilityIds()
                 .Select(id => 
