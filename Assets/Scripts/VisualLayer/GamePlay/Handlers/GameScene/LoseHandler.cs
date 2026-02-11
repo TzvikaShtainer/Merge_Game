@@ -48,6 +48,13 @@ namespace VisualLayer.GamePlay.Handlers
         {
             if (collision.gameObject.layer == ItemLayer.StandingFruit.ToLayer() && !_isTriggered)
             {
+                Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+                
+                if (rb != null && rb.linearVelocity.magnitude > 0.1f)
+                {
+                    return;
+                }
+
                 _signalBus.Fire<HandleItemsCollisionAfterLoseSignal>();
                 
                 _signalBus.Fire<ReachedColliderLoseSignal>();

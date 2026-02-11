@@ -69,7 +69,8 @@ namespace VisualLayer.MergeItems.MergeSystem
             Item newItem = _itemFactory.Create(newLevel, newPosition);
            // newItem.transform.position = newPosition;
             
-            newItem.gameObject.layer = ItemLayer.StandingFruit.ToLayer();
+           //newItem.gameObject.layer = ItemLayer.StandingFruit.ToLayer();
+           newItem.gameObject.layer = ItemLayer.FallingFruit.ToLayer();
             newItem.MakeItemFall(true);
             
             Object.Destroy(item1.gameObject);
