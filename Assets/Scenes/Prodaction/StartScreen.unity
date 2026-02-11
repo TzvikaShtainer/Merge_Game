@@ -3115,6 +3115,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6062832124277424792}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSettingsButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VisualLayer.GamePlay.UI.TopBarUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369774876147536255, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4654589427178377138, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3235,6 +3263,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6062832124277424792}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSettingsButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VisualLayer.GamePlay.UI.TopBarUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550722722626706331, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7927884234862482859, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3244,6 +3300,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+--- !u!114 &6062832124277424792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1729032222129092919, guid: 5ec06725ae3102c488c92b9bd88e1474, type: 3}
+  m_PrefabInstance: {fileID: 6062832124277424791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d139c9ffab4bb68a3722a8e2d99864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisualLayer.GamePlay.UI.TopBarUI
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

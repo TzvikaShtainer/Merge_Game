@@ -1,6 +1,8 @@
 ﻿using DataLayer;
+using ServiceLayer.MusicService;
 using TMPro;
 using UnityEngine;
+using VisualLayer.GamePlay.Handlers;
 using Zenject;
 
 namespace VisualLayer.GamePlay.UI
@@ -12,6 +14,9 @@ namespace VisualLayer.GamePlay.UI
         
         [Inject]
         private IDataLayer _dataLayer;
+        
+        [Inject]
+        private ISettingsMenuClickHandler _settingsClickHandler; 
         
         private void Start()
         {
@@ -32,6 +37,12 @@ namespace VisualLayer.GamePlay.UI
         private void SyncUiWithData()
         {
             _coinsBalanceText.text = _dataLayer.Balances.Coins.ToString();
+        }
+        
+        public async void OnSettingsButtonClick()
+        {
+            //_settingsClickHandler.Execute();
+            //_sfxService.PlaySfxType(SfxType.Click);
         }
     }
 }

@@ -9,6 +9,7 @@ using VisualLayer.GamePlay.Handlers;
 using VisualLayer.GamePlay.Handlers.StartScene;
 using VisualLayer.GamePlay.PlayerInput;
 using VisualLayer.GamePlay.Popups.DailyRewardPopup;
+using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.MergeItems;
 using VisualLayer.MergeItems.MergeSystem;
 using Zenject;
@@ -54,6 +55,15 @@ namespace VisualLayer.GamePlay.Installers
                 .Bind<IDailyRewardHandler>()
                 .To<DailyRewardHandler>()
                 .AsSingle();
+            
+            Container
+                .Bind<ISettingsMenuClickHandler>()
+                .To<SettingsMenuClickHandler>()
+                .AsSingle();
+            
+            Container.Bind<ISettingsMenuActions>()
+                .To<SettingsMenuHandler>()
+                .AsTransient();
             
             //Debug.Log("InstallBindings Ended");
         }
