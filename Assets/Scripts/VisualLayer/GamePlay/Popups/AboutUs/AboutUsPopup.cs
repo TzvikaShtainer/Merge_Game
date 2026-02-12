@@ -12,5 +12,7 @@ namespace VisualLayer.GamePlay.Popups.AboutUs
         }
 
         #endregion
+        
+        public void OnCloseBtnClick() => Close();
     }
 }
