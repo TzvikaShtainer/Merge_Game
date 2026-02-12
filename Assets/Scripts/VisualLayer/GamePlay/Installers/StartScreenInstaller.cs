@@ -65,6 +65,11 @@ namespace VisualLayer.GamePlay.Installers
                 .To<SettingsMenuHandler>()
                 .AsTransient();
             
+            Container
+                .Bind<IAboutUsClickHandler>()
+                .To<AboutUsClickHandler>()
+                .AsSingle();
+            
             //Debug.Log("InstallBindings Ended");
         }
     }

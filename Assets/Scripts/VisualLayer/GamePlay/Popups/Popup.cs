@@ -22,6 +22,7 @@ namespace VisualLayer.GamePlay.Popups
         private void Awake()
         {
             transform.localScale = Vector3.zero;
+            //Todo: Add sfx here?
         }
 
         protected virtual void OnEnable()

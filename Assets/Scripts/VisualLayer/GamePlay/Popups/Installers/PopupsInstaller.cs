@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using VisualLayer.GamePlay.Handlers.StartScene;
+using VisualLayer.GamePlay.Popups.AboutUs;
 using VisualLayer.GamePlay.Popups.InternetConnectionPopup;
 using VisualLayer.GamePlay.Popups.MusicMenuPopup;
 using VisualLayer.GamePlay.Popups.SpinTheWheelPopup;
@@ -30,7 +31,7 @@ namespace VisualLayer.GamePlay.Popups.Installers
         private AddSkillsPopup.AddSkillsPopup _addSkillPopupPrefabRef;
         
         [SerializeField]
-        private SettingsMenuPopup settingsMenuPopupPrefabRef;
+        private SettingsMenuPopup _settingsMenuPopupPrefabRef;
         
         [SerializeField]
         private InternetConnectionPopup.InternetConnectionPopup _internetConnectionPopup;
@@ -39,13 +40,22 @@ namespace VisualLayer.GamePlay.Popups.Installers
         private SpinTheWheelPopup.SpinTheWheelPopup  _spinTheWheelPopupPrefabRef;
         
         [SerializeField]
-        private SpinWinPopup  _spinWinPopupPrefabRef;
+        private SpinTheWheelPopup.SpinWinPopup  _spinWinPopupPrefabRef;
         
         [SerializeField]
         private DailyRewardPopup.DailyRewardPopup  _dailyRewardPopupPrefabRef;
         
+        [SerializeField]
+        private AboutUsPopup  _aboutUsPopupPrefabRef;
+        
         public override void InstallBindings()
         {
+            Container
+                .BindFactory<AboutUsPopup, AboutUsPopup.Factory>()
+                .FromComponentInNewPrefab(_aboutUsPopupPrefabRef)
+                .UnderTransform(_parentPopupCanvasTransform)
+                .AsSingle();
+            
             Container
                 .BindFactory<YesNoPopupArgs ,YesNoPopup.YesNoPopup, YesNoPopup.YesNoPopup.Factory>()
                 .FromComponentInNewPrefab(_yesNoPopupPrefabRef)
@@ -60,7 +70,7 @@ namespace VisualLayer.GamePlay.Popups.Installers
 
             Container
                 .BindFactory<SettingsMenuPopup, SettingsMenuPopup.Factory>()
-                .FromComponentInNewPrefab(settingsMenuPopupPrefabRef)
+                .FromComponentInNewPrefab(_settingsMenuPopupPrefabRef)
                 .UnderTransform(_parentPopupCanvasTransform);
             
             Container

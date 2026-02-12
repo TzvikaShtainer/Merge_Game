@@ -16,7 +16,13 @@ namespace VisualLayer.GamePlay.UI
         private IDataLayer _dataLayer;
         
         [Inject]
+        private ISfxService _sfxService;
+        
+        [Inject]
         private ISettingsMenuClickHandler _settingsClickHandler; 
+        
+        [Inject]
+        private IAboutUsClickHandler _aboutUsClickHandler; 
         
         private void Start()
         {
@@ -43,6 +49,12 @@ namespace VisualLayer.GamePlay.UI
         {
             //_settingsClickHandler.Execute();
             //_sfxService.PlaySfxType(SfxType.Click);
+        }
+        
+        public async void OnAboutUsButtonClick()
+        {
+            _aboutUsClickHandler.Execute();
+            _sfxService.PlaySfxType(SfxType.Click);
         }
     }
 }

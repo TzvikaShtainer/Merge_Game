@@ -301,11 +301,12 @@ MonoBehaviour:
   _parentPopupCanvasTransform: {fileID: 757602815}
   _yesNoPopupPrefabRef: {fileID: 3066193168179115435, guid: 56aba42a0c2fa8743b9566fba9b9ec0b, type: 3}
   _addSkillPopupPrefabRef: {fileID: 6701155958128324559, guid: 65fb84c34ca730848870748900cd8a4d, type: 3}
-  settingsMenuPopupPrefabRef: {fileID: 97610254448028388, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
+  _settingsMenuPopupPrefabRef: {fileID: 97610254448028388, guid: 574a7816526a50545a5ddd0c5c0bd5ee, type: 3}
   _internetConnectionPopup: {fileID: 2295269995137708215, guid: 290d16d5908a51244a83a9624e13f5c1, type: 3}
   _spinTheWheelPopupPrefabRef: {fileID: -2871210500984260776, guid: 3c92501a5ec95d646a71c53718fb6d51, type: 3}
   _spinWinPopupPrefabRef: {fileID: 6447056023463380385, guid: e1fdbc38c5b7cc042ab21a93f7909bb3, type: 3}
   _dailyRewardPopupPrefabRef: {fileID: 8963657135667799006, guid: 0648e76c799da774e920aaa6408d3ff9, type: 3}
+  _aboutUsPopupPrefabRef: {fileID: 2256561700375652013, guid: 31e8b8af3fa1cb441a3d3b7df8015f37, type: 3}
 --- !u!1001 &1910715666
 PrefabInstance:
   m_ObjectHideFlags: 0
