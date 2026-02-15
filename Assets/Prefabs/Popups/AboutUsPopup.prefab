@@ -1354,15 +1354,15 @@ RectTransform:
   m_GameObject: {fileID: 6643405796326587460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1881281, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7929797228659017221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.001415, y: -16}
-  m_SizeDelta: {x: 850, y: 850}
+  m_AnchoredPosition: {x: -6.4748, y: -8.3323}
+  m_SizeDelta: {x: 801.4396, y: 250.0188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2572412773138247911
 CanvasRenderer:
@@ -1441,8 +1441,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 93.92615}
-  m_SizeDelta: {x: 1042.0317, y: 2498.6807}
+  m_AnchoredPosition: {x: 0, y: 90}
+  m_SizeDelta: {x: 1042.0317, y: 495.0953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7235986652403890896
 CanvasRenderer:
@@ -1736,7 +1736,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -460.3794, y: 0, z: -495.53467, w: -70.16016}
+  m_margin: {x: -364.5106, y: 0, z: -340.66968, w: -70.16016}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1914,7 +1914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.904629, y: 289.4077}
+  m_AnchoredPosition: {x: 15.904629, y: 356}
   m_SizeDelta: {x: 185.98, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3230190186364852348
@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -480.9505, y: -83.139404, z: -498.4859, w: -2.5444336}
+  m_margin: {x: -384.0079, y: -83.139404, z: -344.18942, w: -2.5444336}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2041,7 +2041,7 @@ RectTransform:
   m_GameObject: {fileID: 9060980316306530710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1999999, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4520812835950852912}
@@ -2089,19 +2089,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 427.4646
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -554.255
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.84166
+      value: 0.9258261
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3.837
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2133,11 +2133,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 24.309387
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2902181398810367016, guid: d750926f779e42249b0f75c647e6d20d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

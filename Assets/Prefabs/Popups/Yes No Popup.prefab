@@ -574,12 +574,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_fontSize
-      value: 55
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_margin.w
+      value: 64.394775
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_margin.y
+      value: 71.17322
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_margin.z
+      value: 12.080414
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b921880c36dd72e4195ebd5b56a93533, type: 2}
+    - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_fontSizeBase
       value: 55
@@ -590,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 8376640209121580419, guid: b921880c36dd72e4195ebd5b56a93533, type: 2}
     - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: m_enableAutoSizing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: fe54246863587b44cac17170a71eec77, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -792,19 +812,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_margin.w
-      value: -31.677853
+      value: -76.276855
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_margin.x
-      value: -46.68315
+      value: 11.123367
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_margin.y
-      value: -11.670735
+      value: -58.297073
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_margin.z
-      value: -46.683243
+      value: 11.123275
       objectReference: {fileID: 0}
     - target: {fileID: 4641298007483600876, guid: 19d598cb2dde1b94bb135a64194ac673, type: 3}
       propertyPath: m_fontAsset

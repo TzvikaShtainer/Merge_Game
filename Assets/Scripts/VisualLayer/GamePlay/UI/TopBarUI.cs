@@ -48,7 +48,7 @@ namespace VisualLayer.GamePlay.UI
         public async void OnSettingsButtonClick()
         {
             //_settingsClickHandler.Execute();
-            //_sfxService.PlaySfxType(SfxType.Click);
+            _sfxService.PlaySfxType(SfxType.Click);
         }
         
         public async void OnAboutUsButtonClick()

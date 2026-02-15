@@ -15,7 +15,7 @@ namespace VisualLayer.GamePlay.Handlers
     public class SettingsMenuClickHandler : ISettingsMenuClickHandler
     {
         [Inject] 
-        private SettingsMenuPopup.Factory _musicMenuPopupFactory;
+        private SettingsMenuPopup.Factory _SettingsPopupFactory;
         
         [Inject]
         private ITimeController _timeController;
@@ -31,7 +31,7 @@ namespace VisualLayer.GamePlay.Handlers
             //_timeController.PauseGameplay();
             //_signalBus.Fire<PauseInput>();
             
-            var popup = _musicMenuPopupFactory.Create();
+            var popup = _SettingsPopupFactory.Create();
             popup.Initialize(_actions);
             
             //_timeController.UnpauseGameplay();
