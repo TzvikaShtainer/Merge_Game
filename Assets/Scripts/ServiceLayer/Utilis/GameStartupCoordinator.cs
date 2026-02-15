@@ -1,12 +1,15 @@
 ﻿using Cysharp.Threading.Tasks;
 using DataLayer;
 using ServiceLayer.HourlyCoinsService;
+using ServiceLayer.NotificationsService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
+using ServiceLayer.Signals.SignalsClasses;
 using ServiceLayer.SpinTheWheelCooldownService;
 using UnityEngine;
 using VisualLayer.GamePlay.Abilities;
 using VisualLayer.GamePlay.Popups.DailyRewardPopup;
+using Zenject;
 
 namespace ServiceLayer.Utilis
 {
@@ -19,12 +22,15 @@ namespace ServiceLayer.Utilis
         private IHourlyCoinsService _hourlyCoinsService;
         private ISpinTheWheelCooldownService  _spinTheWheelCooldownService;
         private IDailyRewardCooldownService  _dailyRewardCooldownService;
+        
+        [Inject]
+        private SignalBus  _signalBus;
 
         public GameStartupCoordinator(IDataLayer  dataLayer, AbilityManager  abilityManager, 
             IGameSettingsService gameSettingsService, ISaveSystem saveSystem
             , IHourlyCoinsService hourlyCoinsService
             , ISpinTheWheelCooldownService spinTheWheelCooldownService
-            , IDailyRewardCooldownService  dailyRewardCooldownService)
+            , IDailyRewardCooldownService  dailyRewardCooldownService )
         {
             _dataLayer =  dataLayer;
             _abilityManager = abilityManager;

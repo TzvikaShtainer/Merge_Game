@@ -171,7 +171,8 @@ namespace VisualLayer.Loader
             _signalBus.Fire<UIComponentsInBehaviorSignal>();
             
             _signalBus.Fire<StartInternetCheckSignal>();
-
+            
+            _signalBus.Fire<GameReadyForNotificationsSignal>();
         }
     }
 }

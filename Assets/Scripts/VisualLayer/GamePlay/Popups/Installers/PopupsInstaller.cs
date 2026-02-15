@@ -2,6 +2,7 @@
 using DataLayer.DataTypes.abilities;
 using EasyUI.PickerWheelUI;
 using ServiceLayer.GameScenes;
+using ServiceLayer.NotificationsService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -107,6 +108,21 @@ namespace VisualLayer.GamePlay.Popups.Installers
                 .BindInterfacesAndSelfTo<InternetConnectionService>()
                 .AsSingle()
                 .NonLazy();
+
+            Container
+                .BindInterfacesAndSelfTo<NotificationFlowManager>()
+                .AsSingle();
+            
+            Container
+                .Bind<IInitializableNotification>()
+                .To<DailyRewardNotification>()
+                .AsCached();
+            
+            Container
+                .Bind<IInitializableNotification>()
+                .To<SpinTheWheelNotification>()
+                .AsCached();
+            
         }
         
         private async void Awake()

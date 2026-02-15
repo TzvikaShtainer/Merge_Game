@@ -4,6 +4,7 @@ using ServiceLayer.GameScenes;
 using ServiceLayer.HourlyCoinsService;
 using ServiceLayer.MusicService;
 using ServiceLayer.NavigationService;
+using ServiceLayer.NotificationsService;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
@@ -70,11 +71,17 @@ namespace ServiceLayer.Installers
                 .AsSingle();
             
             
-            Container.BindInterfacesAndSelfTo<PlayFabHourlyCoinsService>().AsSingle();
+            Container
+                .BindInterfacesAndSelfTo<PlayFabHourlyCoinsService>()
+                .AsSingle();
     
-            Container.BindInterfacesAndSelfTo<PlayFabSpinTheWheelCooldownService>().AsSingle();
+            Container
+                .BindInterfacesAndSelfTo<PlayFabSpinTheWheelCooldownService>()
+                .AsSingle();
     
-            Container.BindInterfacesAndSelfTo<PlayFabDailyRewardCooldownService>().AsSingle();
+            Container
+                .BindInterfacesAndSelfTo<PlayFabDailyRewardCooldownService>()
+                .AsSingle();
             
             //---Zenject Dont Need To Bind An Abstract Class
             /*Container
@@ -82,9 +89,14 @@ namespace ServiceLayer.Installers
                 .To<BaseCooldownService>()
                 .AsSingle();*/
             
-            Container.BindInterfacesAndSelfTo<DataSyncService.DataSyncService>().AsSingle().NonLazy();
+            Container
+                .BindInterfacesAndSelfTo<DataSyncService.DataSyncService>()
+                .AsSingle()
+                .NonLazy();
             
-            Container.Bind<GameStartupCoordinator>().AsSingle();
+            Container
+                .Bind<GameStartupCoordinator>()
+                .AsSingle();
         }
     }
 }
