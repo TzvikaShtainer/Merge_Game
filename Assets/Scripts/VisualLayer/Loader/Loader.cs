@@ -30,9 +30,12 @@ namespace VisualLayer.Loader
         #endregion
         
         #region Methods
+        
+        public bool IsActive { get; private set; }
 
         public async UniTask InitLoader()
         {
+            IsActive = true;
             ResetData();
             await FadeIn();
         }
@@ -51,6 +54,7 @@ namespace VisualLayer.Loader
         public async UniTask FadeOut()
         {
             await _animationComponent.PlayClipAsync(_FadeOutClip);
+            IsActive = false;
         }
 
         public void SetProgress(float progress, string text)

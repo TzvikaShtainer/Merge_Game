@@ -10,6 +10,8 @@
     using VisualLayer.GamePlay.Popups.YesNoPopup;
     using VisualLayer.Loader;
     using Zenject;
+    using Cysharp.Threading.Tasks;
+    using Cysharp.Threading.Tasks.Linq;
 
     namespace VisualLayer.GamePlay.Handlers
     {
@@ -44,6 +46,13 @@
             public async void Execute()
             {
                 _signalBus.Fire<PauseInputSignal>();
+                
+                if (_loader.IsActive) 
+                {
+                    Debug.Log("[GameEndHandler] Loader is active, waiting for signal...");
+        
+                    await UniTask.WaitUntil(() => !_loader.IsActive);
+                }
 
                 var popupArgs = new YesNoPopupArgs
                 {

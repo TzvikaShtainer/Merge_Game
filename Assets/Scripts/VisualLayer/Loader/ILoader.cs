@@ -8,6 +8,8 @@ namespace VisualLayer.Loader
     public interface ILoader
     {
         #region Methods
+        
+        public bool IsActive { get;}
 
         UniTask InitLoader();
         void ResetData();
