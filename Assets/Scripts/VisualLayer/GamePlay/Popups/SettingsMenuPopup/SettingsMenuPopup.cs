@@ -77,6 +77,7 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 
         public void OnRestartBtnClick()
         {
+            Close();
             _settingsMenuActions.OnRestartGame();
         }
 
