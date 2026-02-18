@@ -20,6 +20,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
         }
         public void Spawn(Vector2 posToSpawn)
         {
+            Debug.Log("Spawning items");
             _gameLogicHandler.DropCurrentItem(); 
         }
 

@@ -78,7 +78,7 @@ namespace VisualLayer.MergeItems
             _rigidbody = GetComponent<Rigidbody2D>();
             _circleCollider2D = GetComponent<CircleCollider2D>();
             
-            _circleCollider2D.enabled = true;
+            _circleCollider2D.enabled = false;
         }
         
 

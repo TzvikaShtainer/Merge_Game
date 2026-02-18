@@ -70,7 +70,7 @@ namespace VisualLayer.MergeItems.MergeSystem
            // newItem.transform.position = newPosition;
             
            //newItem.gameObject.layer = ItemLayer.StandingFruit.ToLayer();
-           newItem.gameObject.layer = ItemLayer.FallingFruit.ToLayer();
+            newItem.gameObject.layer = ItemLayer.FallingFruit.ToLayer();
             newItem.MakeItemFall(true);
             
             Object.Destroy(item1.gameObject);
