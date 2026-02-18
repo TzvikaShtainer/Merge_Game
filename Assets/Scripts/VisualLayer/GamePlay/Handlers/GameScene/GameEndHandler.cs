@@ -49,8 +49,6 @@
                 
                 if (_loader.IsActive) 
                 {
-                    Debug.Log("[GameEndHandler] Loader is active, waiting for signal...");
-        
                     await UniTask.WaitUntil(() => !_loader.IsActive);
                 }
 
