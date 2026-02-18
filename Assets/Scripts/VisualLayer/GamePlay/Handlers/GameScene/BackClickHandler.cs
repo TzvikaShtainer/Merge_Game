@@ -33,7 +33,7 @@ namespace VisualLayer.GamePlay.Handlers
         public async UniTask Execute()
         {
             _saveService.Save();
-            _dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
+            //_dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
             
             await _loader.InitLoader();
             
@@ -46,6 +46,9 @@ namespace VisualLayer.GamePlay.Handlers
             await _loader.AnimateProgressTo(0.5f, 1f);
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
+            
+            await _gameStartupCoordinator.LoadAllDataFromServer();
+            await _gameStartupCoordinator.LoadAllDataFromDevice();
             
             await _loader.AnimateProgressTo(1f, 0.5f);
             

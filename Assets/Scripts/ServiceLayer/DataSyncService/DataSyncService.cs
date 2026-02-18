@@ -10,13 +10,20 @@ using Zenject;
 
 namespace ServiceLayer.DataSyncService
 {
+    public interface ISyncLock
+    {
+        void LockSync();
+        void UnlockSync();
+    }
+    
     public class DataSyncService : IInitializable, IDisposable
     {
-        private IServerService _serverService;
-        private bool _isSyncScheduled;
-        private List<ISyncableService> _servicesToSync;
-        private bool _isInitialLoading = true;
+        private readonly IServerService _serverService;
+        private readonly List<ISyncableService> _servicesToSync;
         
+        private bool _isSyncScheduled;
+        private bool _isLocked = false; // חסימה לוגית בזמן טעינה
+
         public DataSyncService(
             IServerService serverService, 
             [Inject(Source = InjectSources.Any)] List<ISyncableService> servicesToSync)
@@ -24,31 +31,38 @@ namespace ServiceLayer.DataSyncService
             _serverService = serverService;
             _servicesToSync = servicesToSync ?? new List<ISyncableService>();
         }
-        public async void Initialize()
+
+        public void Initialize()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(7)); 
-            _isInitialLoading = false;
-            
+            // נרשמים לאירועים מיד, אבל השליטה היא דרך ה-Lock
             foreach (var serviceToSync in _servicesToSync)
                 serviceToSync.OnDataChanged += ScheduleSync;
         }
-        
+
         public void Dispose()
         {
             foreach (var serviceToSync in _servicesToSync)
                 serviceToSync.OnDataChanged -= ScheduleSync;
         }
-        
+
+        public void LockSync() 
+        {
+            _isLocked = true;
+            Debug.Log("<color=yellow>[DataSync] Sync LOCKED - Upload blocked.</color>");
+        }
+
+        public void UnlockSync() 
+        {
+            _isLocked = false;
+            Debug.Log("<color=cyan>[DataSync] Sync UNLOCKED - Ready to sync changes.</color>");
+        }
+
         private void ScheduleSync()
         {
-            if (_isInitialLoading)
-            {
-                //Debug.Log("[DataSync] Blocked sync attempt during initial loading window.");
-                return;
-            }
+            // אם המערכת נעולה (בטעינה) - אנחנו פשוט מתעלמים מהבקשה לסנכרן
+            if (_isLocked) return;
             
-            if (_isSyncScheduled)
-                return;
+            if (_isSyncScheduled) return;
 
             _isSyncScheduled = true;
             SyncRoutine().Forget();
@@ -56,8 +70,12 @@ namespace ServiceLayer.DataSyncService
         
         private async UniTaskVoid SyncRoutine()
         {
+            // מחכים מעט כדי לאסוף שינויים נוספים (Debounce)
             await UniTask.Delay(TimeSpan.FromMilliseconds(800));
             _isSyncScheduled = false;
+
+            // בדיקה נוספת למקרה שהסנכרון ננעל בזמן ההמתנה
+            if (_isLocked) return;
 
             var allData = new Dictionary<string, string>();
 
@@ -65,6 +83,7 @@ namespace ServiceLayer.DataSyncService
             {
                 var data = service.GetSyncData();
                 if (data == null) continue;
+                
                 foreach (var kvp in data) 
                 {
                     if (!string.IsNullOrEmpty(kvp.Key))
@@ -74,8 +93,13 @@ namespace ServiceLayer.DataSyncService
 
             if (allData.Count == 0) return;
 
+            await SendDataInBatches(allData);
+        }
+
+        private async UniTask SendDataInBatches(Dictionary<string, string> allData)
+        {
             var dataList = allData.ToList();
-            int batchSize = 10; 
+            const int batchSize = 10; 
 
             for (int i = 0; i < dataList.Count; i += batchSize)
             {
@@ -86,16 +110,12 @@ namespace ServiceLayer.DataSyncService
 
                 try
                 {
-                    //Debug.Log($"[DataSync] Sending batch {i / batchSize + 1}: {string.Join(", ", batchDict.Keys)}");
-            
                     await _serverService.SetUserData(batchDict);
-            
-                    //Debug.Log($"<color=green>[DataSync] Batch {i / batchSize + 1} Successful!</color>");
+                    //Debug.Log($"<color=green>[DataSync] Successfully synced batch {i / batchSize + 1}</color>");
                 }
                 catch (Exception ex)
                 {
-                    //Debug.LogError($"[DataSync] Batch starting at index {i} failed: {ex.Message}");
-                    //Debug.LogError($"[DataSync] Failed keys in this batch: {string.Join(", ", batchDict.Keys)}");
+                    Debug.LogError($"[DataSync] Batch failed: {ex.Message}");
                 }
             }
         }

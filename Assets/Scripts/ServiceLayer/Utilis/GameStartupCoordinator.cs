@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DataLayer;
+using ServiceLayer.DataSyncService;
 using ServiceLayer.HourlyCoinsService;
 using ServiceLayer.NotificationsService;
 using ServiceLayer.SaveSystem;
@@ -22,33 +23,59 @@ namespace ServiceLayer.Utilis
         private IHourlyCoinsService _hourlyCoinsService;
         private ISpinTheWheelCooldownService  _spinTheWheelCooldownService;
         private IDailyRewardCooldownService  _dailyRewardCooldownService;
+        private readonly DataSyncService.DataSyncService _syncService;
         
         [Inject]
         private SignalBus  _signalBus;
 
-        public GameStartupCoordinator(IDataLayer  dataLayer, AbilityManager  abilityManager, 
-            IGameSettingsService gameSettingsService, ISaveSystem saveSystem
-            , IHourlyCoinsService hourlyCoinsService
-            , ISpinTheWheelCooldownService spinTheWheelCooldownService
-            , IDailyRewardCooldownService  dailyRewardCooldownService )
+        public GameStartupCoordinator(
+            IDataLayer dataLayer, 
+            AbilityManager abilityManager, 
+            IGameSettingsService gameSettingsService, 
+            ISaveSystem saveSystem,
+            IHourlyCoinsService hourlyCoinsService,
+            ISpinTheWheelCooldownService spinTheWheelCooldownService,
+            IDailyRewardCooldownService dailyRewardCooldownService,
+            DataSyncService.DataSyncService syncService)
         {
-            _dataLayer =  dataLayer;
+            _dataLayer = dataLayer;
             _abilityManager = abilityManager;
             _gameSettingsService = gameSettingsService;
             _saveSystem = saveSystem;
             _hourlyCoinsService = hourlyCoinsService;
             _spinTheWheelCooldownService = spinTheWheelCooldownService;
             _dailyRewardCooldownService = dailyRewardCooldownService;
+            _syncService = syncService;
         }
 
         public async UniTask LoadAllDataFromServer()
         {
-             await _dataLayer.Balances.LoadFromServer();
-             await _abilityManager.LoadFromServer();
-             await _gameSettingsService.LoadFromServer();
-             await _hourlyCoinsService.LoadFromServer();
-             await _spinTheWheelCooldownService.LoadFromServer();
-             await _dailyRewardCooldownService.LoadFromServer();
+            
+            var syncLock = _syncService as ISyncLock; 
+    
+            syncLock?.LockSync(); 
+
+            try 
+            {
+                await UniTask.WhenAll(
+                    _dataLayer.Balances.LoadFromServer(),
+                    _gameSettingsService.LoadFromServer(),
+                    _hourlyCoinsService.LoadFromServer(),
+                    _spinTheWheelCooldownService.LoadFromServer(),
+                    _dailyRewardCooldownService.LoadFromServer(),
+                    _abilityManager.LoadFromServer()
+                );
+
+                await UniTask.Yield();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[GameStartupCoordinator] Error during data load: {e.Message}");
+            }
+            finally 
+            {
+                syncLock?.UnlockSync();
+            }
         }
 
         public async UniTask LoadAllDataFromDevice()
