@@ -11,9 +11,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
         private IGameLogicHandler _gameLogicHandler;
         
         private readonly Camera _mainCamera;
-        private const float EdgePadding = 0.7f;
-        private float _manXValue = 1.7f;
-        private float _minXValue = -1.7f;
+        private const float EdgePadding = 0.45f;
         
         [Inject]
         public SpawnLogic(Camera mainCamera)
@@ -38,7 +36,7 @@ namespace VisualLayer.MergeItems.SpawnLogic
             
             float maxXBound = (orthoSize * screenAspect) - EdgePadding;
             float minXBound = -maxXBound;
-
+            
             pos.x = Mathf.Clamp(pos.x, minXBound, maxXBound);
             
             _gameLogicHandler.SetCurrItemPosByLocation(pos);
