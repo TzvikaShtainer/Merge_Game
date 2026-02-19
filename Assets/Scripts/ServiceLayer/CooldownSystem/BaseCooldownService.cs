@@ -6,6 +6,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using ServiceLayer.DataSyncService;
 using ServiceLayer.PlayFabService;
+using ServiceLayer.TImeProvider;
 using UnityEngine;
 using Zenject;
 
@@ -21,12 +22,17 @@ namespace ServiceLayer
         [Inject]
         private IDataLayer _dataLayer;
         
+        [Inject]
+        private ITimeProviderService _timeProviderService;
+        
         protected abstract string CooldownKey { get; }
         protected abstract int CooldownSeconds { get; }
         protected abstract int RewardAmount { get; }
 
+        private DateTime _initialServerTime;
+        private double _startupTimestamp;
         private DateTime _lastClaimUtc;
-        private TimeSpan _serverOffset;
+        private bool _isInitialized;
 
         public DateTime LastClaimTimeUtc => _lastClaimUtc;
         
@@ -37,39 +43,33 @@ namespace ServiceLayer
                 {CooldownKey, _lastClaimUtc.ToString("o")}
             };
         }
-        public virtual async UniTask LoadFromServer()
+       public virtual async UniTask LoadFromServer()
         {
-            var serverTime = await GetServerTimeUtc();
-            _serverOffset = serverTime - DateTime.UtcNow;
-
+            _initialServerTime = await _timeProviderService.GetServerTimeUtc();
+            
+            _startupTimestamp = Time.realtimeSinceStartupAsDouble;
+            
             var data = await _serverService.GetUserData(CooldownKey);
-            if (data.TryGetValue(CooldownKey, out var saved))
-                _lastClaimUtc = DateTime.Parse(saved).ToUniversalTime();
+            if (data.TryGetValue(CooldownKey, out var saved) && DateTime.TryParse(saved, out var parsedTime))
+            {
+                _lastClaimUtc = parsedTime.ToUniversalTime();
+            }
             else
+            {
                 _lastClaimUtc = DateTime.MinValue;
-        }
-        
-        public async UniTask<DateTime> GetServerTimeUtc()
-        {
-            var tcs = new UniTaskCompletionSource<DateTime>();
-             
-            PlayFabClientAPI.GetTime(new GetTimeRequest(),
-                results =>
-                {
-                    tcs.TrySetResult(results.Time.ToUniversalTime());
-                },
-                error =>
-                {
-                    Debug.LogError($"Failed to get server time: {error.ErrorMessage}");
-                    tcs.TrySetResult(DateTime.UtcNow);
-                });
+            }
 
-            return await tcs.Task;
+            _isInitialized = true;
+            NotifyDataChanged();
         }
-
+       
         private DateTime GetCurrentServerTime()
         {
-            return DateTime.UtcNow + _serverOffset;
+            if (!_isInitialized) return DateTime.UtcNow;
+
+            // חישוב כמה זמן עבר באמת מאז הסנכרון האחרון
+            double elapsedSinceSync = Time.realtimeSinceStartupAsDouble - _startupTimestamp;
+            return _initialServerTime.AddSeconds(elapsedSinceSync);
         }
 
         public bool CanClaim(out TimeSpan timeRemaining)
@@ -87,18 +87,24 @@ namespace ServiceLayer
             return false;
         }
 
-        public void Claim()
+        public virtual void Claim()
         {
-            var now = GetCurrentServerTime();
-            _lastClaimUtc = now;
+            if (!CanClaim(out _))
+            {
+                Debug.LogWarning($"[{CooldownKey}] Claim attempted before cooldown finished.");
+                return;
+            }
+
+            _lastClaimUtc = GetCurrentServerTime();
             
             OnClaim();
-            
-            OnDataChanged?.Invoke();
+            NotifyDataChanged();
         }
+
         protected abstract void OnClaim();
+
         public int GetRewardAmount() => RewardAmount;
-        
+
         protected void NotifyDataChanged() => OnDataChanged?.Invoke();
     }
 }

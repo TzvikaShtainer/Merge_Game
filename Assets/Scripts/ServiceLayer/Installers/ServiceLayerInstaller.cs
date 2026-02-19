@@ -8,6 +8,7 @@ using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
 using ServiceLayer.SpinTheWheelCooldownService;
 using ServiceLayer.TimeControl;
+using ServiceLayer.TImeProvider;
 using ServiceLayer.Utilis;
 using UnityEngine;
 using VisualLayer.GamePlay.Popups.DailyRewardPopup;
@@ -56,6 +57,12 @@ namespace ServiceLayer.Installers
                 .Bind<ISfxService>()
                 .To<FMODSfxService>()
                 .AsSingle();
+            
+            Container
+                .Bind<ITimeProviderService>()
+                .To<TimeProviderService>()
+                .AsSingle();
+            
             
             Container.BindInterfacesAndSelfTo<PlayFabHourlyCoinsService>().AsSingle();
     
