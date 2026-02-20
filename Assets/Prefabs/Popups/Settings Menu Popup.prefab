@@ -402,17 +402,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c68ee9e674113a929c56f1f2c99b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicToggle:
+  _musicToggleButton:
     buttonImage: {fileID: 7881662654293526640}
     spriteOn: {fileID: 21300000, guid: 6646a637abcc6bd4fa6559db0524d6cc, type: 3}
     spriteOff: {fileID: 21300000, guid: e0384ba44b1a58d428cccda1070fedf8, type: 3}
     isOn: 1
-  _sfxToggle:
+  _sfxToggleButton:
     buttonImage: {fileID: 7047941324850432086}
     spriteOn: {fileID: 21300000, guid: 469bd984930c66e4fa2c51ab40f4c94d, type: 3}
     spriteOff: {fileID: 21300000, guid: 408b622eb8b0355439c6b5a9110ad89f, type: 3}
     isOn: 1
-  _vibrationToggle:
+  _vibrationToggleButton:
     buttonImage: {fileID: 6470978278591164003}
     spriteOn: {fileID: 21300000, guid: 020fd4269c1da6848ae72ef6cd770d4f, type: 3}
     spriteOff: {fileID: 21300000, guid: 642d9f1de2ed1bb48a22c8d2dd8a0c2e, type: 3}

@@ -6,7 +6,7 @@ using ServiceLayer.GameScenes;
 using ServiceLayer.MusicService;
 using ServiceLayer.SettingsService;
 using ServiceLayer.Signals.SignalsClasses;
-using UnityEngine;
+using VisualLayer.GamePlay.Popups.YesNoPopup;
 using VisualLayer.Loader;
 using Zenject;
 
@@ -35,6 +35,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         [Inject]
         private SignalBus _signalBus;
         
+        [Inject] 
+        private global::VisualLayer.GamePlay.Popups.YesNoPopup.YesNoPopup.Factory _yesNoPopupFactory;
+        
         public void OnToggleMusic()
         {
             bool isOn = !_gameScenesService.Settings.IsMusicOn;
@@ -62,39 +65,55 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         public async UniTask OnRestartGame()
         { 
             _sfxService.PlaySfxType(SfxType.Click);
-            
-            await _loader.InitLoader();
-            
-            //_loader.SetProgress(0.2f, "Loading Level 20%");
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
-            await _loader.AnimateProgressTo(0.2f, 0.3f);
-            
-            //unload gameplay lvl scene
-            //_loader.SetProgress(0.5f, "Loading Level 50%");
-            await _loader.AnimateProgressTo(0.5f, 0.5f);
 
-            await _scenesService.UnloadLevelScene(_currentLevelType);
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            var popupArgs = new YesNoPopupArgs
+            {
+                Text = "Are You Sure?",
+                IsNoButtonVisible = true,
+                YesCaption = "Yes",
+                NoCaption = "No"
+            };
             
-            //load lvl selection scene
-            // _loader.SetProgress(0.7f, "Loading Level 70%");
-            await _loader.AnimateProgressTo(0.7f, 0.5f);
+            var popup = _yesNoPopupFactory.Create(popupArgs);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+            var result = await popup.WaitForResult();
+
+            if (result.IsNo)
+            {
+                _signalBus.Fire<UnpauseInputSignal>();
+                await UniTask.Delay(TimeSpan.FromSeconds(0.5));
+            }
+
+            else
+            {
+                await _loader.InitLoader();
+            
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                await _loader.AnimateProgressTo(0.2f, 0.3f);
+            
+                await _loader.AnimateProgressTo(0.5f, 0.5f);
+
+                await _scenesService.UnloadLevelScene(_currentLevelType);
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            
+                await _loader.AnimateProgressTo(0.7f, 0.5f);
            
-            _dataLayer.Balances.SetCurrentScore(0);
+                _dataLayer.Balances.SetCurrentScore(0);
             
-            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+                await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
-            await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.Loader);
-            await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
+                await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.Loader);
+                await _scenesService.LoadInfraSceneIfNotLoaded(InfraScreenType.GamePopups);
             
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
-            //_loader.SetProgress(1f, "Loading Level 100%");
-            await _loader.AnimateProgressTo(1f, 0.5f);
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                //_loader.SetProgress(1f, "Loading Level 100%");
+                await _loader.AnimateProgressTo(1f, 0.5f);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
-            await _loader.FadeOut();
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                await _loader.FadeOut();
             
-            _signalBus.Fire<UnpauseInputSignal>();
+                _signalBus.Fire<UnpauseInputSignal>();
+            }
         }
     }
 }

@@ -26,9 +26,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 
         #region Editor
 
-        [SerializeField] private ToggleButton _musicToggle;
-        [SerializeField] private ToggleButton _sfxToggle;
-        [SerializeField] private ToggleButton _vibrationToggle;
+        [SerializeField] private ToggleButton _musicToggleButton;
+        [SerializeField] private ToggleButton _sfxToggleButton;
+        [SerializeField] private ToggleButton _vibrationToggleButton;
 
         #endregion
 
@@ -49,9 +49,9 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
         public void Initialize(ISettingsMenuActions settingsMenuActions)
         {
             _settingsMenuActions = settingsMenuActions;
-            _musicToggle.SetState(_gameSettingsService.Settings.IsMusicOn);
-            _sfxToggle.SetState(_gameSettingsService.Settings.IsSoundEffectsOn);
-            _vibrationToggle.SetState(_gameSettingsService.Settings.IsVibrationOn);
+            _musicToggleButton.SetState(_gameSettingsService.Settings.IsMusicOn);
+            _sfxToggleButton.SetState(_gameSettingsService.Settings.IsSoundEffectsOn);
+            _vibrationToggleButton.SetState(_gameSettingsService.Settings.IsVibrationOn);
         }
 
         public void OnContinueBtnClick() => Close();
@@ -59,26 +59,24 @@ namespace VisualLayer.GamePlay.Popups.MusicMenuPopup
 
         public void OnBgMusicBtnClick()
         {
-            _musicToggle.Toggle();
+            _musicToggleButton.Toggle();
             _settingsMenuActions.OnToggleMusic();
         }
 
         public void OnSoundBtnClick()
         {
-            _sfxToggle.Toggle();
+            _sfxToggleButton.Toggle();
             _settingsMenuActions.OnToggleSfx();
         }
 
         public void OnVibrationBtnClick()
         {
-            _vibrationToggle.Toggle();
+            _vibrationToggleButton.Toggle();
             _settingsMenuActions.OnToggleVibration();
         }
 
         public void OnRestartBtnClick()
         {
-            Close();
-            
             _settingsMenuActions.OnRestartGame();
         }
 
