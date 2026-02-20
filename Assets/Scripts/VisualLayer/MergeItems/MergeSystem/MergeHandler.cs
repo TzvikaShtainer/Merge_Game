@@ -12,7 +12,7 @@ namespace VisualLayer.MergeItems.MergeSystem
     public class MergeHandler : IMergeHandler
     {
 
-        private int _itemLvlToGetCoins = 0;
+        private int _itemLvlToGetCoins = 7;
         [Inject]
         private IDataLayer _dataLayer;
         
