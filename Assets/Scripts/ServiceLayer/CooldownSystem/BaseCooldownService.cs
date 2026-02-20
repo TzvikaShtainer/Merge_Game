@@ -38,10 +38,14 @@ namespace ServiceLayer
         
         public virtual Dictionary<string, string> GetSyncData()
         {
-            return new Dictionary<string, string>
+            var data = new Dictionary<string, string>();
+    
+            if (_lastClaimUtc != DateTime.MinValue)
             {
-                {CooldownKey, _lastClaimUtc.ToString("o")}
-            };
+                data.Add(CooldownKey, _lastClaimUtc.ToString("o"));
+            }
+    
+            return data;
         }
        public virtual async UniTask LoadFromServer()
         {

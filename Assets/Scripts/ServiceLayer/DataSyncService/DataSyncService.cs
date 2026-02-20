@@ -16,13 +16,13 @@ namespace ServiceLayer.DataSyncService
         void UnlockSync();
     }
     
-    public class DataSyncService : IInitializable, IDisposable
+    public class DataSyncService : IInitializable, IDisposable, ISyncLock
     {
         private readonly IServerService _serverService;
         private readonly List<ISyncableService> _servicesToSync;
         
         private bool _isSyncScheduled;
-        private bool _isLocked = false; // חסימה לוגית בזמן טעינה
+        private bool _isLocked = true;
 
         public DataSyncService(
             IServerService serverService, 
@@ -34,7 +34,6 @@ namespace ServiceLayer.DataSyncService
 
         public void Initialize()
         {
-            // נרשמים לאירועים מיד, אבל השליטה היא דרך ה-Lock
             foreach (var serviceToSync in _servicesToSync)
                 serviceToSync.OnDataChanged += ScheduleSync;
         }
@@ -59,7 +58,6 @@ namespace ServiceLayer.DataSyncService
 
         private void ScheduleSync()
         {
-            // אם המערכת נעולה (בטעינה) - אנחנו פשוט מתעלמים מהבקשה לסנכרן
             if (_isLocked) return;
             
             if (_isSyncScheduled) return;
@@ -70,11 +68,9 @@ namespace ServiceLayer.DataSyncService
         
         private async UniTaskVoid SyncRoutine()
         {
-            // מחכים מעט כדי לאסוף שינויים נוספים (Debounce)
             await UniTask.Delay(TimeSpan.FromMilliseconds(800));
             _isSyncScheduled = false;
 
-            // בדיקה נוספת למקרה שהסנכרון ננעל בזמן ההמתנה
             if (_isLocked) return;
 
             var allData = new Dictionary<string, string>();
