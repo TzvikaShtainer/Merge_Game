@@ -158,8 +158,7 @@ namespace VisualLayer.GamePlay.UI
         public void OnAbilityButtonClick(string abilityId)
         {
             //Debug.Log("abilityId: "+ abilityId +"firstTime: "+ _abilityManager.IsAbilityFirstTime(abilityId));
-            if (!_abilityManager.IsAbilityFirstTime(abilityId) || 
-                _abilityManager.GetAbilityCount(abilityId) == 0)
+            if (_abilityManager.GetAbilityCount(abilityId) == 0)
             {
                 _sfxService.PlaySfxType(SfxType.OpenPopup);
                 

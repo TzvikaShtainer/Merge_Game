@@ -9,7 +9,7 @@ using Zenject;
 namespace DataLayer.Balances
 {
     [Serializable]
-    public class PlayerBalances : IPlayerBalances, ISyncableService
+    public class PlayerBalances : IPlayerBalances, ISyncableService, IInitializable
     {
         #region Events
 
@@ -57,6 +57,13 @@ namespace DataLayer.Balances
         
 
         #region Methods
+        
+        public void Initialize()
+        {
+            _coins = 0;
+            _highScore = 0;
+            _currentScore = 0;
+        }
         
         public Dictionary<string, string> GetSyncData()
         {
@@ -161,6 +168,8 @@ namespace DataLayer.Balances
             
             //Debug.Log("Finish Loading player balances: "+_coins + " " + _highScore +" CurrentScore: " +_currentScore);
         }
+        
+        
         
         #endregion
     }
