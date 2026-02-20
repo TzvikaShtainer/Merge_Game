@@ -3,6 +3,7 @@ using ServiceLayer.EffectsService;
 using ServiceLayer.GameScenes;
 using ServiceLayer.HourlyCoinsService;
 using ServiceLayer.MusicService;
+using ServiceLayer.NavigationService;
 using ServiceLayer.PlayFabService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.SettingsService;
@@ -61,6 +62,11 @@ namespace ServiceLayer.Installers
             Container
                 .Bind<ITimeProviderService>()
                 .To<TimeProviderService>()
+                .AsSingle();
+            
+            Container
+                .Bind<INavigationService>()
+                .To<NavigationService.NavigationService>()
                 .AsSingle();
             
             

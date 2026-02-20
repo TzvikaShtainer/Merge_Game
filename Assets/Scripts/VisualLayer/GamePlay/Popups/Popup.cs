@@ -19,7 +19,7 @@ namespace VisualLayer.GamePlay.Popups
             _sfxService.PlaySfxType(SfxType.ClosePopup);
         }
         
-        private void Awake()
+        protected virtual void Awake()
         {
             transform.localScale = Vector3.zero;
             //Todo: Add sfx here?
