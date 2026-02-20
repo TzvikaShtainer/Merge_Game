@@ -50,9 +50,6 @@ namespace VisualLayer.GamePlay.Abilities
         public void AddAbilityCount(int amountToAdd)
         {
             Count += amountToAdd;
-            Debug.Log("AddAbilityCount");
-            Debug.Log($"Adding ability count {amountToAdd}");
-            Debug.Log($"Adding  count Now {Count}");
         }
 
         public bool IsFirstTime()

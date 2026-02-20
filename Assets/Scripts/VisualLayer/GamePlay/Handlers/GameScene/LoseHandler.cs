@@ -59,7 +59,7 @@ namespace VisualLayer.GamePlay.Handlers
         {
             if (collision.gameObject.layer == LayerCache.StandingFruit && !_isTriggered)
             {
-                Debug.Log("CustomTriggerBehavior StandingFruit");
+                //Debug.Log("CustomTriggerBehavior StandingFruit");
                 Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
                 
                 if (rb != null && rb.linearVelocity.magnitude > 0.1f)

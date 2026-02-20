@@ -31,7 +31,7 @@ namespace ServiceLayer.SaveSystem
             if (!_isReadyToSave)
                 return;
             
-            Debug.Log($"Saving {SavePath}");
+            //Debug.Log($"Saving {SavePath}");
             Dictionary<string, bool> existingFlags = new Dictionary<string, bool>();
             if (File.Exists(SavePath))
             {
