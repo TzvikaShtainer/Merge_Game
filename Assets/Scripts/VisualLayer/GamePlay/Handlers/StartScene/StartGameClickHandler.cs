@@ -45,8 +45,7 @@ namespace VisualLayer.GamePlay.Handlers
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
             
-            await _gameStartupCoordinator.LoadAllDataFromServer();
-            await _gameStartupCoordinator.LoadAllDataFromDevice();
+            await _gameStartupCoordinator.LoadLocalAndServer();
             
             await _loader.AnimateProgressTo(1f, 0.5f);
             

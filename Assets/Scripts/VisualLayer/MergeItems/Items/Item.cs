@@ -10,20 +10,15 @@ using Zenject;
 
 namespace VisualLayer.MergeItems
 {
-    public enum ItemLayer
-    {
-        FallingFruit,
-        StandingFruit,
-        CreatedFruit
-    }
 
-    public static class ItemLayerExtensions
+    public static class LayerCache
     {
-        public static int ToLayer(this ItemLayer layer)
-        {
-            return LayerMask.NameToLayer(layer.ToString());
-        }
+        public static readonly int FallingFruit = LayerMask.NameToLayer("FallingFruit");
+        public static readonly int StandingFruit = LayerMask.NameToLayer("StandingFruit");
+        public static readonly int CreatedFruit = LayerMask.NameToLayer("CreatedFruit");
+        public static readonly int CantLose = LayerMask.NameToLayer("CantLose");
     }
+    
     public class Item : MonoBehaviour
     {
         [SerializeField] 
@@ -54,13 +49,23 @@ namespace VisualLayer.MergeItems
             _signalBus.Subscribe<HandleItemsCollisionAfterLoseSignal>(OnPlayerLose);
             _signalBus.Subscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
         }
+        
+        private void OnDestroy()
+        {
+            _signalBus.TryUnsubscribe<HandleItemsCollisionAfterLoseSignal>(OnPlayerLose);
+            _signalBus.TryUnsubscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
+        }
 
         private void OnPlayerLose()
         {
             if (this == null) return;
             
             _isLosing = true;
-            gameObject.layer = ItemLayer.CreatedFruit.ToLayer();
+
+            if (gameObject.layer != LayerCache.CreatedFruit)
+            {
+                gameObject.layer = LayerCache.CantLose;
+            }
             
             itemSprite.sprite = itemMetadata.ItemSadSprite;
         }
@@ -84,10 +89,9 @@ namespace VisualLayer.MergeItems
 
         private void Update()
         {
-            if (IsStandingAfterFall())
+            if (IsStandingAfterFall() && gameObject.layer != LayerCache.CantLose)
             {
-                //Debug.Log("Standing");
-                gameObject.layer = ItemLayer.StandingFruit.ToLayer();
+                gameObject.layer = LayerCache.StandingFruit;
             }
         }
 
@@ -95,7 +99,7 @@ namespace VisualLayer.MergeItems
         {
             if (_rigidbody.linearVelocity.magnitude < 0.1f && _rigidbody.gravityScale != 0)
             {
-                if (gameObject.layer == ItemLayer.FallingFruit.ToLayer() && _isLosing)
+                if (gameObject.layer == LayerCache.FallingFruit && _isLosing)
                 {
                     //Debug.Log("IsStandingAfterFall true");
                     return true;
@@ -142,7 +146,15 @@ namespace VisualLayer.MergeItems
         
         private void HandleCollisionWithJar()
         {
-            gameObject.layer = ItemLayer.StandingFruit.ToLayer();
+            if (gameObject.layer == LayerCache.CantLose)
+            {
+                
+                return;
+            }
+            else
+            {
+                gameObject.layer = LayerCache.StandingFruit;
+            }
         }
         
         public void MakeItemFall(bool enabled)

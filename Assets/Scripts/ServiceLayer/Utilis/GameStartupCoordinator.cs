@@ -82,5 +82,11 @@ namespace ServiceLayer.Utilis
         {
             await _saveSystem.Load();
         }
+
+        public async UniTask LoadLocalAndServer()
+        {
+            await LoadAllDataFromServer();
+            await LoadAllDataFromDevice();
+        }
     }
 }

@@ -19,10 +19,21 @@ namespace VisualLayer.GamePlay.Handlers
         {
             _signalBus.Subscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
             
-            _signalBus.Subscribe<DisableLoseCollider>(()=> detectionZone.gameObject.SetActive(false));
-            _signalBus.Subscribe<EnableLoseCollider>(()=> detectionZone.gameObject.SetActive(true));
+            _signalBus.Subscribe<DisableLoseCollider>(OnDisableLoseCollider);
+            _signalBus.Subscribe<EnableLoseCollider>(OnEnableLoseCollider);
 
         }
+        
+        private void OnDestroy()
+        {
+            _signalBus.TryUnsubscribe<OnContinueClickedSignal>(OnPlayerContinueClicked);
+            
+            _signalBus.TryUnsubscribe<DisableLoseCollider>(OnDisableLoseCollider);
+            _signalBus.TryUnsubscribe<EnableLoseCollider>(OnEnableLoseCollider);
+        }
+        
+        private void OnDisableLoseCollider() => detectionZone.gameObject.SetActive(false);
+        private void OnEnableLoseCollider() => detectionZone.gameObject.SetActive(true);
 
         private void OnPlayerContinueClicked()
         {
@@ -46,8 +57,9 @@ namespace VisualLayer.GamePlay.Handlers
 
         private void CustomTriggerBehavior(Collider2D collision)
         {
-            if (collision.gameObject.layer == ItemLayer.StandingFruit.ToLayer() && !_isTriggered)
+            if (collision.gameObject.layer == LayerCache.StandingFruit && !_isTriggered)
             {
+                Debug.Log("CustomTriggerBehavior StandingFruit");
                 Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
                 
                 if (rb != null && rb.linearVelocity.magnitude > 0.1f)

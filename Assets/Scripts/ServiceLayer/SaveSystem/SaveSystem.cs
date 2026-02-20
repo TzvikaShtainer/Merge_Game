@@ -16,6 +16,8 @@ namespace ServiceLayer.SaveSystem
         private AbilityManager  _abilityManager;
         
         private GameLogicHandler _gameLogicHandler;
+        
+        private bool _isReadyToSave = false;
 
         public void Init(GameLogicHandler handler)
         {
@@ -26,6 +28,10 @@ namespace ServiceLayer.SaveSystem
         //C:\Users\tzvik\AppData\LocalLow\DreamzzzStudio\Merge Delicious
         public void Save()
         {
+            if (!_isReadyToSave)
+                return;
+            
+            Debug.Log($"Saving {SavePath}");
             Dictionary<string, bool> existingFlags = new Dictionary<string, bool>();
             if (File.Exists(SavePath))
             {
@@ -100,7 +106,13 @@ namespace ServiceLayer.SaveSystem
 
         public async UniTask Load()
         {
-            if (!IsFileOk(out var saveData)) return;
+            _isReadyToSave = false;
+            
+            if (!IsFileOk(out var saveData))
+            {
+                _isReadyToSave = true; 
+                return;
+            }
 
             //Debug.Log(json);
             //Debug.Log("SAVEPATH: " + SavePath);

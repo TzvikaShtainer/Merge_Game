@@ -50,6 +50,8 @@ namespace VisualLayer.Loader
 
         private async void Awake()
         {
+            Time.timeScale = 1;
+            
             await LoadScene();
         }
 
