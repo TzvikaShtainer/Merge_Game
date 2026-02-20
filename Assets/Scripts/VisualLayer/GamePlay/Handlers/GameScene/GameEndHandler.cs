@@ -86,33 +86,27 @@
                 {
                     await _loader.InitLoader();
                     
-                    //await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    //_loader.SetProgress(0.2f, "Loading Level 20%");
                     await _loader.AnimateProgressTo(0.2f, 1f);
-
-                    //await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    //_loader.SetProgress(0.5f, "Loading Level 50%");
+                    
                     await _loader.AnimateProgressTo(0.5f, 1f);
-
-                        
+                    
                     _dataLayer.Balances.SetCurrentScore(0);
                     
-                    //unload gameplay lvl scene
                     await _scenesService.UnloadLevelScene(_currentLevelType);
-                
-                    //await UniTask.Delay(TimeSpan.FromSeconds(1));
-                    //_loader.SetProgress(1f, "Loading Level 100%");
+                    
                     await _loader.AnimateProgressTo(1f, 1f);
-
-                
-                    //load Start Screen scene
-                    await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.GamePlay);
+                    
+                    await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
                 
                 
                     await UniTask.Delay(TimeSpan.FromSeconds(1));
                     await _loader.FadeOut();
                     
                     _signalBus.Fire<UnpauseInputSignal>();
+                    
+                    await UniTask.Delay(500);
+                    
+                    _signalBus.Fire<UIComponentsInBehaviorSignal>();
                 }
             }
         }
