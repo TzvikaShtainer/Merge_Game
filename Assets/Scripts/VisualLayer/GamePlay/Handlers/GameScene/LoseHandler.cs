@@ -67,7 +67,7 @@ namespace VisualLayer.GamePlay.Handlers
                     return;
                 }
                 
-                Debug.Log(collision.gameObject.name);
+                //Debug.Log(collision.gameObject.name);
 
                 _signalBus.Fire<HandleItemsCollisionAfterLoseSignal>();
                 

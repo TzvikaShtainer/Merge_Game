@@ -156,10 +156,6 @@ namespace EasyUI.PickerWheelUI {
             });
       }
 
-      private void FixedUpdate () {
-
-      }
-
       public void OnSpinStart (UnityAction action) {
          onSpinStartEvent = action ;
       }
