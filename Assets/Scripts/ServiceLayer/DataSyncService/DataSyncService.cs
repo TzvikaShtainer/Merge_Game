@@ -29,7 +29,7 @@ namespace ServiceLayer.DataSyncService
             [Inject(Source = InjectSources.Any)] List<ISyncableService> servicesToSync)
         {
             _serverService = serverService;
-            _servicesToSync = servicesToSync ?? new List<ISyncableService>();
+            _servicesToSync = servicesToSync;
         }
 
         public void Initialize()
@@ -58,9 +58,7 @@ namespace ServiceLayer.DataSyncService
 
         private void ScheduleSync()
         {
-            if (_isLocked) return;
-            
-            if (_isSyncScheduled) return;
+            if (_isLocked || _isSyncScheduled) return;
 
             _isSyncScheduled = true;
             SyncRoutine().Forget();
@@ -69,50 +67,72 @@ namespace ServiceLayer.DataSyncService
         private async UniTaskVoid SyncRoutine()
         {
             await UniTask.Delay(TimeSpan.FromMilliseconds(800));
-            _isSyncScheduled = false;
 
-            if (_isLocked) return;
-
-            var allData = new Dictionary<string, string>();
-
-            foreach (var service in _servicesToSync)
+            if (_isLocked) 
             {
-                var data = service.GetSyncData();
-                if (data == null) continue;
-                
-                foreach (var kvp in data) 
-                {
-                    if (!string.IsNullOrEmpty(kvp.Key))
-                        allData[kvp.Key] = kvp.Value;
-                }
+                _isSyncScheduled = false;
+                return;
             }
 
-            if (allData.Count == 0) return;
+            try
+            {
+                var allData = new Dictionary<string, string>();
 
-            await SendDataInBatches(allData);
+                foreach (var service in _servicesToSync)
+                {
+                    var data = service.GetSyncData();
+                    if (data == null) continue;
+                    
+                    foreach (var kvp in data) 
+                    {
+                        if (!string.IsNullOrEmpty(kvp.Key))
+                            allData[kvp.Key] = kvp.Value;
+                    }
+                }
+
+                if (allData.Count > 0)
+                {
+                    await SendDataInBatches(allData);
+                }
+            }
+            finally
+            {
+                _isSyncScheduled = false;
+            }
         }
 
         private async UniTask SendDataInBatches(Dictionary<string, string> allData)
         {
-            var dataList = allData.ToList();
             const int batchSize = 10; 
+            var currentBatch = new Dictionary<string, string>(batchSize);
 
-            for (int i = 0; i < dataList.Count; i += batchSize)
+            foreach (var kvp in allData)
             {
-                var batchDict = dataList
-                    .Skip(i)
-                    .Take(batchSize)
-                    .ToDictionary(x => x.Key, x => x.Value);
+                currentBatch[kvp.Key] = kvp.Value;
 
-                try
+                if (currentBatch.Count == batchSize)
                 {
-                    await _serverService.SetUserData(batchDict);
-                    //Debug.Log($"<color=green>[DataSync] Successfully synced batch {i / batchSize + 1}</color>");
+                    await SendBatchSafe(currentBatch);
+                    currentBatch.Clear(); 
                 }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"[DataSync] Batch failed: {ex.Message}");
-                }
+            }
+
+            if (currentBatch.Count > 0)
+            {
+                await SendBatchSafe(currentBatch);
+            }
+        }
+
+        private async UniTask SendBatchSafe(Dictionary<string, string> batch)
+        {
+            try
+            {
+                await _serverService.SetUserData(batch);
+                //Debug.Log($"<color=green>[DataSync] Successfully synced batch of {batch.Count} items</color>");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[DataSync] Batch failed: {ex.Message}");
             }
         }
     }
