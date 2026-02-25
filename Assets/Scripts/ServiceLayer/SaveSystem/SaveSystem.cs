@@ -23,13 +23,36 @@ namespace ServiceLayer.SaveSystem
         {
             _gameLogicHandler = handler;
         }
+
+        public async UniTask ClearSave()
+        {
+            try
+            {
+                _isReadyToSave = false;
+
+                if (File.Exists(SavePath))
+                {
+                    File.Delete(SavePath);
+                    Debug.Log("[SaveSystem] Save file deleted.");
+                }
         
+                await UniTask.CompletedTask;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[SaveSystem] ClearSave failed: {e.Message}");
+            }
+        }
+
         private string SavePath => Path.Combine(Application.persistentDataPath, "GameItemsLocation.json");
         //C:\Users\tzvik\AppData\LocalLow\DreamzzzStudio\Merge Delicious
-        public void Save()
+        public async UniTask Save()
         {
             if (!_isReadyToSave)
+            {
+                Debug.Log("Cant SAve now"+_isReadyToSave);
                 return;
+            }
             
             //Debug.Log($"Saving {SavePath}");
             Dictionary<string, bool> existingFlags = new Dictionary<string, bool>();
@@ -107,10 +130,12 @@ namespace ServiceLayer.SaveSystem
         public async UniTask Load()
         {
             _isReadyToSave = false;
+            Debug.Log("Im loading "+_isReadyToSave);
             
             if (!IsFileOk(out var saveData))
             {
                 _isReadyToSave = true; 
+                Debug.Log("im ready to save "+_isReadyToSave);
                 return;
             }
 

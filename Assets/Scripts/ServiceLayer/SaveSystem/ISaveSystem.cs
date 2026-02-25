@@ -5,8 +5,9 @@ namespace ServiceLayer.SaveSystem
 {
     public interface ISaveSystem
     {
-        void Save();
+        UniTask Save();
         public UniTask Load();
         void Init(GameLogicHandler gameLogicHandler);
+        public UniTask ClearSave();
     }
 }

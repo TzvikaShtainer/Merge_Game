@@ -16,7 +16,7 @@ namespace ServiceLayer.SaveSystem
         {
             if (pause)
             {
-                //Debug.Log("pause");
+                Debug.Log("pause - saving now");
                 _saveService.Save();
                 _dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
 
@@ -25,7 +25,7 @@ namespace ServiceLayer.SaveSystem
 
         private void OnApplicationQuit()
         {
-            //Debug.Log("OnApplicationQuit");
+            Debug.Log("OnApplicationQuit - saving now");
             _saveService.Save();
             _dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
 

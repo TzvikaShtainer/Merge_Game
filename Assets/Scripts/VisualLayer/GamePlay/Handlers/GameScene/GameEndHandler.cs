@@ -12,6 +12,7 @@
     using Zenject;
     using Cysharp.Threading.Tasks;
     using Cysharp.Threading.Tasks.Linq;
+    using ServiceLayer.SaveSystem;
 
     namespace VisualLayer.GamePlay.Handlers
     {
@@ -40,6 +41,9 @@
             
             [Inject]
             private IDataLayer  _dataLayer;
+            
+            [Inject] 
+            private ISaveSystem _saveSystem;
 
             private int _coinsForTryAgain = 20;
             
@@ -84,6 +88,8 @@
                 }
                 else
                 {
+                    _saveSystem.ClearSave();
+                    
                     await _loader.InitLoader();
                     
                     await _loader.AnimateProgressTo(0.2f, 1f);
