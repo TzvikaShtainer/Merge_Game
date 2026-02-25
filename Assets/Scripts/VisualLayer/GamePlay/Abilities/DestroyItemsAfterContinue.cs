@@ -42,35 +42,39 @@ namespace VisualLayer.GamePlay.Abilities
         
         private void FindAndDestroyTwoLowestItems()
         {
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-            
-            allItems = RemoveItemsThatNotInTheJar(allItems);
+            List<Item> itemsInJar = Object.FindObjectsOfType<Item>()
+                .Where(item => !IsOutsideTheJar(item))
+                .ToList();
 
-            if (allItems.Count == 0)
+            if (itemsInJar.Count == 0) return;
+
+            var distinctIds = itemsInJar
+                .Select(item => item.GetItemId())
+                .Distinct()
+                .OrderBy(id => id)
+                .Take(2) 
+                .ToList();
+
+            if (distinctIds.Count == 0) return;
+
+            foreach (int idToDestroy in distinctIds)
             {
-                //Debug.Log("No items found");
-                return;
-            }
-
-            int lowestItemIndex = allItems.Min(item => item.GetItemId());
-            int lowestSecondItemIndex = lowestItemIndex++;
-
-            DestroyLowestItems(allItems, lowestItemIndex);
-            DestroyLowestItems(allItems, lowestSecondItemIndex);
-        }
-
-        private void DestroyLowestItems(List<Item> allItems, int lowestItemIndex)
-        {
-            for (var index = 0; index < allItems.Count; index++)
-            {
-                var currItem = allItems[index];
-                if (currItem.GetItemId() == lowestItemIndex && !IsOutsideTheJar(currItem))
+                var targets = itemsInJar.Where(i => i.GetItemId() == idToDestroy).ToList();
+        
+                foreach (var target in targets)
                 {
-                    Object.Destroy(currItem.gameObject);
-                    _effectsManager.PlayEffect(EffectType.DestroyAbility, currItem.gameObject.transform.position);
-                    _sfxService.PlaySfxType(SfxType.DestroyAbility);
+                    ExecuteDestruction(target);
                 }
             }
+        }
+
+        private void ExecuteDestruction(Item item)
+        {
+            if (item == null) return;
+    
+            _effectsManager.PlayEffect(EffectType.DestroyAbility, item.transform.position);
+            _sfxService.PlaySfxType(SfxType.DestroyAbility);
+            Object.Destroy(item.gameObject);
         }
 
         private List<Item> RemoveItemsThatNotInTheJar(List<Item> allItems)

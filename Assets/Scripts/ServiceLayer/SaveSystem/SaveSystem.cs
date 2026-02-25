@@ -12,6 +12,8 @@ namespace ServiceLayer.SaveSystem
 {
     public class SaveSystem : ISaveSystem
     {
+        //C:\Users\tzvik\AppData\LocalLow\DreamzzzStudio\Merge Delicious
+        
         [Inject]
         private AbilityManager  _abilityManager;
         
@@ -45,7 +47,6 @@ namespace ServiceLayer.SaveSystem
         }
 
         private string SavePath => Path.Combine(Application.persistentDataPath, "GameItemsLocation.json");
-        //C:\Users\tzvik\AppData\LocalLow\DreamzzzStudio\Merge Delicious
         public async UniTask Save()
         {
             if (!_isReadyToSave)
