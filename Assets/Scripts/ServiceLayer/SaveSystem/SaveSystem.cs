@@ -33,7 +33,7 @@ namespace ServiceLayer.SaveSystem
                 if (File.Exists(SavePath))
                 {
                     File.Delete(SavePath);
-                    Debug.Log("[SaveSystem] Save file deleted.");
+                    //Debug.Log("[SaveSystem] Save file deleted.");
                 }
         
                 await UniTask.CompletedTask;
@@ -50,7 +50,7 @@ namespace ServiceLayer.SaveSystem
         {
             if (!_isReadyToSave)
             {
-                Debug.Log("Cant SAve now"+_isReadyToSave);
+                //Debug.Log("Cant SAve now"+_isReadyToSave);
                 return;
             }
             
@@ -130,12 +130,12 @@ namespace ServiceLayer.SaveSystem
         public async UniTask Load()
         {
             _isReadyToSave = false;
-            Debug.Log("Im loading "+_isReadyToSave);
+           // Debug.Log("Im loading "+_isReadyToSave);
             
             if (!IsFileOk(out var saveData))
             {
                 _isReadyToSave = true; 
-                Debug.Log("im ready to save "+_isReadyToSave);
+                //Debug.Log("im ready to save "+_isReadyToSave);
                 return;
             }
 
@@ -145,6 +145,9 @@ namespace ServiceLayer.SaveSystem
             LoadItemsPosFromData(saveData);
 
             LoadAbilitiesFirstTimeMap(saveData);
+            
+            _isReadyToSave = true; 
+            //Debug.Log("[SaveSystem] Load finished. Ready to save.");
         }
         
         private bool IsFileOk(out SaveData saveData)
