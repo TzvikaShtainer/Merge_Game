@@ -87,7 +87,8 @@ namespace ServiceLayer.SaveSystem
                     typeId = item.GetItemId().ToString(),
                     position = SerializableTypes.SerializableVector2.From(item.transform.position),
                     velocity = SerializableTypes.SerializableVector2.From(item.GetComponent<Rigidbody2D>().linearVelocity),
-                    rotation = SerializableTypes.SerializableQuaternion.From(item.transform.rotation)
+                    rotation = SerializableTypes.SerializableQuaternion.From(item.transform.rotation),
+                    layer = item.gameObject.layer
                 }).ToList();
             
             //Debug.Log($"[SaveSystem] Saving {itemsToSave.Count} items.");
@@ -215,6 +216,7 @@ namespace ServiceLayer.SaveSystem
                 var item = _gameLogicHandler.CreateItemFromSave(itemData.typeId, itemData.position);
                 item.transform.rotation = itemData.rotation.ToQuaternion();
                 item.GetComponent<Rigidbody2D>().linearVelocity = itemData.velocity.ToVector2();
+                item.gameObject.layer = itemData.layer;
                 item.MakeItemFall(true);
             }
         }

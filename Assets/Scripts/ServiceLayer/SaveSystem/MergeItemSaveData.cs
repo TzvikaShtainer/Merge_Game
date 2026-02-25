@@ -7,5 +7,6 @@
         public SerializableTypes.SerializableVector2 position;
         public SerializableTypes.SerializableVector2 velocity;
         public SerializableTypes.SerializableQuaternion  rotation;
+        public int layer;
     }
 }

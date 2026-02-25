@@ -33,7 +33,7 @@ namespace VisualLayer.GamePlay.Handlers
         public async UniTask Execute()
         {
             await _saveService.Save();
-            Debug.Log("Back Click Handler SAving now");
+            //Debug.Log("Back Click Handler SAving now");
             //_dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
             
             await _loader.InitLoader();
