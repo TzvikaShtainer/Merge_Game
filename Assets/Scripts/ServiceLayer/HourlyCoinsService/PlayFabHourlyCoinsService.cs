@@ -20,6 +20,7 @@ namespace ServiceLayer.HourlyCoinsService
         protected override int RewardAmount => 10;
         protected override void OnClaim()
         {
+            Debug.Log("here2");
             _dataLayer.Balances.AddCoins(RewardAmount);
         }
     }

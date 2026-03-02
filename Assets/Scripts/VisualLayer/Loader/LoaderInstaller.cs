@@ -158,17 +158,17 @@ namespace VisualLayer.Loader
             
             await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
             
-            await _loader.AnimateProgressTo(0.85f, 0.5f);
-            
             await _gameStartupCoordinator.LoadAllDataFromServer();
+            
+            await _loader.AnimateProgressTo(0.85f, 0.5f);
             
             await _loader.AnimateProgressTo(1.0f, 0.5f);
             
             await _loader.FadeOut();
             
-            _signalBus.Fire<UnpauseInputSignal>();
-            
             await UniTask.Delay(500);
+            
+            _signalBus.Fire<UnpauseInputSignal>();
             
             _signalBus.Fire<UIComponentsInBehaviorSignal>();
             

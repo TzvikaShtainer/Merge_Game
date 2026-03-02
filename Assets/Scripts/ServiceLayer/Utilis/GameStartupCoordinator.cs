@@ -47,6 +47,12 @@ namespace ServiceLayer.Utilis
             _dailyRewardCooldownService = dailyRewardCooldownService;
             _syncService = syncService;
         }
+        
+        public async UniTask LoadLocalAndServer()
+        {
+            await LoadAllDataFromServer();
+            await LoadAllDataFromDevice();
+        }
 
         public async UniTask LoadAllDataFromServer()
         {
@@ -81,12 +87,6 @@ namespace ServiceLayer.Utilis
         public async UniTask LoadAllDataFromDevice()
         {
             await _saveSystem.Load();
-        }
-
-        public async UniTask LoadLocalAndServer()
-        {
-            await LoadAllDataFromServer();
-            await LoadAllDataFromDevice();
         }
     }
 }

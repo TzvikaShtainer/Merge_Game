@@ -1,4 +1,6 @@
-﻿namespace ServiceLayer.SpinTheWheelCooldownService
+﻿using UnityEngine;
+
+namespace ServiceLayer.SpinTheWheelCooldownService
 {
     public class PlayFabSpinTheWheelCooldownService : BaseCooldownService, ISpinTheWheelCooldownService
     {
@@ -7,7 +9,7 @@
         protected override int RewardAmount => 0;
         protected override void OnClaim()
         {
-           
+            Debug.Log("here3");
         }
     }
 }

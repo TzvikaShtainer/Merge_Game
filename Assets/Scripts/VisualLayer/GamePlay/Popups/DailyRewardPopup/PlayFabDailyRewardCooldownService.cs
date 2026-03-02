@@ -55,6 +55,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
         }
         protected override void OnClaim()
         {
+            Debug.Log("here");
             if (_currentDayIndex >= MaxDaysInWeek)
             {
                 _currentDayIndex = 1;

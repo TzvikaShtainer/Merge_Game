@@ -70,8 +70,7 @@ namespace ServiceLayer
         private DateTime GetCurrentServerTime()
         {
             if (!_isInitialized) return DateTime.UtcNow;
-
-            // חישוב כמה זמן עבר באמת מאז הסנכרון האחרון
+            
             double elapsedSinceSync = Time.realtimeSinceStartupAsDouble - _startupTimestamp;
             return _initialServerTime.AddSeconds(elapsedSinceSync);
         }
