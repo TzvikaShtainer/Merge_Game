@@ -86,6 +86,20 @@ namespace VisualLayer.MergeItems
             _circleCollider2D.enabled = false;
         }
         
+        private void FixedUpdate()
+        {
+            AntiShake();
+        }
+
+        private void AntiShake()
+        {
+            if (_rigidbody.linearVelocity.magnitude < 0.01f && _rigidbody.angularVelocity < 0.01f) 
+            {
+                
+                _rigidbody.linearVelocity = Vector2.zero;
+                _rigidbody.angularVelocity = 0f;
+            }
+        }
 
         private void Update()
         {
