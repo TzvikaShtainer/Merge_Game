@@ -24,6 +24,11 @@ namespace VisualLayer.GamePlay.Abilities
             set => AbilityDataSo.Count = Mathf.Max(0, value);
         }
         
+        public void TriggerRequest()
+        {
+            OnRequestExecution?.Invoke();
+        }
+        
         protected  LazyInject<IDataLayer> DataLayer;
         
         protected BaseAbility(AbilityDataSO abilityDataSo, LazyInject<IDataLayer> dataLayer)
@@ -52,7 +57,7 @@ namespace VisualLayer.GamePlay.Abilities
         public virtual void UseAbility()
         {
             if (Count <= 0) return;
-            Count--;
+            
             IsFirstTimeUse = true;
             OnRequestExecution?.Invoke();
         }

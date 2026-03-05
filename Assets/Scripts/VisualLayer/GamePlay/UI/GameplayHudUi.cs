@@ -166,7 +166,7 @@ namespace VisualLayer.GamePlay.UI
             }
             else
             {
-                _abilityManager.UseAbility(abilityId);
+                _abilityManager.RequestAbilityUsage(abilityId);
             }
 
         }

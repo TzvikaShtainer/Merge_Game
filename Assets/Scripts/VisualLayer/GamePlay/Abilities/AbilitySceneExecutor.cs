@@ -41,6 +41,9 @@ namespace VisualLayer.GamePlay.Abilities
         
         [Inject]
         private ItemFactory _itemFactory;
+
+        [Inject] 
+        private AbilityManager _abilityManager;
         
         //General 
         private List<Item> _itemsToToggle;
@@ -85,30 +88,53 @@ namespace VisualLayer.GamePlay.Abilities
 
             DisableEnvironment();
             
-            switch (ability.Id)
+            bool executionSuccess = false;
+
+            try
             {
-                case "ShakeBoxAbility":
-                    await ExecuteShakeBoxAbility(ability.Id);
-                    break;
+                switch (ability.Id)
+                {
+                    case "ShakeBoxAbility":
+                        await ExecuteShakeBoxAbility();
+                        executionSuccess = true;
+                        break;
 
-                case "UpgradeSpecificFruitAbility":
-                    await ExecuteUpgradeSpecificFruitAbility();
-                    break;
+                    case "UpgradeSpecificFruitAbility":
+                        await ExecuteUpgradeSpecificFruitAbility();
+                        executionSuccess = true;
+                        break;
 
-                case "DestroyAllLowestLevelFruitsAbility":
-                    ExecuteDestroyAllLowestLevelFruitsAbility();
-                    break;
+                    case "DestroyAllLowestLevelFruitsAbility":
+                        ExecuteDestroyAllLowestLevelFruitsAbility();
+                        executionSuccess = true;
+                        break;
 
-                case "DestroySpecificFruitAbility":
-                    await ExecuteDestroySpecificFruitAbility();
-                    break;
+                    case "DestroySpecificFruitAbility":
+                        await ExecuteDestroySpecificFruitAbility();
+                        executionSuccess = true;
+                        break;
 
-                case "DestroyItemsAfterContinue":
-                    ExecuteDestroyItemsAfterContinue();
-                    break;
+                    case "DestroyItemsAfterContinue":
+                        ExecuteDestroyItemsAfterContinue();
+                        executionSuccess = true;
+                        break;
+                }
+                
+                if (executionSuccess)
+                {
+                    _abilityManager.ConsumeAbility(ability.Id);
+                }
+
             }
-            
-            EnableItemsOutsideTheJar();
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally 
+            {
+                EnableItemsOutsideTheJar();
+            }
         }
 
         #region Shared Methods
@@ -119,9 +145,14 @@ namespace VisualLayer.GamePlay.Abilities
             
             _allItems = Object.FindObjectsOfType<Item>().ToList();
             
+            Debug.Log($"<color=white>[AbilityExecutor] Scanning {_allItems.Count} total items in scene...</color>");
+            
             _signalBus.Fire<DisableUISignal>();
             
             SortItems();
+            
+            string itemList = string.Join(", ", _itemsToToggle.Select(i => $"{i.name} (Active: {i.gameObject.activeSelf}, Y: {i.transform.position.y:F2})"));
+            Debug.Log($"<color=orange>[AbilityExecutor] Found {_itemsToToggle.Count} items to toggle: {itemList}</color>");
             
             DisableItemsOutsideTheJar();
         }
@@ -149,14 +180,30 @@ namespace VisualLayer.GamePlay.Abilities
         
         private void ToggleItems(bool isEnabled)
         {
+            if (_itemsToToggle == null || _itemsToToggle.Count == 0)
+            {
+                Debug.LogWarning($"<color=red>[AbilityExecutor] ToggleItems({isEnabled}) called but _itemsToToggle is EMPTY!</color>");
+                return;
+            }
+
             foreach (Item currItem in _itemsToToggle)
             {
-                currItem.gameObject.SetActive(isEnabled);
+                if (currItem != null)
+                {
+                    // לוג לפני שינוי סטטוס
+                    // Debug.Log($"[AbilityExecutor] Setting {currItem.name} Active = {isEnabled}");
+                    currItem.gameObject.SetActive(isEnabled);
+                }
+                else
+                {
+                    Debug.LogError("[AbilityExecutor] A null item was found in the toggle list during execution!");
+                }
             }
         }
 
         protected void EnableItemsOutsideTheJar()
         {
+            Debug.Log($"<color=green>[AbilityExecutor] Enabling items back. Count: {_itemsToToggle?.Count ?? 0}</color>");
             ToggleItems(true);
         }
         
@@ -171,7 +218,7 @@ namespace VisualLayer.GamePlay.Abilities
 
             if (allItems.Count == 0)
             {
-                //Debug.Log("No items found");
+                Debug.Log("No items found");
                 return true;
             }
 
@@ -182,7 +229,7 @@ namespace VisualLayer.GamePlay.Abilities
         
         #region ShakeBoxAbility
 
-        private async Task ExecuteShakeBoxAbility(string abilityId)
+        private async UniTask ExecuteShakeBoxAbility()
         {
             _signalBus.Fire<PauseInputSignal>();
             _signalBus.Fire<DisableLoseCollider>();
@@ -324,7 +371,7 @@ namespace VisualLayer.GamePlay.Abilities
 
         #region UpgradeSpecificFruitAbility
 
-        private async Task ExecuteUpgradeSpecificFruitAbility()
+        private async UniTask ExecuteUpgradeSpecificFruitAbility()
         {
             _inputDriven.BlockInput();
             
@@ -405,7 +452,7 @@ namespace VisualLayer.GamePlay.Abilities
 
         #region DestroyAllLowestLevelFruitsAbility
 
-        private async Task ExecuteDestroyAllLowestLevelFruitsAbility()
+        private async UniTask ExecuteDestroyAllLowestLevelFruitsAbility()
         {
             _signalBus.Fire<PauseInputSignal>();
             
@@ -462,7 +509,7 @@ namespace VisualLayer.GamePlay.Abilities
 
         #region DestroySpecificFruitAbility
 
-        private async Task ExecuteDestroySpecificFruitAbility()
+        private async UniTask ExecuteDestroySpecificFruitAbility()
         {
             _inputDriven.BlockInput();
             
@@ -514,7 +561,7 @@ namespace VisualLayer.GamePlay.Abilities
 
         #region DestroyItemsAfterContinue
 
-        private async Task ExecuteDestroyItemsAfterContinue()
+        private async UniTask ExecuteDestroyItemsAfterContinue()
         {
             _signalBus.Fire<PauseInputSignal>();
             

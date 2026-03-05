@@ -67,25 +67,28 @@ namespace VisualLayer.GamePlay.Abilities
             return data;
         }
         
-        public void UseAbility(string abilityId)
+        public void RequestAbilityUsage(string abilityId)
         {
             if (_abilitiesDict.TryGetValue(abilityId, out var ability))
             {
-                ability.UseAbility();
-
-                if (ability.Id == "DestroyItemsAfterContinue")
+                if (ability.Count <= 0) return;
+                
+                if (ability is BaseAbility baseAbility)
                 {
-                    //Debug.Log("DestroyItemsAfterContinue");
-                    return;
+                    baseAbility.TriggerRequest();
                 }
+            }
+        }
+        
+        public void ConsumeAbility(string abilityId)
+        {
+            if (_abilitiesDict.TryGetValue(abilityId, out var ability))
+            {
+                if (ability.Count <= 0) return;
+
+                ability.Count--;
                 OnAbilityChanged?.Invoke(abilityId, ability.Count);
-                
                 OnDataChanged?.Invoke();
-                
-                // _serverService.SetUserData(new Dictionary<string, string>
-                // {
-                //     { ability.Id, ability.Count.ToString() }
-                // }).Forget();
             }
         }
         

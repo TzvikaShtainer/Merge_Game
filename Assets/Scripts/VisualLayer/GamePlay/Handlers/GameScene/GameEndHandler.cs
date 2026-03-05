@@ -79,7 +79,7 @@
                 
                 if (result.IsNo)
                 {
-                    _abilityManager.UseAbility("DestroyItemsAfterContinue");
+                    _abilityManager.RequestAbilityUsage("DestroyItemsAfterContinue");
                     _dataLayer.Balances.RemoveCoins(_coinsForTryAgain);
                     await UniTask.Delay(TimeSpan.FromSeconds(0.5));
 
