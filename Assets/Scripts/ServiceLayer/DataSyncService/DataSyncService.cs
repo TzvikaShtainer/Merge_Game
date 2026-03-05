@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
-using DataLayer;
-using DataLayer.Balances;
 using ServiceLayer.PlayFabService;
 using UnityEngine;
 using Zenject;
 
 namespace ServiceLayer.DataSyncService
 {
-    public interface ISyncLock
-    {
-        void LockSync();
-        void UnlockSync();
-    }
-    
     public class DataSyncService : IInitializable, IDisposable, ISyncLock
     {
         private readonly IServerService _serverService;
@@ -23,6 +14,7 @@ namespace ServiceLayer.DataSyncService
         
         private bool _isSyncScheduled;
         private bool _isLocked = true;
+        private bool _hasPendingChanges;
 
         public DataSyncService(
             IServerService serverService, 
@@ -35,7 +27,12 @@ namespace ServiceLayer.DataSyncService
         public void Initialize()
         {
             foreach (var serviceToSync in _servicesToSync)
+            {
                 serviceToSync.OnDataChanged += ScheduleSync;
+                //Debug.Log($"<color=white>[DataSync] Subscribed to {serviceToSync.GetType().Name}</color>");
+            }
+            
+            Application.quitting += OnApplicationQuitting;
         }
 
         public void Dispose()
@@ -47,20 +44,63 @@ namespace ServiceLayer.DataSyncService
         public void LockSync() 
         {
             _isLocked = true;
-            //Debug.Log("<color=yellow>[DataSync] Sync LOCKED - Upload blocked.</color>");
+            //Debug.Log("<color=orange>[DataSync] 🔒 Sync LOCKED - Changes will be queued but not sent.</color>");
         }
 
         public void UnlockSync() 
         {
             _isLocked = false;
-            //Debug.Log("<color=cyan>[DataSync] Sync UNLOCKED - Ready to sync changes.</color>");
+            //Debug.Log("<color=cyan>[DataSync] 🔓 Sync UNLOCKED - Processing pending changes: " + _hasPendingChanges + "</color>");
+            
+            if (_hasPendingChanges)
+            {
+                ScheduleSync();
+            }
         }
 
+        private void OnApplicationQuitting()
+        {
+            //Debug.Log("<color=red>[DataSync] ⚠️ Application Quitting! Attempting emergency sync...</color>");
+            ForceSyncImmediate().Forget();
+        }
+        
+        private async UniTask ForceSyncImmediate()
+        {
+            var allData = new Dictionary<string, string>();
+            foreach (var service in _servicesToSync)
+            {
+                var data = service.GetSyncData();
+                if (data != null)
+                {
+                    foreach (var kvp in data) allData[kvp.Key] = kvp.Value;
+                }
+            }
+
+            if (allData.Count > 0)
+            {
+                await _serverService.SetUserData(allData);
+                //Debug.Log("<color=green>[DataSync] ✅ Emergency sync completed successfully.</color>");
+            }
+        }
         private void ScheduleSync()
         {
-            if (_isLocked || _isSyncScheduled) return;
+            // Debug.Log("<color=white>[DataSync] Change detected. IsLocked: " + _isLocked + ", IsScheduled: " + _isSyncScheduled + "</color>");
+
+            if (_isLocked) 
+            {
+                _hasPendingChanges = true;
+                //Debug.Log("<color=yellow>[DataSync] Pending change recorded (System is Locked).</color>");
+                return;
+            }
+
+            if (_isSyncScheduled) 
+            {
+                return;
+            }
 
             _isSyncScheduled = true;
+            _hasPendingChanges = false;
+            //Debug.Log("<color=magenta>[DataSync] Scheduling sync routine (Debounce 800ms starting...)</color>");
             SyncRoutine().Forget();
         }
         
@@ -70,7 +110,9 @@ namespace ServiceLayer.DataSyncService
 
             if (_isLocked) 
             {
+                //Debug.LogWarning("[DataSync] SyncRoutine aborted: System was re-locked during delay.");
                 _isSyncScheduled = false;
+                _hasPendingChanges = true;
                 return;
             }
 
@@ -92,8 +134,17 @@ namespace ServiceLayer.DataSyncService
 
                 if (allData.Count > 0)
                 {
+                    //Debug.Log($"<color=blue>[DataSync] Starting upload of {allData.Count} unique data keys...</color>");
                     await SendDataInBatches(allData);
                 }
+                else
+                {
+                    //Debug.Log("<color=grey>[DataSync] SyncRoutine finished: No data found to sync.</color>");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[DataSync] CRITICAL ERROR in SyncRoutine: {ex.Message}");
             }
             finally
             {
@@ -105,6 +156,7 @@ namespace ServiceLayer.DataSyncService
         {
             const int batchSize = 10; 
             var currentBatch = new Dictionary<string, string>(batchSize);
+            int totalSent = 0;
 
             foreach (var kvp in allData)
             {
@@ -113,6 +165,7 @@ namespace ServiceLayer.DataSyncService
                 if (currentBatch.Count == batchSize)
                 {
                     await SendBatchSafe(currentBatch);
+                    totalSent += currentBatch.Count;
                     currentBatch.Clear(); 
                 }
             }
@@ -120,7 +173,10 @@ namespace ServiceLayer.DataSyncService
             if (currentBatch.Count > 0)
             {
                 await SendBatchSafe(currentBatch);
+                totalSent += currentBatch.Count;
             }
+            
+            //Debug.Log($"<color=green>[DataSync] Finished syncing total of {totalSent} items to server.</color>");
         }
 
         private async UniTask SendBatchSafe(Dictionary<string, string> batch)
@@ -128,11 +184,12 @@ namespace ServiceLayer.DataSyncService
             try
             {
                 await _serverService.SetUserData(batch);
-                //Debug.Log($"<color=green>[DataSync] Successfully synced batch of {batch.Count} items</color>");
+                //Debug.Log($"<color=#00ff00>[DataSync] Successfully synced batch of {batch.Count} items.</color>");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[DataSync] Batch failed: {ex.Message}");
+                //Debug.LogError($"[DataSync] Batch send failed: {ex.Message}");
+                _hasPendingChanges = true; 
             }
         }
     }

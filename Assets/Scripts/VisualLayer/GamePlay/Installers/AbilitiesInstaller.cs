@@ -8,8 +8,6 @@ namespace VisualLayer.GamePlay.Installers
 {
     public class AbilitiesInstaller: MonoInstaller<AbilitiesInstaller>
     {
-       
-    
         [SerializeField]
         private GameObject shakeBoxAbilityJarPrefab;
 

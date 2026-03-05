@@ -63,8 +63,15 @@ namespace DataLayer.Installers
         
        public override void InstallBindings()
         {
-            Container.Bind<SfxDatabase>().FromInstance(_sfxDatabase).AsSingle();
-            Container.Bind<EffectsDatabase>().FromInstance(_effectsDatabase).AsSingle();
+            Container
+                .Bind<SfxDatabase>()
+                .FromInstance(_sfxDatabase)
+                .AsSingle();
+            
+            Container
+                .Bind<EffectsDatabase>()
+                .FromInstance(_effectsDatabase)
+                .AsSingle();
 
             foreach (var currEffect in _effectsDatabase.effects)
             {
@@ -92,14 +99,21 @@ namespace DataLayer.Installers
                 .FromMethod(ctx => ctx.Container.Resolve<AbilityManager>() as ISyncableService)
                 .AsCached();
             
-            Container.BindInstance(dailyRewardsConfig).AsSingle();
+            Container
+                .BindInstance(dailyRewardsConfig)
+                .AsSingle();
         }
 
         private void SubContainerBindings(DiContainer subContainer)
         {
-            // Binding יחיד לכל סוג בתוך התת-קונטיינר
-            subContainer.Bind<IDataLayer>().To<DataLayer>().AsSingle();
-            subContainer.Bind<AbilityManager>().AsSingle();
+            subContainer
+                .Bind<IDataLayer>()
+                .To<DataLayer>()
+                .AsSingle();
+            
+            subContainer
+                .Bind<AbilityManager>()
+                .AsSingle();
 
             var serverService = Container.Resolve<IServerService>();
             _playerBalances.Initialize(serverService);
@@ -110,29 +124,55 @@ namespace DataLayer.Installers
                 .FromInstance(_playerBalances)
                 .AsSingle();
 
-            subContainer.Bind<IGameMetadata>().To<GameMetadata>().AsSingle();
-            subContainer.Bind<ItemMetadata[]>().FromInstance(_items).AsSingle();
-            subContainer.Bind<GameLevelMetadata[]>().FromInstance(_levelsMetadata).AsCached();
-            subContainer.Bind<InfraScreenMetadata[]>().FromInstance(_infraScreenMetadatas).AsCached();
+            subContainer
+                .Bind<IGameMetadata>()
+                .To<GameMetadata>()
+                .AsSingle();
             
-
-            // --- רישום יכולות עם WithArguments (הזרקה בטוחה ל-Constructor) ---
+            subContainer
+                .Bind<ItemMetadata[]>()
+                .FromInstance(_items)
+                .AsSingle();
             
+            subContainer
+                .Bind<GameLevelMetadata[]>()
+                .FromInstance(_levelsMetadata)
+                .AsCached();
+            
+            subContainer
+                .Bind<InfraScreenMetadata[]>()
+                .FromInstance(_infraScreenMetadatas)
+                .AsCached();
 
-            subContainer.Bind<IAbility>().To<DestroyAllLowestLevelFruitsAbility>()
-                .AsCached().WithArguments(destroyLowestAbilityData);
+            subContainer
+                .Bind<IAbility>()
+                .To<DestroyAllLowestLevelFruitsAbility>()
+                .AsCached()
+                .WithArguments(destroyLowestAbilityData);
 
-            subContainer.Bind<IAbility>().To<ShakeBoxAbility>()
-                .AsCached().WithArguments(shakeBoxAbilityData);
+            subContainer
+                .Bind<IAbility>()
+                .To<ShakeBoxAbility>()
+                .AsCached()
+                .WithArguments(shakeBoxAbilityData);
 
-            subContainer.Bind<IAbility>().To<UpgradeSpecificFruitAbility>()
-                .AsCached().WithArguments(upgradeSpecificFruitAbilityData);
+            subContainer
+                .Bind<IAbility>()
+                .To<UpgradeSpecificFruitAbility>()
+                .AsCached()
+                .WithArguments(upgradeSpecificFruitAbilityData);
 
-            subContainer.Bind<IAbility>().To<DestroySpecificFruitAbility>()
-                .AsCached().WithArguments(destroySpecificFruitAbilityData);
+            subContainer
+                .Bind<IAbility>()
+                .To<DestroySpecificFruitAbility>()
+                .AsCached()
+                .WithArguments(destroySpecificFruitAbilityData);
 
-            subContainer.Bind<IAbility>().To<DestroyItemsAfterContinue>()
-                .AsCached().WithArguments(destroyItemsAfterContinueAbilityData);
+            subContainer
+                .Bind<IAbility>()
+                .To<DestroyItemsAfterContinue>()
+                .AsCached()
+                .WithArguments(destroyItemsAfterContinueAbilityData);
         }
     }
 }
