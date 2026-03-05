@@ -22,6 +22,35 @@ namespace VisualLayer.GamePlay.Abilities
         [Inject]
         private IServerService _serverService;
         
+        public AbilityManager(List<IAbility> abilities, IServerService serverService)
+        {
+            _serverService = serverService;
+            
+            // בדיקת הגנה: מוודא שכל יכולת שהוזרקה אכן תקינה
+            foreach(var a in abilities)
+            {
+                if (a == null) Debug.LogError("AbilityManager: Received a null IAbility!");
+                if (a != null && a.Data == null) Debug.LogError($"AbilityManager: Ability of type {a.GetType().Name} has no AbilityDataSO!");
+            }
+
+            _abilitiesDict = abilities
+                .Where(a => a != null && a.Data != null)
+                .ToDictionary(a => a.Id, a => a);
+            
+            
+            if (abilities == null || abilities.Count == 0)
+            {
+                Debug.LogError("[AbilityManager] CRITICAL: No abilities injected! Check DataLayerInstaller.");
+                _abilitiesDict = new Dictionary<string, IAbility>();
+                return;
+            }
+
+            _abilitiesDict = abilities.ToDictionary(a => a.Id, a => a);
+            //Debug.Log($"[AbilityManager] Successfully initialized with {_abilitiesDict.Count} abilities.");
+        }
+        
+        #endregion
+        
         public Dictionary<string, string> GetSyncData()
         {
             var data = new Dictionary<string, string>();
@@ -37,27 +66,6 @@ namespace VisualLayer.GamePlay.Abilities
     
             return data;
         }
-        
-        public void InitAbilities(List<IAbility> abilities)
-        {
-            //Debug.Log($"Constructing AbilityManager with {abilities?.Count ?? 0} abilities");
-            if (abilities == null || abilities.Count == 0)
-            {
-                //Debug.LogError("No abilities were injected into AbilityManager!");
-                return;
-            }
-    
-            _abilitiesDict = abilities.ToDictionary(a => a.Id, a => a);
-            
-            //Debug.Log($"Created dictionary with {_abilitiesDict.Count} abilities");
-            foreach (var ability in abilities)
-            {
-                //Debug.Log($"Registered ability: {ability.Id}");
-            }
-
-        }
-        
-        #endregion
         
         public void UseAbility(string abilityId)
         {

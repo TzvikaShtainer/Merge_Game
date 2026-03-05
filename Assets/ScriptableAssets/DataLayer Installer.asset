@@ -69,9 +69,9 @@ MonoBehaviour:
     _itemPreviewSprite: {fileID: 21300000, guid: e689e00c26c973945813c4497d425cb8, type: 3}
     _itemSadSprite: {fileID: 21300000, guid: 56c1ba7c440f20d4eaf99d77a10ae29e, type: 3}
   _playerBalances:
-    _coins: 700
-    _highScore: 310
-    _currentScore: 320
+    _coins: 10350
+    _highScore: 950
+    _currentScore: 950
   _levelsMetadata:
   - _levelType: 0
     _levelName: Start Screen
@@ -87,3 +87,8 @@ MonoBehaviour:
   _effectsDatabase: {fileID: 11400000, guid: e30962ae2582810408654981aaa7553b, type: 2}
   _sfxDatabase: {fileID: 11400000, guid: 581867b07c6661d44b27efcade335698, type: 2}
   dailyRewardsConfig: {fileID: 11400000, guid: e09dfb1484437af4285b94f82ed3a0df, type: 2}
+  destroyLowestAbilityData: {fileID: 11400000, guid: d06a3ed4974967a4e8ce1ac1912c70a6, type: 2}
+  shakeBoxAbilityData: {fileID: 11400000, guid: ce82dd54ad2777d428892358b5b8c962, type: 2}
+  upgradeSpecificFruitAbilityData: {fileID: 11400000, guid: 0a371e30ec191ab4493ae0472f8bebf0, type: 2}
+  destroySpecificFruitAbilityData: {fileID: 11400000, guid: 5e5f335b1f11d1344a503a79f68f0814, type: 2}
+  destroyItemsAfterContinueAbilityData: {fileID: 11400000, guid: a92c839926ff574479db9fc9ef53a0cc, type: 2}

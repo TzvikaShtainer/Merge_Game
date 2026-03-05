@@ -47,13 +47,13 @@ namespace ServiceLayer.DataSyncService
         public void LockSync() 
         {
             _isLocked = true;
-            Debug.Log("<color=yellow>[DataSync] Sync LOCKED - Upload blocked.</color>");
+            //Debug.Log("<color=yellow>[DataSync] Sync LOCKED - Upload blocked.</color>");
         }
 
         public void UnlockSync() 
         {
             _isLocked = false;
-            Debug.Log("<color=cyan>[DataSync] Sync UNLOCKED - Ready to sync changes.</color>");
+            //Debug.Log("<color=cyan>[DataSync] Sync UNLOCKED - Ready to sync changes.</color>");
         }
 
         private void ScheduleSync()

@@ -18,87 +18,8 @@ namespace VisualLayer.GamePlay.Abilities
 {
     public class DestroyAllLowestLevelFruitsAbility : BaseAbility
     {
-        [Inject] 
-        private IEffectsManager _effectsManager;
-        
-        [Inject]
-        private ISfxService  _sfxService;
-
-        public override async void UseAbility()
+        public DestroyAllLowestLevelFruitsAbility(AbilityDataSO abilityDataSo, LazyInject<IDataLayer> dataLayer) : base(abilityDataSo, dataLayer)
         {
-            if (Count <= 0)
-                return;
-            
-            if (IsJarEmpty())
-                return;
-            
-            if (!IsFirstTimeUse)
-                IsFirstTimeUse = true;
-            
-            Count--;
-            
-            DisableEnvironment();
-
-            FindAndDestroyLowestItems();    
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5));
-            
-            EnableEnvironment();
-        }
-        
-        protected override void DisableEnvironment()
-        {
-            base.DisableEnvironment();
-            
-            SignalBus.Fire<PauseInputSignal>();
-        }
-
-        
-        private void FindAndDestroyLowestItems()
-        {
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-            
-            allItems = RemoveItemsThatNotInTheJar(allItems);
-
-            if (allItems.Count == 0)
-            {
-                //Debug.Log("No items found");
-                return;
-            }
-
-            int lowestItemIndex = allItems.Min(item => item.GetItemId());
-
-            DestroyLowestItems(allItems, lowestItemIndex);
-        }
-
-        private void DestroyLowestItems(List<Item> allItems, int lowestItemIndex)
-        {
-            for (var index = 0; index < allItems.Count; index++)
-            {
-                var currItem = allItems[index];
-                if (currItem.GetItemId() == lowestItemIndex && !IsOutsideTheJar(currItem))
-                {
-                    Object.Destroy(currItem.gameObject);
-                    _effectsManager.PlayEffect(EffectType.DestroyAbility, currItem.gameObject.transform.position);
-                    _sfxService.PlaySfxType(SfxType.DestroyAbility);
-                }
-            }
-        }
-
-        private List<Item> RemoveItemsThatNotInTheJar(List<Item> allItems)
-        {
-            allItems = allItems
-                .Where(item => !IsOutsideTheJar(item))
-                .ToList();
-            return allItems;
-        }
-        
-        public override void EnableEnvironment()
-        {
-            SignalBus.Fire<UnpauseInputSignal>();
-            SignalBus.Fire<EnableUISignal>();
-            
-            EnableItemsOutsideTheJar();
         }
     }
 }

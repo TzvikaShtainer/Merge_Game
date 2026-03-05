@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataLayer;
 using DataLayer.DataTypes.abilities;
@@ -11,16 +12,11 @@ namespace VisualLayer.GamePlay.Abilities
 {
     public abstract class BaseAbility : IAbility
     {
+        public event Action OnRequestExecution;
+        
         protected AbilityDataSO AbilityDataSo;
-        
-        protected List<Item> ItemsToToggle;
-            
-        protected List<Item> AllItems;
-
         protected bool IsFirstTimeUse = false;
-        
         public AbilityDataSO Data => AbilityDataSo;
-        
         public string Id  => AbilityDataSo.Id;
         public int Count
         {
@@ -28,23 +24,19 @@ namespace VisualLayer.GamePlay.Abilities
             set => AbilityDataSo.Count = Mathf.Max(0, value);
         }
         
-        [Inject]
-        protected  IDataLayer DataLayer;
+        protected  LazyInject<IDataLayer> DataLayer;
         
-        [Inject]
-        protected  SignalBus SignalBus;
-        
-        [Inject]
-        public void Construct(AbilityDataSO abilityDataSo)
+        protected BaseAbility(AbilityDataSO abilityDataSo, LazyInject<IDataLayer> dataLayer)
         {
             AbilityDataSo = abilityDataSo;
+            DataLayer = dataLayer;
         }
         
         public virtual void Buy()
         {
             Count++;
             
-            DataLayer.Balances.RemoveCoins(AbilityDataSo.Cost);
+            DataLayer.Value.Balances.RemoveCoins(AbilityDataSo.Cost);
         }
 
         public void AddAbilityCount(int amountToAdd)
@@ -56,75 +48,14 @@ namespace VisualLayer.GamePlay.Abilities
         {
             return IsFirstTimeUse;
         }
-
-        protected virtual void DisableEnvironment()
-        {
-            ItemsToToggle = new List<Item>();
-            
-            AllItems = Object.FindObjectsOfType<Item>().ToList();
-            
-            SignalBus.Fire<DisableUISignal>();
-            
-            SortItems();
-            
-            DisableItemsOutsideTheJar();
-        }
         
-        private void SortItems()
+        public virtual void UseAbility()
         {
-            foreach (Item currItem in AllItems)
-            {
-                if (IsOutsideTheJar(currItem))
-                {
-                    ItemsToToggle.Add(currItem);
-                }
-            }
+            if (Count <= 0) return;
+            Count--;
+            IsFirstTimeUse = true;
+            OnRequestExecution?.Invoke();
         }
-
-        protected bool IsOutsideTheJar(Item currItem)
-        {
-            return currItem.transform.position.y >= 2.5f;
-        }
-        
-        private void DisableItemsOutsideTheJar()
-        {
-            ToggleItems(false);
-        }
-        
-        private void ToggleItems(bool isEnabled)
-        {
-            foreach (Item currItem in ItemsToToggle)
-            {
-                currItem.gameObject.SetActive(isEnabled);
-            }
-        }
-
-        protected void EnableItemsOutsideTheJar()
-        {
-            ToggleItems(true);
-        }
-        
-        protected bool IsJarEmpty()
-        {
-            List<Item> allItems = Object.FindObjectsOfType<Item>().ToList();
-
-            //remove items that not inside the jar
-            allItems = allItems
-                .Where(item => !IsOutsideTheJar(item))
-                .ToList();
-
-            if (allItems.Count == 0)
-            {
-                //Debug.Log("No items found");
-                return true;
-            }
-
-            return false;
-        }
-        
-        public abstract void EnableEnvironment();
-
-        public abstract void UseAbility();
         
         public void SetFirstTime(bool value)
         {
