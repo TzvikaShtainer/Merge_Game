@@ -13,7 +13,7 @@ namespace VisualLayer.GamePlay.Popups.DailyRewardPopup
     public class PlayFabDailyRewardCooldownService : BaseCooldownService,  IDailyRewardCooldownService
     {
         protected override string CooldownKey => "DailyRewardLastClaimUtc";
-        protected override int CooldownSeconds => 2; //86400
+        protected override int CooldownSeconds => 86400; //86400
         protected override int RewardAmount => 0; //no need
         
         private const string DayIndexKey = "DailyRewardDayIndex";
