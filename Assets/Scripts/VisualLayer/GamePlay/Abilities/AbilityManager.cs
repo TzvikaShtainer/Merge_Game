@@ -69,14 +69,17 @@ namespace VisualLayer.GamePlay.Abilities
         
         public void RequestAbilityUsage(string abilityId)
         {
-            if (_abilitiesDict.TryGetValue(abilityId, out var ability))
+            if (!_abilitiesDict.TryGetValue(abilityId, out var ability))
+                return;
+
+            bool isSpecialAbility = abilityId == "DestroyItemsAfterContinue";
+
+            if (!isSpecialAbility && ability.Count <= 0)
+                return;
+
+            if (ability is BaseAbility baseAbility)
             {
-                if (ability.Count <= 0) return;
-                
-                if (ability is BaseAbility baseAbility)
-                {
-                    baseAbility.TriggerRequest();
-                }
+                baseAbility.TriggerRequest();
             }
         }
         

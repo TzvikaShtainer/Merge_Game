@@ -85,13 +85,13 @@ namespace VisualLayer.GamePlay.Abilities
         private async void HandleExecution(BaseAbility ability)
         {
             if (IsJarEmpty()) return;
-
-            DisableEnvironment();
             
             bool executionSuccess = false;
 
             try
             {
+                DisableEnvironment();
+                
                 switch (ability.Id)
                 {
                     case "ShakeBoxAbility":
@@ -105,7 +105,7 @@ namespace VisualLayer.GamePlay.Abilities
                         break;
 
                     case "DestroyAllLowestLevelFruitsAbility":
-                        ExecuteDestroyAllLowestLevelFruitsAbility();
+                        await ExecuteDestroyAllLowestLevelFruitsAbility();
                         executionSuccess = true;
                         break;
 
@@ -115,12 +115,12 @@ namespace VisualLayer.GamePlay.Abilities
                         break;
 
                     case "DestroyItemsAfterContinue":
-                        ExecuteDestroyItemsAfterContinue();
+                        await ExecuteDestroyItemsAfterContinue();
                         executionSuccess = true;
                         break;
                 }
                 
-                if (executionSuccess)
+                if (ability.Id != "DestroyItemsAfterContinue" && executionSuccess)
                 {
                     _abilityManager.ConsumeAbility(ability.Id);
                 }
@@ -143,16 +143,16 @@ namespace VisualLayer.GamePlay.Abilities
         {
             _itemsToToggle = new List<Item>();
             
-            _allItems = Object.FindObjectsOfType<Item>().ToList();
+            _allItems = Object.FindObjectsOfType<Item>(true).ToList();
             
-            Debug.Log($"<color=white>[AbilityExecutor] Scanning {_allItems.Count} total items in scene...</color>");
+            //Debug.Log($"<color=white>[AbilityExecutor] Scanning {_allItems.Count} total items in scene...</color>");
             
             _signalBus.Fire<DisableUISignal>();
             
             SortItems();
             
             string itemList = string.Join(", ", _itemsToToggle.Select(i => $"{i.name} (Active: {i.gameObject.activeSelf}, Y: {i.transform.position.y:F2})"));
-            Debug.Log($"<color=orange>[AbilityExecutor] Found {_itemsToToggle.Count} items to toggle: {itemList}</color>");
+            //Debug.Log($"<color=orange>[AbilityExecutor] Found {_itemsToToggle.Count} items to toggle: {itemList}</color>");
             
             DisableItemsOutsideTheJar();
         }
@@ -180,10 +180,9 @@ namespace VisualLayer.GamePlay.Abilities
         
         private void ToggleItems(bool isEnabled)
         {
-            Debug.Log("before if");
             if (_itemsToToggle == null || _itemsToToggle.Count == 0)
             {
-                Debug.LogWarning($"<color=red>[AbilityExecutor] ToggleItems({isEnabled}) called but _itemsToToggle is EMPTY!</color>");
+                //Debug.LogWarning($"<color=red>[AbilityExecutor] ToggleItems({isEnabled}) called but _itemsToToggle is EMPTY!</color>");
                 return;
             }
 
@@ -191,19 +190,19 @@ namespace VisualLayer.GamePlay.Abilities
             {
                 if (currItem != null)
                 {
-                    Debug.Log($"[AbilityExecutor] Setting {currItem.name} Active = {isEnabled}");
+                    //Debug.Log($"[AbilityExecutor] Setting {currItem.name} Active = {isEnabled}");
                     currItem.gameObject.SetActive(isEnabled);
                 }
                 else
                 {
-                    Debug.LogError("[AbilityExecutor] A null item was found in the toggle list during execution!");
+                    //Debug.LogError("[AbilityExecutor] A null item was found in the toggle list during execution!");
                 }
             }
         }
 
         protected void EnableItemsOutsideTheJar()
         {
-            Debug.Log($"<color=green>[AbilityExecutor] Enabling items back. Count: {_itemsToToggle?.Count ?? 0}</color>");
+            //Debug.Log($"<color=green>[AbilityExecutor] Enabling items back. Count: {_itemsToToggle?.Count ?? 0}</color>");
             ToggleItems(true);
         }
         
@@ -218,7 +217,7 @@ namespace VisualLayer.GamePlay.Abilities
 
             if (allItems.Count == 0)
             {
-                Debug.Log("No items found");
+                //Debug.Log("No items found");
                 return true;
             }
 
