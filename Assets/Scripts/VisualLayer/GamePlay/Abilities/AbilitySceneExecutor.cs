@@ -180,6 +180,7 @@ namespace VisualLayer.GamePlay.Abilities
         
         private void ToggleItems(bool isEnabled)
         {
+            Debug.Log("before if");
             if (_itemsToToggle == null || _itemsToToggle.Count == 0)
             {
                 Debug.LogWarning($"<color=red>[AbilityExecutor] ToggleItems({isEnabled}) called but _itemsToToggle is EMPTY!</color>");
@@ -190,8 +191,7 @@ namespace VisualLayer.GamePlay.Abilities
             {
                 if (currItem != null)
                 {
-                    // לוג לפני שינוי סטטוס
-                    // Debug.Log($"[AbilityExecutor] Setting {currItem.name} Active = {isEnabled}");
+                    Debug.Log($"[AbilityExecutor] Setting {currItem.name} Active = {isEnabled}");
                     currItem.gameObject.SetActive(isEnabled);
                 }
                 else
