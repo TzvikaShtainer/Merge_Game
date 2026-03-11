@@ -1,11 +1,14 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using DataLayer;
 using DataLayer.DataTypes;
 using ServiceLayer.GameScenes;
+using ServiceLayer.MusicService;
 using ServiceLayer.SaveSystem;
 using ServiceLayer.Signals.SignalsClasses;
 using ServiceLayer.Utilis;
 using UnityEngine;
+using VisualLayer.GamePlay.Popups.YesNoPopup;
 using VisualLayer.Loader;
 using Zenject;
 
@@ -30,35 +33,60 @@ namespace VisualLayer.GamePlay.Handlers
         
         [Inject]
         private GameStartupCoordinator  _gameStartupCoordinator;
+        
+        [Inject] 
+        private YesNoPopup.Factory _yesNoPopupFactory;
+        
         public async UniTask Execute()
         {
-            await _saveService.Save();
-            //Debug.Log("Back Click Handler SAving now");
-            //_dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
+            var popupArgs = new YesNoPopupArgs
+            {
+                Text = "Are You Sure?",
+                IsNoButtonVisible = true,
+                YesCaption = "Yes",
+                NoCaption = "No"
+            };
             
-            await _loader.InitLoader();
+            var popup = _yesNoPopupFactory.Create(popupArgs);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+            var result = await popup.WaitForResult();
+
+            if (result.IsNo)
+            {
+                _signalBus.Fire<UnpauseInputSignal>();
+                await UniTask.Delay(TimeSpan.FromSeconds(0.5));
+            }
+
+            else
+            {
+                await _saveService.Save();
+                //Debug.Log("Back Click Handler SAving now");
+                //_dataLayer.Balances.SetCurrentScore(_dataLayer.Balances.CurrentScore);
             
-            await _loader.AnimateProgressTo(0.2f, 0.5f);
+                await _loader.InitLoader();
             
-            await UniTask.Delay(1000);
+                await _loader.AnimateProgressTo(0.2f, 0.5f);
             
-            await _scenesService.UnloadLevelScene(GameLevelType.GamePlay);
+                await UniTask.Delay(1000);
             
-            await _loader.AnimateProgressTo(0.5f, 1f);
+                await _scenesService.UnloadLevelScene(GameLevelType.GamePlay);
             
-            await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
+                await _loader.AnimateProgressTo(0.5f, 1f);
             
-            await _gameStartupCoordinator.LoadLocalAndServer();
+                await _scenesService.LoadLevelSceneIfNotLoaded(GameLevelType.StartScreen);
             
-            await _loader.AnimateProgressTo(1f, 0.5f);
+                await _gameStartupCoordinator.LoadLocalAndServer();
             
-            await _loader.FadeOut();
+                await _loader.AnimateProgressTo(1f, 0.5f);
             
-            _signalBus.Fire<UnpauseInputSignal>();
+                await _loader.FadeOut();
             
-            await UniTask.Delay(500);
+                _signalBus.Fire<UnpauseInputSignal>();
             
-            _signalBus.Fire<UIComponentsInBehaviorSignal>();
+                await UniTask.Delay(500);
+            
+                _signalBus.Fire<UIComponentsInBehaviorSignal>();
+            }
         }
     }
 }
