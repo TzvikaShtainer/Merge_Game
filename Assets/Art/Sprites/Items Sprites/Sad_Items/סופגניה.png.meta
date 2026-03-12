@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7741dcf472fedd0479d52be05a0e0499
+guid: 6d8f3e3f4cb226b49a733f9002e7e1b2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3752711834126370623
-    second: Sad_0
+      213: 709063047179310864
+    second: "\u05E1\u05D5\u05E4\u05D2\u05E0\u05D9\u05D4_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sad_0
+      name: "\u05E1\u05D5\u05E4\u05D2\u05E0\u05D9\u05D4_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 29
-        width: 676
-        height: 671
+        x: 62
+        y: 47
+        width: 608
+        height: 609
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c83e763870bbebc0800000000000000
-      internalID: -3752711834126370623
+      spriteID: 0179a7aa51917d900800000000000000
+      internalID: 709063047179310864
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sad_0: -3752711834126370623
+      "\u05E1\u05D5\u05E4\u05D2\u05E0\u05D9\u05D4_0": 709063047179310864
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
