@@ -1,5 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using ServiceLayer.NotificationsService;
+using UniRx;
 using UnityEngine;
 using VisualLayer.GamePlay.Handlers;
 using Zenject;
@@ -11,22 +13,25 @@ namespace VisualLayer.GamePlay.Buttons
         [Inject]
         private IStartGameClickHandler _enterLevelHandler;
 
+        [Inject] 
+        private NotificationFlowManager _notificationFlowManager;
+
         private bool _isBlocked = true;
-        private int _timeToBlockBtnInSec = 7;
 
         private void Start()
         {
-            StartCooldown().Forget();
+            InitializeReactiveFlow();
         }
 
-        private async UniTask StartCooldown()
+        private void InitializeReactiveFlow()
         {
-            _isBlocked = true;
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(_timeToBlockBtnInSec), DelayType.Realtime);
-            _isBlocked = false;
+            _notificationFlowManager.IsNotificationsFlowCompleted
+                .Subscribe(completed =>
+                {
+                    _isBlocked = !completed;
+                })
+                .AddTo(this);
         }
-
 
         public void OnClick()
         {

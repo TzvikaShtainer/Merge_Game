@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using ServiceLayer.Signals.SignalsClasses;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,8 @@ namespace ServiceLayer.NotificationsService
 {
     public class NotificationFlowManager : IInitializable, IDisposable
     {
+        public ReactiveProperty<bool> IsNotificationsFlowCompleted = new ReactiveProperty<bool>();
+        
         [Inject]
         private List<IInitializableNotification>  _notificationsList;
         
@@ -29,6 +32,8 @@ namespace ServiceLayer.NotificationsService
 
         public async UniTask RunNotificationSequence()
         {
+            IsNotificationsFlowCompleted.Value = false;
+            
             var sortedList = _notificationsList.OrderBy(n => n.Priority).ToList();
             foreach (var notification in sortedList)
             {
@@ -42,6 +47,8 @@ namespace ServiceLayer.NotificationsService
                     await notification.Show();
                 }
             }
+            
+            IsNotificationsFlowCompleted.Value = true;
         }
         
         public void Dispose()
