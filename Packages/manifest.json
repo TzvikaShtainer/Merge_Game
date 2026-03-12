@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.gemserk.selectionhistory": "https://github.com/acoppes/unity-history-window.git#1.5.6",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
     "com.unity.addressables": "2.8.1",
     "com.unity.collab-proxy": "2.11.3",
     "com.unity.device-simulator.devices": "1.0.1",
